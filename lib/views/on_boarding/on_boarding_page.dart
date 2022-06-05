@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
 
+import 'widgets/buttonstarted.dart';
+import 'widgets/latarimg.dart';
+import 'widgets/textstarted.dart';
+
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
 
@@ -9,17 +13,33 @@ class OnBoardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const Text('On Boarding Under Development'),
-            TextButton(
-              child: const Text('Go to Sign In Page'),
-              onPressed: () {
-                context.router.push(const SignInRoute());
-              },
+        child: Stack(children: [
+          const LatarImg(
+            asset: 'assets/images/background1.png',
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/Logo.png',
+                  scale: 2.2,
+                ),
+                const TextStarted(
+                  subtit: 'akdokwakodakwodoad',
+                  tit: "Make Your Self \nStronger\n\n",
+                ),
+                ButtonStarted(
+                  press: () {
+                    context.router.push(const Landingpage());
+                  },
+                  title: 'Get Started',
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }

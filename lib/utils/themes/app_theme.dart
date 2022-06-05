@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
-      colorScheme: const ColorScheme.light().copyWith(
+      colorScheme: const ColorScheme.light().copyWith(primary: Color(0xFF4FBDBA)
           // untuk edit warna, dll bisa di sini.
           // ada banyak propertinya
           ),
