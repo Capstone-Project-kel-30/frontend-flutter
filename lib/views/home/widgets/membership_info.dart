@@ -11,6 +11,7 @@ class MembershipInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
+      color: kBackgroundColor,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Row(
@@ -21,7 +22,7 @@ class MembershipInfo extends StatelessWidget {
                 text: 'Reach Your Body Goals \n',
                 style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(
                       color: const Color.fromRGBO(94, 94, 94, 1),
-                      fontWeight: FontWeight.w600,
+                      fontWeight: kSemiBoldWeight,
                       letterSpacing: 0,
                     ),
                 children: const <TextSpan>[
@@ -30,13 +31,18 @@ class MembershipInfo extends StatelessWidget {
                     text: 'Workout Zone.',
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: kBoldWeight,
                     ),
                   )
                 ],
               ),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
               child: Text(
                 'Join Membership',
                 style: AppTheme.theme(context).textTheme.labelSmall?.copyWith(

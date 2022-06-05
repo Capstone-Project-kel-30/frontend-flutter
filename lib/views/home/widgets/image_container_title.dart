@@ -23,7 +23,7 @@ class ImageContainerTitle extends StatelessWidget {
           title,
           style: AppTheme.theme(context).textTheme.titleSmall?.copyWith(
                 letterSpacing: 0.5,
-                fontWeight: FontWeight.w600,
+                fontWeight: kSemiBoldWeight,
               ),
         ),
         if (moreThan5)
@@ -32,7 +32,7 @@ class ImageContainerTitle extends StatelessWidget {
             child: Text(
               'See all',
               style: AppTheme.theme(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: kSemiBoldWeight,
                     color: AppTheme.theme(context).colorScheme.primary,
                   ),
             ),

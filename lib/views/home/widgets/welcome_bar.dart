@@ -20,14 +20,14 @@ class WelcomeBar extends StatelessWidget {
             Text(
               'Welcome,',
               style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(
-                    color: const Color.fromRGBO(134, 134, 134, 1),
+                    color: kGreyColor,
                   ),
             ),
             const VerticalSpace(height: 4),
             Text(
               username,
               style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: kSemiBoldWeight,
                   ),
             )
           ],

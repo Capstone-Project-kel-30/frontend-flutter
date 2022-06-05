@@ -50,8 +50,8 @@ class ImageCard extends StatelessWidget {
               child: Text(
                 title,
                 style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
+                      color: kLightColor,
+                      fontWeight: kSemiBoldWeight,
                     ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

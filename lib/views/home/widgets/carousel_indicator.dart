@@ -20,9 +20,8 @@ class CarouselIndicator extends StatelessWidget {
         borderRadius:
             selected ? BorderRadius.circular(20) : BorderRadius.circular(100),
         shape: BoxShape.rectangle,
-        color: selected
-            ? AppTheme.theme(context).colorScheme.primary
-            : Colors.grey,
+        color:
+            selected ? AppTheme.theme(context).colorScheme.primary : kGreyColor,
       ),
     );
   }
