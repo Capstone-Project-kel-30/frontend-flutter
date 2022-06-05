@@ -6,9 +6,9 @@ const Color kPrimaryColor = Color.fromRGBO(79, 189, 186, 1);
 const Color kSecondaryColor = Color.fromRGBO(26, 46, 57, 1);
 const Color kDarkColor = Color.fromRGBO(14, 14, 14, 1);
 const Color kLightColor = Color.fromRGBO(254, 254, 252, 1);
-const Color kDisabledColor = Color.fromRGBO(175, 175, 175, 1);
-const Color kErrorColor = Color.fromRGBO(141, 41, 51, 1);
-const Color kPressedColor = Color.fromRGBO(40, 95, 93, 1);
+const Color kGreyColor = Color.fromRGBO(175, 175, 175, 1);
+const Color kRedColor = Color.fromRGBO(141, 41, 51, 1);
+const Color kDarkerPrimaryColor = Color.fromRGBO(40, 95, 93, 1);
 
 // FontWeight
 const FontWeight kRegularWeight = FontWeight.w400;
@@ -21,13 +21,11 @@ class AppTheme {
     return ThemeData(
       colorScheme: const ColorScheme.light().copyWith(
         primary: kPrimaryColor,
-        onPrimary: kLightColor,
         secondary: kSecondaryColor,
-        onSecondary: kLightColor,
-        error: kErrorColor,
+        error: kRedColor,
         background: kBackgroundColor,
-        onBackground: kDarkColor,
       ),
+      scaffoldBackgroundColor: kBackgroundColor,
     );
   }
 
