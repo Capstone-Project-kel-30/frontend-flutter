@@ -14,15 +14,15 @@ class TextStarted extends StatelessWidget {
       width: double.infinity,
       child: RichText(
         text: TextSpan(
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           children: [
             TextSpan(
               text: tit,
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             TextSpan(
               text: subtit,
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
           ],
         ),

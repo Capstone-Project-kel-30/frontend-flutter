@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/themes/app_theme.dart';
 
 class ButtonStarted extends StatelessWidget {
   const ButtonStarted({
@@ -16,13 +17,13 @@ class ButtonStarted extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           primary: Colors.white,
-          backgroundColor: Color(0xFF4FBDBA),
-        ),
-        child: Text(
-          title,
-          style: TextStyle(fontSize: 20),
+          backgroundColor: kPrimaryColor,
         ),
         onPressed: press,
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 20),
+        ),
       ),
     );
   }
