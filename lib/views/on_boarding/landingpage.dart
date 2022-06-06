@@ -19,7 +19,7 @@ class Landingpage extends StatelessWidget {
         child: Stack(children: [
           const LatarImg(asset: 'assets/images/background2.png'),
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 32, 20, 53),
+            padding: const EdgeInsets.fromLTRB(20, 32, 20, 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[

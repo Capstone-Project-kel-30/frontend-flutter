@@ -19,7 +19,7 @@ class OnBoardingPage extends StatelessWidget {
             asset: 'assets/images/background1.png',
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 33, 20, 49),
+            padding: const EdgeInsets.fromLTRB(20, 33, 20, 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
