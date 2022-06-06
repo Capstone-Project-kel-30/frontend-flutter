@@ -120,8 +120,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "8.3.2"
-<<<<<<< Updated upstream
-=======
   carousel_slider:
     dependency: "direct main"
     description:
@@ -129,7 +127,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.1.1"
->>>>>>> Stashed changes
   characters:
     dependency: transitive
     description:
