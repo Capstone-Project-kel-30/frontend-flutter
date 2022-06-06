@@ -5,6 +5,7 @@ import 'package:workout_zone/views/class/class_page.dart';
 import 'package:workout_zone/views/home/home_page.dart';
 import 'package:workout_zone/views/membership/membership_page.dart';
 import 'package:workout_zone/views/newsletter/newsletter_page.dart';
+import 'package:workout_zone/views/on_boarding/landingpage.dart';
 import 'package:workout_zone/views/on_boarding/on_boarding_page.dart';
 import 'package:workout_zone/views/payment/payment_page.dart';
 import 'package:workout_zone/views/profile/profile_page.dart';
@@ -19,6 +20,10 @@ import 'package:workout_zone/views/wrapper/home_wrapper.dart';
       path: 'onBoarding',
       page: OnBoardingPage,
       initial: true,
+    ),
+    AutoRoute(
+      path: 'LandingPage',
+      page: Landingpage,
     ),
     AutoRoute(
       path: 'signIn',
