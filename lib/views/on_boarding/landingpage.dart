@@ -37,14 +37,14 @@ class Landingpage extends StatelessWidget {
                 Column(
                   children: [
                     const SignUpButton(
-                      title: 'SignUp',
+                      title: 'Sign In',
                     ),
                     const VerticalSpace(height: 11),
                     ButtonStarted(
                       press: () {
                         context.router.push(const SignInRoute());
                       },
-                      title: 'Sign In',
+                      title: 'Sign Up',
                     ),
                   ],
                 ),
