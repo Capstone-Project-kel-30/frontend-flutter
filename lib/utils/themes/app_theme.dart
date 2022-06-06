@@ -19,13 +19,16 @@ const FontWeight kBoldWeight = FontWeight.w700;
 class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
+      scaffoldBackgroundColor: kBackgroundColor,
       colorScheme: const ColorScheme.light().copyWith(
         primary: kPrimaryColor,
-        secondary: kSecondaryColor,
         error: kRedColor,
         background: kBackgroundColor,
       ),
-      scaffoldBackgroundColor: kBackgroundColor,
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: kBackgroundColor,
+        elevation: 5,
+      ),
     );
   }
 

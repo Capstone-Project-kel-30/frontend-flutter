@@ -19,7 +19,7 @@ packages:
     dependency: transitive
     description:
       name: archive
-      url: "https://pub.flutter-io.cn"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
   args:
@@ -120,6 +120,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "8.3.2"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.1"
   characters:
     dependency: transitive
     description:
@@ -255,9 +262,9 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_native_splash
-      url: "https://pub.flutter-io.cn"
+      url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.3"
+    version: "2.2.2"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -321,7 +328,7 @@ packages:
     dependency: transitive
     description:
       name: image
-      url: "https://pub.flutter-io.cn"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
   io:
@@ -349,7 +356,7 @@ packages:
     dependency: transitive
     description:
       name: lint
-      url: "https://pub.flutter-io.cn"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
   lints:
