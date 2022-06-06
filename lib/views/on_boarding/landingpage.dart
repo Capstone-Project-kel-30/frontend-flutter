@@ -22,29 +22,24 @@ class Landingpage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
+                ///logo
                 Image.asset(
                   'assets/images/Logo.png',
                   scale: 2.2,
                 ),
+
+                ///text
                 const TextStarted(
                   subtit: 'asdasddasdasd',
                   tit: "Make Your Self \nStronger\n\n",
                 ),
+
+                ///
+                /////Button
                 Column(
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      height: 45,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: kPrimaryColor),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'SignUp',
-                          style: TextStyle(color: kLightColor),
-                        ),
-                      ),
+                    const SignUpButton(
+                      title: 'SignUp',
                     ),
                     const VerticalSpace(height: 11),
                     ButtonStarted(
@@ -59,6 +54,32 @@ class Landingpage extends StatelessWidget {
             ),
           ),
         ]),
+      ),
+    );
+  }
+}
+
+class SignUpButton extends StatelessWidget {
+  const SignUpButton({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 45,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(color: kPrimaryColor),
+        ),
+        onPressed: () {},
+        child: Text(
+          title,
+          style: TextStyle(color: kLightColor),
+        ),
       ),
     );
   }

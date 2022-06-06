@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
+import 'package:workout_zone/views/on_boarding/widgets/logoimg.dart';
 
-import 'widgets/buttonstarted.dart';
+import 'widgets/signinbutton.dart';
 import 'widgets/latarimg.dart';
 import 'widgets/textstarted.dart';
 
@@ -23,10 +23,7 @@ class OnBoardingPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Image.asset(
-                  'assets/images/Logo.png',
-                  scale: 2.2,
-                ),
+                const LogoImg(),
                 const TextStarted(
                   subtit: 'akdokwakodakwodoad',
                   tit: "Make Your Self \nStronger\n\n",
