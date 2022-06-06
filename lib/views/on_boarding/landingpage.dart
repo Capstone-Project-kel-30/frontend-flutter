@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/on_boarding/widgets/latarimg.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-import 'widgets/buttonstarted.dart';
+import 'widgets/logoimg.dart';
+import 'widgets/signinbutton.dart';
+import 'widgets/signupbutton.dart';
 import 'widgets/textstarted.dart';
 
 class Landingpage extends StatelessWidget {
@@ -23,10 +24,7 @@ class Landingpage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 ///logo
-                Image.asset(
-                  'assets/images/Logo.png',
-                  scale: 2.2,
-                ),
+                const LogoImg(),
 
                 ///text
                 const TextStarted(
@@ -54,32 +52,6 @@ class Landingpage extends StatelessWidget {
             ),
           ),
         ]),
-      ),
-    );
-  }
-}
-
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 45,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: kPrimaryColor),
-        ),
-        onPressed: () {},
-        child: Text(
-          title,
-          style: TextStyle(color: kLightColor),
-        ),
       ),
     );
   }
