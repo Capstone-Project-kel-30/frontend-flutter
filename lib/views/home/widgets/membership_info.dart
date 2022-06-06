@@ -52,7 +52,7 @@ class MembershipInfo extends StatelessWidget {
                     ),
               ),
               onPressed: () {
-                context.router.push(const MembershipRoute());
+                context.router.push(MembershipRoute());
               },
             ),
           ],

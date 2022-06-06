@@ -3,6 +3,7 @@ import 'package:workout_zone/views/authentication/sign_in_page.dart';
 import 'package:workout_zone/views/authentication/sign_up_page.dart';
 import 'package:workout_zone/views/class/class_page.dart';
 import 'package:workout_zone/views/home/home_page.dart';
+import 'package:workout_zone/views/membership/membership_detail_page.dart';
 import 'package:workout_zone/views/membership/membership_page.dart';
 import 'package:workout_zone/views/newsletter/newsletter_page.dart';
 import 'package:workout_zone/views/on_boarding/on_boarding_page.dart';
@@ -65,6 +66,10 @@ import 'package:workout_zone/views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'payment',
       page: PaymentPage,
+    ),
+    AutoRoute(
+      path: 'membershipDetail',
+      page: MembershipDetailPage,
     ),
   ],
 )
