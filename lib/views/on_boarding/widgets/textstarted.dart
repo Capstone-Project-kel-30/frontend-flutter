@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/themes/app_theme.dart';
 
 class TextStarted extends StatelessWidget {
   const TextStarted({
@@ -14,7 +15,7 @@ class TextStarted extends StatelessWidget {
       width: double.infinity,
       child: RichText(
         text: TextSpan(
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: kLightColor),
           children: [
             TextSpan(
               text: tit,

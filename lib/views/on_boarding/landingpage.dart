@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
+import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/on_boarding/widgets/latarimg.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 import 'widgets/buttonstarted.dart';
 import 'widgets/textstarted.dart';
@@ -16,7 +18,7 @@ class Landingpage extends StatelessWidget {
         child: Stack(children: [
           const LatarImg(asset: 'assets/images/background2.png'),
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+            padding: const EdgeInsets.fromLTRB(20, 32, 20, 53),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -30,15 +32,21 @@ class Landingpage extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    ButtonStarted(
-                      press: () {
-                        context.router.push(const SignUpRoute());
-                      },
-                      title: 'Sign Up',
+                    SizedBox(
+                      width: double.infinity,
+                      height: 45,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: kPrimaryColor),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          'SignUp',
+                          style: TextStyle(color: kLightColor),
+                        ),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 13,
-                    ),
+                    const VerticalSpace(height: 11),
                     ButtonStarted(
                       press: () {
                         context.router.push(const SignInRoute());

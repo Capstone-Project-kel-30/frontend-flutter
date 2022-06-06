@@ -13,16 +13,16 @@ class ButtonStarted extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 55,
+      height: 45,
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.white,
+          primary: kLightColor,
           backgroundColor: kPrimaryColor,
         ),
         onPressed: press,
         child: Text(
           title,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 14),
         ),
       ),
     );
