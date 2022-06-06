@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
+
+import 'utils/routes/routes.gr.dart';
+import 'utils/themes/app_theme.dart';
 
 void main() {
   runApp(MyApp());
