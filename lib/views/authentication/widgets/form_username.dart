@@ -18,7 +18,7 @@ class FormUsername extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 12),
+          style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 14),
         ),
         const VerticalSpace(height: 4),
         SizedBox(
@@ -27,7 +27,7 @@ class FormUsername extends StatelessWidget {
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               hintText: hint,
-              hintStyle: const TextStyle(fontSize: 10),
+              hintStyle: const TextStyle(fontSize: 12),
               fillColor: kDarkColor,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(

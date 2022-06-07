@@ -25,12 +25,14 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       ///
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Sign in',
-          style: TextStyle(color: kDarkColor),
+          style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
+                fontWeight: kRegularWeight,
+              ),
         ),
         centerTitle: true,
-        toolbarHeight: 50,
+        toolbarHeight: 68,
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -45,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
       ///body
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -89,7 +91,15 @@ class _SignInPageState extends State<SignInPage> {
                       const VerticalSpace(height: 10),
                       const ForgetPassBttn(),
                       const VerticalSpace(height: 240),
-                      const Bottomtxt(),
+                      Bottomtxt(
+                        txt1: "Not Have Account yet ?",
+                        txt2: 'Sign Up',
+                        press: () {
+                          context.router.push(
+                            const SignUpRoute(),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 )

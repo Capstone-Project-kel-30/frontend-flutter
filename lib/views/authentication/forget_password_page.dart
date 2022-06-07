@@ -16,12 +16,14 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Forget Password',
-          style: TextStyle(color: kDarkColor),
+          style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
+                fontWeight: kRegularWeight,
+              ),
         ),
         centerTitle: true,
-        toolbarHeight: 50,
+        toolbarHeight: 68,
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -34,7 +36,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: SingleChildScrollView(
             child: Column(
               children: [
