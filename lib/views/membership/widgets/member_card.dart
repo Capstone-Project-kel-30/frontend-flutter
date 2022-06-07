@@ -1,73 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
+
+import '../../../utils/themes/app_theme.dart';
 
 class MemberCard extends StatelessWidget {
-  const MemberCard({
+  MemberCard({
     Key? key,
-    required this.asset,
+    required this.height,
+    required this.width,
     required this.type,
-    required this.price,
-    required this.colors,
-    required this.onTap,
   }) : super(key: key);
 
-  final String asset, type, price;
-  final List<Color> colors;
-  final Function() onTap;
+  final String type;
+  final double height, width;
+
+  final List<String> assetList = [
+    'assets/images/gold_member_card.png',
+    'assets/images/silver_member_card.png',
+    'assets/images/bronze_member_card.png',
+  ];
+
+  final List<List<Color>> colorList = [
+    [kGold, kGold2, kGold],
+    [kSilver, kSilver2, kSilver],
+    [kBronze, kBronze2, kBronze],
+  ];
+
+  List<Color> setColor(type) {
+    if (type == 'Gold') {
+      return colorList[0];
+    } else if (type == 'Silver') {
+      return colorList[1];
+    } else {
+      return colorList[2];
+    }
+  }
+
+  String setAsset(type) {
+    if (type == 'Gold') {
+      return assetList[0];
+    } else if (type == 'Silver') {
+      return assetList[1];
+    } else {
+      return assetList[2];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: colors,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                asset,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+    final colors = setColor(type);
+    final asset = setAsset(type);
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: colors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        Positioned.fill(
-          bottom: 15,
-          left: 15,
-          right: 15,
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  type,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: kSemiBoldWeight,
-                  ),
-                ),
-                Text(
-                  'Rp $price',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: kSemiBoldWeight,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.asset(
+          asset,
+          fit: BoxFit.fill,
         ),
-      ],
+      ),
     );
   }
 }

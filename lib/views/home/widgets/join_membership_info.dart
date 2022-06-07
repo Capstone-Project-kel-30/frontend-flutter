@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';
 
-class MembershipInfo extends StatelessWidget {
-  const MembershipInfo({Key? key}) : super(key: key);
+class JoinMembershipInfo extends StatelessWidget {
+  const JoinMembershipInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
