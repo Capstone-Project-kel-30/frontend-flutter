@@ -1,11 +1,12 @@
 import 'package:auto_route/annotations.dart';
+import 'package:workout_zone/views/authentication/forget_password_page.dart';
 import 'package:workout_zone/views/authentication/sign_in_page.dart';
 import 'package:workout_zone/views/authentication/sign_up_page.dart';
 import 'package:workout_zone/views/class/class_page.dart';
 import 'package:workout_zone/views/home/home_page.dart';
 import 'package:workout_zone/views/membership/membership_page.dart';
 import 'package:workout_zone/views/newsletter/newsletter_page.dart';
-import 'package:workout_zone/views/on_boarding/landingpage.dart';
+import 'package:workout_zone/views/on_boarding/landing_page.dart';
 import 'package:workout_zone/views/on_boarding/on_boarding_page.dart';
 import 'package:workout_zone/views/payment/payment_page.dart';
 import 'package:workout_zone/views/profile/profile_page.dart';
@@ -32,6 +33,10 @@ import 'package:workout_zone/views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'signUp',
       page: SignUpPage,
+    ),
+    AutoRoute(
+      path: 'forgetPassword',
+      page: ForgetPasswordPage,
     ),
     AutoRoute(
       path: 'homeWrapper',
