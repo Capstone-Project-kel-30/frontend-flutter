@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/views/on_boarding/widgets/latarimg.dart';
+import 'package:workout_zone/views/on_boarding/widgets/button_tnp_latar.dart';
+import 'package:workout_zone/views/on_boarding/widgets/latar_img.dart';
+import 'package:workout_zone/views/on_boarding/widgets/logo_img.dart';
+import 'package:workout_zone/views/on_boarding/widgets/text_started.dart';
+import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
-
-import 'widgets/logoimg.dart';
-import 'widgets/signinbutton.dart';
-import 'widgets/signupbutton.dart';
-import 'widgets/textstarted.dart';
 
 class Landingpage extends StatelessWidget {
   const Landingpage({Key? key}) : super(key: key);
@@ -36,13 +35,16 @@ class Landingpage extends StatelessWidget {
                 /////Button
                 Column(
                   children: [
-                    const SignUpButton(
+                    ButtonTnpLatar(
                       title: 'Sign In',
-                    ),
-                    const VerticalSpace(height: 11),
-                    ButtonStarted(
                       press: () {
                         context.router.push(const SignInRoute());
+                      },
+                    ),
+                    const VerticalSpace(height: 11),
+                    ButtonWithLatar(
+                      press: () {
+                        context.router.push(const SignUpRoute());
                       },
                       title: 'Sign Up',
                     ),
