@@ -24,7 +24,10 @@ class ButtonTnpLatar extends StatelessWidget {
         onPressed: press,
         child: Text(
           title,
-          style: const TextStyle(color: kLightColor),
+          style: AppTheme.theme(context).textTheme.labelMedium?.copyWith(
+                fontWeight: kRegularWeight,
+                color: kLightColor,
+              ),
         ),
       ),
     );
