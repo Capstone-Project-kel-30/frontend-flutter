@@ -2,6 +2,8 @@ import 'package:auto_route/annotations.dart';
 import 'package:workout_zone/views/authentication/forget_password_page.dart';
 import 'package:workout_zone/views/authentication/sign_in_page.dart';
 import 'package:workout_zone/views/authentication/sign_up_page.dart';
+import 'package:workout_zone/views/authentication/widgets/verifikasi/verfikasi_signup.dart';
+import 'package:workout_zone/views/authentication/widgets/verifikasi/verifikasi_forget_password.dart';
 import 'package:workout_zone/views/class/class_page.dart';
 import 'package:workout_zone/views/home/home_page.dart';
 import 'package:workout_zone/views/membership/membership_page.dart';
@@ -37,6 +39,14 @@ import 'package:workout_zone/views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'forgetPassword',
       page: ForgetPasswordPage,
+    ),
+    AutoRoute(
+      path: 'verfikasiSignUp',
+      page: VerfikasiSignUp,
+    ),
+    AutoRoute(
+      path: 'verfikasiForgetPassword',
+      page: VerfikasiForgetPassword,
     ),
     AutoRoute(
       path: 'homeWrapper',

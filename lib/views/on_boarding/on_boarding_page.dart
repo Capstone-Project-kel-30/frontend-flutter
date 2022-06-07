@@ -18,7 +18,7 @@ class OnBoardingPage extends StatelessWidget {
           const LatarImg(
             asset: 'assets/images/background1.png',
           ),
-          Container(
+          Padding(
             padding: const EdgeInsets.fromLTRB(20, 33, 20, 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

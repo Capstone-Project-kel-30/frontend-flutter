@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
+import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
@@ -12,6 +15,8 @@ class ForgetPasswordPage extends StatefulWidget {
 
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+
+  final TextEditingController _forgetPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,23 +24,25 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
         title: Text(
           'Forget Password',
           style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
-                fontWeight: kRegularWeight,
+                fontWeight: kBoldWeight,
               ),
         ),
         centerTitle: true,
-        toolbarHeight: 68,
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
           color: kDarkColor,
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: kPrimaryColor,
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
       ),
       body: SafeArea(
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: SingleChildScrollView(
             child: Column(
@@ -44,37 +51,27 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                   "Enter the email you’ve used to sign up to WorkoutZone.",
                 ),
                 const VerticalSpace(height: 20),
+
+                ///Form
                 Form(
                   key: _formKey,
-                  child: SizedBox(
-                    height: 45,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        hintText: 'Email',
-                        hintStyle: TextStyle(
-                          color: kPrimaryColor,
-                          fontSize: 10,
-                        ),
-                        fillColor: kDarkColor,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: kGreyColor,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
+                  child: FormUsername(
+                    color: kPrimaryColor,
+                    controller: _forgetPassword,
+                    hint: 'Enter Your Email',
+                    title: 'Email',
                   ),
                 ),
+
+                ///button
                 const VerticalSpace(height: 490),
                 ButtonWithLatar(
                   title: "Recover Password",
-                  press: () {},
+                  press: () {
+                    context.router.push(
+                      const VerfikasiForgetPassword(),
+                    );
+                  },
                 )
               ],
             ),

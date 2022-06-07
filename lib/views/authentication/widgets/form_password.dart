@@ -7,8 +7,10 @@ class FormPassword extends StatelessWidget {
     Key? key,
     required this.title,
     required this.hint,
+    required this.controller,
   }) : super(key: key);
   final String title, hint;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class FormPassword extends StatelessWidget {
         SizedBox(
           height: 45,
           child: TextFormField(
+            controller: controller,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               suffixIcon: const Icon(

@@ -15,10 +15,9 @@ class ButtonWithLatar extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 45,
-      child: TextButton(
-        style: TextButton.styleFrom(
-          primary: kLightColor,
-          backgroundColor: kPrimaryColor,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: kPrimaryColor,
         ),
         onPressed: press,
         child: Text(

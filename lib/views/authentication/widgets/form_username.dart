@@ -8,8 +8,12 @@ class FormUsername extends StatelessWidget {
     Key? key,
     required this.title,
     required this.hint,
+    required this.controller,
+    required this.color,
   }) : super(key: key);
   final String title, hint;
+  final TextEditingController controller;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class FormUsername extends StatelessWidget {
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               hintText: hint,
-              hintStyle: const TextStyle(fontSize: 12),
+              hintStyle: TextStyle(fontSize: 10, color: color),
               fillColor: kDarkColor,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
