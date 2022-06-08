@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
@@ -74,7 +76,11 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                 const VerticalSpace(height: 64),
                 ButtonWithLatar(
                   title: "Verify",
-                  press: () {},
+                  press: () {
+                    context.router.push(
+                      const HomeWrapper(),
+                    );
+                  },
                 )
               ],
             ),

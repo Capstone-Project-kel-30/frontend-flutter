@@ -94,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                       title: "Sign In",
                       press: () {
                         context.router.push(
-                          const HomeWrapper(),
+                          VerfikasiSignUp(email: _emailController.text),
                         );
                       },
                     ),
