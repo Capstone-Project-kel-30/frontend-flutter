@@ -1,16 +1,26 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
 import 'package:workout_zone/views/authentication/widgets/form_kotak.dart';
-import 'package:workout_zone/views/authentication/widgets/verifikasi/email_validasi.dart';
+import 'package:workout_zone/views/authentication/widgets/txt_email_validasi.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-class VerfikasiForgetPassword extends StatelessWidget {
-  const VerfikasiForgetPassword({Key? key}) : super(key: key);
+class VerfikasiForgetPassword extends StatefulWidget {
+  const VerfikasiForgetPassword({Key? key, required this.email})
+      : super(key: key);
+  final String email;
 
+  @override
+  State<VerfikasiForgetPassword> createState() =>
+      _VerfikasiForgetPasswordState();
+}
+
+class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +47,12 @@ class VerfikasiForgetPassword extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Center(
             child: Column(
               children: [
-                const EmailValidasi(
-                  user: 'Da*********@gmail.com',
+                TxtEmailValidasi(
+                  user: widget.email,
                 ),
                 Form(
                   child: Row(
@@ -68,7 +78,11 @@ class VerfikasiForgetPassword extends StatelessWidget {
                 const VerticalSpace(height: 64),
                 ButtonWithLatar(
                   title: "Confirm",
-                  press: () {},
+                  press: () {
+                    context.router.push(
+                      const CreateNewPass(),
+                    );
+                  },
                 )
               ],
             ),

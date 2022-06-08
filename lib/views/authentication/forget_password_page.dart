@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
+
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
@@ -50,38 +51,41 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const Text(
-                  "Enter the email you’ve used to sign up to WorkoutZone.",
-                ),
-                const VerticalSpace(height: 20),
-
-                ///Form
-                Form(
-                  key: _formKey,
-                  child: FormUsername(
-                    color: kPrimaryColor,
-                    controller: _forgetPassword,
-                    hint: 'Enter Your Email',
-                    title: 'Email',
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  const Text(
+                    "Enter the email youcolu’ve used to sign up to WorkoutZone.",
                   ),
-                ),
+                  const VerticalSpace(height: 15),
 
-                ///button
-                const VerticalSpace(height: 490),
-                ButtonWithLatar(
-                  title: "Recover Password",
-                  press: () {
-                    context.router.push(
-                      const VerfikasiForgetPassword(),
-                    );
-                  },
-                )
-              ],
-            ),
+                  ///Form
+                  Form(
+                    key: _formKey,
+                    child: FormUsername(
+                      color: kPrimaryColor,
+                      controller: _forgetPassword,
+                      hint: 'Enter Your Email',
+                      title: 'Email',
+                    ),
+                  ),
+                ],
+              ),
+
+              ///button
+
+              ButtonWithLatar(
+                title: "Recover Password",
+                press: () {
+                  context.router.push(
+                    VerfikasiForgetPassword(email: _forgetPassword.text),
+                  );
+                },
+              )
+            ],
           ),
         ),
       ),

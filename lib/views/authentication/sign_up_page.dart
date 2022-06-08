@@ -5,7 +5,7 @@ import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
 import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
-import 'package:workout_zone/views/authentication/widgets/text_sambut.dart';
+import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
@@ -18,12 +18,25 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final GlobalKey<FormState> _formkey = GlobalKey();
   bool check = false;
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _compassController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    emailController.dispose();
+    _numberController.dispose();
+    _passwordController.dispose();
+    _compassController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -63,37 +76,34 @@ class _SignUpPageState extends State<SignUpPage> {
                     smabut2: 'asjdiasjdadkadajdkjkjad\nasdsjjdjasdka',
                   ),
                 ),
+                const VerticalSpace(height: 20),
                 Form(
+                  key: _formkey,
                   child: Column(
                     children: [
-                      const VerticalSpace(height: 28),
                       FormUsername(
                         title: 'Username',
                         hint: 'Enter Username',
                         controller: _usernameController,
                         color: kDarkColor,
                       ),
-                      const VerticalSpace(height: 10),
                       FormUsername(
                         title: 'Email',
                         hint: 'Enter Email',
-                        controller: _emailController,
+                        controller: emailController,
                         color: kDarkColor,
                       ),
-                      const VerticalSpace(height: 10),
                       FormUsername(
                         title: 'Phone Number',
                         hint: 'Enter Phone Number',
                         controller: _numberController,
                         color: kDarkColor,
                       ),
-                      const VerticalSpace(height: 10),
                       FormPassword(
                         title: 'Password',
                         hint: 'Enter Your Password',
                         controller: _passwordController,
                       ),
-                      const VerticalSpace(height: 10),
                       FormPassword(
                         title: 'Confirm Password',
                         hint: 'Re-Enter Your Password',
@@ -132,18 +142,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         title: 'Sign Up',
                         press: () {
                           context.router.push(
-                            VerfikasiSignUp(username: _emailController.text),
+                            VerfikasiSignUp(email: emailController.text),
                           );
                         },
                       ),
-                      const VerticalSpace(height: 38),
+                      const VerticalSpace(height: 30),
                       Bottomtxt(
                         txt1: 'Already Have Accoount',
                         txt2: 'Sign In',
                         tekan: () {
                           context.router.push(const SignInRoute());
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),

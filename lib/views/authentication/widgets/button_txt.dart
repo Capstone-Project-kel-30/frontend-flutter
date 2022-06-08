@@ -15,21 +15,24 @@ class Bottomtxt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          txt1,
-          style: AppTheme.theme(context).textTheme.labelMedium?.copyWith(
-                fontWeight: kRegularWeight,
-              ),
-        ),
-        const HorizontalSpace(width: 5),
-        ForgetPassBttn(
-          titile: txt2,
-          press: tekan,
-        )
-      ],
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            txt1,
+            style: AppTheme.theme(context).textTheme.labelMedium?.copyWith(
+                  fontWeight: kRegularWeight,
+                ),
+          ),
+          const HorizontalSpace(width: 5),
+          ForgetPassBttn(
+            titile: txt2,
+            press: tekan,
+          )
+        ],
+      ),
     );
   }
 }

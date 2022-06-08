@@ -4,11 +4,11 @@ import 'package:workout_zone/utils/routes/routes.gr.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
 import 'package:workout_zone/views/authentication/widgets/form_password.dart';
+import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 import 'widgets/form_username.dart';
-import 'widgets/text_sambut.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -58,74 +58,74 @@ class _SignInPageState extends State<SignInPage> {
       ///body
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: double.infinity,
-                  child: TextSambut(
-                    sambut1: 'Welcome Back\n',
-                    smabut2: 'asdsadasdjhadjsahdjhadjads\nakasdhjahdjkasd',
-                  ),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ///Form
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      width: double.infinity,
+                      child: TextSambut(
+                        sambut1: 'Welcome Back\n',
+                        smabut2: 'asdsadasdjhadjsahdjhadjads\nakasdhjahdjkasd',
+                      ),
+                    ),
+                    const VerticalSpace(height: 20),
+                    FormUsername(
+                      hint: 'Masukan Email',
+                      title: 'Email',
+                      controller: _emailController,
+                      color: kDarkColor,
+                    ),
+
+                    FormPassword(
+                      title: "Password",
+                      hint: "Masukan Password",
+                      controller: _passwordController,
+                    ),
+                    const VerticalSpace(height: 15),
+
+                    ///button
+                    ButtonWithLatar(
+                      title: "Sign In",
+                      press: () {
+                        context.router.push(
+                          const HomeWrapper(),
+                        );
+                      },
+                    ),
+                    const VerticalSpace(height: 10),
+
+                    ///text yang dibawah button
+
+                    ///forget button
+                    ForgetPassBttn(
+                      titile: 'Forget Password ?',
+                      press: () {
+                        context.router.push(
+                          const ForgetPasswordRoute(),
+                        );
+                      },
+                    ),
+
+                    //text yang dibawah
+                  ],
                 ),
-                const VerticalSpace(height: 30),
-
-                ///Form
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      FormUsername(
-                        hint: 'Masukan Email',
-                        title: 'Email',
-                        controller: _emailController,
-                        color: kDarkColor,
-                      ),
-                      const VerticalSpace(height: 10),
-                      FormPassword(
-                        title: "Password",
-                        hint: "Masukan Password",
-                        controller: _passwordController,
-                      ),
-                      const VerticalSpace(height: 60),
-
-                      ///button
-                      ButtonWithLatar(
-                        title: "Sign In",
-                        press: () {
-                          context.router.push(
-                            const HomeWrapper(),
-                          );
-                        },
-                      ),
-
-                      ///text yang dibawah button
-                      const VerticalSpace(height: 10),
-
-                      ///forget button
-                      ForgetPassBttn(
-                        titile: 'Forget Password ?',
-                        press: () {
-                          context.router.push(const ForgetPasswordRoute());
-                        },
-                      ),
-
-                      const VerticalSpace(height: 240),
-                      //text yang dibawah
-                      Bottomtxt(
-                        txt1: "Not Have Account yet ?",
-                        txt2: 'Sign Up',
-                        tekan: () {
-                          context.router.push(const SignUpRoute());
-                        },
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              ),
+              Bottomtxt(
+                txt1: "Not Have Account yet ?",
+                txt2: 'Sign Up',
+                tekan: () {
+                  context.router.push(
+                    const SignUpRoute(),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),

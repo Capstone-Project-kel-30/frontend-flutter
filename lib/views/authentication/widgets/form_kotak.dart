@@ -11,8 +11,8 @@ class FormKotak extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController formKotak = TextEditingController();
     return SizedBox(
-      width: 38,
-      height: 38,
+      width: 50,
+      height: 50,
       child: TextFormField(
         controller: formKotak,
         onChanged: (value) {
@@ -28,14 +28,15 @@ class FormKotak extends StatelessWidget {
           FilteringTextInputFormatter.digitsOnly,
         ],
         decoration: const InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: kGreyColor),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: kGreyColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: kDarkColor,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: kDarkColor,
-              ),
-            )),
+          ),
+        ),
       ),
     );
   }

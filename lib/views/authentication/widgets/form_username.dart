@@ -20,6 +20,7 @@ class FormUsername extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const VerticalSpace(height: 10),
         Text(
           title,
           style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 14),
@@ -28,6 +29,7 @@ class FormUsername extends StatelessWidget {
         SizedBox(
           height: 45,
           child: TextFormField(
+            controller: controller,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               hintText: hint,

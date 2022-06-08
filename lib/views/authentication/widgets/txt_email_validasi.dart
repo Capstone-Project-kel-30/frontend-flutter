@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-class EmailValidasi extends StatelessWidget {
-  const EmailValidasi({
+class TxtEmailValidasi extends StatelessWidget {
+  const TxtEmailValidasi({
     Key? key,
     required this.user,
   }) : super(key: key);

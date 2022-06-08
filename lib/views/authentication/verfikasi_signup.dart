@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
 import 'package:workout_zone/views/authentication/widgets/form_kotak.dart';
-import 'package:workout_zone/views/authentication/widgets/verifikasi/email_validasi.dart';
+import 'package:workout_zone/views/authentication/widgets/txt_email_validasi.dart';
 
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class VerfikasiSignUp extends StatefulWidget {
-  const VerfikasiSignUp({Key? key, required this.username}) : super(key: key);
-  final String username;
+  const VerfikasiSignUp({Key? key, required this.email}) : super(key: key);
+  final String email;
 
   @override
   State<VerfikasiSignUp> createState() => _VerfikasiSignUpState();
@@ -44,11 +44,12 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Center(
             child: Column(
               children: [
-                EmailValidasi(user: widget.username),
+                TxtEmailValidasi(user: widget.email),
+                const VerticalSpace(height: 15),
                 Form(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
