@@ -58,7 +58,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
               Column(
                 children: [
                   const Text(
-                    "Enter the email youcolu’ve used to sign up to WorkoutZone.",
+                    "Enter the email you’ve used to sign up to WorkoutZone.",
                   ),
                   const VerticalSpace(height: 15),
 
