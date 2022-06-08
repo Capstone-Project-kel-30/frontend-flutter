@@ -17,6 +17,13 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final TextEditingController _forgetPassword = TextEditingController();
+
+  @override
+  void dispose() {
+    _forgetPassword.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

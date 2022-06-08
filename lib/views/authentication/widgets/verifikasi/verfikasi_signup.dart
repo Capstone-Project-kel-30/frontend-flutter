@@ -9,9 +9,15 @@ import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-class VerfikasiSignUp extends StatelessWidget {
+class VerfikasiSignUp extends StatefulWidget {
   const VerfikasiSignUp({Key? key, required this.username}) : super(key: key);
   final String username;
+
+  @override
+  State<VerfikasiSignUp> createState() => _VerfikasiSignUpState();
+}
+
+class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,7 @@ class VerfikasiSignUp extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                EmailValidasi(user: username),
+                EmailValidasi(user: widget.username),
                 Form(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

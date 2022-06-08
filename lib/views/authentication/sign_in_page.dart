@@ -19,8 +19,16 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController __emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +80,7 @@ class _SignInPageState extends State<SignInPage> {
                       FormUsername(
                         hint: 'Masukan Email',
                         title: 'Email',
-                        controller: __emailController,
+                        controller: _emailController,
                         color: kDarkColor,
                       ),
                       const VerticalSpace(height: 10),
@@ -103,6 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                           context.router.push(const ForgetPasswordRoute());
                         },
                       ),
+
                       const VerticalSpace(height: 240),
                       //text yang dibawah
                       Bottomtxt(
