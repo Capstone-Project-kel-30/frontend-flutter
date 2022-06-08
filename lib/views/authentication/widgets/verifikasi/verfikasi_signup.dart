@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
 import 'package:workout_zone/views/authentication/widgets/form_kotak.dart';
+import 'package:workout_zone/views/authentication/widgets/verifikasi/email_validasi.dart';
+
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class VerfikasiSignUp extends StatelessWidget {
-  const VerfikasiSignUp({Key? key}) : super(key: key);
-
+  const VerfikasiSignUp({Key? key, required this.username}) : super(key: key);
+  final String username;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,15 +42,7 @@ class VerfikasiSignUp extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                const Text(
-                  'Please enter the code we sent to',
-                ),
-                const VerticalSpace(height: 10),
-                const Text(
-                  "Da*********@gmail.com",
-                  style: TextStyle(fontWeight: kSemiBoldWeight),
-                ),
-                const VerticalSpace(height: 15),
+                EmailValidasi(user: username),
                 Form(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

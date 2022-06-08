@@ -100,19 +100,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         controller: _compassController,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Checkbox(
-                            fillColor: MaterialStateProperty.resolveWith(
-                                (states) => kPrimaryColor),
-                            value: check,
-                            onChanged: (bool? value) {
-                              setState(
-                                () {
-                                  check = value!;
-                                },
-                              );
-                            },
+                          SizedBox(
+                            width: 20,
+                            child: Checkbox(
+                              fillColor: MaterialStateProperty.resolveWith(
+                                  (states) => kPrimaryColor),
+                              value: check,
+                              onChanged: (bool? value) {
+                                setState(
+                                  () {
+                                    check = value!;
+                                  },
+                                );
+                              },
+                            ),
                           ),
                           const HorizontalSpace(width: 8),
                           Text(
@@ -130,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         title: 'Sign Up',
                         press: () {
                           context.router.push(
-                            const VerfikasiSignUp(),
+                            VerfikasiSignUp(username: _emailController.text),
                           );
                         },
                       ),

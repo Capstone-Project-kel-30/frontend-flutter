@@ -59,8 +59,10 @@ class AppRouter extends _i17.RootStackRouter {
           routeData: routeData, child: const _i5.ForgetPasswordPage());
     },
     VerfikasiSignUp.name: (routeData) {
+      final args = routeData.argsAs<VerfikasiSignUpArgs>();
       return _i17.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.VerfikasiSignUp());
+          routeData: routeData,
+          child: _i6.VerfikasiSignUp(key: args.key, username: args.username));
     },
     VerfikasiForgetPassword.name: (routeData) {
       return _i17.MaterialPageX<dynamic>(
@@ -175,11 +177,26 @@ class ForgetPasswordRoute extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.VerfikasiSignUp]
-class VerfikasiSignUp extends _i17.PageRouteInfo<void> {
-  const VerfikasiSignUp()
-      : super(VerfikasiSignUp.name, path: 'verfikasiSignUp');
+class VerfikasiSignUp extends _i17.PageRouteInfo<VerfikasiSignUpArgs> {
+  VerfikasiSignUp({_i18.Key? key, required String username})
+      : super(VerfikasiSignUp.name,
+            path: 'verfikasiSignUp',
+            args: VerfikasiSignUpArgs(key: key, username: username));
 
   static const String name = 'VerfikasiSignUp';
+}
+
+class VerfikasiSignUpArgs {
+  const VerfikasiSignUpArgs({this.key, required this.username});
+
+  final _i18.Key? key;
+
+  final String username;
+
+  @override
+  String toString() {
+    return 'VerfikasiSignUpArgs{key: $key, username: $username}';
+  }
 }
 
 /// generated route for
