@@ -61,6 +61,7 @@ class _SignInPageState extends State<SignInPage> {
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ///Form
                 Form(
@@ -131,18 +132,17 @@ class _SignInPageState extends State<SignInPage> {
                           );
                         },
                       ),
-                      const VerticalSpace(height: 287),
-                      Bottomtxt(
-                        txt1: "Not Have Account yet ?",
-                        txt2: 'Sign Up',
-                        tekan: () {
-                          context.router.push(
-                            const SignUpRoute(),
-                          );
-                        },
-                      ),
                     ],
                   ),
+                ),
+                Bottomtxt(
+                  txt1: "Not Have Account yet ?",
+                  txt2: 'Sign Up',
+                  tekan: () {
+                    context.router.push(
+                      const SignUpRoute(),
+                    );
+                  },
                 ),
               ],
             ),
