@@ -10,10 +10,14 @@ class FormUsername extends StatelessWidget {
     required this.hint,
     required this.controller,
     required this.color,
+    required this.validator,
+    required this.keyboard,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
   final Color color;
+  final String? Function(String?)? validator;
+  final TextInputType keyboard;
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +27,18 @@ class FormUsername extends StatelessWidget {
         const VerticalSpace(height: 10),
         Text(
           title,
-          style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 14),
+          style: const TextStyle(fontWeight: kBoldWeight, fontSize: 14),
         ),
-        const VerticalSpace(height: 4),
+        const VerticalSpace(height: 8),
         SizedBox(
-          height: 45,
           child: TextFormField(
+            validator: validator,
+            keyboardType: keyboard,
             controller: controller,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               hintText: hint,
-              hintStyle: TextStyle(fontSize: 10, color: color),
+              hintStyle: TextStyle(fontSize: 13, color: color),
               fillColor: kDarkColor,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
@@ -42,6 +47,14 @@ class FormUsername extends StatelessWidget {
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: kPrimaryColor),
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
+              ),
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
               ),
             ),
           ),

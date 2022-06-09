@@ -20,6 +20,7 @@ class VerfikasiSignUp extends StatefulWidget {
 }
 
 class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
+  final GlobalKey<FormState> _formKotak = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +54,7 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                 TxtEmailValidasi(user: widget.email),
                 const VerticalSpace(height: 15),
                 Form(
+                  key: _formKotak,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -77,9 +79,9 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                 ButtonWithLatar(
                   title: "Verify",
                   press: () {
-                    context.router.push(
-                      const HomeWrapper(),
-                    );
+                    if (_formKotak.currentState!.validate()) {
+                      context.router.push(const HomeWrapper());
+                    }
                   },
                 )
               ],

@@ -66,10 +66,20 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                   Form(
                     key: _formKey,
                     child: FormUsername(
+                      validator: (value) {
+                        if (value == null ||
+                            value.length < 14 ||
+                            !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(value)) {
+                          return 'Masukan Valid Email';
+                        }
+                        return null;
+                      },
                       color: kPrimaryColor,
                       controller: _forgetPassword,
                       hint: 'Enter Your Email',
                       title: 'Email',
+                      keyboard: TextInputType.emailAddress,
                     ),
                   ),
                 ],
@@ -80,9 +90,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
               ButtonWithLatar(
                 title: "Recover Password",
                 press: () {
-                  context.router.push(
-                    VerfikasiForgetPassword(email: _forgetPassword.text),
-                  );
+                  if (_formKey.currentState!.validate()) {
+                    context.router.push(
+                      VerfikasiForgetPassword(email: _forgetPassword.text),
+                    );
+                  }
                 },
               )
             ],

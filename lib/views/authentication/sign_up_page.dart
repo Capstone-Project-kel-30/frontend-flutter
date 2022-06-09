@@ -82,29 +82,79 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Column(
                     children: [
                       FormUsername(
+                        validator: (value) {
+                          if (value == null ||
+                              value.length < 4 ||
+                              RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
+                                  .hasMatch(value)) {
+                            return 'Masukan Nama yang benar';
+                          }
+                          return null;
+                        },
                         title: 'Username',
                         hint: 'Enter Username',
                         controller: _usernameController,
-                        color: kDarkColor,
+                        color: kGreyColor,
+                        keyboard: TextInputType.name,
                       ),
                       FormUsername(
+                        validator: (value) {
+                          if (value == null ||
+                              value.length < 14 ||
+                              !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(value)) {
+                            return 'Masukan Email';
+                          }
+                          return null;
+                        },
                         title: 'Email',
                         hint: 'Enter Email',
                         controller: emailController,
-                        color: kDarkColor,
+                        color: kGreyColor,
+                        keyboard: TextInputType.emailAddress,
                       ),
                       FormUsername(
+                        validator: (value) {
+                          if (value == null ||
+                              value.length < 12 ||
+                              RegExp(r"^\+?0[0-9]{10}$").hasMatch(value)) {
+                            return 'Masukan Nomor Handphone';
+                          }
+                          return null;
+                        },
                         title: 'Phone Number',
                         hint: 'Enter Phone Number',
                         controller: _numberController,
-                        color: kDarkColor,
+                        color: kGreyColor,
+                        keyboard: TextInputType.phone,
                       ),
                       FormPassword(
+                        validator: (value) {
+                          if (value == null ||
+                              value.length < 8 ||
+                              !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
+                                  .hasMatch(value)) {
+                            return 'Masukan Password yang valid ';
+                          }
+                          return null;
+                        },
                         title: 'Password',
                         hint: 'Enter Your Password',
                         controller: _passwordController,
                       ),
                       FormPassword(
+                        validator: (value) {
+                          if (value == null ||
+                              value.length < 8 ||
+                              !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
+                                  .hasMatch(value)) {
+                            return 'Masukan Password yang valid ';
+                          }
+                          if (value != _passwordController.text) {
+                            return 'Password Not Match';
+                          }
+                          return null;
+                        },
                         title: 'Confirm Password',
                         hint: 'Re-Enter Your Password',
                         controller: _compassController,
@@ -141,9 +191,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       ButtonWithLatar(
                         title: 'Sign Up',
                         press: () {
-                          context.router.push(
-                            VerfikasiSignUp(email: emailController.text),
-                          );
+                          if (_formkey.currentState!.validate()) {
+                            context.router.push(
+                              VerfikasiSignUp(email: emailController.text),
+                            );
+                          }
                         },
                       ),
                       const VerticalSpace(height: 30),
@@ -151,7 +203,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         txt1: 'Already Have Accoount',
                         txt2: 'Sign In',
                         tekan: () {
-                          context.router.push(const SignInRoute());
+                          context.router.push(
+                            const SignInRoute(),
+                          );
                         },
                       ),
                     ],

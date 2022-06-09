@@ -43,7 +43,7 @@ class _CreateNewPassState extends State<CreateNewPass> {
       ),
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -55,11 +55,32 @@ class _CreateNewPassState extends State<CreateNewPass> {
                     'Your new password, must be different from previously used password.',
                   ),
                   FormPassword(
+                    validator: (value) {
+                      if (value == null ||
+                          value.length < 8 ||
+                          !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
+                              .hasMatch(value)) {
+                        return 'Masukan Password yang valid ';
+                      }
+                      return null;
+                    },
                     title: 'New Password',
                     hint: 'Enter new password',
                     controller: _newPassword,
                   ),
                   FormPassword(
+                    validator: (value) {
+                      if (value == null ||
+                          value.length < 8 ||
+                          !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
+                              .hasMatch(value)) {
+                        return 'Masukan Password yang valid ';
+                      }
+                      if (value != _newPassword.text) {
+                        return 'Password Not Match';
+                      }
+                      return null;
+                    },
                     title: 'Comfirm New Password',
                     hint: 'Enter new confirm password',
                     controller: _comnewPassword,
@@ -70,9 +91,11 @@ class _CreateNewPassState extends State<CreateNewPass> {
             ButtonWithLatar(
                 title: 'Confirm',
                 press: () {
-                  context.router.push(
-                    const SignInRoute(),
-                  );
+                  if (_formKey.currentState!.validate()) {
+                    context.router.push(
+                      const SignInRoute(),
+                    );
+                  }
                 })
           ],
         ),

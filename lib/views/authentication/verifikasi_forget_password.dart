@@ -21,6 +21,7 @@ class VerfikasiForgetPassword extends StatefulWidget {
 }
 
 class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
+  final GlobalKey<FormState> _formKotak = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +55,9 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
                 TxtEmailValidasi(
                   user: widget.email,
                 ),
+                const VerticalSpace(height: 15),
                 Form(
+                  key: _formKotak,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -79,9 +82,9 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
                 ButtonWithLatar(
                   title: "Confirm",
                   press: () {
-                    context.router.push(
-                      const CreateNewPass(),
-                    );
+                    if (_formKotak.currentState!.validate()) {
+                      context.router.push(const CreateNewPass());
+                    }
                   },
                 )
               ],

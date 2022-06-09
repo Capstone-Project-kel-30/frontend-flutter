@@ -58,74 +58,95 @@ class _SignInPageState extends State<SignInPage> {
       ///body
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ///Form
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      width: double.infinity,
-                      child: TextSambut(
-                        sambut1: 'Welcome Back\n',
-                        smabut2: 'asdsadasdjhadjsahdjhadjads\nakasdhjahdjkasd',
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ///Form
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        width: double.infinity,
+                        child: TextSambut(
+                          sambut1: 'Welcome Back\n',
+                          smabut2:
+                              'asdsadasdjhadjsahdjhadjads\nakasdhjahdjkasd',
+                        ),
                       ),
-                    ),
-                    const VerticalSpace(height: 20),
-                    FormUsername(
-                      hint: 'Masukan Email',
-                      title: 'Email',
-                      controller: _emailController,
-                      color: kDarkColor,
-                    ),
+                      const VerticalSpace(height: 20),
+                      FormUsername(
+                        validator: (value) {
+                          if (value == null ||
+                              value.length < 14 ||
+                              !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(value)) {
+                            return 'Masukan Valid Email';
+                          }
+                          return null;
+                        },
+                        hint: 'Enter Email',
+                        title: 'Email',
+                        controller: _emailController,
+                        color: kGreyColor,
+                        keyboard: TextInputType.emailAddress,
+                      ),
 
-                    FormPassword(
-                      title: "Password",
-                      hint: "Masukan Password",
-                      controller: _passwordController,
-                    ),
-                    const VerticalSpace(height: 15),
+                      FormPassword(
+                        validator: (value) {
+                          if (value == null ||
+                              value.length < 8 ||
+                              !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
+                            return 'Incorrect password\nPassword is to short (minimum 8 characters)';
+                          }
+                          return null;
+                        },
+                        title: "Password",
+                        hint: "Enter your password",
+                        controller: _passwordController,
+                      ),
+                      const VerticalSpace(height: 15),
 
-                    ///button
-                    ButtonWithLatar(
-                      title: "Sign In",
-                      press: () {
-                        context.router.push(
-                          VerfikasiSignUp(email: _emailController.text),
-                        );
-                      },
-                    ),
-                    const VerticalSpace(height: 10),
+                      ///button
+                      ButtonWithLatar(
+                        title: "Sign In",
+                        press: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.router.push(
+                              VerfikasiSignUp(email: _emailController.text),
+                            );
+                          }
+                        },
+                      ),
+                      const VerticalSpace(height: 10),
 
-                    ///text yang dibawah button
+                      ///text yang dibawah button
 
-                    ///forget button
-                    ForgetPassBttn(
-                      titile: 'Forget Password ?',
-                      press: () {
-                        context.router.push(
-                          const ForgetPasswordRoute(),
-                        );
-                      },
-                    ),
-
-                    //text yang dibawah
-                  ],
+                      ///forget button
+                      ForgetPassBttn(
+                        titile: 'Forget Password ?',
+                        press: () {
+                          context.router.push(
+                            const ForgetPasswordRoute(),
+                          );
+                        },
+                      ),
+                      const VerticalSpace(height: 287),
+                      Bottomtxt(
+                        txt1: "Not Have Account yet ?",
+                        txt2: 'Sign Up',
+                        tekan: () {
+                          context.router.push(
+                            const SignUpRoute(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Bottomtxt(
-                txt1: "Not Have Account yet ?",
-                txt2: 'Sign Up',
-                tekan: () {
-                  context.router.push(
-                    const SignUpRoute(),
-                  );
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

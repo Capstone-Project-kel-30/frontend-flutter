@@ -8,9 +8,11 @@ class FormPassword extends StatefulWidget {
     required this.title,
     required this.hint,
     required this.controller,
+    required this.validator,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   State<FormPassword> createState() => _FormPasswordState();
@@ -27,12 +29,12 @@ class _FormPasswordState extends State<FormPassword> {
         const VerticalSpace(height: 10),
         Text(
           widget.title,
-          style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 14),
+          style: const TextStyle(fontWeight: kBoldWeight, fontSize: 14),
         ),
-        const VerticalSpace(height: 4),
+        const VerticalSpace(height: 8),
         SizedBox(
-          height: 45,
           child: TextFormField(
+            validator: widget.validator,
             obscureText: _hidePassword,
             controller: widget.controller,
             decoration: InputDecoration(
@@ -44,10 +46,11 @@ class _FormPasswordState extends State<FormPassword> {
                   });
                 },
                 child: Icon(
-                    _hidePassword ? Icons.visibility : Icons.visibility_off),
+                  _hidePassword ? Icons.visibility_off : Icons.visibility,
+                ),
               ),
               hintText: widget.hint,
-              hintStyle: const TextStyle(fontSize: 12),
+              hintStyle: const TextStyle(fontSize: 13, color: kGreyColor),
               fillColor: kDarkColor,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
@@ -56,6 +59,12 @@ class _FormPasswordState extends State<FormPassword> {
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: kPrimaryColor),
+              ),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
               ),
             ),
           ),
