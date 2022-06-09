@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../../utils/routes/routes.gr.dart';
 import '../widgets/vertical_space.dart';
-import 'widgets/image_carousel.dart';
+import 'widgets/home_image_carousel.dart';
 import 'widgets/image_container.dart';
 import 'widgets/image_container_title.dart';
-import 'widgets/membership_info.dart';
+import 'widgets/join_membership_info.dart';
 import 'widgets/welcome_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,11 +30,11 @@ class _HomePageState extends State<HomePage> {
         children: [
           const WelcomeBar(username: 'Dadang Konelo'),
           const VerticalSpace(height: 15),
-          ImageCarousel(
+          HomeImageCarousel(
             imgList: imgList,
           ),
           const VerticalSpace(height: 25),
-          const MembershipInfo(),
+          const JoinMembershipInfo(),
           const VerticalSpace(height: 20),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

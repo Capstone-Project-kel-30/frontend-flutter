@@ -2,18 +2,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/vertical_space.dart';
-import 'carousel_indicator.dart';
+import '../../widgets/carousel_indicator.dart';
 
-class ImageCarousel extends StatefulWidget {
-  const ImageCarousel({Key? key, required this.imgList}) : super(key: key);
+class HomeImageCarousel extends StatefulWidget {
+  const HomeImageCarousel({Key? key, required this.imgList}) : super(key: key);
 
   final List<String> imgList;
 
   @override
-  State<ImageCarousel> createState() => _ImageCarouselState();
+  State<HomeImageCarousel> createState() => _HomeImageCarouselState();
 }
 
-class _ImageCarouselState extends State<ImageCarousel> {
+class _HomeImageCarouselState extends State<HomeImageCarousel> {
   int _current = 0;
   @override
   Widget build(BuildContext context) {
@@ -46,10 +46,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (int i = 0; i < widget.imgList.length; i++)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: CarouselIndicator(selected: _current == i),
-              )
+              CarouselIndicator(selected: _current == i)
           ],
         ),
       ],
