@@ -71,18 +71,17 @@ class _SignInPageState extends State<SignInPage> {
                         width: double.infinity,
                         child: TextSambut(
                           sambut1: 'Welcome Back\n',
-                          smabut2:
-                              'asdsadasdjhadjsahdjhadjads\nakasdhjahdjkasd',
+                          smabut2: 'You have been missed, Login to continue',
                         ),
                       ),
-                      const VerticalSpace(height: 20),
+
                       FormUsername(
                         validator: (value) {
                           if (value == null ||
                               value.length < 14 ||
                               !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
-                            return 'Masukan Valid Email';
+                            return 'Please enter your email address';
                           }
                           return null;
                         },
@@ -98,7 +97,7 @@ class _SignInPageState extends State<SignInPage> {
                           if (value == null ||
                               value.length < 8 ||
                               !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
-                            return 'Incorrect password\nPassword is to short (minimum 8 characters)';
+                            return 'Incorrect password';
                           }
                           return null;
                         },
@@ -119,7 +118,7 @@ class _SignInPageState extends State<SignInPage> {
                           }
                         },
                       ),
-                      const VerticalSpace(height: 10),
+                      const VerticalSpace(height: 20),
 
                       ///text yang dibawah button
 

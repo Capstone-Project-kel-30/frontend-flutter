@@ -25,7 +25,8 @@ class OnBoardingPage extends StatelessWidget {
               children: <Widget>[
                 const LogoImg(),
                 const TextStarted(
-                  subtit: 'akdokwakodakwodoad',
+                  subtit:
+                      'Increase endurance and body strength\nto create a healthier life with Workout\nzone.',
                   tit: "Make Your Self \nStronger\n\n",
                 ),
                 ButtonWithLatar(

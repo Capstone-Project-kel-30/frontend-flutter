@@ -71,7 +71,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                             value.length < 14 ||
                             !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(value)) {
-                          return 'Masukan Valid Email';
+                          return 'Please enter your email address';
                         }
                         return null;
                       },

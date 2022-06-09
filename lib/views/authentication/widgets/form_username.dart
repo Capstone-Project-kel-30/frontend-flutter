@@ -24,7 +24,7 @@ class FormUsername extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const VerticalSpace(height: 10),
+        const VerticalSpace(height: 20),
         Text(
           title,
           style: const TextStyle(fontWeight: kBoldWeight, fontSize: 14),
@@ -36,6 +36,10 @@ class FormUsername extends StatelessWidget {
             keyboardType: keyboard,
             controller: controller,
             decoration: InputDecoration(
+              errorStyle: AppTheme.theme(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: Colors.red),
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               hintText: hint,
               hintStyle: TextStyle(fontSize: 13, color: color),

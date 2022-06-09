@@ -26,7 +26,7 @@ class _FormPasswordState extends State<FormPassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const VerticalSpace(height: 10),
+        const VerticalSpace(height: 20),
         Text(
           widget.title,
           style: const TextStyle(fontWeight: kBoldWeight, fontSize: 14),
@@ -38,6 +38,10 @@ class _FormPasswordState extends State<FormPassword> {
             obscureText: _hidePassword,
             controller: widget.controller,
             decoration: InputDecoration(
+              errorStyle: AppTheme.theme(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: Colors.red),
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               suffixIcon: GestureDetector(
                 onTap: () {

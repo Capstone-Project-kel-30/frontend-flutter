@@ -30,16 +30,16 @@ class _CreateNewPassState extends State<CreateNewPass> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          color: kDarkColor,
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: kPrimaryColor,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        // leading: IconButton(
+        //   color: kDarkColor,
+        //   icon: const Icon(
+        //     Icons.arrow_back_ios_new,
+        //     color: kPrimaryColor,
+        //   ),
+        //   onPressed: () {
+        //     Navigator.of(context).pop();
+        //   },
+        // ),
       ),
       body: SafeArea(
           child: Padding(
@@ -58,9 +58,8 @@ class _CreateNewPassState extends State<CreateNewPass> {
                     validator: (value) {
                       if (value == null ||
                           value.length < 8 ||
-                          !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
-                              .hasMatch(value)) {
-                        return 'Masukan Password yang valid ';
+                          !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
+                        return 'Password length must be at least 8 characters';
                       }
                       return null;
                     },
@@ -72,13 +71,11 @@ class _CreateNewPassState extends State<CreateNewPass> {
                     validator: (value) {
                       if (value == null ||
                           value.length < 8 ||
-                          !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
-                              .hasMatch(value)) {
-                        return 'Masukan Password yang valid ';
-                      }
-                      if (value != _newPassword.text) {
+                          (value != _newPassword.text) ||
+                          !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
                         return 'Password Not Match';
                       }
+
                       return null;
                     },
                     title: 'Comfirm New Password',
@@ -92,7 +89,7 @@ class _CreateNewPassState extends State<CreateNewPass> {
                 title: 'Confirm',
                 press: () {
                   if (_formKey.currentState!.validate()) {
-                    context.router.push(
+                    context.router.replace(
                       const SignInRoute(),
                     );
                   }

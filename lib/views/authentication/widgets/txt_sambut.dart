@@ -16,7 +16,7 @@ class TextSambut extends StatelessWidget {
           TextSpan(
             text: sambut1,
             style: AppTheme.theme(context).textTheme.headlineMedium?.copyWith(
-                height: 1.2, fontWeight: kBoldWeight, color: kDarkColor),
+                height: 2.0, fontWeight: kBoldWeight, color: kDarkColor),
           ),
           TextSpan(
             text: smabut2,

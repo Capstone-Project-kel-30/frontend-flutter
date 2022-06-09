@@ -28,8 +28,9 @@ class Landingpage extends StatelessWidget {
 
                 ///text
                 const TextStarted(
-                  subtit: 'asdasddasdasd',
-                  tit: "Make Your Self \nStronger\n\n",
+                  subtit:
+                      "Being healthy is more fun if you can\ndo it together with more friends. With the\nbest coaches and interesting classes.\nLet's make the Workout Zone your\nhealthy life partner!",
+                  tit: "GET YOUR\nPERFECT CLASS\nWITH PERFECT\nTRAINERS\n\n",
                 ),
 
                 ///

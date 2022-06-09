@@ -1,3 +1,4 @@
+import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
@@ -73,10 +74,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: double.infinity,
                   child: TextSambut(
                     sambut1: 'Welcome !\n',
-                    smabut2: 'asjdiasjdadkadajdkjkjad\nasdsjjdjasdka',
+                    smabut2:
+                        'Enjoy the gym with us, Create account to continue',
                   ),
                 ),
-                const VerticalSpace(height: 20),
                 Form(
                   key: _formkey,
                   child: Column(
@@ -85,9 +86,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null ||
                               value.length < 4 ||
-                              RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
-                                  .hasMatch(value)) {
-                            return 'Masukan Nama yang benar';
+                              !RegExp(r"^([a-z0-9])([A-Z])").hasMatch(value)) {
+                            return 'Please use only letters (a-z), and numbers.';
                           }
                           return null;
                         },
@@ -103,7 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               value.length < 14 ||
                               !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
-                            return 'Masukan Email';
+                            return 'Please Enter a valid Email Address';
                           }
                           return null;
                         },
@@ -118,7 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           if (value == null ||
                               value.length < 12 ||
                               RegExp(r"^\+?0[0-9]{10}$").hasMatch(value)) {
-                            return 'Masukan Nomor Handphone';
+                            return 'Please enter your phone number';
                           }
                           return null;
                         },
@@ -132,9 +132,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null ||
                               value.length < 8 ||
-                              !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
-                                  .hasMatch(value)) {
-                            return 'Masukan Password yang valid ';
+                              !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
+                            return 'Password length must be at least 8 characters';
                           }
                           return null;
                         },
@@ -146,48 +145,33 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null ||
                               value.length < 8 ||
-                              !RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)")
-                                  .hasMatch(value)) {
-                            return 'Masukan Password yang valid ';
+                              value != _passwordController.text ||
+                              !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
+                            return 'Password do not match';
                           }
-                          if (value != _passwordController.text) {
-                            return 'Password Not Match';
-                          }
+
                           return null;
                         },
                         title: 'Confirm Password',
                         hint: 'Re-Enter Your Password',
                         controller: _compassController,
                       ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 20,
-                            child: Checkbox(
-                              fillColor: MaterialStateProperty.resolveWith(
-                                  (states) => kPrimaryColor),
-                              value: check,
-                              onChanged: (bool? value) {
-                                setState(
-                                  () {
-                                    check = value!;
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                          const HorizontalSpace(width: 8),
-                          Text(
+                      const VerticalSpace(height: 16),
+                      CheckboxListTileFormField(
+                        contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        title: Text(
                             'By registering, you agree to Terms and Conditions',
-                            style: AppTheme.theme(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                  fontWeight: kRegularWeight,
-                                ),
-                          ),
-                        ],
+                            style:
+                                AppTheme.theme(context).textTheme.labelLarge),
+                        validator: (value) {
+                          if (value!) {
+                            return null;
+                          } else {
+                            return 'You must accept the terms and conditions to register an account';
+                          }
+                        },
                       ),
+                      const VerticalSpace(height: 16),
                       ButtonWithLatar(
                         title: 'Sign Up',
                         press: () {
