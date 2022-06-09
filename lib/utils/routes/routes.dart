@@ -7,6 +7,7 @@ import '../../views/membership/membership_detail_page.dart';
 import '../../views/membership/membership_page.dart';
 import '../../views/membership/membership_payment_page.dart';
 import '../../views/newsletter/newsletter_page.dart';
+import '../../views/on_boarding/landingpage.dart';
 import '../../views/on_boarding/on_boarding_page.dart';
 import '../../views/payment/payment_page.dart';
 import '../../views/profile/profile_page.dart';
@@ -21,6 +22,10 @@ import '../../views/wrapper/home_wrapper.dart';
       path: 'onBoarding',
       page: OnBoardingPage,
       initial: true,
+    ),
+    AutoRoute(
+      path: 'LandingPage',
+      page: Landingpage,
     ),
     AutoRoute(
       path: 'signIn',
