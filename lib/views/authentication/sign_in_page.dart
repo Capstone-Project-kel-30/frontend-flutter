@@ -135,14 +135,17 @@ class _SignInPageState extends State<SignInPage> {
                     ],
                   ),
                 ),
-                Bottomtxt(
-                  txt1: "Not Have Account yet ?",
-                  txt2: 'Sign Up',
-                  tekan: () {
-                    context.router.push(
-                      const SignUpRoute(),
-                    );
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: Bottomtxt(
+                    txt1: "Not Have Account yet ?",
+                    txt2: 'Sign Up',
+                    tekan: () {
+                      context.router.push(
+                        const SignUpRoute(),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
