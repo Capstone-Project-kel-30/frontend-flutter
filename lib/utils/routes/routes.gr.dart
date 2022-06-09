@@ -73,15 +73,18 @@ class AppRouter extends _i15.RootStackRouter {
           routeData: routeData, child: const _i9.PaymentPage());
     },
     MembershipDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<MembershipDetailRouteArgs>(
-          orElse: () => const MembershipDetailRouteArgs());
+      final args = routeData.argsAs<MembershipDetailRouteArgs>();
       return _i15.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i10.MembershipDetailPage(key: args.key));
+          child: _i10.MembershipDetailPage(
+              key: args.key, type: args.type, price: args.price));
     },
     MembershipPaymentRoute.name: (routeData) {
+      final args = routeData.argsAs<MembershipPaymentRouteArgs>();
       return _i15.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i11.MembershipPaymentPage());
+          routeData: routeData,
+          child: _i11.MembershipPaymentPage(
+              key: args.key, type: args.type, price: args.price));
     },
     HomeRoute.name: (routeData) {
       return _i15.MaterialPageX<dynamic>(
@@ -213,32 +216,60 @@ class PaymentRoute extends _i15.PageRouteInfo<void> {
 /// [_i10.MembershipDetailPage]
 class MembershipDetailRoute
     extends _i15.PageRouteInfo<MembershipDetailRouteArgs> {
-  MembershipDetailRoute({_i16.Key? key})
+  MembershipDetailRoute(
+      {_i16.Key? key, required String type, required String price})
       : super(MembershipDetailRoute.name,
             path: 'membershipDetail',
-            args: MembershipDetailRouteArgs(key: key));
+            args:
+                MembershipDetailRouteArgs(key: key, type: type, price: price));
 
   static const String name = 'MembershipDetailRoute';
 }
 
 class MembershipDetailRouteArgs {
-  const MembershipDetailRouteArgs({this.key});
+  const MembershipDetailRouteArgs(
+      {this.key, required this.type, required this.price});
 
   final _i16.Key? key;
 
+  final String type;
+
+  final String price;
+
   @override
   String toString() {
-    return 'MembershipDetailRouteArgs{key: $key}';
+    return 'MembershipDetailRouteArgs{key: $key, type: $type, price: $price}';
   }
 }
 
 /// generated route for
 /// [_i11.MembershipPaymentPage]
-class MembershipPaymentRoute extends _i15.PageRouteInfo<void> {
-  const MembershipPaymentRoute()
-      : super(MembershipPaymentRoute.name, path: 'membershipPayment');
+class MembershipPaymentRoute
+    extends _i15.PageRouteInfo<MembershipPaymentRouteArgs> {
+  MembershipPaymentRoute(
+      {_i16.Key? key, required String type, required String price})
+      : super(MembershipPaymentRoute.name,
+            path: 'membershipPayment',
+            args:
+                MembershipPaymentRouteArgs(key: key, type: type, price: price));
 
   static const String name = 'MembershipPaymentRoute';
+}
+
+class MembershipPaymentRouteArgs {
+  const MembershipPaymentRouteArgs(
+      {this.key, required this.type, required this.price});
+
+  final _i16.Key? key;
+
+  final String type;
+
+  final String price;
+
+  @override
+  String toString() {
+    return 'MembershipPaymentRouteArgs{key: $key, type: $type, price: $price}';
+  }
 }
 
 /// generated route for

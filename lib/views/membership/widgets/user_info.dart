@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
-import 'package:workout_zone/views/membership/widgets/time_info.dart';
-import 'package:workout_zone/views/membership/widgets/user_info_row.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
+
+import '../../../utils/themes/app_theme.dart';
+import '../../widgets/vertical_space.dart';
+import 'user_info_row.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -25,7 +25,6 @@ class UserInfo extends StatelessWidget {
         const VerticalSpace(height: 10),
         const UserInfoRow(info: 'Email', data: 'loremipsum@lorem.com'),
         const VerticalSpace(height: 50),
-        const Center(child: TimeInfo(timeLeft: '23 : 59 : 00')),
       ],
     );
   }

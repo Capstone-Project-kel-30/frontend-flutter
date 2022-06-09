@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
+import 'package:flutter/material.dart';
 
+import '../../utils/routes/routes.gr.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/card_info.dart';
 
@@ -27,7 +27,10 @@ class MembershipPage extends StatelessWidget {
                 type: types[0],
                 price: prices[0],
                 onTap: () {
-                  context.router.push(MembershipDetailRoute());
+                  context.router.push(MembershipDetailRoute(
+                    type: types[0],
+                    price: prices[0],
+                  ));
                 },
               ),
               const VerticalSpace(height: 20),
@@ -35,7 +38,10 @@ class MembershipPage extends StatelessWidget {
                 type: types[1],
                 price: prices[1],
                 onTap: () {
-                  context.router.push(MembershipDetailRoute());
+                  context.router.push(MembershipDetailRoute(
+                    type: types[1],
+                    price: prices[1],
+                  ));
                 },
               ),
               const VerticalSpace(height: 20),
@@ -43,7 +49,10 @@ class MembershipPage extends StatelessWidget {
                 type: types[2],
                 price: prices[2],
                 onTap: () {
-                  context.router.push(MembershipDetailRoute());
+                  context.router.push(MembershipDetailRoute(
+                    type: types[2],
+                    price: prices[2],
+                  ));
                 },
               ),
             ],

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/views/home/widgets/membership_number.dart';
-import 'package:workout_zone/views/membership/widgets/member_info.dart';
-import 'package:workout_zone/views/membership/widgets/user_info.dart';
 
+import '../home/widgets/membership_number.dart';
+import 'widgets/member_info.dart';
 import 'widgets/membership_payment_button.dart';
+import 'widgets/user_info.dart';
 
 class MembershipPaymentPage extends StatelessWidget {
-  const MembershipPaymentPage({Key? key}) : super(key: key);
+  const MembershipPaymentPage({
+    Key? key,
+    required this.type,
+    required this.price,
+  }) : super(key: key);
+
+  final String type, price;
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +20,27 @@ class MembershipPaymentPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Membership Payment'),
       ),
-      body: Column(
-        children: [
-          Column(
-            children: const [
-              MembershipNumber(membershipNumber: '1234567'),
-              MemberTypeInfo(type: 'Gold', price: '990.000'),
-              UserInfo(),
-            ],
-          ),
-          const MembershipPaymentButton(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                const MembershipNumber(membershipNumber: '1234567'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: MemberTypeInfo(type: type, price: price),
+                ),
+                const UserInfo(),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 50),
+              child: MembershipPaymentButton(),
+            ),
+          ],
+        ),
       ),
     );
   }

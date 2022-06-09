@@ -47,8 +47,8 @@ class MemberCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = setColor(type);
-    final asset = setAsset(type);
+    final List<Color> colors = setColor(type);
+    final String asset = setAsset(type);
     return Container(
       height: height,
       width: width,
