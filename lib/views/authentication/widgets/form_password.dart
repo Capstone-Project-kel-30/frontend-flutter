@@ -26,7 +26,7 @@ class _FormPasswordState extends State<FormPassword> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const VerticalSpace(height: 20),
+        const VerticalSpace(height: 10),
         Text(
           widget.title,
           style: const TextStyle(fontWeight: kBoldWeight, fontSize: 14),

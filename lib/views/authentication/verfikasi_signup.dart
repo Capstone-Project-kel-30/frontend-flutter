@@ -34,16 +34,6 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          color: kDarkColor,
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: kPrimaryColor,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -80,7 +70,7 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                   title: "Verify",
                   press: () {
                     if (_formKotak.currentState!.validate()) {
-                      context.router.push(const HomeWrapper());
+                      context.router.replace(const HomeWrapper());
                     }
                   },
                 )

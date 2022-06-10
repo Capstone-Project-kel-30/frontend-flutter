@@ -58,97 +58,95 @@ class _SignInPageState extends State<SignInPage> {
       ///body
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ///Form
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        width: double.infinity,
-                        child: TextSambut(
-                          sambut1: 'Welcome Back\n',
-                          smabut2: 'You have been missed, Login to continue',
-                        ),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ///Form
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      width: double.infinity,
+                      child: TextSambut(
+                        sambut1: 'Welcome Back\n',
+                        smabut2: 'You have been missed, Login to continue',
                       ),
+                    ),
 
-                      FormUsername(
-                        validator: (value) {
-                          if (value == null ||
-                              value.length < 14 ||
-                              !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(value)) {
-                            return 'Please enter your email address';
-                          }
-                          return null;
-                        },
-                        hint: 'Enter Email',
-                        title: 'Email',
-                        controller: _emailController,
-                        color: kGreyColor,
-                        keyboard: TextInputType.emailAddress,
-                      ),
+                    FormUsername(
+                      validator: (value) {
+                        if (value == null ||
+                            value.length < 14 ||
+                            !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(value)) {
+                          return 'Please enter your email address';
+                        }
+                        return null;
+                      },
+                      hint: 'Enter Email',
+                      title: 'Email',
+                      controller: _emailController,
+                      color: kGreyColor,
+                      keyboard: TextInputType.emailAddress,
+                    ),
 
-                      FormPassword(
-                        validator: (value) {
-                          if (value == null ||
-                              value.length < 8 ||
-                              !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
-                            return 'Incorrect password';
-                          }
-                          return null;
-                        },
-                        title: "Password",
-                        hint: "Enter your password",
-                        controller: _passwordController,
-                      ),
-                      const VerticalSpace(height: 15),
+                    FormPassword(
+                      validator: (value) {
+                        if (value == null ||
+                            value.length < 8 ||
+                            !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
+                          return 'Incorrect password';
+                        }
+                        return null;
+                      },
+                      title: "Password",
+                      hint: "Enter your password",
+                      controller: _passwordController,
+                    ),
+                    const VerticalSpace(height: 15),
 
-                      ///button
-                      ButtonWithLatar(
-                        title: "Sign In",
-                        press: () {
-                          if (_formKey.currentState!.validate()) {
-                            context.router.push(
-                              VerfikasiSignUp(email: _emailController.text),
-                            );
-                          }
-                        },
-                      ),
-                      const VerticalSpace(height: 20),
-
-                      ///text yang dibawah button
-
-                      ///forget button
-                      ForgetPassBttn(
-                        titile: 'Forget Password ?',
-                        press: () {
+                    ///button
+                    ButtonWithLatar(
+                      title: "Sign In",
+                      press: () {
+                        if (_formKey.currentState!.validate()) {
                           context.router.push(
-                            const ForgetPasswordRoute(),
+                            VerfikasiSignUp(email: _emailController.text),
                           );
-                        },
-                      ),
-                    ],
-                  ),
+                        }
+                      },
+                    ),
+                    const VerticalSpace(height: 15),
+
+                    ///text yang dibawah button
+
+                    ///forget button
+                    ForgetPassBttn(
+                      titile: 'Forget Password ?',
+                      press: () {
+                        context.router.push(
+                          const ForgetPasswordRoute(),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
-                  child: Bottomtxt(
-                    txt1: "Not Have Account yet ?",
-                    txt2: 'Sign Up',
-                    tekan: () {
-                      context.router.push(
-                        const SignUpRoute(),
-                      );
-                    },
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Bottomtxt(
+                  txt1: "Not Have Account yet ?",
+                  txt2: 'Sign Up',
+                  tekan: () {
+                    context.router.push(
+                      const SignUpRoute(),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

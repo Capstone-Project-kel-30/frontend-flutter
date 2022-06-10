@@ -68,7 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(
                   width: double.infinity,
@@ -86,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null ||
                               value.length < 4 ||
-                              !RegExp(r"^([a-z0-9])([A-Z])").hasMatch(value)) {
+                              !RegExp(r"^[a-z0-9A-Z]").hasMatch(value)) {
                             return 'Please use only letters (a-z), and numbers.';
                           }
                           return null;
@@ -182,17 +182,19 @@ class _SignUpPageState extends State<SignUpPage> {
                           }
                         },
                       ),
-                      const VerticalSpace(height: 30),
-                      Bottomtxt(
-                        txt1: 'Already Have Accoount',
-                        txt2: 'Sign In',
-                        tekan: () {
-                          context.router.push(
-                            const SignInRoute(),
-                          );
-                        },
-                      ),
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Bottomtxt(
+                    txt1: 'Already Have Accoount',
+                    txt2: 'Sign In',
+                    tekan: () {
+                      context.router.push(
+                        const SignInRoute(),
+                      );
+                    },
                   ),
                 ),
               ],

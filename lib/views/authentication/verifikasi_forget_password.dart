@@ -35,16 +35,6 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          color: kDarkColor,
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: kPrimaryColor,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -83,7 +73,7 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
                   title: "Confirm",
                   press: () {
                     if (_formKotak.currentState!.validate()) {
-                      context.router.push(const CreateNewPass());
+                      context.router.replace(const CreateNewPass());
                     }
                   },
                 )
