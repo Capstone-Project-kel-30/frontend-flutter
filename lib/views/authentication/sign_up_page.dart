@@ -23,6 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isPhoneEmpty = false;
   bool _isPassEty = false;
   bool _isComEpty = false;
+  bool _isCheck = false;
   final GlobalKey<FormState> _formkey = GlobalKey();
   bool check = false;
   TextEditingController _usernameController = TextEditingController();
@@ -103,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null ||
                               value.length < 14 ||
-                              !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              !RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")
                                   .hasMatch(value)) {
                             return 'Please Enter a valid Email Address';
                           }
@@ -168,10 +169,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       FormPassword(
                         validator: (value) {
-                          if (value == null ||
-                              value.length < 8 ||
-                              !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
+                          if (value == null || value.length < 8) {
                             return 'Password length must be at least 8 characters';
+                          }
+                          if (!RegExp(
+                                  r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
+                              .hasMatch(value)) {
+                            return 'Insert Correct Password';
                           }
                           return null;
                         },
@@ -183,9 +187,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null ||
                               value.length < 8 ||
-                              value != _passwordController.text ||
-                              !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
-                            return 'Password do not match';
+                              !RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
+                                  .hasMatch(value)) {
+                            return 'Password mush contain ';
+                          }
+                          if (value != _passwordController.text) {
+                            return 'Password Does Not Match';
                           }
 
                           return null;
@@ -194,29 +201,26 @@ class _SignUpPageState extends State<SignUpPage> {
                         hint: 'Re-Enter Your Password',
                         controller: _compassController,
                       ),
-                      const VerticalSpace(height: 16),
                       CheckboxListTileFormField(
                         contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         title: Text(
-                            'By registering, you agree to Terms and Conditions',
-                            style:
-                                AppTheme.theme(context).textTheme.labelLarge),
-                        validator: (value) {
-                          if (value!) {
-                            return null;
-                          } else {
-                            return 'You must accept the terms and conditions to register an account';
-                          }
+                          'By registering, you agree to Terms and Conditions',
+                          style: AppTheme.theme(context).textTheme.labelLarge,
+                        ),
+                        onChanged: (val) {
+                          setState(() {
+                            _isCheck = val;
+                          });
                         },
                       ),
-                      const VerticalSpace(height: 16),
                       ButtonWithLatar(
                         title: 'Sign Up',
                         press: _isUserEpty &&
                                 _isEmailEtpy &&
                                 _isPhoneEmpty &&
                                 _isPassEty &&
-                                _isComEpty
+                                _isComEpty &&
+                                _isCheck
                             ? () {
                                 if (_formkey.currentState!.validate()) {
                                   context.router.push(
@@ -231,7 +235,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.all(50.0),
                   child: Bottomtxt(
                     txt1: 'Already Have Accoount',
                     txt2: 'Sign In',

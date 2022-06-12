@@ -29,7 +29,7 @@ class _FormPasswordState extends State<FormPassword> {
         const VerticalSpace(height: 10),
         Text(
           widget.title,
-          style: const TextStyle(fontWeight: kBoldWeight, fontSize: 14),
+          style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 14),
         ),
         const VerticalSpace(height: 8),
         SizedBox(

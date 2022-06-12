@@ -82,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
       ///body
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -103,7 +103,7 @@ class _SignInPageState extends State<SignInPage> {
                       validator: (value) {
                         if (value == null ||
                             value.length < 14 ||
-                            !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            !RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")
                                 .hasMatch(value)) {
                           return 'Please enter your email address';
                         }
@@ -120,7 +120,8 @@ class _SignInPageState extends State<SignInPage> {
                       validator: (value) {
                         if (value == null ||
                             value.length < 8 ||
-                            !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
+                            !RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
+                                .hasMatch(value)) {
                           return 'Incorrect password';
                         }
                         return null;
@@ -160,17 +161,15 @@ class _SignInPageState extends State<SignInPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: Bottomtxt(
-                  txt1: "Not Have Account yet ?",
-                  txt2: 'Sign Up',
-                  tekan: () {
-                    context.router.push(
-                      const SignUpRoute(),
-                    );
-                  },
-                ),
+
+              Bottomtxt(
+                txt1: "Not Have Account yet ?",
+                txt2: 'Sign Up',
+                tekan: () {
+                  context.router.push(
+                    const SignUpRoute(),
+                  );
+                },
               ),
             ],
           ),

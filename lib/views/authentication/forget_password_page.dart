@@ -67,11 +67,13 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     key: _formKey,
                     child: FormUsername(
                       validator: (value) {
-                        if (value == null ||
-                            value.length < 14 ||
-                            !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(value)) {
+                        if (value == null || value.length < 14) {
                           return 'Please enter your email address';
+                        }
+                        if (!RegExp(
+                                r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
+                            .hasMatch(value)) {
+                          return 'Insert Correct Email';
                         }
                         return null;
                       },
