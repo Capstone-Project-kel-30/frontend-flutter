@@ -9,7 +9,7 @@ class ButtonWithLatar extends StatelessWidget {
     required this.press,
   }) : super(key: key);
   final String title;
-  final VoidCallback press;
+  final VoidCallback? press;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

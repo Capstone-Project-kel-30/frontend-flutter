@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
@@ -18,9 +19,32 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  bool _isEmailEpty = false;
+  bool _isPassEmpty = false;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final _passwordController = TextEditingController();
-  final _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _emailController.addListener(
+      () {
+        setState(() {
+          _isEmailEpty = _emailController.text.isNotEmpty;
+        });
+      },
+    );
+    _passwordController.addListener(
+      () {
+        setState(() {
+          _isPassEmpty = _passwordController.text.isNotEmpty;
+        });
+      },
+    );
+  }
 
   @override
   void dispose() {
@@ -110,13 +134,15 @@ class _SignInPageState extends State<SignInPage> {
                     ///button
                     ButtonWithLatar(
                       title: "Sign In",
-                      press: () {
-                        if (_formKey.currentState!.validate()) {
-                          context.router.push(
-                            VerfikasiSignUp(email: _emailController.text),
-                          );
-                        }
-                      },
+                      press: _isEmailEpty && _isPassEmpty
+                          ? () {
+                              if (_formKey.currentState!.validate()) {
+                                context.router.push(
+                                  VerfikasiSignUp(email: _emailController.text),
+                                );
+                              }
+                            }
+                          : null,
                     ),
                     const VerticalSpace(height: 15),
 

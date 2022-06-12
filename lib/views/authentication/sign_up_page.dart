@@ -8,7 +8,6 @@ import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
-import 'package:workout_zone/views/widgets/horizontal_space.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -19,18 +18,57 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  bool _isUserEpty = false;
+  bool _isEmailEtpy = false;
+  bool _isPhoneEmpty = false;
+  bool _isPassEty = false;
+  bool _isComEpty = false;
   final GlobalKey<FormState> _formkey = GlobalKey();
   bool check = false;
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController _numberController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _compassController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _numberController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _compassController = TextEditingController();
+  @override
+  void initState() {
+    _usernameController = TextEditingController();
+    _emailController = TextEditingController();
+    _numberController = TextEditingController();
+    _passwordController = TextEditingController();
+    _compassController = TextEditingController();
+    _usernameController.addListener(() {
+      setState(() {
+        _isUserEpty = _usernameController.text.isNotEmpty;
+      });
+    });
+    _emailController.addListener(() {
+      setState(() {
+        _isEmailEtpy = _emailController.text.isNotEmpty;
+      });
+    });
+    _numberController.addListener(() {
+      setState(() {
+        _isPhoneEmpty = _numberController.text.isNotEmpty;
+      });
+    });
+    _passwordController.addListener(() {
+      setState(() {
+        _isPassEty = _passwordController.text.isNotEmpty;
+      });
+    });
+    _compassController.addListener(() {
+      setState(() {
+        _isComEpty = _compassController.text.isNotEmpty;
+      });
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
     _usernameController.dispose();
-    emailController.dispose();
+    _emailController.dispose();
     _numberController.dispose();
     _passwordController.dispose();
     _compassController.dispose();
@@ -109,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         },
                         title: 'Email',
                         hint: 'Enter Email',
-                        controller: emailController,
+                        controller: _emailController,
                         color: kGreyColor,
                         keyboard: TextInputType.emailAddress,
                       ),
@@ -174,13 +212,20 @@ class _SignUpPageState extends State<SignUpPage> {
                       const VerticalSpace(height: 16),
                       ButtonWithLatar(
                         title: 'Sign Up',
-                        press: () {
-                          if (_formkey.currentState!.validate()) {
-                            context.router.push(
-                              VerfikasiSignUp(email: emailController.text),
-                            );
-                          }
-                        },
+                        press: _isUserEpty &&
+                                _isEmailEtpy &&
+                                _isPhoneEmpty &&
+                                _isPassEty &&
+                                _isComEpty
+                            ? () {
+                                if (_formkey.currentState!.validate()) {
+                                  context.router.push(
+                                    VerfikasiSignUp(
+                                        email: _emailController.text),
+                                  );
+                                }
+                              }
+                            : null,
                       ),
                     ],
                   ),
