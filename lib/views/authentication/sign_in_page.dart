@@ -66,17 +66,6 @@ class _SignInPageState extends State<SignInPage> {
         ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          color: kDarkColor,
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: kPrimaryColor,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
       ),
 
       ///body

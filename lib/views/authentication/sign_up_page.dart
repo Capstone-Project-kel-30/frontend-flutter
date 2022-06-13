@@ -8,7 +8,6 @@ import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -201,17 +200,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         hint: 'Re-Enter Your Password',
                         controller: _compassController,
                       ),
-                      CheckboxListTileFormField(
-                        contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        title: Text(
-                          'By registering, you agree to Terms and Conditions',
-                          style: AppTheme.theme(context).textTheme.labelLarge,
+                      SizedBox(
+                        child: CheckboxListTileFormField(
+                          contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          title: Text(
+                            'By registering, you agree to Terms and Conditions',
+                            style: AppTheme.theme(context).textTheme.labelLarge,
+                          ),
+                          onChanged: (val) {
+                            setState(() {
+                              _isCheck = val;
+                            });
+                          },
                         ),
-                        onChanged: (val) {
-                          setState(() {
-                            _isCheck = val;
-                          });
-                        },
                       ),
                       ButtonWithLatar(
                         title: 'Sign Up',
