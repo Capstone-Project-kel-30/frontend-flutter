@@ -9,6 +9,12 @@ const Color kLightColor = Color.fromRGBO(254, 254, 252, 1);
 const Color kGreyColor = Color.fromRGBO(175, 175, 175, 1);
 const Color kRedColor = Color.fromRGBO(141, 41, 51, 1);
 const Color kDarkerPrimaryColor = Color.fromRGBO(40, 95, 93, 1);
+const Color kGold = Color.fromRGBO(206, 155, 72, 1);
+const Color kGold2 = Color.fromRGBO(249, 242, 162, 1);
+const Color kSilver = Color.fromRGBO(161, 167, 170, 1);
+const Color kSilver2 = Color.fromRGBO(237, 238, 240, 1);
+const Color kBronze = Color.fromRGBO(167, 122, 93, 1);
+const Color kBronze2 = Color.fromRGBO(220, 152, 107, 1);
 
 // FontWeight
 const FontWeight kRegularWeight = FontWeight.w400;
@@ -20,6 +26,17 @@ class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
       scaffoldBackgroundColor: kBackgroundColor,
+      appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        elevation: 0,
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: kSemiBoldWeight,
+          color: kDarkColor,
+        ),
+        foregroundColor: kPrimaryColor,
+        backgroundColor: kBackgroundColor,
+      ),
       colorScheme: const ColorScheme.light().copyWith(
         primary: kPrimaryColor,
         error: kRedColor,
