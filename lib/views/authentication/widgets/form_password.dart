@@ -54,7 +54,8 @@ class _FormPasswordState extends State<FormPassword> {
                 ),
               ),
               hintText: widget.hint,
-              hintStyle: const TextStyle(fontSize: 13, color: kGreyColor),
+              hintStyle: const TextStyle(
+                  fontSize: 15, color: kGreyColor, fontWeight: kMediumWeight),
               fillColor: kDarkColor,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(

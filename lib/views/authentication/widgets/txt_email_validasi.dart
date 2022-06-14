@@ -20,7 +20,9 @@ class TxtEmailValidasi extends StatelessWidget {
         const VerticalSpace(height: 10),
         Text(
           user,
-          style: const TextStyle(fontWeight: kSemiBoldWeight),
+          style: AppTheme.theme(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: kSemiBoldWeight,
+              ),
         ),
         const VerticalSpace(height: 15),
       ],

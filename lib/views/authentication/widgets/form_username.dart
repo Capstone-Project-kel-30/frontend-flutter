@@ -42,7 +42,8 @@ class FormUsername extends StatelessWidget {
                   ?.copyWith(color: Colors.red),
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               hintText: hint,
-              hintStyle: TextStyle(fontSize: 13, color: color),
+              hintStyle: TextStyle(
+                  fontSize: 15, color: color, fontWeight: kMediumWeight),
               fillColor: kDarkColor,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(

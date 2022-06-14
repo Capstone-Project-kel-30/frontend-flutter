@@ -23,7 +23,7 @@ class ButtonWithLatar extends StatelessWidget {
         child: Text(
           title,
           style: AppTheme.theme(context).textTheme.labelMedium?.copyWith(
-                fontWeight: kRegularWeight,
+                fontWeight: kSemiBoldWeight,
                 color: kLightColor,
               ),
         ),

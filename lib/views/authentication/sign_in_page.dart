@@ -57,6 +57,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       ///
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           'Sign in',
@@ -66,7 +67,7 @@ class _SignInPageState extends State<SignInPage> {
       ///body
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 55),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

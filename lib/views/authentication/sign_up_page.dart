@@ -8,6 +8,7 @@ import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
+import 'package:workout_zone/views/widgets/horizontal_space.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -155,11 +156,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           if (value == null || value.length < 8) {
                             return 'Password length must be at least 8 characters';
                           }
-                          if (!RegExp(
-                                  r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
-                              .hasMatch(value)) {
-                            return 'Insert Correct Password';
-                          }
+
                           return null;
                         },
                         title: 'Password',
@@ -170,12 +167,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (value) {
                           if (value == null ||
                               value.length < 8 ||
-                              !RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
-                                  .hasMatch(value)) {
-                            return 'Password mush contain ';
-                          }
-                          if (value != _passwordController.text) {
-                            return 'Password Does Not Match';
+                              value != _passwordController.text) {
+                            return 'Password Does Not Match ';
                           }
 
                           return null;
@@ -186,22 +179,46 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
 
                       ///check box
-                      SizedBox(
-                        width: double.infinity,
-                        child: CheckboxListTileFormField(
-                          activeColor: kPrimaryColor,
-                          contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          title: Text(
-                            'By registering, you agree to Terms and Conditions',
-                            style: AppTheme.theme(context).textTheme.labelLarge,
+                      ///
+                      ///
+                      Row(
+                        children: [
+                          Checkbox(
+                            activeColor: kPrimaryColor,
+                            value: check,
+                            onChanged: (val) {
+                              setState(
+                                () {
+                                  check = val!;
+                                  _isCheck = val;
+                                },
+                              );
+                            },
                           ),
-                          onChanged: (val) {
-                            setState(() {
-                              _isCheck = val;
-                            });
-                          },
-                        ),
+                          const Text(
+                            'By registering, you agree to Terms and \nConditions',
+                          ),
+                        ],
                       ),
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   child: CheckboxListTileFormField(
+                      //     activeColor: kPrimaryColor,
+                      //     contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      //     title: Text(
+                      //       'By registering, you agree to Terms and Conditions',
+                      //       style: AppTheme.theme(context)
+                      //           .textTheme
+                      //           .bodyMedium!
+                      //           .copyWith(fontWeight: kRegularWeight),
+                      //     ),
+                      //     onChanged: (val) {
+                      //       setState(() {
+                      //         _isCheck = val;
+                      //       });
+                      //     },
+                      //   ),
+                      // ),
 
                       ///tombol dan validator
                       ///

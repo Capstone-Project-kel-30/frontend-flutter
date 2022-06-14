@@ -22,7 +22,7 @@ class Bottomtxt extends StatelessWidget {
         children: [
           Text(
             txt1,
-            style: AppTheme.theme(context).textTheme.labelMedium?.copyWith(
+            style: AppTheme.theme(context).textTheme.labelLarge?.copyWith(
                   fontWeight: kRegularWeight,
                 ),
           ),
@@ -54,8 +54,8 @@ class ForgetPassBttn extends StatelessWidget {
           onTap: press,
           child: Text(
             titile,
-            style: AppTheme.theme(context).textTheme.labelMedium?.copyWith(
-                  fontWeight: kRegularWeight,
+            style: AppTheme.theme(context).textTheme.labelLarge?.copyWith(
+                  fontWeight: kSemiBoldWeight,
                   color: kPrimaryColor,
                 ),
           ),
