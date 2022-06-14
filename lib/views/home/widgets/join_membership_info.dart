@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';
+import '../../widgets/cutom_elevated_button.dart';
 
 class JoinMembershipInfo extends StatelessWidget {
   const JoinMembershipInfo({Key? key}) : super(key: key);
@@ -37,20 +38,11 @@ class JoinMembershipInfo extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: Text(
-                'Join Membership',
-                style: AppTheme.theme(context).textTheme.labelSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0,
-                      color: const Color.fromRGBO(244, 244, 244, 1),
-                    ),
-              ),
+            CustomElevatedButton(
+              text: 'Join Membership',
+              radius: 100,
+              fontSize: 10,
+              fontWeight: kSemiBoldWeight,
               onPressed: () {
                 context.router.push(MembershipRoute());
               },
