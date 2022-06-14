@@ -98,6 +98,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         'Enjoy the gym with us, Create account to continue',
                   ),
                 ),
+
+                ///Form
                 Form(
                   key: _formkey,
                   child: Column(
@@ -182,6 +184,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         hint: 'Re-Enter Your Password',
                         controller: _compassController,
                       ),
+
+                      ///check box
                       SizedBox(
                         child: CheckboxListTileFormField(
                           contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -196,6 +200,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           },
                         ),
                       ),
+
+                      ///tombol dan validator
+                      ///
                       ButtonWithLatar(
                         title: 'Sign Up',
                         press: _isUserEpty &&
@@ -217,6 +224,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
+
+                ///bottom txt
+                ///
                 Padding(
                   padding: const EdgeInsets.all(50.0),
                   child: Bottomtxt(
