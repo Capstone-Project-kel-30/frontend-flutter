@@ -14,7 +14,7 @@ class TextSambut extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: sambut1,
+            text: '$sambut1\n',
             style: AppTheme.theme(context).textTheme.headlineMedium?.copyWith(
                 height: 2.0, fontWeight: kBoldWeight, color: kDarkColor),
           ),

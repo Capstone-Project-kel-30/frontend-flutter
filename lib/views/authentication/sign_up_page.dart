@@ -93,7 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(
                   width: double.infinity,
                   child: TextSambut(
-                    sambut1: 'Welcome !\n',
+                    sambut1: 'Welcome !',
                     smabut2:
                         'Enjoy the gym with us, Create account to continue',
                   ),
@@ -187,7 +187,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       ///check box
                       SizedBox(
+                        width: double.infinity,
                         child: CheckboxListTileFormField(
+                          activeColor: kPrimaryColor,
                           contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           title: Text(
                             'By registering, you agree to Terms and Conditions',

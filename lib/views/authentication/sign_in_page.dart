@@ -78,7 +78,7 @@ class _SignInPageState extends State<SignInPage> {
                     const SizedBox(
                       width: double.infinity,
                       child: TextSambut(
-                        sambut1: 'Welcome Back\n',
+                        sambut1: 'Welcome Back',
                         smabut2: 'You have been missed, Login to continue',
                       ),
                     ),
