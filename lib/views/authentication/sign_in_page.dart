@@ -58,14 +58,9 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       ///
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Sign in',
-          style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
-                fontWeight: kBoldWeight,
-              ),
         ),
-        centerTitle: true,
-        elevation: 0,
       ),
 
       ///body

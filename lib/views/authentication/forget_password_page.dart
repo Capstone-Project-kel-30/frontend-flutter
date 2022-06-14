@@ -29,24 +29,8 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Forget Password',
-          style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
-                fontWeight: kBoldWeight,
-              ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          color: kDarkColor,
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: kPrimaryColor,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
         ),
       ),
       body: SafeArea(

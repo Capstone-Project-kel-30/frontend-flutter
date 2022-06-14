@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 
@@ -21,25 +20,9 @@ class _CreateNewPassState extends State<CreateNewPass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Create Password',
-          style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
-                fontWeight: kBoldWeight,
-              ),
         ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        // leading: IconButton(
-        //   color: kDarkColor,
-        //   icon: const Icon(
-        //     Icons.arrow_back_ios_new,
-        //     color: kPrimaryColor,
-        //   ),
-        //   onPressed: () {
-        //     Navigator.of(context).pop();
-        //   },
-        // ),
       ),
       body: SafeArea(
           child: Padding(
