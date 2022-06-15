@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/themes/app_theme.dart';
 
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({
+class ButtonTnpLatar extends StatelessWidget {
+  const ButtonTnpLatar({
     Key? key,
     required this.title,
+    required this.press,
   }) : super(key: key);
+
   final String title;
+  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +21,13 @@ class SignUpButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           side: const BorderSide(color: kPrimaryColor),
         ),
-        onPressed: () {},
+        onPressed: press,
         child: Text(
           title,
-          style: const TextStyle(color: kLightColor),
+          style: AppTheme.theme(context).textTheme.titleMedium?.copyWith(
+                fontWeight: kSemiBoldWeight,
+                color: kLightColor,
+              ),
         ),
       ),
     );

@@ -19,11 +19,12 @@ class TextStarted extends StatelessWidget {
           children: [
             TextSpan(
               text: tit,
-              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 36, fontWeight: FontWeight.bold, height: 1),
             ),
             TextSpan(
               text: subtit,
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16, height: 1.6),
             ),
           ],
         ),
