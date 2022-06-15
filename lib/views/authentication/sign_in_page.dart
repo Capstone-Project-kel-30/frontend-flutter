@@ -1,14 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
-import 'package:workout_zone/views/authentication/widgets/form_password.dart';
-import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
-import 'package:workout_zone/views/widgets/button_with_latar.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
 
+import '../../utils/routes/routes.gr.dart';
+import '../widgets/cutom_elevated_button.dart';
+import '../widgets/vertical_space.dart';
+import 'widgets/button_txt.dart';
+import 'widgets/form_password.dart';
 import 'widgets/form_username.dart';
+import 'widgets/txt_sambut.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -100,6 +99,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
 
                     FormPassword(
+                      validator: null,
                       title: "Password",
                       hint: "Enter your password",
                       controller: _passwordController,
@@ -107,9 +107,9 @@ class _SignInPageState extends State<SignInPage> {
                     const VerticalSpace(height: 15),
 
                     ///button
-                    ButtonWithLatar(
-                      title: "Sign In",
-                      press: _isEmailEpty && _isPassEmpty
+                    CustomElevatedButton(
+                      text: "Sign In",
+                      onPressed: _isEmailEpty && _isPassEmpty
                           ? () {
                               if (_formKey.currentState!.validate()) {
                                 context.router.push(const HomeWrapper());

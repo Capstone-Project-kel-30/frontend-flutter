@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
 
-import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
-import 'package:workout_zone/views/authentication/widgets/form_kotak.dart';
-import 'package:workout_zone/views/authentication/widgets/txt_email_validasi.dart';
-import 'package:workout_zone/views/widgets/button_with_latar.dart';
-import 'package:workout_zone/views/widgets/horizontal_space.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
+import '../../utils/routes/routes.gr.dart';
+import '../widgets/cutom_elevated_button.dart';
+import '../widgets/horizontal_space.dart';
+import '../widgets/vertical_space.dart';
+import 'widgets/button_txt.dart';
+import 'widgets/form_kotak.dart';
+import 'widgets/txt_email_validasi.dart';
 
 class VerfikasiForgetPassword extends StatefulWidget {
   const VerfikasiForgetPassword({Key? key, required this.email})
@@ -109,9 +109,9 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
                     txt2: 'Please resend',
                     tekan: () {}),
                 const VerticalSpace(height: 64),
-                ButtonWithLatar(
-                  title: "Confirm",
-                  press: _kotk1 && _kotk2 && _kotk3 && _kotk4
+                CustomElevatedButton(
+                  text: "Confirm",
+                  onPressed: _kotk1 && _kotk2 && _kotk3 && _kotk4
                       ? () {
                           if (_formKotak.currentState!.validate()) {
                             context.router.replace(const CreateNewPass());

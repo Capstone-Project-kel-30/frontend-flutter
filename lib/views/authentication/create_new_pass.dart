@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/views/authentication/widgets/form_password.dart';
-import 'package:workout_zone/views/widgets/button_with_latar.dart';
+
+import '../../utils/routes/routes.gr.dart';
+import '../widgets/cutom_elevated_button.dart';
+import 'widgets/form_password.dart';
 
 class CreateNewPass extends StatefulWidget {
   const CreateNewPass({Key? key}) : super(key: key);
@@ -61,18 +62,32 @@ class _CreateNewPassState extends State<CreateNewPass> {
                     title: 'New Password',
                     hint: 'Enter new password',
                     controller: _newPassword,
+                    validator: (value) {
+                      if (value == null || value.length < 8) {
+                        return 'Password length must be at least 8 characters';
+                      }
+                      return null;
+                    },
                   ),
                   FormPassword(
                     title: 'Comfirm New Password',
                     hint: 'Enter new confirm password',
                     controller: _comnewPassword,
+                    validator: (value) {
+                      if (value == null ||
+                          value.length < 8 ||
+                          (value != _newPassword.text)) {
+                        return 'Password Does Not Match';
+                      }
+                      return null;
+                    },
                   )
                 ],
               ),
             ),
-            ButtonWithLatar(
-              title: 'Confirm',
-              press: _passEpy && _comPass
+            CustomElevatedButton(
+              text: 'Confirm',
+              onPressed: _passEpy && _comPass
                   ? () {
                       if (_formKey.currentState!.validate()) {
                         context.router.replace(

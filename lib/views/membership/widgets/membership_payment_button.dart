@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
 
 import '../../../utils/routes/routes.gr.dart';
-import 'custom_outlined_button.dart';
+import '../../../utils/themes/app_theme.dart';
+import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/cutom_elevated_button.dart';
 
 class MembershipPaymentButton extends StatelessWidget {
@@ -19,6 +19,10 @@ class MembershipPaymentButton extends StatelessWidget {
             context.router
                 .removeUntil((route) => route.name == HomeWrapper.name);
           },
+          fontSize: 14,
+          fontWeight: kSemiBoldWeight,
+          color: kGreyColor,
+          radius: 5,
         ),
         CustomElevatedButton(
           text: 'Continue to Payment',

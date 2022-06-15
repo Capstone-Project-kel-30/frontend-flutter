@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/views/on_boarding/widgets/latar_img.dart';
-import 'package:workout_zone/views/widgets/button_with_latar.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
 
+import '../../utils/routes/routes.gr.dart';
+import '../widgets/custom_outlined_button.dart';
+import '../widgets/cutom_elevated_button.dart';
+import '../widgets/vertical_space.dart';
+import 'widgets/latar_img.dart';
 import 'widgets/logo_img.dart';
-import 'widgets/button_tnp_latar.dart';
 import 'widgets/text_started.dart';
 
 class Landingpage extends StatelessWidget {
@@ -37,22 +37,22 @@ class Landingpage extends StatelessWidget {
                 /////Button
                 Column(
                   children: [
-                    ButtonTnpLatar(
-                      title: 'Sign In',
-                      press: () {
+                    CustomOutlinedButton(
+                      text: 'Sign In',
+                      onPressed: () {
                         context.router.push(
                           const SignInRoute(),
                         );
                       },
                     ),
                     const VerticalSpace(height: 11),
-                    ButtonWithLatar(
-                      press: () {
+                    CustomElevatedButton(
+                      onPressed: () {
                         context.router.push(
                           const SignUpRoute(),
                         );
                       },
-                      title: 'Sign Up',
+                      text: 'Sign Up',
                     ),
                   ],
                 ),

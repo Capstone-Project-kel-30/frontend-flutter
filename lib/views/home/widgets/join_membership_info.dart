@@ -43,6 +43,8 @@ class JoinMembershipInfo extends StatelessWidget {
               radius: 100,
               fontSize: 10,
               fontWeight: kSemiBoldWeight,
+              width: null,
+              height: 25,
               onPressed: () {
                 context.router.push(MembershipRoute());
               },

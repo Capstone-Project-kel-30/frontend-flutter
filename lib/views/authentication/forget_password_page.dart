@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
 
-import 'package:workout_zone/views/authentication/widgets/form_username.dart';
-import 'package:workout_zone/views/widgets/button_with_latar.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
+import '../../utils/routes/routes.gr.dart';
+import '../widgets/cutom_elevated_button.dart';
+import '../widgets/vertical_space.dart';
+import 'widgets/form_username.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({Key? key}) : super(key: key);
@@ -81,9 +81,9 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
               ///button
 
-              ButtonWithLatar(
-                title: "Recover Password",
-                press: _isEmailEpy
+              CustomElevatedButton(
+                text: "Recover Password",
+                onPressed: _isEmailEpy
                     ? () {
                         if (_formKey.currentState!.validate()) {
                           context.router.push(

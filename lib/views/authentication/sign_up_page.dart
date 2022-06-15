@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
-import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
-import 'package:workout_zone/views/authentication/widgets/form_password.dart';
-import 'package:workout_zone/views/authentication/widgets/form_username.dart';
-import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
-import 'package:workout_zone/views/widgets/button_with_latar.dart';
+import 'package:flutter/material.dart';
+import 'package:workout_zone/views/widgets/horizontal_space.dart';
+
+import '../../utils/routes/routes.gr.dart';
+import '../../utils/themes/app_theme.dart';
+import '../widgets/cutom_elevated_button.dart';
+import 'widgets/button_txt.dart';
+import 'widgets/form_password.dart';
+import 'widgets/form_username.dart';
+import 'widgets/txt_sambut.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -150,36 +152,54 @@ class _SignUpPageState extends State<SignUpPage> {
                         title: 'Password',
                         hint: 'Enter Your Password',
                         controller: _passwordController,
+                        validator: (value) {
+                          if (value == null || value.length < 8) {
+                            return 'Password length must be at least 8 characters';
+                          }
+                          return null;
+                        },
                       ),
                       FormPassword(
                         title: 'Confirm Password',
                         hint: 'Re-Enter Your Password',
                         controller: _compassController,
+                        validator: (value) {
+                          if (value == null ||
+                              value != _passwordController.text) {
+                            return 'Password Does Not Match ';
+                          }
+                          return null;
+                        },
                       ),
 
                       ///check box
                       ///
                       ///
 
-                      SizedBox(
-                        height: 47,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Checkbox(
-                                activeColor: kPrimaryColor,
-                                value: check,
-                                onChanged: (val) {
-                                  setState(
-                                    () {
-                                      check = val!;
-                                      _isCheck = val;
-                                    },
-                                  );
-                                },
+                              padding: const EdgeInsets.all(3),
+                              child: SizedBox(
+                                height: 18,
+                                width: 18,
+                                child: Checkbox(
+                                  activeColor: kPrimaryColor,
+                                  value: check,
+                                  onChanged: (val) {
+                                    setState(
+                                      () {
+                                        check = val!;
+                                        _isCheck = val;
+                                      },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
+                            const HorizontalSpace(width: 5),
                             Text(
                               'By registering, you agree to Terms and Conditions',
                               style:
@@ -191,9 +211,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       ///tombol dan validator
                       ///
-                      ButtonWithLatar(
-                        title: 'Sign Up',
-                        press: _isUserEpty &&
+                      CustomElevatedButton(
+                        text: 'Sign Up',
+                        onPressed: _isUserEpty &&
                                 _isEmailEtpy &&
                                 _isPhoneEmpty &&
                                 _isPassEty &&

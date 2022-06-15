@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/cutom_elevated_button.dart';
 import '../../widgets/vertical_space.dart';
@@ -95,8 +97,12 @@ class CarouselImageCard extends StatelessWidget {
                     text: textList[index][3],
                     radius: 100,
                     fontSize: 10,
+                    width: null,
+                    height: 22,
                     fontWeight: kBoldWeight,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.router.push(MembershipRoute());
+                    },
                   )
                 ],
               ),

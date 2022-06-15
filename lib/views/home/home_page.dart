@@ -50,21 +50,32 @@ class _HomePageState extends State<HomePage> {
       'Try Now',
     ],
   ];
+  final String member = '';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         children: [
-          const WelcomeBar(username: 'Dadang Konelo'),
+          WelcomeBar(
+            username: 'Dadang Konelo',
+            member: member,
+          ),
           const VerticalSpace(height: 15),
           HomeImageCarousel(
             imgList: bannerImgList,
             textList: textList,
           ),
-          const VerticalSpace(height: 25),
-          const JoinMembershipInfo(),
           const VerticalSpace(height: 20),
+          Visibility(
+            visible: member == '',
+            child: Column(
+              children: const [
+                JoinMembershipInfo(),
+                VerticalSpace(height: 20),
+              ],
+            ),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

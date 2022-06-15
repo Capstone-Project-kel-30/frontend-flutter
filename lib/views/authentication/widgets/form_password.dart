@@ -8,9 +8,11 @@ class FormPassword extends StatefulWidget {
     required this.title,
     required this.hint,
     required this.controller,
+    required this.validator,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   State<FormPassword> createState() => _FormPasswordState();
@@ -33,6 +35,7 @@ class _FormPasswordState extends State<FormPassword> {
         SizedBox(
           child: TextFormField(
             obscureText: _hidePassword,
+            validator: widget.validator,
             controller: widget.controller,
             decoration: InputDecoration(
               errorStyle: AppTheme.theme(context)
