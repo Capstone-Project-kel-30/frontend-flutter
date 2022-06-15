@@ -100,15 +100,6 @@ class _SignInPageState extends State<SignInPage> {
                     ),
 
                     FormPassword(
-                      validator: (value) {
-                        if (value == null ||
-                            value.length < 8 ||
-                            !RegExp(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
-                                .hasMatch(value)) {
-                          return 'Incorrect password';
-                        }
-                        return null;
-                      },
                       title: "Password",
                       hint: "Enter your password",
                       controller: _passwordController,

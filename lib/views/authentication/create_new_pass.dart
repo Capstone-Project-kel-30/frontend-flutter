@@ -58,29 +58,11 @@ class _CreateNewPassState extends State<CreateNewPass> {
                     'Your new password, must be different from previously used password.',
                   ),
                   FormPassword(
-                    validator: (value) {
-                      if (value == null ||
-                          value.length < 8 ||
-                          !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
-                        return 'Password length must be at least 8 characters';
-                      }
-                      return null;
-                    },
                     title: 'New Password',
                     hint: 'Enter new password',
                     controller: _newPassword,
                   ),
                   FormPassword(
-                    validator: (value) {
-                      if (value == null ||
-                          value.length < 8 ||
-                          (value != _newPassword.text) ||
-                          !RegExp(r"([a-z0-9])([A-Z])").hasMatch(value)) {
-                        return 'Password Not Match';
-                      }
-
-                      return null;
-                    },
                     title: 'Comfirm New Password',
                     hint: 'Enter new confirm password',
                     controller: _comnewPassword,

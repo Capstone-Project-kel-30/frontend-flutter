@@ -147,27 +147,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         keyboard: TextInputType.phone,
                       ),
                       FormPassword(
-                        validator: (value) {
-                          if (value == null || value.length < 8) {
-                            return 'Password length must be at least 8 characters';
-                          }
-
-                          return null;
-                        },
                         title: 'Password',
                         hint: 'Enter Your Password',
                         controller: _passwordController,
                       ),
                       FormPassword(
-                        validator: (value) {
-                          if (value == null ||
-                              value.length < 8 ||
-                              value != _passwordController.text) {
-                            return 'Password Does Not Match ';
-                          }
-
-                          return null;
-                        },
                         title: 'Confirm Password',
                         hint: 'Re-Enter Your Password',
                         controller: _compassController,
@@ -177,21 +161,24 @@ class _SignUpPageState extends State<SignUpPage> {
                       ///
                       ///
 
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      SizedBox(
+                        height: 47,
                         child: Row(
                           children: [
-                            Checkbox(
-                              activeColor: kPrimaryColor,
-                              value: check,
-                              onChanged: (val) {
-                                setState(
-                                  () {
-                                    check = val!;
-                                    _isCheck = val;
-                                  },
-                                );
-                              },
+                            Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Checkbox(
+                                activeColor: kPrimaryColor,
+                                value: check,
+                                onChanged: (val) {
+                                  setState(
+                                    () {
+                                      check = val!;
+                                      _isCheck = val;
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                             Text(
                               'By registering, you agree to Terms and Conditions',
