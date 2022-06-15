@@ -112,7 +112,8 @@ class _SignInPageState extends State<SignInPage> {
                       onPressed: _isEmailEpty && _isPassEmpty
                           ? () {
                               if (_formKey.currentState!.validate()) {
-                                context.router.push(const HomeWrapper());
+                                context.router
+                                    .replaceAll([const HomeWrapper()]);
                               }
                             }
                           : null,

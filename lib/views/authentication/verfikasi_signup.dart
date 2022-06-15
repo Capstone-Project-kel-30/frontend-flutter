@@ -113,7 +113,7 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                   onPressed: _kotk1 && _kotk2 && _kotk3 && _kotk4
                       ? () {
                           if (_formKotak.currentState!.validate()) {
-                            context.router.replace(const SignInRoute());
+                            context.router.replaceAll([const SignInRoute()]);
                           }
                         }
                       : null,
