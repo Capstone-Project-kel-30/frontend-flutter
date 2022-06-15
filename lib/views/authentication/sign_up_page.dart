@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
-
 import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
 import '../widgets/cutom_elevated_button.dart';

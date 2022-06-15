@@ -13,6 +13,9 @@ import 'package:workout_zone/views/newsletter/newsletter_page.dart';
 import 'package:workout_zone/views/on_boarding/landing_page.dart';
 import 'package:workout_zone/views/on_boarding/on_boarding_page.dart';
 import 'package:workout_zone/views/payment/payment_page.dart';
+import 'package:workout_zone/views/profile/new_password.dart';
+import 'package:workout_zone/views/profile/profile_edit.dart';
+import 'package:workout_zone/views/profile/profile_setting.dart';
 import 'package:workout_zone/views/profile/profile_page.dart';
 import 'package:workout_zone/views/schedule/schedule_page.dart';
 import 'package:workout_zone/views/video_content/video_content_page.dart';
@@ -85,6 +88,18 @@ import '../../views/wrapper/home_wrapper.dart';
           page: ProfilePage,
         ),
       ],
+    ),
+    AutoRoute(
+      path: 'profileSeting',
+      page: ProfileSeting,
+    ),
+    AutoRoute(
+      path: 'profileEdit',
+      page: ProfileEdit,
+    ),
+    AutoRoute(
+      path: 'editProfilePassword',
+      page: NewPassword,
     ),
     AutoRoute(
       path: 'class',
