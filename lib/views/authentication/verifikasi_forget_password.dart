@@ -21,6 +21,45 @@ class VerfikasiForgetPassword extends StatefulWidget {
 
 class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
   final GlobalKey<FormState> _formKotak = GlobalKey();
+  TextEditingController _kotak1 = TextEditingController();
+  TextEditingController _kotak2 = TextEditingController();
+  TextEditingController _kotak3 = TextEditingController();
+  TextEditingController _kotak4 = TextEditingController();
+  bool _kotk1 = false;
+  bool _kotk2 = false;
+  bool _kotk3 = false;
+  bool _kotk4 = false;
+
+  @override
+  void initState() {
+    _kotak1 = TextEditingController();
+    _kotak2 = TextEditingController();
+    _kotak3 = TextEditingController();
+    _kotak4 = TextEditingController();
+
+    _kotak1.addListener(() {
+      setState(() {
+        _kotk1 = _kotak1.text.isNotEmpty;
+      });
+    });
+    _kotak2.addListener(() {
+      setState(() {
+        _kotk2 = _kotak2.text.isNotEmpty;
+      });
+    });
+    _kotak3.addListener(() {
+      setState(() {
+        _kotk3 = _kotak3.text.isNotEmpty;
+      });
+    });
+    _kotak4.addListener(() {
+      setState(() {
+        _kotk4 = _kotak4.text.isNotEmpty;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,15 +83,23 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      FormKotak(),
-                      HorizontalSpace(width: 10),
-                      FormKotak(),
-                      HorizontalSpace(width: 10),
-                      FormKotak(),
-                      HorizontalSpace(width: 10),
-                      FormKotak(),
-                      HorizontalSpace(width: 10),
+                    children: [
+                      FormKotak(
+                        controller: _kotak1,
+                      ),
+                      const HorizontalSpace(width: 10),
+                      FormKotak(
+                        controller: _kotak2,
+                      ),
+                      const HorizontalSpace(width: 10),
+                      FormKotak(
+                        controller: _kotak3,
+                      ),
+                      const HorizontalSpace(width: 10),
+                      FormKotak(
+                        controller: _kotak4,
+                      ),
+                      const HorizontalSpace(width: 10),
                     ],
                   ),
                 ),
@@ -64,11 +111,13 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
                 const VerticalSpace(height: 64),
                 ButtonWithLatar(
                   title: "Confirm",
-                  press: () {
-                    if (_formKotak.currentState!.validate()) {
-                      context.router.replace(const CreateNewPass());
-                    }
-                  },
+                  press: _kotk1 && _kotk2 && _kotk3 && _kotk4
+                      ? () {
+                          if (_formKotak.currentState!.validate()) {
+                            context.router.replace(const CreateNewPass());
+                          }
+                        }
+                      : null,
                 )
               ],
             ),

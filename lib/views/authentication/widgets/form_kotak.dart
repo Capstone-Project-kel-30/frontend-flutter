@@ -6,17 +6,18 @@ import 'package:workout_zone/utils/themes/app_theme.dart';
 class FormKotak extends StatelessWidget {
   const FormKotak({
     Key? key,
+    required this.controller,
   }) : super(key: key);
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController formKotak = TextEditingController();
     return Container(
       color: kLightColor,
       width: 50,
       height: 58,
       child: TextFormField(
-        controller: formKotak,
+        controller: controller,
         validator: (value) {
           if (value!.isEmpty) {
             return '';

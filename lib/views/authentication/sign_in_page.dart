@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
 import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
@@ -67,7 +66,7 @@ class _SignInPageState extends State<SignInPage> {
       ///body
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 55),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -97,7 +96,6 @@ class _SignInPageState extends State<SignInPage> {
                       hint: 'Enter Email',
                       title: 'Email',
                       controller: _emailController,
-                      color: kGreyColor,
                       keyboard: TextInputType.emailAddress,
                     ),
 
@@ -123,9 +121,7 @@ class _SignInPageState extends State<SignInPage> {
                       press: _isEmailEpty && _isPassEmpty
                           ? () {
                               if (_formKey.currentState!.validate()) {
-                                context.router.push(
-                                  VerfikasiSignUp(email: _emailController.text),
-                                );
+                                context.router.push(const HomeWrapper());
                               }
                             }
                           : null,
@@ -147,14 +143,17 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
 
-              Bottomtxt(
-                txt1: "Not Have Account yet ?",
-                txt2: 'Sign Up',
-                tekan: () {
-                  context.router.push(
-                    const SignUpRoute(),
-                  );
-                },
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Bottomtxt(
+                  txt1: "Not Have Account yet ?",
+                  txt2: 'Sign Up',
+                  tekan: () {
+                    context.router.push(
+                      const SignUpRoute(),
+                    );
+                  },
+                ),
               ),
             ],
           ),

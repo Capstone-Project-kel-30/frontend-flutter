@@ -1,4 +1,3 @@
-import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
@@ -8,7 +7,6 @@ import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/authentication/widgets/txt_sambut.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
-import 'package:workout_zone/views/widgets/horizontal_space.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -117,7 +115,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         title: 'Username',
                         hint: 'Enter Username',
                         controller: _usernameController,
-                        color: kGreyColor,
                         keyboard: TextInputType.name,
                       ),
                       FormUsername(
@@ -133,7 +130,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         title: 'Email',
                         hint: 'Enter Email',
                         controller: _emailController,
-                        color: kGreyColor,
                         keyboard: TextInputType.emailAddress,
                       ),
                       FormUsername(
@@ -148,7 +144,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         title: 'Phone Number',
                         hint: 'Enter Phone Number',
                         controller: _numberController,
-                        color: kGreyColor,
                         keyboard: TextInputType.phone,
                       ),
                       FormPassword(
@@ -181,44 +176,31 @@ class _SignUpPageState extends State<SignUpPage> {
                       ///check box
                       ///
                       ///
-                      Row(
-                        children: [
-                          Checkbox(
-                            activeColor: kPrimaryColor,
-                            value: check,
-                            onChanged: (val) {
-                              setState(
-                                () {
-                                  check = val!;
-                                  _isCheck = val;
-                                },
-                              );
-                            },
-                          ),
-                          const Text(
-                            'By registering, you agree to Terms and \nConditions',
-                          ),
-                        ],
+
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              activeColor: kPrimaryColor,
+                              value: check,
+                              onChanged: (val) {
+                                setState(
+                                  () {
+                                    check = val!;
+                                    _isCheck = val;
+                                  },
+                                );
+                              },
+                            ),
+                            Text(
+                              'By registering, you agree to Terms and Conditions',
+                              style:
+                                  AppTheme.theme(context).textTheme.labelMedium,
+                            ),
+                          ],
+                        ),
                       ),
-                      // SizedBox(
-                      //   width: double.infinity,
-                      //   child: CheckboxListTileFormField(
-                      //     activeColor: kPrimaryColor,
-                      //     contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      //     title: Text(
-                      //       'By registering, you agree to Terms and Conditions',
-                      //       style: AppTheme.theme(context)
-                      //           .textTheme
-                      //           .bodyMedium!
-                      //           .copyWith(fontWeight: kRegularWeight),
-                      //     ),
-                      //     onChanged: (val) {
-                      //       setState(() {
-                      //         _isCheck = val;
-                      //       });
-                      //     },
-                      //   ),
-                      // ),
 
                       ///tombol dan validator
                       ///
@@ -247,7 +229,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ///bottom txt
                 ///
                 Padding(
-                  padding: const EdgeInsets.all(50.0),
+                  padding: const EdgeInsets.all(60.0),
                   child: Bottomtxt(
                     txt1: 'Already Have Accoount',
                     txt2: 'Sign In',

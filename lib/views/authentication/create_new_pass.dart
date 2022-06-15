@@ -12,9 +12,29 @@ class CreateNewPass extends StatefulWidget {
 }
 
 class _CreateNewPassState extends State<CreateNewPass> {
+  bool _passEpy = false;
+  bool _comPass = false;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final _newPassword = TextEditingController();
-  final _comnewPassword = TextEditingController();
+  TextEditingController _newPassword = TextEditingController();
+  TextEditingController _comnewPassword = TextEditingController();
+
+  @override
+  void initState() {
+    _newPassword = TextEditingController();
+    _comnewPassword = TextEditingController();
+    _newPassword.addListener(() {
+      setState(() {
+        _passEpy = _newPassword.text.isNotEmpty;
+      });
+    });
+
+    _comnewPassword.addListener(() {
+      setState(() {
+        _comPass = _comnewPassword.text.isNotEmpty;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,14 +89,17 @@ class _CreateNewPassState extends State<CreateNewPass> {
               ),
             ),
             ButtonWithLatar(
-                title: 'Confirm',
-                press: () {
-                  if (_formKey.currentState!.validate()) {
-                    context.router.replace(
-                      const SignInRoute(),
-                    );
-                  }
-                })
+              title: 'Confirm',
+              press: _passEpy && _comPass
+                  ? () {
+                      if (_formKey.currentState!.validate()) {
+                        context.router.replace(
+                          const SignInRoute(),
+                        );
+                      }
+                    }
+                  : null,
+            )
           ],
         ),
       )),

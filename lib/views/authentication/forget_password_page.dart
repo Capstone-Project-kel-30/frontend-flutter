@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
 
-import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/widgets/button_with_latar.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
@@ -16,8 +15,19 @@ class ForgetPasswordPage extends StatefulWidget {
 
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  bool _isEmailEpy = false;
 
-  final TextEditingController _forgetPassword = TextEditingController();
+  TextEditingController _forgetPassword = TextEditingController();
+  @override
+  void initState() {
+    _forgetPassword = TextEditingController();
+    _forgetPassword.addListener(() {
+      setState(() {
+        _isEmailEpy = _forgetPassword.text.isNotEmpty;
+      });
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -54,14 +64,12 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                         if (value == null || value.length < 14) {
                           return 'Please enter your email address';
                         }
-                        if (!RegExp(
-                                r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")
+                        if (!RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$")
                             .hasMatch(value)) {
                           return 'Insert Correct Email';
                         }
                         return null;
                       },
-                      color: kPrimaryColor,
                       controller: _forgetPassword,
                       hint: 'Enter Your Email',
                       title: 'Email',
@@ -75,13 +83,17 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
               ButtonWithLatar(
                 title: "Recover Password",
-                press: () {
-                  if (_formKey.currentState!.validate()) {
-                    context.router.push(
-                      VerfikasiForgetPassword(email: _forgetPassword.text),
-                    );
-                  }
-                },
+                press: _isEmailEpy
+                    ? () {
+                        if (_formKey.currentState!.validate()) {
+                          context.router.push(
+                            VerfikasiForgetPassword(
+                              email: _forgetPassword.text,
+                            ),
+                          );
+                        }
+                      }
+                    : null,
               )
             ],
           ),

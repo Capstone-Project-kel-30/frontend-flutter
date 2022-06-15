@@ -9,13 +9,12 @@ class FormUsername extends StatelessWidget {
     required this.title,
     required this.hint,
     required this.controller,
-    required this.color,
     required this.validator,
     required this.keyboard,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
-  final Color color;
+
   final String? Function(String?)? validator;
   final TextInputType keyboard;
 
@@ -42,8 +41,8 @@ class FormUsername extends StatelessWidget {
                   ?.copyWith(color: Colors.red),
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               hintText: hint,
-              hintStyle: TextStyle(
-                  fontSize: 15, color: color, fontWeight: kMediumWeight),
+              hintStyle: const TextStyle(
+                  fontSize: 12, color: kGreyColor, fontWeight: kMediumWeight),
               fillColor: kDarkColor,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
