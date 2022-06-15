@@ -21,41 +21,43 @@ class MembershipPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CardInfo(
-                type: types[0],
-                price: prices[0],
-                onTap: () {
-                  context.router.push(MembershipDetailRoute(
-                    type: types[0],
-                    price: prices[0],
-                  ));
-                },
-              ),
-              const VerticalSpace(height: 20),
-              CardInfo(
-                type: types[1],
-                price: prices[1],
-                onTap: () {
-                  context.router.push(MembershipDetailRoute(
-                    type: types[1],
-                    price: prices[1],
-                  ));
-                },
-              ),
-              const VerticalSpace(height: 20),
-              CardInfo(
-                type: types[2],
-                price: prices[2],
-                onTap: () {
-                  context.router.push(MembershipDetailRoute(
-                    type: types[2],
-                    price: prices[2],
-                  ));
-                },
-              ),
-            ],
+          child: Center(
+            child: Column(
+              children: [
+                CardInfo(
+                  type: types[0],
+                  price: prices[0],
+                  onTap: () {
+                    context.router.push(MembershipDetailRoute(
+                      type: types[0],
+                      price: prices[0],
+                    ));
+                  },
+                ),
+                const VerticalSpace(height: 20),
+                CardInfo(
+                  type: types[1],
+                  price: prices[1],
+                  onTap: () {
+                    context.router.push(MembershipDetailRoute(
+                      type: types[1],
+                      price: prices[1],
+                    ));
+                  },
+                ),
+                const VerticalSpace(height: 20),
+                CardInfo(
+                  type: types[2],
+                  price: prices[2],
+                  onTap: () {
+                    context.router.push(MembershipDetailRoute(
+                      type: types[2],
+                      price: prices[2],
+                    ));
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

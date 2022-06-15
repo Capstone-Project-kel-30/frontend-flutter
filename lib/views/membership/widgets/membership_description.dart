@@ -10,11 +10,11 @@ class MembershipDescription extends StatelessWidget {
 
   String getDescription(type) {
     if (type == 'Gold') {
-      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel ipsum penatibus congue ipsum nisl. In massa elit amet sed morbi. Leo, cras adipiscing cursus netus eu pharetra. Aliquam, est, ultrices odio posuere elit.';
+      return 'Gold membership is the best package offer for you. The advantages of this package are:\n\n1. The duration of membership is 3 months.\n2. Unlocked online and offline class features.\n3. Free access to online and offline class bookings for the duration of the active membership.';
     } else if (type == 'Silver') {
-      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel ipsum penatibus congue ipsum nisl. In massa elit amet sed morbi. Leo, cras adipiscing cursus netus eu pharetra. Aliquam, est, ultrices odio posuere elit.';
+      return 'Silver membership is the best package offer for you. The advantages of this package are:\n\n1. Membership duration is 2 months.\n2. Unlocked online and offline class features.\n3. Free access to online and offline class bookings for the duration of the active membership.';
     } else {
-      return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel ipsum penatibus congue ipsum nisl. In massa elit amet sed morbi. Leo, cras adipiscing cursus netus eu pharetra. Aliquam, est, ultrices odio posuere elit.';
+      return 'Bronze membership is the best package offer for you. The advantages of this package are:\n\n1. The duration of membership is 1 month.\n2. Unlocked online and offline class features.\n3. Free access to online and offline class bookings for the duration of the active membership.';
     }
   }
 
