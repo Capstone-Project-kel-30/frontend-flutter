@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
-import 'widgets/cutom_elevated_button.dart';
+import '../widgets/cutom_elevated_button.dart';
 import 'widgets/membership_description.dart';
 import 'widgets/membership_image_carousel.dart';
 import 'widgets/membership_info.dart';
@@ -63,10 +63,12 @@ class MembershipDetailPage extends StatelessWidget {
                   CustomElevatedButton(
                     text: 'Join Membership',
                     onPressed: () {
-                      context.router.push(MembershipPaymentRoute(
-                        type: type,
-                        price: price,
-                      ));
+                      context.router.replaceAll([
+                        MembershipPaymentRoute(
+                          type: type,
+                          price: price,
+                        )
+                      ]);
                     },
                   ),
                 ],

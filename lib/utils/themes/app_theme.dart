@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // Color
 const Color kBackgroundColor = Color.fromRGBO(244, 244, 244, 1);
@@ -25,6 +26,7 @@ const FontWeight kBoldWeight = FontWeight.w700;
 class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
+      fontFamily: GoogleFonts.montserrat().fontFamily,
       scaffoldBackgroundColor: kBackgroundColor,
       appBarTheme: const AppBarTheme(
         centerTitle: true,

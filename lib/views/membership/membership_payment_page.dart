@@ -21,7 +21,7 @@ class MembershipPaymentPage extends StatelessWidget {
         title: const Text('Membership Payment'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 50),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -35,10 +35,7 @@ class MembershipPaymentPage extends StatelessWidget {
                 const UserInfo(),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 50),
-              child: MembershipPaymentButton(),
-            ),
+            const MembershipPaymentButton(),
           ],
         ),
       ),

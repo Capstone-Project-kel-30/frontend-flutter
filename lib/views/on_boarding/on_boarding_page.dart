@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/views/on_boarding/widgets/logoimg.dart';
+import 'package:flutter/material.dart';
 
-import 'widgets/signinbutton.dart';
-import 'widgets/latarimg.dart';
-import 'widgets/textstarted.dart';
+import '../../utils/routes/routes.gr.dart';
+import '../widgets/cutom_elevated_button.dart';
+import 'widgets/latar_img.dart';
+import 'widgets/logo_img.dart';
+import 'widgets/text_started.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -18,21 +18,22 @@ class OnBoardingPage extends StatelessWidget {
           const LatarImg(
             asset: 'assets/images/background1.png',
           ),
-          Container(
+          Padding(
             padding: const EdgeInsets.fromLTRB(20, 33, 20, 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 const LogoImg(),
                 const TextStarted(
-                  subtit: 'akdokwakodakwodoad',
+                  subtit:
+                      'Increase endurance and body strength\nto create a healthier life with Workout\nzone.',
                   tit: "Make Your Self \nStronger\n\n",
                 ),
-                ButtonStarted(
-                  press: () {
-                    context.router.push(const Landingpage());
+                CustomElevatedButton(
+                  onPressed: () {
+                    context.router.replaceAll([const Landingpage()]);
                   },
-                  title: 'Get Started',
+                  text: 'Get Started',
                 ),
               ],
             ),
