@@ -17,6 +17,7 @@ import 'package:workout_zone/views/profile/new_password.dart';
 import 'package:workout_zone/views/profile/profile_edit.dart';
 import 'package:workout_zone/views/profile/profile_setting.dart';
 import 'package:workout_zone/views/profile/profile_page.dart';
+import 'package:workout_zone/views/schedule/all_schedule_page.dart';
 import 'package:workout_zone/views/schedule/schedule_page.dart';
 import 'package:workout_zone/views/video_content/video_content_page.dart';
 import 'package:workout_zone/views/wrapper/home_wrapper.dart';
@@ -82,6 +83,10 @@ import '../../views/wrapper/home_wrapper.dart';
         AutoRoute(
           path: 'schedule',
           page: SchedulePage,
+        ),
+        AutoRoute(
+          path: 'allSchedulePage',
+          page: AllSchedulePage,
         ),
         AutoRoute(
           path: 'profile',

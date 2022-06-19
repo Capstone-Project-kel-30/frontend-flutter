@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       'Try Now',
     ],
   ];
-  final String member = '';
+  final String member = 'Bronze';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
