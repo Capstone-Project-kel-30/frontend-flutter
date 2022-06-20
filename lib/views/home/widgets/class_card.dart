@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_zone/views/widgets/time_widget.dart';
 
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/horizontal_space.dart';
@@ -64,35 +65,7 @@ class ClassCard extends StatelessWidget {
                       ),
                     ),
                     const HorizontalSpace(width: 5),
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: kPrimaryColor),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2.5,
-                        ),
-                        child: Row(
-                          children: [
-                            SvgPicture.asset('assets/icons/Clock.svg'),
-                            const HorizontalSpace(width: 3),
-                            Text(
-                              startTime,
-                              style: AppTheme.theme(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontSize: 10,
-                                    color: kGreyColor,
-                                    fontWeight: kMediumWeight,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    TimeWidget(startTime: startTime),
                   ],
                 ),
                 const VerticalSpace(height: 5),

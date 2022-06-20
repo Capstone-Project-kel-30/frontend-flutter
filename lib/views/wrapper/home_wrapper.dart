@@ -14,7 +14,6 @@ class HomeWrapper extends StatelessWidget {
         HomeRoute(),
         ScheduleRoute(),
         ProfileRoute(),
-        AllScheduleRoute()
       ],
       bottomNavigationBuilder: (_, tabRouter) {
         return BottomNavigationBar(
