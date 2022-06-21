@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/auth/auth_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../widgets/cutom_elevated_button.dart';
 import 'widgets/form_password.dart';
 
 class CreateNewPass extends StatefulWidget {
-  const CreateNewPass({Key? key}) : super(key: key);
+  const CreateNewPass({Key? key, required this.email}) : super(key: key);
+  final String email;
 
   @override
   State<CreateNewPass> createState() => _CreateNewPassState();
@@ -16,11 +19,12 @@ class _CreateNewPassState extends State<CreateNewPass> {
   bool _passEpy = false;
   bool _comPass = false;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  TextEditingController _newPassword = TextEditingController();
-  TextEditingController _comnewPassword = TextEditingController();
+  late TextEditingController _newPassword;
+  late TextEditingController _comnewPassword;
 
   @override
   void initState() {
+    super.initState();
     _newPassword = TextEditingController();
     _comnewPassword = TextEditingController();
     _newPassword.addListener(() {
@@ -34,7 +38,13 @@ class _CreateNewPassState extends State<CreateNewPass> {
         _comPass = _comnewPassword.text.isNotEmpty;
       });
     });
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _newPassword.dispose();
+    _comnewPassword.dispose();
+    super.dispose();
   }
 
   @override
@@ -85,17 +95,52 @@ class _CreateNewPassState extends State<CreateNewPass> {
                 ],
               ),
             ),
-            CustomElevatedButton(
-              text: 'Confirm',
-              onPressed: _passEpy && _comPass
-                  ? () {
-                      if (_formKey.currentState!.validate()) {
-                        context.router.replace(
-                          const SignInRoute(),
-                        );
+            BlocListener<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is Authenticating) {
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        duration: Duration(seconds: 5),
+                        content: Text('Loading ...'),
+                      ),
+                    );
+                }
+                if (state is UnAuthenticated) {
+                  context.router.replaceAll([const SignInRoute()]);
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        content: Text('Create new password success'),
+                      ),
+                    );
+                }
+                if (state is AuthenticationError) {
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text(state.msg),
+                      ),
+                    );
+                }
+              },
+              child: CustomElevatedButton(
+                text: 'Confirm',
+                onPressed: _passEpy && _comPass
+                    ? () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        if (_formKey.currentState!.validate()) {
+                          final String password = _newPassword.text;
+                          context.read<AuthBloc>().add(
+                                ResetPasswordRequest(widget.email, password),
+                              );
+                        }
                       }
-                    }
-                  : null,
+                    : null,
+              ),
             )
           ],
         ),
