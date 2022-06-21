@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/views/widgets/horizontal_space.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/auth/auth_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
 import '../widgets/cutom_elevated_button.dart';
+import '../widgets/horizontal_space.dart';
 import 'widgets/button_txt.dart';
 import 'widgets/form_password.dart';
 import 'widgets/form_username.dart';
@@ -25,14 +27,14 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isComEpty = false;
   bool _isCheck = false;
   final GlobalKey<FormState> _formkey = GlobalKey();
-  bool check = false;
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _numberController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _compassController = TextEditingController();
+  late TextEditingController _usernameController;
+  late TextEditingController _emailController;
+  late TextEditingController _numberController;
+  late TextEditingController _passwordController;
+  late TextEditingController _compassController;
   @override
   void initState() {
+    super.initState();
     _usernameController = TextEditingController();
     _emailController = TextEditingController();
     _numberController = TextEditingController();
@@ -63,7 +65,6 @@ class _SignUpPageState extends State<SignUpPage> {
         _isComEpty = _compassController.text.isNotEmpty;
       });
     });
-    super.initState();
   }
 
   @override
@@ -73,7 +74,6 @@ class _SignUpPageState extends State<SignUpPage> {
     _numberController.dispose();
     _passwordController.dispose();
     _compassController.dispose();
-
     super.dispose();
   }
 
@@ -187,12 +187,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                 width: 18,
                                 child: Checkbox(
                                   activeColor: kPrimaryColor,
-                                  value: check,
+                                  value: _isCheck,
                                   onChanged: (val) {
                                     setState(
                                       () {
-                                        check = val!;
-                                        _isCheck = val;
+                                        _isCheck = val!;
                                       },
                                     );
                                   },
@@ -211,23 +210,74 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       ///tombol dan validator
                       ///
-                      CustomElevatedButton(
-                        text: 'Sign Up',
-                        onPressed: _isUserEpty &&
-                                _isEmailEtpy &&
-                                _isPhoneEmpty &&
-                                _isPassEty &&
-                                _isComEpty &&
-                                _isCheck
-                            ? () {
-                                if (_formkey.currentState!.validate()) {
-                                  context.router.push(
-                                    VerfikasiSignUp(
-                                        email: _emailController.text),
-                                  );
+                      BlocListener<AuthBloc, AuthState>(
+                        listener: (context, state) {
+                          if (state is Authenticating) {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                const SnackBar(
+                                  duration: Duration(seconds: 5),
+                                  content: Text('Loading ...'),
+                                ),
+                              );
+                          }
+                          if (state is AuthSuccess) {
+                            context.router.push(
+                              VerfikasiSignUp(
+                                email: _emailController.text,
+                                otp: state.otp,
+                              ),
+                            );
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                const SnackBar(
+                                  content:
+                                      Text('OTP has been sent to your email'),
+                                ),
+                              );
+                          }
+                          if (state is SignUpError) {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                SnackBar(
+                                  content: Text(state.msg),
+                                ),
+                              );
+                          }
+                        },
+                        child: CustomElevatedButton(
+                          text: 'Sign Up',
+                          onPressed: _isUserEpty &&
+                                  _isEmailEtpy &&
+                                  _isPhoneEmpty &&
+                                  _isPassEty &&
+                                  _isComEpty &&
+                                  _isCheck
+                              ? () {
+                                  if (_formkey.currentState!.validate()) {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    final String username =
+                                        _usernameController.text;
+                                    final String email = _emailController.text;
+                                    final String password =
+                                        _passwordController.text;
+                                    final String phone = _numberController.text;
+                                    context.read<AuthBloc>().add(
+                                          SignUpRequest(
+                                            username,
+                                            email,
+                                            password,
+                                            phone,
+                                          ),
+                                        );
+                                  }
                                 }
-                              }
-                            : null,
+                              : null,
+                        ),
                       ),
                     ],
                   ),
@@ -241,9 +291,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     txt1: 'Already Have Accoount',
                     txt2: 'Sign In',
                     tekan: () {
-                      context.router.push(
+                      context.router.replaceAll([
+                        const SignUpRoute(),
                         const SignInRoute(),
-                      );
+                      ]);
                     },
                   ),
                 ),

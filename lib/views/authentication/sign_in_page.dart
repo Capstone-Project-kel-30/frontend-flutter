@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/auth/auth_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/vertical_space.dart';
@@ -20,8 +22,8 @@ class _SignInPageState extends State<SignInPage> {
   bool _isEmailEpty = false;
   bool _isPassEmpty = false;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
+  late TextEditingController _passwordController;
+  late TextEditingController _emailController;
 
   @override
   void initState() {
@@ -107,16 +109,57 @@ class _SignInPageState extends State<SignInPage> {
                     const VerticalSpace(height: 15),
 
                     ///button
-                    CustomElevatedButton(
-                      text: "Sign In",
-                      onPressed: _isEmailEpty && _isPassEmpty
-                          ? () {
-                              if (_formKey.currentState!.validate()) {
-                                context.router
-                                    .replaceAll([const HomeWrapper()]);
+                    BlocListener<AuthBloc, AuthState>(
+                      listener: (context, state) {
+                        if (state is Authenticating) {
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              const SnackBar(
+                                duration: Duration(seconds: 5),
+                                content: Text('Signing In ...'),
+                              ),
+                            );
+                        }
+                        if (state is Authenticated) {
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              const SnackBar(
+                                content: Text('Sign In Success'),
+                              ),
+                            );
+                          context.router.replaceAll([const HomeWrapper()]);
+                        }
+                        if (state is SignInError) {
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              SnackBar(
+                                content: Text(state.msg),
+                              ),
+                            );
+                        }
+                      },
+                      child: CustomElevatedButton(
+                        text: "Sign In",
+                        onPressed: _isEmailEpty && _isPassEmpty
+                            ? () {
+                                if (_formKey.currentState!.validate()) {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  final String email = _emailController.text;
+                                  final String password =
+                                      _passwordController.text;
+                                  context.read<AuthBloc>().add(
+                                        SignInRequest(
+                                          email,
+                                          password,
+                                        ),
+                                      );
+                                }
                               }
-                            }
-                          : null,
+                            : null,
+                      ),
                     ),
                     const VerticalSpace(height: 15),
 
@@ -141,9 +184,10 @@ class _SignInPageState extends State<SignInPage> {
                   txt1: "Not Have Account yet ?",
                   txt2: 'Sign Up',
                   tekan: () {
-                    context.router.push(
+                    context.router.replaceAll([
+                      const SignInRoute(),
                       const SignUpRoute(),
-                    );
+                    ]);
                   },
                 ),
               ),

@@ -12,10 +12,9 @@ class FormKotak extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: kLightColor,
-      width: 50,
-      height: 58,
+    return SizedBox(
+      height: 40,
+      width: 40,
       child: TextFormField(
         controller: controller,
         validator: (value) {
@@ -29,7 +28,9 @@ class FormKotak extends StatelessWidget {
             FocusScope.of(context).nextFocus();
           }
         },
-        style: AppTheme.theme(context).textTheme.titleLarge,
+        style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(
+              color: kDarkColor,
+            ),
         keyboardType: TextInputType.number,
         textAlign: TextAlign.center,
         inputFormatters: [
@@ -37,6 +38,7 @@ class FormKotak extends StatelessWidget {
           FilteringTextInputFormatter.digitsOnly,
         ],
         decoration: const InputDecoration(
+          contentPadding: EdgeInsets.zero,
           errorStyle: TextStyle(height: 0, fontSize: 0),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: kGreyColor),
@@ -48,12 +50,12 @@ class FormKotak extends StatelessWidget {
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.red,
+              color: kRedColor,
             ),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.red,
+              color: kRedColor,
             ),
           ),
         ),

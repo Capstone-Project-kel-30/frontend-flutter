@@ -8,6 +8,7 @@ import 'package:workout_zone/views/authentication/verifikasi_forget_password.dar
 
 import 'package:workout_zone/views/class/class_page.dart';
 import 'package:workout_zone/views/home/home_page.dart';
+import 'package:workout_zone/views/initial/initial_page.dart';
 import 'package:workout_zone/views/membership/membership_page.dart';
 import 'package:workout_zone/views/newsletter/newsletter_page.dart';
 import 'package:workout_zone/views/on_boarding/landing_page.dart';
@@ -36,9 +37,13 @@ import '../../views/wrapper/home_wrapper.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute(
+      path: 'initial',
+      page: InitialPage,
+      initial: true,
+    ),
+    AutoRoute(
       path: 'onBoarding',
       page: OnBoardingPage,
-      initial: true,
     ),
     AutoRoute(
       path: 'LandingPage',
@@ -75,6 +80,7 @@ import '../../views/wrapper/home_wrapper.dart';
         AutoRoute(
           path: 'home',
           page: HomePage,
+          children: <AutoRoute>[],
         ),
         AutoRoute(
           path: 'schedule',
@@ -91,10 +97,6 @@ import '../../views/wrapper/home_wrapper.dart';
       page: ClassPage,
     ),
     AutoRoute(
-      path: 'membership',
-      page: MembershipPage,
-    ),
-    AutoRoute(
       path: 'newsletter',
       page: NewsletterPage,
     ),
@@ -105,6 +107,10 @@ import '../../views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'payment',
       page: PaymentPage,
+    ),
+    AutoRoute(
+      path: 'membership',
+      page: MembershipPage,
     ),
     AutoRoute(
       path: 'membershipDetail',

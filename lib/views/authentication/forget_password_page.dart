@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/auth/auth_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/vertical_space.dart';
@@ -17,7 +19,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   bool _isEmailEpy = false;
 
-  TextEditingController _forgetPassword = TextEditingController();
+  late TextEditingController _forgetPassword;
   @override
   void initState() {
     _forgetPassword = TextEditingController();
@@ -81,19 +83,58 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
               ///button
 
-              CustomElevatedButton(
-                text: "Recover Password",
-                onPressed: _isEmailEpy
-                    ? () {
-                        if (_formKey.currentState!.validate()) {
-                          context.router.push(
-                            VerfikasiForgetPassword(
-                              email: _forgetPassword.text,
-                            ),
-                          );
+              BlocListener<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is Authenticating) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          duration: Duration(seconds: 5),
+                          content: Text('Loading ...'),
+                        ),
+                      );
+                  }
+                  if (state is AuthSuccess) {
+                    context.router.push(
+                      VerfikasiForgetPassword(
+                        email: _forgetPassword.text,
+                        otp: state.otp,
+                      ),
+                    );
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text('OTP has been sent to your email'),
+                        ),
+                      );
+                  }
+                  if (state is AuthenticationError) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        SnackBar(
+                          content: Text(state.msg),
+                        ),
+                      );
+                  }
+                },
+                child: CustomElevatedButton(
+                  text: "Recover Password",
+                  onPressed: _isEmailEpy
+                      ? () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          if (_formKey.currentState!.validate()) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            final String email = _forgetPassword.text;
+                            context.read<AuthBloc>().add(
+                                  OTPRequest(email),
+                                );
+                          }
                         }
-                      }
-                    : null,
+                      : null,
+                ),
               )
             ],
           ),
