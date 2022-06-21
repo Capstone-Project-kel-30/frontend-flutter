@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
+import 'package:workout_zone/views/schedule/widget/card_jadwal.dart';
 import 'package:workout_zone/views/schedule/widget/toggle_button.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class OnlineSchedulePage extends StatefulWidget {
   const OnlineSchedulePage({Key? key}) : super(key: key);
@@ -41,8 +43,7 @@ class _OnlineSchedulePageState extends State<OnlineSchedulePage> {
                     ToggleButton(
                       isActive: activedButton == 'Offline',
                       onPressed: () {
-                        setState(() {});
-                        (() {
+                        setState(() {
                           context.router.push(const OfflineScheduleRoute());
                           activedButton = 'Offline';
                         });
@@ -54,8 +55,8 @@ class _OnlineSchedulePageState extends State<OnlineSchedulePage> {
                     ToggleButton(
                       isActive: activedButton == 'Online',
                       onPressed: () {
-                        setState(() {});
-                        (() {
+                        setState(() {
+                          context.router.push(const OnlineScheduleRoute());
                           activedButton = 'Online';
                         });
                       },
@@ -63,6 +64,22 @@ class _OnlineSchedulePageState extends State<OnlineSchedulePage> {
                       icon: "assets/icons/Logo (1).svg",
                     ),
                   ],
+                ),
+                const VerticalSpace(height: 10),
+                const CardJadwal(
+                  logo: 'assets/icons/Location.png',
+                  title1: 'Gelud',
+                  title3: 'Trainer',
+                  starttime: '22.00',
+                  title2: 'Gym Studio - Bandung',
+                ),
+                const VerticalSpace(height: 10),
+                const CardJadwal(
+                  logo: 'assets/icons/Location.png',
+                  title1: 'Gelud',
+                  title3: 'Trainer',
+                  starttime: '22.00',
+                  title2: 'Gym Studio - Bandung',
                 ),
               ],
             ),

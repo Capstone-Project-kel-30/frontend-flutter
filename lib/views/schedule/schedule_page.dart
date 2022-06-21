@@ -15,7 +15,7 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   String activedButton = '';
-  String jadwal = 'ja';
+  String jadwal = '';
   String jadwalempty = '';
   @override
   Widget build(BuildContext context) {

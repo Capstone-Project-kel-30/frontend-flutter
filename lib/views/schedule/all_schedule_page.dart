@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/schedule/widget/Toggle_button.dart';
+import 'package:workout_zone/views/schedule/widget/card_jadwal.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
-import 'package:workout_zone/views/widgets/time_widget.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class AllSchedulePage extends StatefulWidget {
   const AllSchedulePage({Key? key}) : super(key: key);
@@ -34,17 +33,15 @@ class _AllSchedulePageState extends State<AllSchedulePage> {
                     ButtonText(
                       isActive: activedButton == 'All',
                       onPressed: () {
-                        setState(() {
-                          activedButton = 'All';
-                        });
+                        activedButton = 'All';
+                        setState(() {});
                       },
                     ),
                     const HorizontalSpace(width: 10),
                     ToggleButton(
                       isActive: activedButton == 'Offline',
                       onPressed: () {
-                        setState(() {});
-                        (() {
+                        setState(() {
                           context.router.push(const OfflineScheduleRoute());
                           activedButton = 'Offline';
                         });
@@ -56,8 +53,7 @@ class _AllSchedulePageState extends State<AllSchedulePage> {
                     ToggleButton(
                       isActive: activedButton == 'Online',
                       onPressed: () {
-                        setState(() {});
-                        (() {
+                        setState(() {
                           context.router.push(const OnlineScheduleRoute());
                           activedButton = 'Online';
                         });
@@ -67,55 +63,24 @@ class _AllSchedulePageState extends State<AllSchedulePage> {
                     ),
                   ],
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: kLightColor),
-                  padding: EdgeInsets.all(10),
-                  width: 335,
-                  height: 65,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Geluud",
-                            style: AppTheme.theme(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                    fontWeight: kSemiBoldWeight,
-                                    wordSpacing: 1.0),
-                          ),
-                          SvgPicture.asset("assets/icons/Location.png"),
-                          Text(
-                            "Live Streaming",
-                            style: AppTheme.theme(context)
-                                .textTheme
-                                .caption!
-                                .copyWith(
-                                  fontWeight: kRegularWeight,
-                                ),
-                          ),
-                          Text(
-                            "Live Streaming",
-                            style: AppTheme.theme(context)
-                                .textTheme
-                                .caption!
-                                .copyWith(
-                                  fontWeight: kRegularWeight,
-                                ),
-                          ),
-                        ],
-                      ),
-                      const TimeWidget(
-                        startTime: "22.00",
-                      ),
-                    ],
-                  ),
-                )
+                //card
+                //jadwal
+                const VerticalSpace(height: 10),
+                const CardJadwal(
+                  logo: 'assets/icons/Location.png',
+                  title1: 'Gelud',
+                  title3: 'Trainer',
+                  starttime: '22.00',
+                  title2: 'Gym Studio - Bandung',
+                ),
+                const VerticalSpace(height: 10),
+                const CardJadwal(
+                  logo: 'assets/icons/Location.png',
+                  title1: 'Gelud',
+                  title3: 'Trainer',
+                  starttime: '22.00',
+                  title2: 'Gym Studio - Bandung',
+                ),
               ],
             ),
           ),
