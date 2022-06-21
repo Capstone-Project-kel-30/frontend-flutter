@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/user/user_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/class_card.dart';
@@ -50,16 +52,29 @@ class _HomePageState extends State<HomePage> {
       'Try Now',
     ],
   ];
-  final String member = 'Silver';
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserBloc>().add(GetUserProfile());
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         children: [
-          WelcomeBar(
-            username: 'Dadang Konelo',
-            member: member,
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              if (state is UserSuccess) {
+                return WelcomeBar(
+                  username: state.user.data!.name!,
+                  member: state.user.data!.memberType!,
+                );
+              }
+              return const WelcomeBar(username: 'username', member: '');
+            },
           ),
           const VerticalSpace(height: 15),
           HomeImageCarousel(
@@ -67,14 +82,29 @@ class _HomePageState extends State<HomePage> {
             textList: textList,
           ),
           const VerticalSpace(height: 20),
-          Visibility(
-            visible: member == '',
-            child: Column(
-              children: const [
-                JoinMembershipInfo(),
-                VerticalSpace(height: 20),
-              ],
-            ),
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              if (state is UserSuccess) {
+                return Visibility(
+                  visible: state.user.data!.memberType! == '',
+                  child: Column(
+                    children: const [
+                      JoinMembershipInfo(),
+                      VerticalSpace(height: 20),
+                    ],
+                  ),
+                );
+              }
+              return Visibility(
+                visible: false,
+                child: Column(
+                  children: const [
+                    JoinMembershipInfo(),
+                    VerticalSpace(height: 20),
+                  ],
+                ),
+              );
+            },
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

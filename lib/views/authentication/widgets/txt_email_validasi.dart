@@ -19,7 +19,7 @@ class TxtEmailValidasi extends StatelessWidget {
         ),
         const VerticalSpace(height: 10),
         Text(
-          user,
+          '${user.substring(0, 2)}${'*' * (user.substring(2, user.indexOf('@')).length)}${user.substring(user.indexOf('@'), user.length)}',
           style: AppTheme.theme(context).textTheme.bodyMedium!.copyWith(
                 fontWeight: kSemiBoldWeight,
               ),

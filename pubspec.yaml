@@ -19,6 +19,8 @@ dependencies:
   flutter_native_splash: ^2.2.2
   flutter_svg: ^1.1.0
   google_fonts: ^3.0.1
+  restart_app: ^1.1.0+1
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   auto_route_generator: ^4.0.0
