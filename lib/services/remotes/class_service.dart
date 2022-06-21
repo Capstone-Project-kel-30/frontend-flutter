@@ -1,27 +1,43 @@
 import 'package:dio/dio.dart';
-import 'package:workout_zone/utils/urls/url.dart';
+
+import '../../utils/urls/url.dart';
+import 'dio.dart';
 
 class ClassService {
-  final Dio _dio = Dio();
+  ClassService() {
+    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+  }
   getAllClass(String authorization) async {
     final Map<String, String> header = {
       'Authorization': authorization,
     };
     try {
-      final Response response = await _dio.post(
+      final Response response = await dio.post(
         urls.getAllClass(),
         options: Options(headers: header),
       );
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
   getClassById(String id) async {
     try {
-      final Response response = await _dio.get(urls.getClassById(id));
-    } catch (e) {
-      throw ('Server Error');
+      final Response response = await dio.get(urls.getClassById(id));
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
@@ -30,12 +46,18 @@ class ClassService {
       'search': keyword,
     };
     try {
-      final Response response = await _dio.post(
+      final Response response = await dio.post(
         urls.searchClass(),
         queryParameters: query,
       );
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 }

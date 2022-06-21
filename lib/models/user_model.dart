@@ -9,7 +9,7 @@ class UserModel {
   UserModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    errors = json['errors'].cast<String>();
+    errors = json['errors'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 

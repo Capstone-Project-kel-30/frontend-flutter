@@ -1,28 +1,43 @@
 import 'package:dio/dio.dart';
 
 import '../../utils/urls/url.dart';
+import 'dio.dart';
 
 class NewsletterService {
-  final Dio _dio = Dio();
+  NewsletterService() {
+    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+  }
   getAllNewsletter(String authorization) async {
     final Map<String, String> header = {
       'Authorization': authorization,
     };
     try {
-      final Response response = await _dio.post(
+      final Response response = await dio.post(
         urls.getAllNewsletter(),
         options: Options(headers: header),
       );
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
   getNewsletterById(String id) async {
     try {
-      final Response response = await _dio.get(urls.getNewsletterById(id));
-    } catch (e) {
-      throw ('Server Error');
+      final Response response = await dio.get(urls.getNewsletterById(id));
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 }

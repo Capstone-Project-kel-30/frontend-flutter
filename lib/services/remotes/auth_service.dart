@@ -2,34 +2,37 @@ import 'package:dio/dio.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/urls/url.dart';
+import 'dio.dart';
 
 class AuthService {
-  final Dio _dio = Dio();
+  AuthService() {
+    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+  }
+
   Future<UserModel> register({
     required String username,
     required String email,
     required String phone,
     required String password,
   }) async {
-    final Map<String, String> data = {
+    final Map<String, dynamic> data = {
       'username': username,
       'email': email,
       'phone': phone,
       'password': password,
     };
     try {
-      final Response response =
-          await _dio.post(urls.userRegister(), data: data);
+      final Response response = await dio.post(urls.userRegister(), data: data);
       final UserModel user = UserModel.fromJson(response.data);
-      // if there is an error
-      if (user.errors != null) {
-        if (user.errors == ['user already exist']) {
-          throw ('user already exist, please sign in');
-        }
-      }
       return user;
-    } catch (e) {
-      throw ('server error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
@@ -38,36 +41,43 @@ class AuthService {
     required String password,
   }) async {
     try {
-      final Map<String, String> data = {
+      final Map<String, dynamic> data = {
         'email': email,
         'password': password,
       };
-      final Response response = await _dio.post(urls.userLogin(), data: data);
+      final Response response = await dio.post(urls.userLogin(), data: data);
       final UserModel user = UserModel.fromJson(response.data);
-      if (user.errors != null) {
-        if (user.errors == ['invalid credentials']) {
-          throw ('invalid credentials');
-        }
-      }
       return user;
-    } catch (e) {
-      throw ('server error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
   Future<UserModel> verifyEmail({required String email}) async {
-    final Map<String, String> data = {
+    final Map<String, dynamic> data = {
       'email': email,
     };
     try {
-      final Response response = await _dio.post(
+      final Response response = await dio.post(
         urls.verifyUserEmail(),
         data: data,
       );
       final UserModel user = UserModel.fromJson(response.data);
       return user;
-    } catch (e) {
-      throw ('server error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
@@ -75,19 +85,25 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-    final Map<String, String> data = {
+    final Map<String, dynamic> data = {
       'email': email,
       'password': password,
     };
     try {
-      final Response response = await _dio.post(
+      final Response response = await dio.post(
         urls.userResetPassword(),
         data: data,
       );
       final UserModel user = UserModel.fromJson(response.data);
       return user;
-    } catch (e) {
-      throw ('server error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 }

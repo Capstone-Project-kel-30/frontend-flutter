@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:workout_zone/utils/urls/url.dart';
+
+import '../../utils/urls/url.dart';
+import 'dio.dart';
 
 class MembershipService {
-  final Dio _dio = Dio();
+  MembershipService() {
+    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+  }
   membershipRegister({
     required String userId,
     required String amount,
@@ -14,12 +18,18 @@ class MembershipService {
       'tier': tier,
     };
     try {
-      final Response response = await _dio.post(
+      final Response response = await dio.post(
         urls.userRegisterMembership(),
         data: data,
       );
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
@@ -28,12 +38,18 @@ class MembershipService {
       final Map<String, String> header = {
         'Authorization': authorization,
       };
-      final Response response = await _dio.get(
+      final Response response = await dio.get(
         urls.userMembershipPaymentInfo(),
         options: Options(headers: header),
       );
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
@@ -43,12 +59,18 @@ class MembershipService {
       'class_id': classId,
     };
     try {
-      final Response response = await _dio.post(
+      final Response response = await dio.post(
         urls.userBookingClass(),
         data: data,
       );
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
@@ -57,12 +79,18 @@ class MembershipService {
       final Map<String, String> header = {
         'Authorization': authorization,
       };
-      final Response response = await _dio.get(
+      final Response response = await dio.get(
         urls.userClassSchedule(),
         options: Options(headers: header),
       );
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 }

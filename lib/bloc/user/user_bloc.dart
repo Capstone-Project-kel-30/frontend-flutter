@@ -39,7 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         );
         emit(UserSuccess(user));
       } catch (e) {
-        emit(UserFailed(e.toString()));
+        emit(UserUpdateFailed(e.toString()));
       }
     });
     on<GetUserProfile>((event, emit) async {
@@ -50,7 +50,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final UserModel user = await userService.getUserProfile(authorization);
         emit(UserSuccess(user));
       } catch (e) {
-        emit(UserFailed(e.toString()));
+        emit(UserGetFailed(e.toString()));
       }
     });
   }

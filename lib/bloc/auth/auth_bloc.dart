@@ -30,6 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final int userId = user.data!.id!;
         final String memberType = user.data!.memberType!;
         await userInfoService.updateUserInfo(
+          hasLogin: true,
           email: email,
           id: userId,
           username: username,
@@ -40,7 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         emit(Authenticated(user));
       } catch (e) {
-        emit(AuthenticationError(e.toString()));
+        emit(SignInError(e.toString()));
       }
     });
     on<SignUpRequest>((event, emit) async {
@@ -50,19 +51,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final String email = event.email;
         final String phone = event.phone;
         final String password = event.password;
-        await authService.register(
+        final UserModel user = await authService.register(
           username: username,
           email: email,
           phone: phone,
           password: password,
         );
-        emit(UnAuthenticated());
+        emit(AuthSuccess(user.data!.totp!));
       } catch (e) {
-        emit(AuthenticationError(e.toString()));
+        emit(SignUpError(e.toString()));
       }
     });
     on<SignOutRequest>((event, emit) async {
-      emit(Authenticating());
+      emit(SignOutLoading());
       await userInfoService.resetUserInfo();
       emit(UnAuthenticated());
     });
@@ -70,8 +71,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(Authenticating());
       try {
         final email = event.email;
-        await authService.verifyEmail(email: email);
-        emit(UnAuthenticated());
+        final UserModel user = await authService.verifyEmail(email: email);
+        emit(AuthSuccess(user.data!.totp!));
       } catch (e) {
         emit(AuthenticationError(e.toString()));
       }

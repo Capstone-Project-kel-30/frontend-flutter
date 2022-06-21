@@ -17,28 +17,26 @@ class ImageCard extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10),
       child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              asset,
-              fit: BoxFit.cover,
-              height: 100,
-              width: 150,
-            ),
-          ),
-          Container(
-            height: 100,
-            width: 150,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
+          ShaderMask(
+            blendMode: BlendMode.srcATop,
+            shaderCallback: (bounds) {
+              return LinearGradient(
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 colors: [
-                  Colors.black.withOpacity(0.7),
+                  kPrimaryColor.withOpacity(0.5),
                   Colors.transparent,
                 ],
-              ),
+              ).createShader(bounds);
+            },
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                asset,
+                fit: BoxFit.cover,
+                width: 150,
+                height: 100,
+              ),
             ),
           ),
           Positioned.fill(

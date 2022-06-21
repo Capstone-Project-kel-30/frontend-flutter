@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/themes/app_theme.dart';
+import '../../utils/themes/app_theme.dart';
 
 class MemberCard extends StatelessWidget {
   MemberCard({
@@ -8,10 +8,12 @@ class MemberCard extends StatelessWidget {
     required this.height,
     required this.width,
     required this.type,
+    this.radius = 10,
   }) : super(key: key);
 
   final String type;
   final double height, width;
+  final double radius;
 
   final List<String> assetList = [
     'assets/images/gold_member_card.png',
@@ -58,10 +60,10 @@ class MemberCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(radius),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(radius),
         child: Image.asset(
           asset,
           fit: BoxFit.fill,

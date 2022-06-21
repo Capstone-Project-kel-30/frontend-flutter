@@ -2,23 +2,31 @@ import 'package:dio/dio.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/urls/url.dart';
+import 'dio.dart';
 
 class UserService {
-  final Dio _dio = Dio();
-
+  UserService() {
+    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+  }
   Future<UserModel> getUserProfile(String authorization) async {
     final Map<String, String> header = {
       'Authorization': authorization,
     };
     try {
-      final Response response = await _dio.get(
+      final Response response = await dio.get(
         urls.userProfile(),
         options: Options(headers: header),
       );
       final UserModel user = UserModel.fromJson(response.data);
       return user;
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 
@@ -39,15 +47,21 @@ class UserService {
       'password': password,
     };
     try {
-      final Response response = await _dio.put(
+      final Response response = await dio.put(
         urls.updateUserProfile(),
         data: data,
         options: Options(headers: header),
       );
       final UserModel user = UserModel.fromJson(response.data);
       return user;
-    } catch (e) {
-      throw ('Server Error');
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
     }
   }
 }

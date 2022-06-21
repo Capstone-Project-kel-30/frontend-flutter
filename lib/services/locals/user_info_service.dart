@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserInfoService {
   final SharedPreferences sharedPreferences;
-  UserInfoService(this.sharedPreferences);
+  UserInfoService({required this.sharedPreferences});
 
   Map<String, dynamic> getUserInfo() {
     final token = sharedPreferences.getString("token");
@@ -24,6 +24,7 @@ class UserInfoService {
 
   Future<void> updateUserInfo({
     String? token,
+    bool? hasLogin,
     int? id,
     String? username,
     String? email,
@@ -31,6 +32,9 @@ class UserInfoService {
     String? password,
     String? memberType,
   }) async {
+    if (hasLogin != null) {
+      await sharedPreferences.setBool("hasLogin", hasLogin);
+    }
     if (token != null) {
       await sharedPreferences.setString("token", token);
     }
@@ -55,8 +59,8 @@ class UserInfoService {
   }
 
   Future<void> resetUserInfo() async {
-    await sharedPreferences.remove("token");
     await sharedPreferences.remove("hasLogin");
+    await sharedPreferences.remove("token");
     await sharedPreferences.remove("id");
     await sharedPreferences.remove("username");
     await sharedPreferences.remove("email");

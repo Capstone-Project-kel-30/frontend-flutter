@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/horizontal_space.dart';
 import '../../widgets/vertical_space.dart';
-import 'member_card.dart';
+import '../../widgets/member_card.dart';
 
 class MemberTypeInfo extends StatelessWidget {
   const MemberTypeInfo({

@@ -40,3 +40,5 @@ class OTPRequest extends AuthEvent {
   @override
   List<Object> get props => [email];
 }
+
+class CheckUser extends AuthEvent {}
