@@ -11,7 +11,7 @@ class HomeWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       routes: const [
-        HomeRoute(),
+        HomeInner(),
         ScheduleRoute(),
         ProfileRoute(),
       ],

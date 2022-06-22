@@ -23,6 +23,7 @@ import 'package:workout_zone/views/schedule/offline_schedule_page.dart';
 import 'package:workout_zone/views/schedule/online_schedule_page.dart';
 import 'package:workout_zone/views/schedule/schedule_page.dart';
 import 'package:workout_zone/views/video_content/video_content_page.dart';
+import 'package:workout_zone/views/wrapper/home_inner.dart';
 import 'package:workout_zone/views/wrapper/home_wrapper.dart';
 import '../../views/authentication/sign_in_page.dart';
 import '../../views/authentication/sign_up_page.dart';
@@ -84,9 +85,19 @@ import '../../views/wrapper/home_wrapper.dart';
       page: HomeWrapper,
       children: <AutoRoute>[
         AutoRoute(
-          path: 'home',
-          page: HomePage,
-          children: <AutoRoute>[],
+          path: 'homeInner',
+          page: HomeInner,
+          children: <AutoRoute>[
+            AutoRoute(
+              path: 'home',
+              page: HomePage,
+              initial: true,
+            ),
+            AutoRoute(
+              path: 'membership',
+              page: MembershipPage,
+            ),
+          ],
         ),
         AutoRoute(
           path: 'schedule',

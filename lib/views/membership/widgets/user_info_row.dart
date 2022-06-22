@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
+
+import '../../../utils/themes/app_theme.dart';
 
 class UserInfoRow extends StatelessWidget {
   const UserInfoRow({
@@ -26,7 +27,7 @@ class UserInfoRow extends StatelessWidget {
           data,
           style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(
                 color: kDarkColor,
-                fontWeight: kRegularWeight,
+                fontWeight: kMediumWeight,
               ),
         ),
       ],

@@ -5,6 +5,7 @@ import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/cutom_elevated_button.dart';
+import '../../widgets/vertical_space.dart';
 
 class MembershipPaymentButton extends StatelessWidget {
   const MembershipPaymentButton({Key? key}) : super(key: key);
@@ -16,20 +17,13 @@ class MembershipPaymentButton extends StatelessWidget {
         CustomOutlinedButton(
           text: 'Back to Home',
           onPressed: () {
-            context.router
-                .removeUntil((route) => route.name == HomeWrapper.name);
+            context.router.replaceAll([const HomeWrapper()]);
           },
-          fontSize: 14,
-          fontWeight: kSemiBoldWeight,
           color: kGreyColor,
-          radius: 5,
         ),
+        const VerticalSpace(height: 10),
         CustomElevatedButton(
           text: 'Continue to Payment',
-          width: double.infinity,
-          radius: 5,
-          fontWeight: kSemiBoldWeight,
-          fontSize: 14,
           onPressed: () {},
         ),
       ],
