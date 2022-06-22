@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/themes/app_theme.dart';
 
-class ImageContainerTitle extends StatelessWidget {
-  const ImageContainerTitle({
+class SectionContainerTitle extends StatelessWidget {
+  const SectionContainerTitle({
     Key? key,
     required this.moreThan5,
     required this.title,
