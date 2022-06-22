@@ -29,9 +29,12 @@ class CardOption extends StatelessWidget {
                     fontWeight: kSemiBoldWeight,
                   ),
             ),
-            trailing: const Icon(
-              Icons.arrow_forward_ios,
-              color: kPrimaryColor,
+            trailing: GestureDetector(
+              onTap: () {},
+              child: const Icon(
+                Icons.arrow_forward_ios,
+                color: kPrimaryColor,
+              ),
             ),
           ),
         ],
