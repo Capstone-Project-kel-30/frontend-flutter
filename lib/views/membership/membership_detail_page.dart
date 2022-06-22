@@ -42,7 +42,7 @@ class MembershipDetailPage extends StatelessWidget {
           MembershipImageCarousel(imgList: imgList),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 50),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -60,21 +60,16 @@ class MembershipDetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 50),
-                    child: CustomElevatedButton(
-                      text: 'Join Membership',
-                      width: double.infinity,
-                      radius: 5,
-                      fontWeight: kSemiBoldWeight,
-                      fontSize: 14,
-                      onPressed: () {
-                        context.router.push(MembershipPaymentRoute(
+                  CustomElevatedButton(
+                    text: 'Join Membership',
+                    onPressed: () {
+                      context.router.replaceAll([
+                        MembershipPaymentRoute(
                           type: type,
                           price: price,
-                        ));
-                      },
-                    ),
+                        )
+                      ]);
+                    },
                   ),
                 ],
               ),

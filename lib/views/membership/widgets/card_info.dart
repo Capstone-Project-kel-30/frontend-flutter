@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
 
+import '../../../utils/themes/app_theme.dart';
 import '../../widgets/member_card.dart';
 
 class CardInfo extends StatelessWidget {

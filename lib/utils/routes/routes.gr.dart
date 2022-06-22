@@ -10,8 +10,8 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i21;
-import 'package:flutter/material.dart' as _i22;
+import 'package:auto_route/auto_route.dart' as _i22;
+import 'package:flutter/material.dart' as _i23;
 
 import '../../views/authentication/create_new_pass.dart' as _i9;
 import '../../views/authentication/forget_password_page.dart' as _i6;
@@ -20,7 +20,7 @@ import '../../views/authentication/sign_up_page.dart' as _i5;
 import '../../views/authentication/verfikasi_signup.dart' as _i7;
 import '../../views/authentication/verifikasi_forget_password.dart' as _i8;
 import '../../views/class/class_page.dart' as _i11;
-import '../../views/home/home_page.dart' as _i18;
+import '../../views/home/home_page.dart' as _i21;
 import '../../views/initial/initial_page.dart' as _i1;
 import '../../views/membership/membership_detail_page.dart' as _i16;
 import '../../views/membership/membership_page.dart' as _i15;
@@ -32,147 +32,164 @@ import '../../views/payment/payment_page.dart' as _i14;
 import '../../views/profile/profile_page.dart' as _i20;
 import '../../views/schedule/schedule_page.dart' as _i19;
 import '../../views/video_content/video_content_page.dart' as _i13;
+import '../../views/wrapper/home_inner.dart' as _i18;
 import '../../views/wrapper/home_wrapper.dart' as _i10;
 
-class AppRouter extends _i21.RootStackRouter {
-  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
+class AppRouter extends _i22.RootStackRouter {
+  AppRouter([_i23.GlobalKey<_i23.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i21.PageFactory> pagesMap = {
+  final Map<String, _i22.PageFactory> pagesMap = {
     InitialRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.InitialPage());
     },
     OnBoardingRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.OnBoardingPage());
     },
     Landingpage.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.Landingpage());
     },
     SignInRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.SignInPage());
     },
     SignUpRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i5.SignUpPage());
     },
     ForgetPasswordRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.ForgetPasswordPage());
     },
     VerfikasiSignUp.name: (routeData) {
       final args = routeData.argsAs<VerfikasiSignUpArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i7.VerfikasiSignUp(
               key: args.key, email: args.email, otp: args.otp));
     },
     VerfikasiForgetPassword.name: (routeData) {
       final args = routeData.argsAs<VerfikasiForgetPasswordArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i8.VerfikasiForgetPassword(
               key: args.key, email: args.email, otp: args.otp));
     },
     CreateNewPass.name: (routeData) {
       final args = routeData.argsAs<CreateNewPassArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i9.CreateNewPass(key: args.key, email: args.email));
     },
     HomeWrapper.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i10.HomeWrapper());
     },
     ClassRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i11.ClassPage());
     },
     NewsletterRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i12.NewsletterPage());
     },
     VideoContentRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i13.VideoContentPage());
     },
     PaymentRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i14.PaymentPage());
     },
     MembershipRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipRouteArgs>(
           orElse: () => const MembershipRouteArgs());
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: _i15.MembershipPage(key: args.key));
     },
     MembershipDetailRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipDetailRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i16.MembershipDetailPage(
               key: args.key, type: args.type, price: args.price));
     },
     MembershipPaymentRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipPaymentRouteArgs>();
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i17.MembershipPaymentPage(
               key: args.key, type: args.type, price: args.price));
     },
-    HomeRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i18.HomePage());
+    HomeInner.name: (routeData) {
+      return _i22.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i18.HomeInner());
     },
     ScheduleRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i19.SchedulePage());
     },
     ProfileRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i20.ProfilePage());
+    },
+    HomeRoute.name: (routeData) {
+      return _i22.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i21.HomePage());
     }
   };
 
   @override
-  List<_i21.RouteConfig> get routes => [
-        _i21.RouteConfig('/#redirect',
+  List<_i22.RouteConfig> get routes => [
+        _i22.RouteConfig('/#redirect',
             path: '/', redirectTo: 'initial', fullMatch: true),
-        _i21.RouteConfig(InitialRoute.name, path: 'initial'),
-        _i21.RouteConfig(OnBoardingRoute.name, path: 'onBoarding'),
-        _i21.RouteConfig(Landingpage.name, path: 'LandingPage'),
-        _i21.RouteConfig(SignInRoute.name, path: 'signIn'),
-        _i21.RouteConfig(SignUpRoute.name, path: 'signUp'),
-        _i21.RouteConfig(ForgetPasswordRoute.name, path: 'forgetPassword'),
-        _i21.RouteConfig(VerfikasiSignUp.name, path: 'verfikasiSignUp'),
-        _i21.RouteConfig(VerfikasiForgetPassword.name,
+        _i22.RouteConfig(InitialRoute.name, path: 'initial'),
+        _i22.RouteConfig(OnBoardingRoute.name, path: 'onBoarding'),
+        _i22.RouteConfig(Landingpage.name, path: 'LandingPage'),
+        _i22.RouteConfig(SignInRoute.name, path: 'signIn'),
+        _i22.RouteConfig(SignUpRoute.name, path: 'signUp'),
+        _i22.RouteConfig(ForgetPasswordRoute.name, path: 'forgetPassword'),
+        _i22.RouteConfig(VerfikasiSignUp.name, path: 'verfikasiSignUp'),
+        _i22.RouteConfig(VerfikasiForgetPassword.name,
             path: 'verfikasiForgetPassword'),
-        _i21.RouteConfig(CreateNewPass.name, path: 'createNewPassword'),
-        _i21.RouteConfig(HomeWrapper.name, path: 'homeWrapper', children: [
-          _i21.RouteConfig(HomeRoute.name,
-              path: 'home', parent: HomeWrapper.name),
-          _i21.RouteConfig(ScheduleRoute.name,
+        _i22.RouteConfig(CreateNewPass.name, path: 'createNewPassword'),
+        _i22.RouteConfig(HomeWrapper.name, path: 'homeWrapper', children: [
+          _i22.RouteConfig(HomeInner.name,
+              path: 'homeInner',
+              parent: HomeWrapper.name,
+              children: [
+                _i22.RouteConfig('#redirect',
+                    path: '',
+                    parent: HomeInner.name,
+                    redirectTo: 'home',
+                    fullMatch: true),
+                _i22.RouteConfig(HomeRoute.name,
+                    path: 'home', parent: HomeInner.name),
+                _i22.RouteConfig(MembershipRoute.name,
+                    path: 'membership', parent: HomeInner.name)
+              ]),
+          _i22.RouteConfig(ScheduleRoute.name,
               path: 'schedule', parent: HomeWrapper.name),
-          _i21.RouteConfig(ProfileRoute.name,
+          _i22.RouteConfig(ProfileRoute.name,
               path: 'profile', parent: HomeWrapper.name)
         ]),
-        _i21.RouteConfig(ClassRoute.name, path: 'class'),
-        _i21.RouteConfig(NewsletterRoute.name, path: 'newsletter'),
-        _i21.RouteConfig(VideoContentRoute.name, path: 'videoContent'),
-        _i21.RouteConfig(PaymentRoute.name, path: 'payment'),
-        _i21.RouteConfig(MembershipRoute.name, path: 'membership'),
-        _i21.RouteConfig(MembershipDetailRoute.name, path: 'membershipDetail'),
-        _i21.RouteConfig(MembershipPaymentRoute.name, path: 'membershipPayment')
+        _i22.RouteConfig(ClassRoute.name, path: 'class'),
+        _i22.RouteConfig(NewsletterRoute.name, path: 'newsletter'),
+        _i22.RouteConfig(VideoContentRoute.name, path: 'videoContent'),
+        _i22.RouteConfig(PaymentRoute.name, path: 'payment'),
+        _i22.RouteConfig(MembershipRoute.name, path: 'membership'),
+        _i22.RouteConfig(MembershipDetailRoute.name, path: 'membershipDetail'),
+        _i22.RouteConfig(MembershipPaymentRoute.name, path: 'membershipPayment')
       ];
 }
 
 /// generated route for
 /// [_i1.InitialPage]
-class InitialRoute extends _i21.PageRouteInfo<void> {
+class InitialRoute extends _i22.PageRouteInfo<void> {
   const InitialRoute() : super(InitialRoute.name, path: 'initial');
 
   static const String name = 'InitialRoute';
@@ -180,7 +197,7 @@ class InitialRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.OnBoardingPage]
-class OnBoardingRoute extends _i21.PageRouteInfo<void> {
+class OnBoardingRoute extends _i22.PageRouteInfo<void> {
   const OnBoardingRoute() : super(OnBoardingRoute.name, path: 'onBoarding');
 
   static const String name = 'OnBoardingRoute';
@@ -188,7 +205,7 @@ class OnBoardingRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.Landingpage]
-class Landingpage extends _i21.PageRouteInfo<void> {
+class Landingpage extends _i22.PageRouteInfo<void> {
   const Landingpage() : super(Landingpage.name, path: 'LandingPage');
 
   static const String name = 'Landingpage';
@@ -196,7 +213,7 @@ class Landingpage extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SignInPage]
-class SignInRoute extends _i21.PageRouteInfo<void> {
+class SignInRoute extends _i22.PageRouteInfo<void> {
   const SignInRoute() : super(SignInRoute.name, path: 'signIn');
 
   static const String name = 'SignInRoute';
@@ -204,7 +221,7 @@ class SignInRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.SignUpPage]
-class SignUpRoute extends _i21.PageRouteInfo<void> {
+class SignUpRoute extends _i22.PageRouteInfo<void> {
   const SignUpRoute() : super(SignUpRoute.name, path: 'signUp');
 
   static const String name = 'SignUpRoute';
@@ -212,7 +229,7 @@ class SignUpRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.ForgetPasswordPage]
-class ForgetPasswordRoute extends _i21.PageRouteInfo<void> {
+class ForgetPasswordRoute extends _i22.PageRouteInfo<void> {
   const ForgetPasswordRoute()
       : super(ForgetPasswordRoute.name, path: 'forgetPassword');
 
@@ -221,8 +238,8 @@ class ForgetPasswordRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.VerfikasiSignUp]
-class VerfikasiSignUp extends _i21.PageRouteInfo<VerfikasiSignUpArgs> {
-  VerfikasiSignUp({_i22.Key? key, required String email, required String otp})
+class VerfikasiSignUp extends _i22.PageRouteInfo<VerfikasiSignUpArgs> {
+  VerfikasiSignUp({_i23.Key? key, required String email, required String otp})
       : super(VerfikasiSignUp.name,
             path: 'verfikasiSignUp',
             args: VerfikasiSignUpArgs(key: key, email: email, otp: otp));
@@ -233,7 +250,7 @@ class VerfikasiSignUp extends _i21.PageRouteInfo<VerfikasiSignUpArgs> {
 class VerfikasiSignUpArgs {
   const VerfikasiSignUpArgs({this.key, required this.email, required this.otp});
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String email;
 
@@ -248,9 +265,9 @@ class VerfikasiSignUpArgs {
 /// generated route for
 /// [_i8.VerfikasiForgetPassword]
 class VerfikasiForgetPassword
-    extends _i21.PageRouteInfo<VerfikasiForgetPasswordArgs> {
+    extends _i22.PageRouteInfo<VerfikasiForgetPasswordArgs> {
   VerfikasiForgetPassword(
-      {_i22.Key? key, required String email, required String otp})
+      {_i23.Key? key, required String email, required String otp})
       : super(VerfikasiForgetPassword.name,
             path: 'verfikasiForgetPassword',
             args:
@@ -263,7 +280,7 @@ class VerfikasiForgetPasswordArgs {
   const VerfikasiForgetPasswordArgs(
       {this.key, required this.email, required this.otp});
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String email;
 
@@ -277,8 +294,8 @@ class VerfikasiForgetPasswordArgs {
 
 /// generated route for
 /// [_i9.CreateNewPass]
-class CreateNewPass extends _i21.PageRouteInfo<CreateNewPassArgs> {
-  CreateNewPass({_i22.Key? key, required String email})
+class CreateNewPass extends _i22.PageRouteInfo<CreateNewPassArgs> {
+  CreateNewPass({_i23.Key? key, required String email})
       : super(CreateNewPass.name,
             path: 'createNewPassword',
             args: CreateNewPassArgs(key: key, email: email));
@@ -289,7 +306,7 @@ class CreateNewPass extends _i21.PageRouteInfo<CreateNewPassArgs> {
 class CreateNewPassArgs {
   const CreateNewPassArgs({this.key, required this.email});
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String email;
 
@@ -301,8 +318,8 @@ class CreateNewPassArgs {
 
 /// generated route for
 /// [_i10.HomeWrapper]
-class HomeWrapper extends _i21.PageRouteInfo<void> {
-  const HomeWrapper({List<_i21.PageRouteInfo>? children})
+class HomeWrapper extends _i22.PageRouteInfo<void> {
+  const HomeWrapper({List<_i22.PageRouteInfo>? children})
       : super(HomeWrapper.name, path: 'homeWrapper', initialChildren: children);
 
   static const String name = 'HomeWrapper';
@@ -310,7 +327,7 @@ class HomeWrapper extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.ClassPage]
-class ClassRoute extends _i21.PageRouteInfo<void> {
+class ClassRoute extends _i22.PageRouteInfo<void> {
   const ClassRoute() : super(ClassRoute.name, path: 'class');
 
   static const String name = 'ClassRoute';
@@ -318,7 +335,7 @@ class ClassRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.NewsletterPage]
-class NewsletterRoute extends _i21.PageRouteInfo<void> {
+class NewsletterRoute extends _i22.PageRouteInfo<void> {
   const NewsletterRoute() : super(NewsletterRoute.name, path: 'newsletter');
 
   static const String name = 'NewsletterRoute';
@@ -326,7 +343,7 @@ class NewsletterRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.VideoContentPage]
-class VideoContentRoute extends _i21.PageRouteInfo<void> {
+class VideoContentRoute extends _i22.PageRouteInfo<void> {
   const VideoContentRoute()
       : super(VideoContentRoute.name, path: 'videoContent');
 
@@ -335,7 +352,7 @@ class VideoContentRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.PaymentPage]
-class PaymentRoute extends _i21.PageRouteInfo<void> {
+class PaymentRoute extends _i22.PageRouteInfo<void> {
   const PaymentRoute() : super(PaymentRoute.name, path: 'payment');
 
   static const String name = 'PaymentRoute';
@@ -343,8 +360,8 @@ class PaymentRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.MembershipPage]
-class MembershipRoute extends _i21.PageRouteInfo<MembershipRouteArgs> {
-  MembershipRoute({_i22.Key? key})
+class MembershipRoute extends _i22.PageRouteInfo<MembershipRouteArgs> {
+  MembershipRoute({_i23.Key? key})
       : super(MembershipRoute.name,
             path: 'membership', args: MembershipRouteArgs(key: key));
 
@@ -354,7 +371,7 @@ class MembershipRoute extends _i21.PageRouteInfo<MembershipRouteArgs> {
 class MembershipRouteArgs {
   const MembershipRouteArgs({this.key});
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   @override
   String toString() {
@@ -365,9 +382,9 @@ class MembershipRouteArgs {
 /// generated route for
 /// [_i16.MembershipDetailPage]
 class MembershipDetailRoute
-    extends _i21.PageRouteInfo<MembershipDetailRouteArgs> {
+    extends _i22.PageRouteInfo<MembershipDetailRouteArgs> {
   MembershipDetailRoute(
-      {_i22.Key? key, required String type, required String price})
+      {_i23.Key? key, required String type, required String price})
       : super(MembershipDetailRoute.name,
             path: 'membershipDetail',
             args:
@@ -380,7 +397,7 @@ class MembershipDetailRouteArgs {
   const MembershipDetailRouteArgs(
       {this.key, required this.type, required this.price});
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String type;
 
@@ -395,9 +412,9 @@ class MembershipDetailRouteArgs {
 /// generated route for
 /// [_i17.MembershipPaymentPage]
 class MembershipPaymentRoute
-    extends _i21.PageRouteInfo<MembershipPaymentRouteArgs> {
+    extends _i22.PageRouteInfo<MembershipPaymentRouteArgs> {
   MembershipPaymentRoute(
-      {_i22.Key? key, required String type, required String price})
+      {_i23.Key? key, required String type, required String price})
       : super(MembershipPaymentRoute.name,
             path: 'membershipPayment',
             args:
@@ -410,7 +427,7 @@ class MembershipPaymentRouteArgs {
   const MembershipPaymentRouteArgs(
       {this.key, required this.type, required this.price});
 
-  final _i22.Key? key;
+  final _i23.Key? key;
 
   final String type;
 
@@ -423,16 +440,17 @@ class MembershipPaymentRouteArgs {
 }
 
 /// generated route for
-/// [_i18.HomePage]
-class HomeRoute extends _i21.PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: 'home');
+/// [_i18.HomeInner]
+class HomeInner extends _i22.PageRouteInfo<void> {
+  const HomeInner({List<_i22.PageRouteInfo>? children})
+      : super(HomeInner.name, path: 'homeInner', initialChildren: children);
 
-  static const String name = 'HomeRoute';
+  static const String name = 'HomeInner';
 }
 
 /// generated route for
 /// [_i19.SchedulePage]
-class ScheduleRoute extends _i21.PageRouteInfo<void> {
+class ScheduleRoute extends _i22.PageRouteInfo<void> {
   const ScheduleRoute() : super(ScheduleRoute.name, path: 'schedule');
 
   static const String name = 'ScheduleRoute';
@@ -440,8 +458,16 @@ class ScheduleRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.ProfilePage]
-class ProfileRoute extends _i21.PageRouteInfo<void> {
+class ProfileRoute extends _i22.PageRouteInfo<void> {
   const ProfileRoute() : super(ProfileRoute.name, path: 'profile');
 
   static const String name = 'ProfileRoute';
+}
+
+/// generated route for
+/// [_i21.HomePage]
+class HomeRoute extends _i22.PageRouteInfo<void> {
+  const HomeRoute() : super(HomeRoute.name, path: 'home');
+
+  static const String name = 'HomeRoute';
 }

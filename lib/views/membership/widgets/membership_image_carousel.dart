@@ -24,9 +24,22 @@ class _MembershipImageCarouselState extends State<MembershipImageCarousel> {
         CarouselSlider.builder(
           itemCount: widget.imgList.length,
           itemBuilder: (_, index, i) {
-            return Image.asset(
-              widget.imgList[index],
-              fit: BoxFit.cover,
+            return ShaderMask(
+              blendMode: BlendMode.srcATop,
+              shaderCallback: (bounds) {
+                return const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black,
+                    Colors.transparent,
+                  ],
+                ).createShader(bounds);
+              },
+              child: Image.asset(
+                widget.imgList[index],
+                fit: BoxFit.cover,
+              ),
             );
           },
           options: CarouselOptions(

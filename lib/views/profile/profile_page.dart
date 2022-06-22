@@ -26,7 +26,6 @@ class ProfilePage extends StatelessWidget {
                   );
               }
               if (state is UnAuthenticated) {
-                context.router.replaceAll([const InitialRoute()]);
                 Restart.restartApp();
                 ScaffoldMessenger.of(context)
                   ..hideCurrentSnackBar()
