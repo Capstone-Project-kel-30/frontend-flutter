@@ -16,6 +16,7 @@ const Color kSilver = Color.fromRGBO(161, 167, 170, 1);
 const Color kSilver2 = Color.fromRGBO(237, 238, 240, 1);
 const Color kBronze = Color.fromRGBO(167, 122, 93, 1);
 const Color kBronze2 = Color.fromRGBO(220, 152, 107, 1);
+const Color kSkeletonColor = Color.fromRGBO(230, 230, 230, 1);
 
 // FontWeight
 const FontWeight kRegularWeight = FontWeight.w400;
