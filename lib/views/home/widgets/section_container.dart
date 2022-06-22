@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ImageContainer extends StatelessWidget {
-  const ImageContainer({
+class SectionContainer extends StatelessWidget {
+  const SectionContainer({
     Key? key,
     required this.child,
     required this.height,

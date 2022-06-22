@@ -8,8 +8,8 @@ import '../widgets/vertical_space.dart';
 import 'widgets/class_card.dart';
 import 'widgets/home_image_carousel.dart';
 import 'widgets/image_card.dart';
-import 'widgets/image_container.dart';
-import 'widgets/image_container_title.dart';
+import 'widgets/section_container.dart';
+import 'widgets/section_container_title.dart';
 import 'widgets/join_membership_info.dart';
 import 'widgets/video_image_card.dart';
 import 'widgets/welcome_bar.dart';
@@ -69,11 +69,16 @@ class _HomePageState extends State<HomePage> {
             builder: (context, state) {
               if (state is UserSuccess) {
                 return WelcomeBar(
+                  isLoading: false,
                   username: state.user.data!.name!,
                   member: state.user.data!.memberType!,
                 );
               }
-              return const WelcomeBar(username: 'username', member: '');
+              return const WelcomeBar(
+                username: 'username',
+                member: '',
+                isLoading: true,
+              );
             },
           ),
           const VerticalSpace(height: 15),
@@ -89,27 +94,24 @@ class _HomePageState extends State<HomePage> {
                   visible: state.user.data!.memberType! == '',
                   child: Column(
                     children: const [
-                      JoinMembershipInfo(),
+                      JoinMembershipInfo(isLoading: false),
                       VerticalSpace(height: 20),
                     ],
                   ),
                 );
               }
-              return Visibility(
-                visible: false,
-                child: Column(
-                  children: const [
-                    JoinMembershipInfo(),
-                    VerticalSpace(height: 20),
-                  ],
-                ),
+              return Column(
+                children: const [
+                  JoinMembershipInfo(isLoading: true),
+                  VerticalSpace(height: 20),
+                ],
               );
             },
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageContainerTitle(
+              SectionContainerTitle(
                 moreThan5: true,
                 title: 'Offline Class',
                 onTap: () {
@@ -117,17 +119,19 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const VerticalSpace(height: 10),
-              ImageContainer(
-                height: 125,
+              SectionContainer(
+                height: 130,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: imgList.length > 5 ? 5 : imgList.length,
                   itemBuilder: ((context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        context.router.push(const ClassRoute());
-                      },
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
                       child: ClassCard(
+                        isLoading: false,
+                        onTap: () {
+                          context.router.push(const ClassRoute());
+                        },
                         startTime: '16:00',
                         img: imgList[0],
                         location: 'Gym Studio - Bandung',
@@ -144,7 +148,7 @@ class _HomePageState extends State<HomePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageContainerTitle(
+              SectionContainerTitle(
                 moreThan5: true,
                 title: 'Online Class',
                 onTap: () {
@@ -152,17 +156,19 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const VerticalSpace(height: 10),
-              ImageContainer(
-                height: 125,
+              SectionContainer(
+                height: 130,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: imgList.length > 5 ? 5 : imgList.length,
                   itemBuilder: ((context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        context.router.push(const ClassRoute());
-                      },
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
                       child: ClassCard(
+                        isLoading: false,
+                        onTap: () {
+                          context.router.push(const ClassRoute());
+                        },
                         startTime: '16:00',
                         img: imgList[0],
                         location: 'Zoom',
@@ -179,7 +185,7 @@ class _HomePageState extends State<HomePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageContainerTitle(
+              SectionContainerTitle(
                 moreThan5: true,
                 title: 'Health tips for you',
                 onTap: () {
@@ -187,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const VerticalSpace(height: 10),
-              ImageContainer(
+              SectionContainer(
                 height: 100,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -211,7 +217,7 @@ class _HomePageState extends State<HomePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageContainerTitle(
+              SectionContainerTitle(
                 moreThan5: false,
                 title: 'Workout From Home',
                 onTap: () {
@@ -219,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const VerticalSpace(height: 10),
-              ImageContainer(
+              SectionContainer(
                 height: 100,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
