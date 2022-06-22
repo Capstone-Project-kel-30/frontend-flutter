@@ -33,7 +33,7 @@ class ProfileEdit extends StatelessWidget {
               children: [
                 ProfileImage(
                   press: () {
-                    context.router.push(const ProfileSeting());
+                    context.router.push(ProfileSeting());
                   },
                   title: "Change",
                   color: kPrimaryColor,
@@ -54,11 +54,6 @@ class ProfileEdit extends StatelessWidget {
                   press: () {
                     context.router.push(const NewPassword());
                   },
-                ),
-                FormUsername(
-                  title: "Nama Lengkap",
-                  hint: "Dadang K",
-                  controller: _nameController,
                 ),
                 FormUsername(
                   title: "Username",

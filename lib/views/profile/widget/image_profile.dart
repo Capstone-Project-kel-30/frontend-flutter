@@ -6,12 +6,12 @@ class ProfileImage extends StatelessWidget {
   const ProfileImage({
     Key? key,
     this.img = "assets/images/Profile.png",
-    this.title = "Danang Iye",
+    required this.title,
     this.color = kDarkColor,
     this.press,
   }) : super(key: key);
   final String img;
-  final String? title;
+  final String title;
   final Color? color;
   final VoidCallback? press;
 
@@ -32,7 +32,7 @@ class ProfileImage extends StatelessWidget {
         GestureDetector(
           onTap: press,
           child: Text(
-            title!,
+            title,
             style: TextStyle(
               fontWeight: kSemiBoldWeight,
               color: color!,
