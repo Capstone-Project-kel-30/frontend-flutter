@@ -4,12 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_zone/bloc/user/user_bloc.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
+import 'package:workout_zone/views/home/widgets/shimmer_placeholder.dart';
+import 'package:workout_zone/views/profile/widget/banner_profile.dart';
 import 'package:workout_zone/views/profile/widget/image_profile.dart';
-import 'package:workout_zone/views/widgets/member_card.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key, this.type}) : super(key: key);
+  const ProfilePage({
+    Key? key,
+    this.type,
+  }) : super(key: key);
 
   final String? type;
   String setBenefit(type) {
@@ -59,45 +62,22 @@ class ProfilePage extends StatelessWidget {
             BlocBuilder<UserBloc, UserState>(
               builder: (context, state) {
                 if (state is UserSuccess) {
-                  return Visibility(
-                      visible: state.user.data!.memberType == '',
-                      child: ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                        label: const Text("Add Membership"),
-                      ));
+                  if (state.user.data!.memberType == '') {
+                    return ElevatedButton.icon(
+                      onPressed: () {
+                        context.router.push(MembershipRoute());
+                      },
+                      icon: const Icon(Icons.add),
+                      label: const Text("Add Membership"),
+                    );
+                  } else {
+                    return BannerProfile(
+                      isLoad: true,
+                      member: state.user.data!.memberType!,
+                    );
+                  }
                 }
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: kSecondaryColor,
-                  ),
-                  height: 50,
-                  width: 199,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        MemberCard(
-                          height: 30,
-                          width: 40,
-                          type: "state.user.data!.memberType!",
-                        ),
-                        Text(
-                          "",
-                          style: AppTheme.theme(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                color: kPrimaryColor,
-                                fontWeight: kSemiBoldWeight,
-                              ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                return const ShimmerPlaceholder(height: 30, width: 60);
               },
             ),
             const Text('')
