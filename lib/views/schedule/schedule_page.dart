@@ -15,7 +15,7 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   String activedButton = '';
-  String jadwal = '';
+
   String jadwalempty = '';
   @override
   Widget build(BuildContext context) {
@@ -29,54 +29,48 @@ class _SchedulePageState extends State<SchedulePage> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ListView(children: [
-            Visibility(
-              visible: jadwalempty == '',
-              child: Row(
-                children: [
-                  ButtonText(
-                    isActive: activedButton == 'All',
-                    onPressed: () {
-                      setState(() {
-                        context.router.push(const AllScheduleRoute());
-                        activedButton = 'All';
-                      });
-                    },
-                  ),
-                  const HorizontalSpace(width: 10),
-                  ToggleButton(
-                    isActive: activedButton == 'Offline',
-                    onPressed: () {
-                      setState(() {
-                        context.router.push(const OfflineScheduleRoute());
-                        activedButton = 'Offline';
-                      });
-                    },
-                    text: 'Offline',
-                    icon: 'assets/icons/Logo (2).svg',
-                  ),
-                  const HorizontalSpace(width: 10),
-                  ToggleButton(
-                    isActive: activedButton == 'Online',
-                    onPressed: () {
-                      setState(() {
-                        context.router.push(const OnlineScheduleRoute());
-                        activedButton = 'Online';
-                      });
-                    },
-                    text: 'Online',
-                    icon: "assets/icons/Logo (1).svg",
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                ButtonText(
+                  isActive: activedButton == 'All',
+                  onPressed: () {
+                    context.router.replace(const AllScheduleRoute());
+                    setState(() {
+                      activedButton = 'All';
+                    });
+                  },
+                ),
+                const HorizontalSpace(width: 10),
+                ToggleButton(
+                  isActive: activedButton == 'Offline',
+                  onPressed: () {
+                    context.router.replace(const OfflineScheduleRoute());
+                    setState(() {
+                      activedButton = 'Offline';
+                    });
+                  },
+                  text: 'Offline',
+                  icon: 'assets/icons/Logo (2).svg',
+                ),
+                const HorizontalSpace(width: 10),
+                ToggleButton(
+                  isActive: activedButton == 'Online',
+                  onPressed: () {
+                    context.router.replace(const OnlineScheduleRoute());
+                    setState(() {
+                      activedButton = 'Online';
+                    });
+                  },
+                  text: 'Online',
+                  icon: "assets/icons/Logo (1).svg",
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                 vertical: 150,
               ),
-              child: Visibility(
-                visible: jadwal == '',
-                child: const EmptyJadwal(),
-              ),
+              child: EmptyJadwal(),
             ),
           ]),
         ),

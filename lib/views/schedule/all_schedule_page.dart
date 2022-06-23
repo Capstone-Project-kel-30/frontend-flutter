@@ -41,8 +41,8 @@ class _AllSchedulePageState extends State<AllSchedulePage> {
                     ToggleButton(
                       isActive: activedButton == 'Offline',
                       onPressed: () {
+                        context.router.replace(const OfflineScheduleRoute());
                         setState(() {
-                          context.router.push(const OfflineScheduleRoute());
                           activedButton = 'Offline';
                         });
                       },
@@ -53,8 +53,8 @@ class _AllSchedulePageState extends State<AllSchedulePage> {
                     ToggleButton(
                       isActive: activedButton == 'Online',
                       onPressed: () {
+                        context.router.replace(const OnlineScheduleRoute());
                         setState(() {
-                          context.router.push(const OnlineScheduleRoute());
                           activedButton = 'Online';
                         });
                       },

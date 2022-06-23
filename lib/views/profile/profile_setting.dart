@@ -12,11 +12,7 @@ import 'package:workout_zone/views/widgets/vertical_space.dart';
 class ProfileSeting extends StatefulWidget {
   const ProfileSeting({
     Key? key,
-    this.name,
-    this.email,
-    this.phone,
   }) : super(key: key);
-  final String? name, email, phone;
 
   @override
   State<ProfileSeting> createState() => _ProfileSetingState();

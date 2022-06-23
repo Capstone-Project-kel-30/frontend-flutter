@@ -32,7 +32,7 @@ class ProfilePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.router.push(ProfileSeting());
+              context.router.push(const ProfileSeting());
             },
             icon: SvgPicture.asset(
               "assets/icons/Settings.svg",
@@ -60,51 +60,44 @@ class ProfilePage extends StatelessWidget {
               builder: (context, state) {
                 if (state is UserSuccess) {
                   return Visibility(
-                    visible: state.user.data!.memberType == '',
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: kSecondaryColor,
-                      ),
-                      height: 50,
-                      width: 199,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                MemberCard(
-                                  height: 30,
-                                  width: 40,
-                                  type: state.user.data!.memberType!,
-                                ),
-                                Text(
-                                  '$type Membership',
-                                  style: AppTheme.theme(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        color: kPrimaryColor,
-                                        fontWeight: kSemiBoldWeight,
-                                      ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
+                      visible: state.user.data!.memberType == '',
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.add),
+                        label: const Text("Add Membership"),
+                      ));
                 }
-                return Visibility(
-                    visible: false,
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.add),
-                      label: const Text("Add Membership"),
-                    ));
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: kSecondaryColor,
+                  ),
+                  height: 50,
+                  width: 199,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        MemberCard(
+                          height: 30,
+                          width: 40,
+                          type: "state.user.data!.memberType!",
+                        ),
+                        Text(
+                          "",
+                          style: AppTheme.theme(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                color: kPrimaryColor,
+                                fontWeight: kSemiBoldWeight,
+                              ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
               },
             ),
             const Text('')

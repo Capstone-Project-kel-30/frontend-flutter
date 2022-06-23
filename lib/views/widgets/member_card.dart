@@ -35,7 +35,7 @@ class MemberCard extends StatelessWidget {
     } else {
       return colorList[2];
     }
-  } 
+  }
 
   String setAsset(type) {
     if (type == 'Gold') {

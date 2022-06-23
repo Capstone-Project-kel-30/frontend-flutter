@@ -10,9 +10,9 @@ class HomeWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: const [
-        HomeInner(),
-        ScheduleRoute(),
+      routes: [
+        const HomeInner(),
+        const ScheduleInner(),
         ProfileRoute(),
       ],
       bottomNavigationBuilder: (_, tabRouter) {
