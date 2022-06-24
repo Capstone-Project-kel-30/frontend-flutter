@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                 moreThan5: true,
                 title: 'Offline Class',
                 onTap: () {
-                  context.router.push(const ClassRoute());
+                  context.router.push(ClassRoute(classType: 'Offline'));
                 },
               ),
               const VerticalSpace(height: 10),
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                       child: ClassCard(
                         isLoading: false,
                         onTap: () {
-                          context.router.push(const ClassRoute());
+                          context.router.push(ClassRoute(classType: 'Offline'));
                         },
                         startTime: '16:00',
                         img: imgList[0],
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                 moreThan5: true,
                 title: 'Online Class',
                 onTap: () {
-                  context.router.push(const ClassRoute());
+                  context.router.push(ClassRoute(classType: 'Online'));
                 },
               ),
               const VerticalSpace(height: 10),
@@ -167,11 +167,11 @@ class _HomePageState extends State<HomePage> {
                       child: ClassCard(
                         isLoading: false,
                         onTap: () {
-                          context.router.push(const ClassRoute());
+                          context.router.push(ClassRoute(classType: 'Online'));
                         },
                         startTime: '16:00',
                         img: imgList[0],
-                        location: 'Zoom',
+                        location: 'Streaming - Zoom',
                         type: 'online',
                         title: 'aaaa',
                       ),

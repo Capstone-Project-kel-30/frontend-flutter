@@ -91,6 +91,10 @@ import '../../views/wrapper/home_wrapper.dart';
               path: 'membership',
               page: MembershipPage,
             ),
+            AutoRoute(
+              path: 'class',
+              page: ClassPage,
+            ),
           ],
         ),
         AutoRoute(
@@ -102,10 +106,6 @@ import '../../views/wrapper/home_wrapper.dart';
           page: ProfilePage,
         ),
       ],
-    ),
-    AutoRoute(
-      path: 'class',
-      page: ClassPage,
     ),
     AutoRoute(
       path: 'newsletter',
