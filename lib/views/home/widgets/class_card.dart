@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_zone/views/widgets/location_info.dart';
 
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/horizontal_space.dart';
@@ -105,29 +106,7 @@ class ClassCard extends StatelessWidget {
                       ],
                     ),
                     const VerticalSpace(height: 5),
-                    Row(
-                      children: [
-                        type == 'offline'
-                            ? Image.asset('assets/icons/Location.png')
-                            : SvgPicture.asset('assets/icons/Stream.svg'),
-                        const HorizontalSpace(width: 3),
-                        FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            type == 'offline'
-                                ? 'Gym Studio - Bandung'
-                                : 'Streaming - $location',
-                            style: AppTheme.theme(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  fontSize: 10,
-                                  color: kGreyColor,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    LocationInfo(classType: type, location: location),
                   ],
                 ),
               ),
