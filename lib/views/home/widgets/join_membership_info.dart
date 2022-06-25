@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/views/home/widgets/shimmer_placeholder.dart';
+import 'package:workout_zone/views/widgets/shimmer_placeholder.dart';
 
 import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';

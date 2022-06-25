@@ -5,6 +5,8 @@ import 'package:workout_zone/views/authentication/sign_in_page.dart';
 import 'package:workout_zone/views/authentication/sign_up_page.dart';
 import 'package:workout_zone/views/authentication/verfikasi_signup.dart';
 import 'package:workout_zone/views/authentication/verifikasi_forget_password.dart';
+import 'package:workout_zone/views/class/booking_detail_page.dart';
+import 'package:workout_zone/views/class/class_detail_page.dart';
 
 import 'package:workout_zone/views/class/class_page.dart';
 import 'package:workout_zone/views/home/home_page.dart';
@@ -13,11 +15,10 @@ import 'package:workout_zone/views/membership/membership_page.dart';
 import 'package:workout_zone/views/newsletter/newsletter_page.dart';
 import 'package:workout_zone/views/on_boarding/landing_page.dart';
 import 'package:workout_zone/views/on_boarding/on_boarding_page.dart';
-import 'package:workout_zone/views/payment/payment_page.dart';
 import 'package:workout_zone/views/profile/new_password.dart';
 import 'package:workout_zone/views/profile/profile_edit.dart';
-import 'package:workout_zone/views/profile/profile_setting.dart';
 import 'package:workout_zone/views/profile/profile_page.dart';
+import 'package:workout_zone/views/profile/profile_setting.dart';
 import 'package:workout_zone/views/schedule/all_schedule_page.dart';
 import 'package:workout_zone/views/schedule/offline_schedule_page.dart';
 import 'package:workout_zone/views/schedule/online_schedule_page.dart';
@@ -35,7 +36,6 @@ import '../../views/membership/membership_page.dart';
 import '../../views/membership/membership_payment_page.dart';
 import '../../views/newsletter/newsletter_page.dart';
 import '../../views/on_boarding/on_boarding_page.dart';
-import '../../views/payment/payment_page.dart';
 import '../../views/profile/profile_page.dart';
 import '../../views/schedule/schedule_page.dart';
 import '../../views/video_content/video_content_page.dart';
@@ -98,6 +98,10 @@ import '../../views/wrapper/home_wrapper.dart';
               path: 'membership',
               page: MembershipPage,
             ),
+            AutoRoute(
+              path: 'class',
+              page: ClassPage,
+            ),
           ],
         ),
         AutoRoute(
@@ -153,12 +157,8 @@ import '../../views/wrapper/home_wrapper.dart';
       page: VideoContentPage,
     ),
     AutoRoute(
-      path: 'payment',
-      page: PaymentPage,
-    ),
-    AutoRoute(
-      path: 'membership',
-      page: MembershipPage,
+      path: 'classDetail',
+      page: ClassDetailPage,
     ),
     AutoRoute(
       path: 'membershipDetail',
@@ -167,6 +167,10 @@ import '../../views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'membershipPayment',
       page: MembershipPaymentPage,
+    ),
+    AutoRoute(
+      path: 'bookingDetail',
+      page: BookingDetailPage,
     ),
   ],
 )
