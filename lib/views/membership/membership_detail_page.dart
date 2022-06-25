@@ -5,7 +5,7 @@ import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
 import '../widgets/cutom_elevated_button.dart';
 import 'widgets/membership_description.dart';
-import 'widgets/membership_image_carousel.dart';
+import '../widgets/image_carousel.dart';
 import 'widgets/membership_info.dart';
 
 class MembershipDetailPage extends StatelessWidget {
@@ -39,7 +39,7 @@ class MembershipDetailPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          MembershipImageCarousel(imgList: imgList),
+          ImageCarousel(imgList: imgList),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 50),

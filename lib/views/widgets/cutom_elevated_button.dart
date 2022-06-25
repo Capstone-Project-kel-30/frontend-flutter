@@ -11,6 +11,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.fontSize = 14,
     this.fontWeight = kSemiBoldWeight,
     this.height = 45,
+    this.padding,
   }) : super(key: key);
 
   final Function()? onPressed;
@@ -18,6 +19,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double? width, height;
   final double radius, fontSize;
   final FontWeight fontWeight;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +28,20 @@ class CustomElevatedButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          padding: padding,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius),
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: fontWeight,
+        child: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+            ),
           ),
         ),
       ),
