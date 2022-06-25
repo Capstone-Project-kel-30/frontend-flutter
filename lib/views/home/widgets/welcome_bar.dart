@@ -5,7 +5,7 @@ import '../../../utils/themes/app_theme.dart';
 import '../../widgets/horizontal_space.dart';
 import '../../widgets/member_card.dart';
 import '../../widgets/vertical_space.dart';
-import 'shimmer_placeholder.dart';
+import '../../widgets/shimmer_placeholder.dart';
 
 class WelcomeBar extends StatelessWidget {
   const WelcomeBar({

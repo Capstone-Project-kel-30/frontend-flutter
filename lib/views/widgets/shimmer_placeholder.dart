@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../utils/themes/app_theme.dart';
+import '../../utils/themes/app_theme.dart';
 
 class ShimmerPlaceholder extends StatelessWidget {
   const ShimmerPlaceholder({

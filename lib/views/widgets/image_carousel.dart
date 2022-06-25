@@ -1,21 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/carousel_indicator.dart';
-import '../../widgets/vertical_space.dart';
+import 'carousel_indicator.dart';
+import 'vertical_space.dart';
 
-class MembershipImageCarousel extends StatefulWidget {
-  const MembershipImageCarousel({Key? key, required this.imgList})
-      : super(key: key);
+class ImageCarousel extends StatefulWidget {
+  const ImageCarousel({Key? key, required this.imgList}) : super(key: key);
 
   final List<String> imgList;
 
   @override
-  State<MembershipImageCarousel> createState() =>
-      _MembershipImageCarouselState();
+  State<ImageCarousel> createState() => _ImageCarouselState();
 }
 
-class _MembershipImageCarouselState extends State<MembershipImageCarousel> {
+class _ImageCarouselState extends State<ImageCarousel> {
   int _current = 0;
   @override
   Widget build(BuildContext context) {
