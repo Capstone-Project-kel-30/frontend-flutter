@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_app/restart_app.dart';
@@ -102,33 +103,36 @@ class _ProfileSetingState extends State<ProfileSeting> {
                   }
                 },
                 child: CustomOutlinedButton(
-                  text: 'log Out',
+                  text: 'Log Out',
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text("Exit"),
-                            content: const Text("KEluar ?"),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(SignOutRequest());
-                                },
-                                child: Text('Yes'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text('No'),
-                              )
-                            ],
-                          );
-                        });
+                    showCupertinoDialog(
+                      context: context,
+                      builder: (BuildContext context) => CupertinoAlertDialog(
+                        title: const Text("Exit"),
+                        content: const Text("Kelar ??"),
+                        actions: [
+                          CupertinoDialogAction(
+                            isDestructiveAction: true,
+                            isDefaultAction: true,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text(
+                              "No",
+                            ),
+                          ),
+                          CupertinoDialogAction(
+                            isDefaultAction: true,
+                            onPressed: () {
+                              context.read<AuthBloc>().add(
+                                    SignOutRequest(),
+                                  );
+                            },
+                            child: const Text("Yes"),
+                          )
+                        ],
+                      ),
+                    );
                   },
                 ),
               ),

@@ -19,14 +19,10 @@ import 'package:workout_zone/views/profile/new_password.dart';
 import 'package:workout_zone/views/profile/profile_edit.dart';
 import 'package:workout_zone/views/profile/profile_page.dart';
 import 'package:workout_zone/views/profile/profile_setting.dart';
-import 'package:workout_zone/views/schedule/all_schedule_page.dart';
-import 'package:workout_zone/views/schedule/offline_schedule_page.dart';
-import 'package:workout_zone/views/schedule/online_schedule_page.dart';
 import 'package:workout_zone/views/schedule/schedule_page.dart';
 import 'package:workout_zone/views/video_content/video_content_page.dart';
 import 'package:workout_zone/views/wrapper/home_inner.dart';
 import 'package:workout_zone/views/wrapper/home_wrapper.dart';
-import 'package:workout_zone/views/wrapper/scheduler_inner.dart';
 import '../../views/authentication/sign_in_page.dart';
 import '../../views/authentication/sign_up_page.dart';
 import '../../views/class/class_page.dart';
@@ -105,26 +101,8 @@ import '../../views/wrapper/home_wrapper.dart';
           ],
         ),
         AutoRoute(
-          path: 'scheduleInner',
-          page: ScheduleInner,
-          children: <AutoRoute>[
-            AutoRoute(
-              path: 'schedulePage',
-              page: SchedulePage,
-            ),
-            AutoRoute(
-              path: 'allSchedulePage',
-              page: AllSchedulePage,
-            ),
-            AutoRoute(
-              path: 'offlineSchedulePage',
-              page: OfflineSchedulePage,
-            ),
-            AutoRoute(
-              path: 'onlineSchedulePage',
-              page: OnlineSchedulePage,
-            ),
-          ],
+          path: 'schedulePage',
+          page: SchedulePage,
         ),
         AutoRoute(
           path: 'profile',

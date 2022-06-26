@@ -9,18 +9,53 @@ import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/authentication/widgets/form_username.dart';
 import 'package:workout_zone/views/profile/widget/image_profile.dart';
 import 'package:workout_zone/views/widgets/cutom_elevated_button.dart';
+import 'package:workout_zone/views/widgets/shimmer_placeholder.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-class ProfileEdit extends StatelessWidget {
+class ProfileEdit extends StatefulWidget {
   const ProfileEdit({Key? key}) : super(key: key);
 
   @override
+  State<ProfileEdit> createState() => _ProfileEditState();
+}
+
+class _ProfileEditState extends State<ProfileEdit> {
+  bool _usernameEmpy = false;
+  bool _phoneEmpy = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  TextEditingController _userController = TextEditingController();
+  TextEditingController _nomorControllers = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _userController = TextEditingController();
+    _nomorControllers = TextEditingController();
+    _userController.addListener(() {
+      setState(() {
+        _usernameEmpy = _userController.text.isNotEmpty;
+      });
+    });
+    _nomorControllers.addListener(() {
+      setState(() {
+        _phoneEmpy = _nomorControllers.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _userController.dispose();
+    _nomorControllers.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
-    TextEditingController _nameController = TextEditingController();
-    TextEditingController _userController = TextEditingController();
-    TextEditingController _nomorControllers = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -37,9 +72,7 @@ class ProfileEdit extends StatelessWidget {
                   return Column(
                     children: [
                       ProfileImage(
-                        press: () {
-                          context.router.push(ProfileSeting());
-                        },
+                        press: () {},
                         title: "Change",
                         color: kPrimaryColor,
                       ),
@@ -94,69 +127,26 @@ class ProfileEdit extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 63),
                           child: CustomElevatedButton(
-                            text: "Save",
-                            onPressed: () {
-                              context.read()<UserBloc>().add(
-                                    UpdateUser(
-                                      _emailController.text,
-                                      _nomorControllers.text,
-                                      _nameController.text,
-                                      _passwordController.text,
-                                    ),
-                                  );
-                            },
-                          ),
+                              text: "Save",
+                              onPressed: _usernameEmpy && _phoneEmpy
+                                  ? () {
+                                      context.read()<UserBloc>().add(
+                                            UpdateUser(
+                                              _emailController.text,
+                                              _nomorControllers.text,
+                                              _userController.text,
+                                              _passwordController.text,
+                                            ),
+                                          );
+                                    }
+                                  : null),
                         ),
                       )
                     ],
                   );
                 }
 
-                return Column(
-                  children: [
-                    ProfileImage(
-                      press: () {
-                        context.router.push(ProfileSeting());
-                      },
-                      title: "Change",
-                      color: kPrimaryColor,
-                    ),
-                    FormUsername(
-                      title: "Email",
-                      hint: "dadangkonelo@gmail.com",
-                      controller: _emailController,
-                    ),
-                    FormPassword(
-                      title: "Password",
-                      hint: "*************",
-                      controller: _passwordController,
-                    ),
-                    const VerticalSpace(height: 10),
-                    ForgetPassBttn(
-                      titile: "Change Password",
-                      press: () {
-                        context.router.push(const NewPassword());
-                      },
-                    ),
-                    FormUsername(
-                      title: "Username",
-                      hint: "dadadaang",
-                      controller: _userController,
-                    ),
-                    FormUsername(
-                      title: "No.HP",
-                      hint: "080128381301283",
-                      controller: _nomorControllers,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 63),
-                      child: CustomElevatedButton(
-                        text: "Save",
-                        onPressed: () {},
-                      ),
-                    )
-                  ],
-                );
+                return const ShimmerPlaceholder(height: 60, width: 100);
               },
             ),
           ),

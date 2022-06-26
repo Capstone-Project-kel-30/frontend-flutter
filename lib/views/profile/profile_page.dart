@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_zone/bloc/user/user_bloc.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/views/home/widgets/shimmer_placeholder.dart';
 import 'package:workout_zone/views/profile/widget/banner_profile.dart';
 import 'package:workout_zone/views/profile/widget/image_profile.dart';
+import 'package:workout_zone/views/widgets/shimmer_placeholder.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({
@@ -35,7 +35,9 @@ class ProfilePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.router.push(const ProfileSeting());
+              context.router.navigate(
+                const ProfileSeting(),
+              );
             },
             icon: SvgPicture.asset(
               "assets/icons/Settings.svg",

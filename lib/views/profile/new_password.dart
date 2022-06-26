@@ -7,7 +7,7 @@ class NewPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _oldePasswordCntrl = TextEditingController();
+    TextEditingController _oldPasswordCntrl = TextEditingController();
     TextEditingController _newPasswordCntrl = TextEditingController();
     TextEditingController _comNewPassCtrl = TextEditingController();
     return Scaffold(
@@ -27,7 +27,7 @@ class NewPassword extends StatelessWidget {
                 FormPassword(
                   title: "Old Password",
                   hint: "Enter Password",
-                  controller: _oldePasswordCntrl,
+                  controller: _oldPasswordCntrl,
                 ),
                 FormPassword(
                   title: "New Password",

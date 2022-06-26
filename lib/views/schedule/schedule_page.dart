@@ -1,78 +1,123 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-
-import 'package:workout_zone/views/schedule/widget/Toggle_button.dart';
-import 'package:workout_zone/views/schedule/widget/empty_jadwal.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:workout_zone/utils/themes/app_theme.dart';
+import 'package:workout_zone/views/class/widgets/trainer_info.dart';
+import 'package:workout_zone/views/schedule/widget/select_picker.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
+import 'package:workout_zone/views/widgets/location_info.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-class SchedulePage extends StatefulWidget {
-  const SchedulePage({Key? key}) : super(key: key);
+class SchedulePage extends StatelessWidget {
+  SchedulePage({
+    Key? key,
+    this.classType,
+  }) : super(key: key);
+  final String? classType;
 
-  @override
-  State<SchedulePage> createState() => _SchedulePageState();
-}
+  int ind = 1;
 
-class _SchedulePageState extends State<SchedulePage> {
-  String activedButton = '';
-
-  String jadwalempty = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Schedule',
-        ),
+        title: const Text("Schedule"),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: ListView(children: [
-            Row(
-              children: [
-                ButtonText(
-                  isActive: activedButton == 'All',
-                  onPressed: () {
-                    context.router.replace(const AllScheduleRoute());
-                    setState(() {
-                      activedButton = 'All';
-                    });
-                  },
-                ),
-                const HorizontalSpace(width: 10),
-                ToggleButton(
-                  isActive: activedButton == 'Offline',
-                  onPressed: () {
-                    context.router.replace(const OfflineScheduleRoute());
-                    setState(() {
-                      activedButton = 'Offline';
-                    });
-                  },
-                  text: 'Offline',
-                  icon: 'assets/icons/Logo (2).svg',
-                ),
-                const HorizontalSpace(width: 10),
-                ToggleButton(
-                  isActive: activedButton == 'Online',
-                  onPressed: () {
-                    context.router.replace(const OnlineScheduleRoute());
-                    setState(() {
-                      activedButton = 'Online';
-                    });
-                  },
-                  text: 'Online',
-                  icon: "assets/icons/Logo (1).svg",
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 150,
+          child: Column(
+            children: [
+              SelectPicker(
+                onprees: (int index) {
+                  ind = index;
+                },
               ),
-              child: EmptyJadwal(),
-            ),
-          ]),
+              const VerticalSpace(height: 10),
+              CardJadwal(
+                classType: "offline",
+                location: "offline" == 'online'
+                    ? 'Streaming - Zoom'
+                    : 'Gym Studio - Bandung',
+                index: ind,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CardJadwal extends StatelessWidget {
+  const CardJadwal({
+    Key? key,
+    required this.classType,
+    required this.location,
+    required int index,
+  }) : super(key: key);
+
+  final String classType, location;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 71,
+      width: double.infinity,
+      child: Card(
+        color: kLightColor,
+        shadowColor: kGreyColor,
+        elevation: 7,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Pilates",
+                    style:
+                        AppTheme.theme(context).textTheme.bodySmall!.copyWith(
+                              fontSize: 14,
+                              fontWeight: kSemiBoldWeight,
+                            ),
+                  ),
+                  LocationInfo(
+                    classType: classType,
+                    location: location,
+                  ),
+                  const TrainerInfo(trainer: 'trainer')
+                ],
+              ),
+              Column(
+                children: [
+                  Container(
+                    height: 22,
+                    width: 58,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: kPrimaryColor),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/Clock.svg",
+                        ),
+                        const HorizontalSpace(width: 4),
+                        Text("data")
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
