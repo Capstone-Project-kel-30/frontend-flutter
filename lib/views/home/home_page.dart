@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../bloc/user/user_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
@@ -52,6 +53,17 @@ class _HomePageState extends State<HomePage> {
       'Try Now',
     ],
   ];
+
+  void launchURL() async {
+    const url = 'https://www.youtube.com/watch?v=B-_GP-YKk3w';
+    var uri = Uri.parse(url);
+    debugPrint(uri.toString());
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      debugPrint('Could not launch $url');
+    }
+  }
 
   @override
   void initState() {
@@ -223,7 +235,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SectionContainerTitle(
-                moreThan5: false,
+                moreThan5: true,
                 title: 'Workout From Home',
                 onTap: () {
                   context.router.push(const VideoContentRoute());
@@ -238,19 +250,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: ((context, index) {
                     return GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const AlertDialog(
-                                insetPadding: EdgeInsets.zero,
-                                titlePadding: EdgeInsets.zero,
-                                contentPadding: EdgeInsets.zero,
-                                content: AspectRatio(
-                                  aspectRatio: 1,
-                                  child: Text('Putar Video'),
-                                ),
-                              );
-                            });
+                        launchURL();
                       },
                       child: VideoImageCard(
                         asset: imgList[0],
