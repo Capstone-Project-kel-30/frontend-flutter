@@ -92,6 +92,10 @@ import '../../views/wrapper/home_wrapper.dart';
               page: MembershipPage,
             ),
             AutoRoute(
+              path: 'videoContent',
+              page: VideoContentPage,
+            ),
+            AutoRoute(
               path: 'class',
               page: ClassPage,
             ),
@@ -110,10 +114,6 @@ import '../../views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'newsletter',
       page: NewsletterPage,
-    ),
-    AutoRoute(
-      path: 'videoContent',
-      page: VideoContentPage,
     ),
     AutoRoute(
       path: 'classDetail',

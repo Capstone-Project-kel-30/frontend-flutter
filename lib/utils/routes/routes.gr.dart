@@ -19,21 +19,21 @@ import '../../views/authentication/sign_in_page.dart' as _i4;
 import '../../views/authentication/sign_up_page.dart' as _i5;
 import '../../views/authentication/verfikasi_signup.dart' as _i7;
 import '../../views/authentication/verifikasi_forget_password.dart' as _i8;
-import '../../views/class/booking_detail_page.dart' as _i16;
-import '../../views/class/class_detail_page.dart' as _i13;
+import '../../views/class/booking_detail_page.dart' as _i15;
+import '../../views/class/class_detail_page.dart' as _i12;
 import '../../views/class/class_page.dart' as _i22;
-import '../../views/home/home_page.dart' as _i20;
+import '../../views/home/home_page.dart' as _i19;
 import '../../views/initial/initial_page.dart' as _i1;
-import '../../views/membership/membership_detail_page.dart' as _i14;
-import '../../views/membership/membership_page.dart' as _i21;
-import '../../views/membership/membership_payment_page.dart' as _i15;
+import '../../views/membership/membership_detail_page.dart' as _i13;
+import '../../views/membership/membership_page.dart' as _i20;
+import '../../views/membership/membership_payment_page.dart' as _i14;
 import '../../views/newsletter/newsletter_page.dart' as _i11;
 import '../../views/on_boarding/landing_page.dart' as _i3;
 import '../../views/on_boarding/on_boarding_page.dart' as _i2;
-import '../../views/profile/profile_page.dart' as _i19;
-import '../../views/schedule/schedule_page.dart' as _i18;
-import '../../views/video_content/video_content_page.dart' as _i12;
-import '../../views/wrapper/home_inner.dart' as _i17;
+import '../../views/profile/profile_page.dart' as _i18;
+import '../../views/schedule/schedule_page.dart' as _i17;
+import '../../views/video_content/video_content_page.dart' as _i21;
+import '../../views/wrapper/home_inner.dart' as _i16;
 import '../../views/wrapper/home_wrapper.dart' as _i10;
 
 class AppRouter extends _i23.RootStackRouter {
@@ -94,56 +94,56 @@ class AppRouter extends _i23.RootStackRouter {
       return _i23.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i11.NewsletterPage());
     },
-    VideoContentRoute.name: (routeData) {
-      return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i12.VideoContentPage());
-    },
     ClassDetailRoute.name: (routeData) {
       final args = routeData.argsAs<ClassDetailRouteArgs>();
       return _i23.MaterialPageX<dynamic>(
           routeData: routeData,
           child:
-              _i13.ClassDetailPage(key: args.key, classType: args.classType));
+              _i12.ClassDetailPage(key: args.key, classType: args.classType));
     },
     MembershipDetailRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipDetailRouteArgs>();
       return _i23.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i14.MembershipDetailPage(
+          child: _i13.MembershipDetailPage(
               key: args.key, type: args.type, price: args.price));
     },
     MembershipPaymentRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipPaymentRouteArgs>();
       return _i23.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i15.MembershipPaymentPage(
+          child: _i14.MembershipPaymentPage(
               key: args.key, type: args.type, price: args.price));
     },
     BookingDetailRoute.name: (routeData) {
       return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i16.BookingDetailPage());
+          routeData: routeData, child: const _i15.BookingDetailPage());
     },
     HomeInner.name: (routeData) {
       return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i17.HomeInner());
+          routeData: routeData, child: const _i16.HomeInner());
     },
     ScheduleRoute.name: (routeData) {
       return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i18.SchedulePage());
+          routeData: routeData, child: const _i17.SchedulePage());
     },
     ProfileRoute.name: (routeData) {
       return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i19.ProfilePage());
+          routeData: routeData, child: const _i18.ProfilePage());
     },
     HomeRoute.name: (routeData) {
       return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i20.HomePage());
+          routeData: routeData, child: const _i19.HomePage());
     },
     MembershipRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipRouteArgs>(
           orElse: () => const MembershipRouteArgs());
       return _i23.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i21.MembershipPage(key: args.key));
+          routeData: routeData, child: _i20.MembershipPage(key: args.key));
+    },
+    VideoContentRoute.name: (routeData) {
+      return _i23.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i21.VideoContentPage());
     },
     ClassRoute.name: (routeData) {
       final args = routeData.argsAs<ClassRouteArgs>();
@@ -181,6 +181,8 @@ class AppRouter extends _i23.RootStackRouter {
                     path: 'home', parent: HomeInner.name),
                 _i23.RouteConfig(MembershipRoute.name,
                     path: 'membership', parent: HomeInner.name),
+                _i23.RouteConfig(VideoContentRoute.name,
+                    path: 'videoContent', parent: HomeInner.name),
                 _i23.RouteConfig(ClassRoute.name,
                     path: 'class', parent: HomeInner.name)
               ]),
@@ -190,7 +192,6 @@ class AppRouter extends _i23.RootStackRouter {
               path: 'profile', parent: HomeWrapper.name)
         ]),
         _i23.RouteConfig(NewsletterRoute.name, path: 'newsletter'),
-        _i23.RouteConfig(VideoContentRoute.name, path: 'videoContent'),
         _i23.RouteConfig(ClassDetailRoute.name, path: 'classDetail'),
         _i23.RouteConfig(MembershipDetailRoute.name, path: 'membershipDetail'),
         _i23.RouteConfig(MembershipPaymentRoute.name,
@@ -346,16 +347,7 @@ class NewsletterRoute extends _i23.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.VideoContentPage]
-class VideoContentRoute extends _i23.PageRouteInfo<void> {
-  const VideoContentRoute()
-      : super(VideoContentRoute.name, path: 'videoContent');
-
-  static const String name = 'VideoContentRoute';
-}
-
-/// generated route for
-/// [_i13.ClassDetailPage]
+/// [_i12.ClassDetailPage]
 class ClassDetailRoute extends _i23.PageRouteInfo<ClassDetailRouteArgs> {
   ClassDetailRoute({_i24.Key? key, required String classType})
       : super(ClassDetailRoute.name,
@@ -379,7 +371,7 @@ class ClassDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i14.MembershipDetailPage]
+/// [_i13.MembershipDetailPage]
 class MembershipDetailRoute
     extends _i23.PageRouteInfo<MembershipDetailRouteArgs> {
   MembershipDetailRoute(
@@ -409,7 +401,7 @@ class MembershipDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i15.MembershipPaymentPage]
+/// [_i14.MembershipPaymentPage]
 class MembershipPaymentRoute
     extends _i23.PageRouteInfo<MembershipPaymentRouteArgs> {
   MembershipPaymentRoute(
@@ -439,7 +431,7 @@ class MembershipPaymentRouteArgs {
 }
 
 /// generated route for
-/// [_i16.BookingDetailPage]
+/// [_i15.BookingDetailPage]
 class BookingDetailRoute extends _i23.PageRouteInfo<void> {
   const BookingDetailRoute()
       : super(BookingDetailRoute.name, path: 'bookingDetail');
@@ -448,7 +440,7 @@ class BookingDetailRoute extends _i23.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.HomeInner]
+/// [_i16.HomeInner]
 class HomeInner extends _i23.PageRouteInfo<void> {
   const HomeInner({List<_i23.PageRouteInfo>? children})
       : super(HomeInner.name, path: 'homeInner', initialChildren: children);
@@ -457,7 +449,7 @@ class HomeInner extends _i23.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.SchedulePage]
+/// [_i17.SchedulePage]
 class ScheduleRoute extends _i23.PageRouteInfo<void> {
   const ScheduleRoute() : super(ScheduleRoute.name, path: 'schedule');
 
@@ -465,7 +457,7 @@ class ScheduleRoute extends _i23.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.ProfilePage]
+/// [_i18.ProfilePage]
 class ProfileRoute extends _i23.PageRouteInfo<void> {
   const ProfileRoute() : super(ProfileRoute.name, path: 'profile');
 
@@ -473,7 +465,7 @@ class ProfileRoute extends _i23.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.HomePage]
+/// [_i19.HomePage]
 class HomeRoute extends _i23.PageRouteInfo<void> {
   const HomeRoute() : super(HomeRoute.name, path: 'home');
 
@@ -481,7 +473,7 @@ class HomeRoute extends _i23.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.MembershipPage]
+/// [_i20.MembershipPage]
 class MembershipRoute extends _i23.PageRouteInfo<MembershipRouteArgs> {
   MembershipRoute({_i24.Key? key})
       : super(MembershipRoute.name,
@@ -499,6 +491,15 @@ class MembershipRouteArgs {
   String toString() {
     return 'MembershipRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [_i21.VideoContentPage]
+class VideoContentRoute extends _i23.PageRouteInfo<void> {
+  const VideoContentRoute()
+      : super(VideoContentRoute.name, path: 'videoContent');
+
+  static const String name = 'VideoContentRoute';
 }
 
 /// generated route for
