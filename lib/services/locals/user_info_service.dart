@@ -6,14 +6,14 @@ class UserInfoService {
 
   Map<String, dynamic> getUserInfo() {
     final token = sharedPreferences.getString("token");
-    final username = sharedPreferences.getString("username");
+    final name = sharedPreferences.getString("name");
     final email = sharedPreferences.getString("email");
     final phone = sharedPreferences.getString("phone");
     final password = sharedPreferences.getString("password");
     final memberType = sharedPreferences.getString("member_type");
     final user = {
       'token': token,
-      'username': username,
+      'name': name,
       'email': email,
       'phone': phone,
       'password': password,
@@ -26,7 +26,7 @@ class UserInfoService {
     String? token,
     bool? hasLogin,
     int? id,
-    String? username,
+    String? name,
     String? email,
     String? phone,
     String? password,
@@ -41,8 +41,8 @@ class UserInfoService {
     if (id != null) {
       await sharedPreferences.setInt("id", id);
     }
-    if (username != null) {
-      await sharedPreferences.setString("username", username);
+    if (name != null) {
+      await sharedPreferences.setString("name", name);
     }
     if (email != null) {
       await sharedPreferences.setString("email", email);
@@ -62,7 +62,7 @@ class UserInfoService {
     await sharedPreferences.remove("hasLogin");
     await sharedPreferences.remove("token");
     await sharedPreferences.remove("id");
-    await sharedPreferences.remove("username");
+    await sharedPreferences.remove("name");
     await sharedPreferences.remove("email");
     await sharedPreferences.remove("phone");
     await sharedPreferences.remove("password");

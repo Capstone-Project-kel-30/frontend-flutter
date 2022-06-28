@@ -10,8 +10,8 @@ import '../../widgets/shimmer_placeholder.dart';
 class WelcomeBar extends StatelessWidget {
   const WelcomeBar({
     Key? key,
-    required this.username,
-    required this.member,
+    this.username = "",
+    this.member = "",
     required this.isLoading,
   }) : super(key: key);
 

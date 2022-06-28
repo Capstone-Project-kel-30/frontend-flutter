@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
+import '../../../utils/common/constant.dart';
 import '../../../utils/themes/app_theme.dart';
 
 class BookingType extends StatelessWidget {
@@ -51,7 +52,7 @@ class BookingType extends StatelessWidget {
                           ),
                     ),
                     const VerticalSpace(height: 5),
-                    classType == 'Online'
+                    classType == onlineClass
                         ? Row(
                             children: [
                               SizedBox(

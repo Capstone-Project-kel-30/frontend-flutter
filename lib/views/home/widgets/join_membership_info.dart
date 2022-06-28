@@ -55,7 +55,7 @@ class JoinMembershipInfo extends StatelessWidget {
                     width: null,
                     height: 25,
                     onPressed: () {
-                      context.router.push(MembershipRoute());
+                      context.router.push(const MembershipRoute());
                     },
                   ),
                 ],

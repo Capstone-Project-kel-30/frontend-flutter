@@ -1,0 +1,11 @@
+const goldMember = "GOLD";
+const silverMember = "SILVER";
+const bronzeMember = "BRONZE";
+const offlineClass = "OFFLINE";
+const onlineClass = "ONLINE";
+const parkingArea = 'Parking area';
+const gloves = 'Gloves';
+const shower = 'Shower';
+const towel = 'Towel';
+const locker = 'Locker';
+const bottle = 'Bottle';

@@ -1,77 +1,40 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_zone/models/user_model.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
-import '../../../utils/themes/app_theme.dart';
-import '../../widgets/location_info.dart';
-import 'book_button.dart';
-import 'time_start.dart';
-import 'trainer_info.dart';
+import 'class_card.dart';
 
 class ClassList extends StatelessWidget {
   const ClassList({
     Key? key,
-    required this.index,
-    required this.classType,
-    required this.location,
-    required this.onTap,
+    required this.classList,
+    required this.user,
   }) : super(key: key);
 
-  final int index;
-  final String classType, location;
-  final Function() onTap;
+  final List<Map<String, dynamic>> classList;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: index,
+      itemCount: classList.length,
       itemBuilder: (context, idx) {
-        return GestureDetector(
-          onTap: onTap,
-          child: SizedBox(
-            height: 71,
-            child: Card(
-              elevation: 3,
-              shadowColor: kLightColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+        return CardClass(
+          classType: classList[idx]["classType"]!,
+          location: classList[idx]["location"]!,
+          isFull: classList[idx]["isFull"]!,
+          title: classList[idx]["title"]!,
+          trainer: classList[idx]["trainer"]!,
+          startTime: classList[idx]["startTime"]!,
+          onTap: () {
+            context.router.push(
+              ClassDetailRoute(
+                user: user,
+                classType: classList[idx]["classType"],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          'Body Camp',
-                          style: AppTheme.theme(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                fontWeight: kSemiBoldWeight,
-                              ),
-                        ),
-                        LocationInfo(classType: classType, location: location),
-                        const TrainerInfo(trainer: 'trainer'),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const TimeStart(time: '16:00'),
-                        BookButton(
-                          isFull: true,
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

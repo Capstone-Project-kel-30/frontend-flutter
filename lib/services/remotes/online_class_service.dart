@@ -3,17 +3,17 @@ import 'package:dio/dio.dart';
 import '../../utils/urls/url.dart';
 import 'dio.dart';
 
-class ClassService {
-  ClassService() {
+class OnlineClassService {
+  OnlineClassService() {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
-  getAllClass(String authorization) async {
+  getAllOnlineClass(String authorization) async {
     final Map<String, String> header = {
       'Authorization': authorization,
     };
     try {
       final Response response = await dio.post(
-        urls.getAllClass(),
+        urls.getAllOnlineClass(),
         options: Options(headers: header),
       );
     } on DioError catch (e) {
@@ -27,9 +27,9 @@ class ClassService {
     }
   }
 
-  getClassById(String id) async {
+  getOnlineClassById(String id) async {
     try {
-      final Response response = await dio.get(urls.getClassById(id));
+      final Response response = await dio.get(urls.getOnlineClassById(id));
     } on DioError catch (e) {
       if (e.response != null) {
         throw (e.response!.data['errors'][0]);
@@ -41,13 +41,13 @@ class ClassService {
     }
   }
 
-  searchClass(String keyword) async {
+  searchOnlineClass(String keyword) async {
     final Map<String, String> query = {
       'search': keyword,
     };
     try {
       final Response response = await dio.post(
-        urls.searchClass(),
+        urls.searchOnlineClass(),
         queryParameters: query,
       );
     } on DioError catch (e) {

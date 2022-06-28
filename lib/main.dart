@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/bloc.dart';
 import 'services/locals/user_info_service.dart';
 import 'services/remotes/auth_service.dart';
+import 'services/remotes/membership_service.dart';
 import 'services/remotes/user_service.dart';
 import 'utils/routes/routes.gr.dart';
 import 'utils/themes/app_theme.dart';
@@ -26,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   late UserInfoService _userInfoService;
   final AuthService _authService = AuthService();
   final UserService _userService = UserService();
+  final MembershipService _membershipService = MembershipService();
 
   @override
   void initState() {
@@ -52,6 +54,15 @@ class _MyAppState extends State<MyApp> {
           create: (_) => UserBloc(
             userInfoService: _userInfoService,
             userService: _userService,
+          ),
+        ),
+        BlocProvider(
+          create: (_) => MembershipBloc(_membershipService),
+        ),
+        BlocProvider(
+          create: (_) => MembershipPaymentBloc(
+            _membershipService,
+            _userInfoService,
           ),
         ),
       ],

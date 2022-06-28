@@ -1,16 +1,27 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/membership/membership_bloc.dart';
+import '../../models/membership_model.dart';
 import '../../utils/routes/routes.gr.dart';
+import '../widgets/shimmer_placeholder.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/card_info.dart';
 
-class MembershipPage extends StatelessWidget {
-  MembershipPage({Key? key}) : super(key: key);
+class MembershipPage extends StatefulWidget {
+  const MembershipPage({Key? key}) : super(key: key);
 
-  final List<String> types = ['Gold', 'Silver', 'Bronze'];
+  @override
+  State<MembershipPage> createState() => _MembershipPageState();
+}
 
-  final List<String> prices = ['990.000', '599.000', '299.000'];
+class _MembershipPageState extends State<MembershipPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<MembershipBloc>().add(GetMembershipDetail());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,45 +31,51 @@ class MembershipPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                CardInfo(
-                  type: types[0],
-                  price: prices[0],
-                  onTap: () {
-                    context.router.push(MembershipDetailRoute(
-                      type: types[0],
-                      price: prices[0],
-                    ));
-                  },
-                ),
-                const VerticalSpace(height: 20),
-                CardInfo(
-                  type: types[1],
-                  price: prices[1],
-                  onTap: () {
-                    context.router.push(MembershipDetailRoute(
-                      type: types[1],
-                      price: prices[1],
-                    ));
-                  },
-                ),
-                const VerticalSpace(height: 20),
-                CardInfo(
-                  type: types[2],
-                  price: prices[2],
-                  onTap: () {
-                    context.router.push(MembershipDetailRoute(
-                      type: types[2],
-                      price: prices[2],
-                    ));
-                  },
-                ),
-              ],
-            ),
-          ),
+        child: BlocBuilder<MembershipBloc, MembershipState>(
+          builder: (context, state) {
+            if (state is MembershipError) {
+              context.router.replaceAll([
+                const ErrorRoute(),
+              ]);
+            }
+            if (state is MembershipDetailLoaded) {
+              return ListView.builder(
+                itemCount: state.membership.data!.length,
+                itemBuilder: (context, index) {
+                  final List<Data> data = state.membership.data!;
+                  data.sort((a, b) => a.id!.compareTo(b.id!));
+                  final String type = data[index].type!;
+                  final String price = data[index].price!.toString();
+                  return Column(
+                    children: [
+                      CardInfo(
+                        type: type,
+                        price: price,
+                        onTap: () {
+                          context.router.push(
+                            MembershipDetailRoute(type: type, price: price),
+                          );
+                        },
+                      ),
+                      const VerticalSpace(height: 20),
+                    ],
+                  );
+                },
+              );
+            }
+            return Center(
+              child: Column(
+                children: const [
+                  ShimmerPlaceholder(height: 150, width: 335),
+                  VerticalSpace(height: 20),
+                  ShimmerPlaceholder(height: 150, width: 335),
+                  VerticalSpace(height: 20),
+                  ShimmerPlaceholder(height: 150, width: 335),
+                  VerticalSpace(height: 20),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

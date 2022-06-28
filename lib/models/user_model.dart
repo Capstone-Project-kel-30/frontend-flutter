@@ -30,6 +30,7 @@ class Data {
   String? name;
   String? email;
   String? phone;
+  String? memberExpired;
   String? memberType;
   String? token;
   String? totp;
@@ -39,6 +40,7 @@ class Data {
     this.name,
     this.email,
     this.phone,
+    this.memberExpired,
     this.memberType,
     this.token,
     this.totp,
@@ -49,6 +51,7 @@ class Data {
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
+    memberExpired = json['member_expired'];
     memberType = json['member_type'];
     token = json['token'];
     totp = json['totp'];
@@ -60,6 +63,7 @@ class Data {
     data['name'] = name;
     data['email'] = email;
     data['phone'] = phone;
+    data['member_expired'] = memberExpired;
     data['member_type'] = memberType;
     data['token'] = token;
     data['totp'] = totp;

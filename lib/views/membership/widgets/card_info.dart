@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/common/helper.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/member_card.dart';
 
@@ -44,7 +45,7 @@ class CardInfo extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Rp $price',
+                  'Rp ${tambahTitik(price)}',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: kSemiBoldWeight,
