@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/common/helper.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/horizontal_space.dart';
 import '../../widgets/vertical_space.dart';
@@ -41,7 +42,7 @@ class MemberTypeInfo extends StatelessWidget {
                 ),
                 const VerticalSpace(height: 5),
                 Text(
-                  'Rp $price',
+                  'Rp ${tambahTitik(price)}',
                   style: AppTheme.theme(context).textTheme.bodyLarge?.copyWith(
                         color: kPrimaryColor,
                         fontWeight: kSemiBoldWeight,

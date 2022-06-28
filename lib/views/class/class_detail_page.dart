@@ -2,8 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../models/user_model.dart';
+import '../../utils/common/constant.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
+import '../membership/widgets/popup_join_membership.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/image_carousel.dart';
 import '../widgets/vertical_space.dart';
@@ -16,9 +19,11 @@ class ClassDetailPage extends StatelessWidget {
   ClassDetailPage({
     Key? key,
     required this.classType,
+    required this.user,
   }) : super(key: key);
 
   final String classType;
+  final UserModel user;
 
   final List<String> imgList = [
     'assets/images/dummy1.png',
@@ -76,7 +81,7 @@ class ClassDetailPage extends StatelessWidget {
                       ClassTitle(
                         classType: classType,
                         classTitle: 'Boxing',
-                        location: classType == 'Offline'
+                        location: classType == offlineClass
                             ? 'Gym Studio - Bandung'
                             : 'Streaming - Zoom',
                       ),
@@ -94,21 +99,45 @@ class ClassDetailPage extends StatelessWidget {
                       const VerticalSpace(height: 20),
                       const FacilitiesInfo(
                         facilities: [
-                          'Parking area',
-                          'Gloves',
-                          'Shower',
-                          'Towel',
-                          'Locker',
-                          'Bottle',
+                          parkingArea,
+                          gloves,
+                          shower,
+                          towel,
+                          locker,
+                          bottle,
                         ],
                       ),
                       const VerticalSpace(height: 20),
                       CustomElevatedButton(
                         text: 'Booking',
                         onPressed: () {
-                          context.router.replaceAll([
-                            const BookingDetailRoute(),
-                          ]);
+                          if (user.data!.memberType != "") {
+                            context.router.replaceAll([
+                              const BookingDetailRoute(),
+                            ]);
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const Dialog(
+                                  backgroundColor: Colors.transparent,
+                                  insetPadding: EdgeInsets.zero,
+                                  child: SizedBox(
+                                    height: 180,
+                                    child: PopUpJoinMembership(
+                                      img: 'assets/images/dummy1.png',
+                                      textList: [
+                                        'Save more with our Membership',
+                                        'Enjoy the All-in-One\nHealthy Lifestyle',
+                                        'Start from Rp299.000',
+                                        'GET IT NOW',
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }
                         },
                       ),
                       const VerticalSpace(height: 20),

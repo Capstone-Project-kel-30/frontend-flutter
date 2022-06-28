@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/common/constant.dart';
 import '../../utils/themes/app_theme.dart';
 
 class MemberCard extends StatelessWidget {
@@ -28,9 +29,9 @@ class MemberCard extends StatelessWidget {
   ];
 
   List<Color> setColor(type) {
-    if (type == 'Gold') {
+    if (type == goldMember) {
       return colorList[0];
-    } else if (type == 'Silver') {
+    } else if (type == silverMember) {
       return colorList[1];
     } else {
       return colorList[2];
@@ -38,9 +39,9 @@ class MemberCard extends StatelessWidget {
   }
 
   String setAsset(type) {
-    if (type == 'Gold') {
+    if (type == goldMember) {
       return assetList[0];
-    } else if (type == 'Silver') {
+    } else if (type == silverMember) {
       return assetList[1];
     } else {
       return assetList[2];

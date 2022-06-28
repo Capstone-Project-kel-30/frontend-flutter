@@ -1,5 +1,5 @@
 class URLS {
-  final String _baseUrl = 'https://gym30.herokuapp.com';
+  final String _baseUrl = 'https://gym-30-v2.herokuapp.com';
   final String _version = 'api/v1';
   final String _auth = 'auth';
   final String _user = 'user';
@@ -28,7 +28,7 @@ class URLS {
   }
 
   String updateUserProfile() {
-    return '$_baseUrl/$_version/$_user';
+    return '$_baseUrl/$_version/$_user/profile';
   }
 
   String userRegisterMembership() {
@@ -39,6 +39,10 @@ class URLS {
     return '$_baseUrl/$_version/$_member/payment';
   }
 
+  String membershipDetails() {
+    return '$_baseUrl/$_version/${_member}ship/list';
+  }
+
   String userBookingClass() {
     return '$_baseUrl/$_version/$_member/booking';
   }
@@ -47,16 +51,28 @@ class URLS {
     return '$_baseUrl/$_version/$_member/schedule';
   }
 
-  String getAllClass() {
-    return '$_baseUrl/$_version/$_class/all';
+  String getAllOnlineClass() {
+    return '$_baseUrl/$_version/$_class/Online/all';
   }
 
-  String getClassById(String id) {
-    return '$_baseUrl/$_version/$_class/$id';
+  String getOnlineClassById(String id) {
+    return '$_baseUrl/$_version/$_class/Online/$id';
   }
 
-  String searchClass() {
-    return '$_baseUrl/$_version/$_class/search';
+  String searchOnlineClass() {
+    return '$_baseUrl/$_version/$_class/Online/search';
+  }
+
+  String getAllOfflineClass() {
+    return '$_baseUrl/$_version/$_class/Offline/all';
+  }
+
+  String getOfflineClassById(String id) {
+    return '$_baseUrl/$_version/$_class/Offline/$id';
+  }
+
+  String searchOfflineClass() {
+    return '$_baseUrl/$_version/$_class/Offline/search';
   }
 
   String getAllNewsletter() {

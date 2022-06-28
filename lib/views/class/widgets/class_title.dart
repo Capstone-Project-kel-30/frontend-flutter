@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
-import 'package:workout_zone/views/class/widgets/badge.dart';
-import 'package:workout_zone/views/widgets/location_info.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
+
+import '../../../utils/common/helper.dart';
+import '../../../utils/themes/app_theme.dart';
+import '../../widgets/location_info.dart';
+import '../../widgets/vertical_space.dart';
+import 'badge.dart';
 
 class ClassTitle extends StatelessWidget {
   const ClassTitle({
@@ -13,9 +15,6 @@ class ClassTitle extends StatelessWidget {
   }) : super(key: key);
 
   final String classType, classTitle, location;
-
-  String capitalize(String string) =>
-      string.replaceFirst(string[0], string[0].toUpperCase());
 
   @override
   Widget build(BuildContext context) {

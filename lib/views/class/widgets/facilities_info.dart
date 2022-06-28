@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/views/class/widgets/facility_badge.dart';
 
+import '../../../utils/common/constant.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/vertical_space.dart';
+import 'facility_badge.dart';
 
 class FacilitiesInfo extends StatelessWidget {
   const FacilitiesInfo({Key? key, required this.facilities}) : super(key: key);
@@ -10,17 +11,17 @@ class FacilitiesInfo extends StatelessWidget {
   final List<String> facilities;
 
   String getAsset(String facility) {
-    if (facility == 'Parking area') {
+    if (facility == parkingArea) {
       return 'assets/icons/Parking-area.png';
-    } else if (facility == 'Gloves') {
+    } else if (facility == gloves) {
       return 'assets/icons/Gloves.png';
-    } else if (facility == 'Shower') {
+    } else if (facility == shower) {
       return 'assets/icons/Shower.png';
-    } else if (facility == 'Towel') {
+    } else if (facility == towel) {
       return 'assets/icons/Towel.png';
-    } else if (facility == 'Locker') {
+    } else if (facility == locker) {
       return 'assets/icons/Locker.png';
-    } else if (facility == 'Bottle') {
+    } else if (facility == bottle) {
       return 'assets/icons/Bottle.png';
     } else {
       return '';

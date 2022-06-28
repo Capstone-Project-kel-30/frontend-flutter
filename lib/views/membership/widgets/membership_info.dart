@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
+import '../../../utils/common/constant.dart';
+import '../../../utils/common/helper.dart';
 import '../../../utils/themes/app_theme.dart';
 
 class MembershipInfo extends StatelessWidget {
@@ -13,9 +15,9 @@ class MembershipInfo extends StatelessWidget {
   final String type, price;
 
   String setBenefit(type) {
-    if (type == 'Gold') {
+    if (type == goldMember) {
       return 'Free access class 4 months';
-    } else if (type == 'Silver') {
+    } else if (type == silverMember) {
       return 'Free access class 2 months';
     } else {
       return 'Free access class 1 months';
@@ -33,14 +35,14 @@ class MembershipInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '$type Membership',
+              '${capitalize(type)} Membership',
               style: AppTheme.theme(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: kSemiBoldWeight,
                   ),
             ),
             const VerticalSpace(height: 5),
             Text(
-              'Rp $price',
+              'Rp ${tambahTitik(price)}',
               style: AppTheme.theme(context).textTheme.bodyLarge?.copyWith(
                     color: kPrimaryColor,
                     fontSize: 18,
@@ -52,9 +54,11 @@ class MembershipInfo extends StatelessWidget {
         DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            border: const Border.fromBorderSide(BorderSide(
-              color: kPrimaryColor,
-            )),
+            border: const Border.fromBorderSide(
+              BorderSide(
+                color: kPrimaryColor,
+              ),
+            ),
           ),
           child: Padding(
             padding: const EdgeInsets.all(10),

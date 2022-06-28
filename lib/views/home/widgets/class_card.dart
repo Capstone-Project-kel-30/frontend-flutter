@@ -25,7 +25,7 @@ class ClassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: isLoading ? null : onTap,
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 5),
         height: 125,
