@@ -111,6 +111,7 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                 Form(
                   key: _formKotak,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FormKotak(
                         controller: _kotak1,

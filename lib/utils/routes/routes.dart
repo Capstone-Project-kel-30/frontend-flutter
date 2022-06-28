@@ -9,6 +9,7 @@ import 'package:workout_zone/views/class/booking_detail_page.dart';
 import 'package:workout_zone/views/class/class_detail_page.dart';
 
 import 'package:workout_zone/views/class/class_page.dart';
+import 'package:workout_zone/views/error/error_page.dart';
 import 'package:workout_zone/views/home/home_page.dart';
 import 'package:workout_zone/views/initial/initial_page.dart';
 import 'package:workout_zone/views/membership/membership_page.dart';
@@ -130,6 +131,14 @@ import '../../views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'bookingDetail',
       page: BookingDetailPage,
+    ),
+    AutoRoute(
+      path: 'error',
+      page: ErrorPage,
+    ),
+    AutoRoute(
+      path: 'membership',
+      page: MembershipPage,
     ),
   ],
 )

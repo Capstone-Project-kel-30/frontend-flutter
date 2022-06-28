@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
-import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/cutom_elevated_button.dart';
 import '../../widgets/vertical_space.dart';
 
-class CarouselImageCard extends StatelessWidget {
-  const CarouselImageCard({
+class PopUpJoinMembership extends StatelessWidget {
+  const PopUpJoinMembership({
     Key? key,
     required this.img,
     required this.textList,
@@ -99,7 +99,10 @@ class CarouselImageCard extends StatelessWidget {
                     height: 22,
                     fontWeight: kBoldWeight,
                     onPressed: () {
-                      context.router.push(const MembershipRoute());
+                      context.router.replaceAll(const [
+                        HomeWrapper(),
+                        MembershipRoute(),
+                      ]);
                     },
                   )
                 ],

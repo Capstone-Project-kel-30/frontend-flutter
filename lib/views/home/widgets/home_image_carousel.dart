@@ -29,9 +29,8 @@ class _HomeImageCarouselState extends State<HomeImageCarousel> {
           itemCount: widget.imgList.length,
           itemBuilder: (_, index, i) {
             return CarouselImageCard(
-              imgList: widget.imgList,
-              index: index,
-              textList: widget.textList,
+              img: widget.imgList[index],
+              textList: widget.textList[index],
             );
           },
           options: CarouselOptions(

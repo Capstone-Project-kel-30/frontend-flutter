@@ -10,13 +10,13 @@ class AuthService {
   }
 
   Future<UserModel> register({
-    required String username,
+    required String name,
     required String email,
     required String phone,
     required String password,
   }) async {
     final Map<String, dynamic> data = {
-      'username': username,
+      'name': name,
       'email': email,
       'phone': phone,
       'password': password,
@@ -26,7 +26,7 @@ class AuthService {
       final UserModel user = UserModel.fromJson(response.data);
       return user;
     } on DioError catch (e) {
-      if (e.response != null) {
+      if (e.response!.data['errors'] != null) {
         throw (e.response!.data['errors'][0]);
       } else if (e.type == DioErrorType.connectTimeout) {
         throw ('request timeout, please check your connection');
@@ -104,6 +104,8 @@ class AuthService {
       } else {
         throw ('server error');
       }
+    } catch (e) {
+      throw ('server error');
     }
   }
 }

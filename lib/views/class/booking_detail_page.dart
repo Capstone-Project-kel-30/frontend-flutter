@@ -5,6 +5,7 @@ import 'package:workout_zone/views/widgets/user_info.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 import '../../bloc/user/user_bloc.dart';
+import '../../utils/common/constant.dart';
 import 'widgets/booking_id.dart';
 import 'widgets/booking_type.dart';
 import 'widgets/membership_type.dart';
@@ -32,7 +33,7 @@ class BookingDetailPage extends StatelessWidget {
                 const VerticalSpace(height: 20),
                 const BookingType(
                   classTitle: 'Boxing',
-                  classType: 'Offline',
+                  classType: offlineClass,
                   classDate: '22 Juni 2022',
                 ),
                 const VerticalSpace(height: 20),
@@ -56,7 +57,7 @@ class BookingDetailPage extends StatelessWidget {
                 ),
                 const VerticalSpace(height: 20),
                 const MembershipType(
-                  memberType: 'Gold',
+                  memberType: goldMember,
                 ),
               ],
             ),

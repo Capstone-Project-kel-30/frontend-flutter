@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           password: password,
         );
         final String userToken = user.data!.token!;
-        final String username = user.data!.name!;
+        final String name = user.data!.name!;
         final String userPhone = user.data!.phone!;
         final int userId = user.data!.id!;
         final String memberType = user.data!.memberType!;
@@ -33,7 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           hasLogin: true,
           email: email,
           id: userId,
-          username: username,
+          name: name,
           token: userToken,
           phone: userPhone,
           password: password,
@@ -47,12 +47,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpRequest>((event, emit) async {
       emit(Authenticating());
       try {
-        final String username = event.username;
+        final String name = event.name;
         final String email = event.email;
         final String phone = event.phone;
         final String password = event.password;
         final UserModel user = await authService.register(
-          username: username,
+          name: name,
           email: email,
           phone: phone,
           password: password,
