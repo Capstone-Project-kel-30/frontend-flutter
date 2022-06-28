@@ -5,10 +5,9 @@ import 'package:workout_zone/views/widgets/member_card.dart';
 class BannerProfile extends StatelessWidget {
   const BannerProfile({
     Key? key,
-    required this.isLoad,
     required this.member,
   }) : super(key: key);
-  final bool isLoad;
+
   final String member;
   @override
   Widget build(BuildContext context) {

@@ -34,14 +34,17 @@ class SelectButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                logo!,
-                color: isActive ? kLightColor : kPrimaryColor,
-              ),
+              if (logo != "")
+                SvgPicture.asset(
+                  logo!,
+                  color: isActive ? kLightColor : kPrimaryColor,
+                  height: 20,
+                ),
               const HorizontalSpace(width: 5),
               Text(
                 title!,
                 style: AppTheme.theme(context).textTheme.titleSmall!.copyWith(
+                      fontSize: 12,
                       fontWeight: kSemiBoldWeight,
                       color: isActive ? kLightColor : kPrimaryColor,
                     ),

@@ -24,14 +24,12 @@ class _ProfileEditState extends State<ProfileEdit> {
   bool _phoneEmpy = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  TextEditingController _userController = TextEditingController();
-  TextEditingController _nomorControllers = TextEditingController();
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _nomorControllers = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _userController = TextEditingController();
-    _nomorControllers = TextEditingController();
     _userController.addListener(() {
       setState(() {
         _usernameEmpy = _userController.text.isNotEmpty;
@@ -46,7 +44,6 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -57,101 +54,69 @@ class _ProfileEditState extends State<ProfileEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Edit Profile",
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-            child: BlocBuilder<UserBloc, UserState>(
-              builder: (context, state) {
-                if (state is UserSuccess) {
-                  return Column(
-                    children: [
-                      ProfileImage(
-                        press: () {},
-                        title: "Change",
-                        color: kPrimaryColor,
-                      ),
-                      FormUsername(
-                        title: "Email",
-                        hint: state.user.data!.email!,
-                        controller: _emailController,
-                      ),
-                      FormPassword(
-                        title: "Password",
-                        hint: "*************",
-                        controller: _passwordController,
-                      ),
-                      const VerticalSpace(height: 10),
-                      ForgetPassBttn(
-                        titile: "Change Password",
-                        press: () {
-                          context.router.push(const NewPassword());
-                        },
-                      ),
-                      FormUsername(
-                        title: "Username",
-                        hint: state.user.data!.name!,
-                        controller: _userController,
-                      ),
-                      FormUsername(
-                        title: "No.HP",
-                        hint: state.user.data!.phone!,
-                        controller: _nomorControllers,
-                      ),
-                      BlocListener<UserBloc, UserState>(
-                        listener: (context, state) {
-                          if (state is UpdateUser) {
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(
-                                const SnackBar(
-                                  content: Text("Saving..."),
-                                ),
-                              );
-                            if (state is UserUpdateFailed) {
-                              ScaffoldMessenger.of(context)
-                                ..hideCurrentSnackBar()
-                                ..showSnackBar(
-                                  SnackBar(
-                                    content: Text(state.msg),
-                                  ),
-                                );
-                            }
-                          }
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 63),
-                          child: CustomElevatedButton(
-                              text: "Save",
-                              onPressed: _usernameEmpy && _phoneEmpy
-                                  ? () {
-                                      context.read()<UserBloc>().add(
-                                            UpdateUser(
-                                              _emailController.text,
-                                              _nomorControllers.text,
-                                              _userController.text,
-                                              _passwordController.text,
-                                            ),
-                                          );
-                                    }
-                                  : null),
-                        ),
-                      )
-                    ],
-                  );
-                }
-
-                return const ShimmerPlaceholder(height: 60, width: 100);
-              },
-            ),
+        appBar: AppBar(
+          title: const Text(
+            "Edit Profile",
           ),
         ),
-      ),
-    );
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  if (state is UserSuccess) {
+                    return Column(
+                      children: [
+                        ProfileImage(
+                          press: () {},
+                          title: "Change",
+                          color: kPrimaryColor,
+                        ),
+                        FormUsername(
+                          title: "Email",
+                          hint: state.user.data!.email!,
+                          controller: _emailController,
+                        ),
+                        FormPassword(
+                          title: "Password",
+                          hint: "*************",
+                          controller: _passwordController,
+                        ),
+                        const VerticalSpace(height: 10),
+                        ForgetPassBttn(
+                          titile: "Change Password",
+                          press: () {
+                            context.router.push(const NewPassword());
+                          },
+                        ),
+                        FormUsername(
+                          title: "Username",
+                          hint: state.user.data!.name!,
+                          controller: _userController,
+                        ),
+                        FormUsername(
+                          keyboard: TextInputType.phone,
+                          title: "No.HP",
+                          hint: state.user.data!.phone!,
+                          controller: _nomorControllers,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 63),
+                          child: CustomElevatedButton(
+                            text: "Save",
+                            onPressed:
+                                _usernameEmpy && _phoneEmpy ? () {} : null,
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return const ShimmerPlaceholder(height: 100, width: 100);
+                },
+              ),
+            ),
+          ),
+        ));
   }
 }

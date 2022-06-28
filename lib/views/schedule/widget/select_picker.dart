@@ -22,7 +22,7 @@ class _SelectPickerState extends State<SelectPicker> {
     'Online',
   ];
   List<String> logoSelect = [
-    "assets/icons/Bell-Outline.svg",
+    "",
     "assets/icons/ph_barbell.svg",
     "assets/icons/Online prediction.svg",
   ];
@@ -31,26 +31,33 @@ class _SelectPickerState extends State<SelectPicker> {
     return SizedBox(
       height: 35,
       child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: select.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(
-                right: 2,
-              ),
-              child: SelectButton(
-                title: select[index],
-                ontap: () {
-                  setState(() {
-                    selectActive = index;
-                  });
-                  widget.onprees;
-                },
-                isActive: selectActive == index,
-                logo: logoSelect[index],
-              ),
-            );
-          }),
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(
+              right: 2,
+            ),
+            child: Row(
+              children: [
+                SelectButton(
+                  title: select[index],
+                  ontap: () {
+                    setState(
+                      () {
+                        selectActive = index;
+                      },
+                    );
+                    widget.onprees(index);
+                  },
+                  isActive: selectActive == index,
+                  logo: logoSelect[index],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

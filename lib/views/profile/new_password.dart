@@ -2,14 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/widgets/cutom_elevated_button.dart';
 
-class NewPassword extends StatelessWidget {
+class NewPassword extends StatefulWidget {
   const NewPassword({Key? key}) : super(key: key);
 
   @override
+  State<NewPassword> createState() => _NewPasswordState();
+}
+
+class _NewPasswordState extends State<NewPassword> {
+  final TextEditingController _oldPasswordCntrl = TextEditingController();
+  final TextEditingController _newPasswordCntrl = TextEditingController();
+  final TextEditingController _comNewPassCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _oldPasswordCntrl.dispose();
+    _newPasswordCntrl.dispose();
+    _comNewPassCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController _oldPasswordCntrl = TextEditingController();
-    TextEditingController _newPasswordCntrl = TextEditingController();
-    TextEditingController _comNewPassCtrl = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
