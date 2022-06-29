@@ -1,24 +1,25 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workout_zone/models/user_model.dart';
 
 class UserInfoService {
   final SharedPreferences sharedPreferences;
   UserInfoService({required this.sharedPreferences});
 
-  Map<String, dynamic> getUserInfo() {
+  UserModel getUserInfo() {
     final token = sharedPreferences.getString("token");
     final name = sharedPreferences.getString("name");
     final email = sharedPreferences.getString("email");
     final phone = sharedPreferences.getString("phone");
-    final password = sharedPreferences.getString("password");
     final memberType = sharedPreferences.getString("member_type");
-    final user = {
-      'token': token,
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'password': password,
-      'member_type': memberType,
-    };
+    final UserModel user = UserModel(
+      data: Data(
+        token: token,
+        name: name,
+        email: email,
+        phone: phone,
+        memberType: memberType,
+      ),
+    );
     return user;
   }
 
@@ -32,28 +33,30 @@ class UserInfoService {
     String? password,
     String? memberType,
   }) async {
-    if (hasLogin != null) {
+    if (hasLogin != null && hasLogin != sharedPreferences.getBool("hasLogin")) {
       await sharedPreferences.setBool("hasLogin", hasLogin);
     }
-    if (token != null) {
+    if (token != null && token != sharedPreferences.getString("token")) {
       await sharedPreferences.setString("token", token);
     }
-    if (id != null) {
+    if (id != null && id != sharedPreferences.getInt("id")) {
       await sharedPreferences.setInt("id", id);
     }
-    if (name != null) {
+    if (name != null && name != sharedPreferences.getString("name")) {
       await sharedPreferences.setString("name", name);
     }
-    if (email != null) {
+    if (email != null && email != sharedPreferences.getString("email")) {
       await sharedPreferences.setString("email", email);
     }
-    if (password != null) {
+    if (password != null &&
+        password != sharedPreferences.getString("password")) {
       await sharedPreferences.setString("password", password);
     }
-    if (phone != null) {
+    if (phone != null && phone != sharedPreferences.getString("phone")) {
       await sharedPreferences.setString("phone", phone);
     }
-    if (memberType != null) {
+    if (memberType != null &&
+        memberType != sharedPreferences.getString("member_type")) {
       await sharedPreferences.setString("member_type", memberType);
     }
   }

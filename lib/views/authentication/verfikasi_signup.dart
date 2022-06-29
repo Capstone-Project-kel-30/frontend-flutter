@@ -162,36 +162,43 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                 const VerticalSpace(height: 64),
                 CustomElevatedButton(
                   text: "Verify",
-                  onPressed: _kotk1 &&
-                          _kotk2 &&
-                          _kotk3 &&
-                          _kotk4 &&
-                          _kotk5 &&
-                          _kotk6
-                      ? () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          final String userOtp =
-                              '${_kotak1.text}${_kotak2.text}${_kotak3.text}${_kotak4.text}${_kotak5.text}${_kotak6.text}';
-                          if (userOtp == widget.otp || userOtp == currentOTP) {
-                            context.router.replaceAll([const SignInRoute()]);
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(
-                                const SnackBar(
-                                  content: Text('Sign Up Success'),
-                                ),
-                              );
-                          } else {
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(
-                                const SnackBar(
-                                  content: Text('OTP doesn\'t match'),
-                                ),
-                              );
-                          }
-                        }
-                      : null,
+                  onPressed:
+                      _kotk1 && _kotk2 && _kotk3 && _kotk4 && _kotk5 && _kotk6
+                          ? () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              final String userOtp =
+                                  '${_kotak1.text}${_kotak2.text}${_kotak3.text}${_kotak4.text}${_kotak5.text}${_kotak6.text}';
+                              if (currentOTP != "") {
+                                if (userOtp == currentOTP) {
+                                  context.router.replaceAll(
+                                    [CreateNewPass(email: widget.email)],
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                    ..hideCurrentSnackBar()
+                                    ..showSnackBar(
+                                      const SnackBar(
+                                        content: Text('OTP doesn\'t match'),
+                                      ),
+                                    );
+                                }
+                              } else {
+                                if (userOtp == widget.otp) {
+                                  context.router.replaceAll(
+                                    [CreateNewPass(email: widget.email)],
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                    ..hideCurrentSnackBar()
+                                    ..showSnackBar(
+                                      const SnackBar(
+                                        content: Text('OTP doesn\'t match'),
+                                      ),
+                                    );
+                                }
+                              }
+                            }
+                          : null,
                 )
               ],
             ),

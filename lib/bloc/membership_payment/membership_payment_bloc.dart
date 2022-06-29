@@ -20,7 +20,7 @@ class MembershipPaymentBloc
       emit(PaymentLoading());
       try {
         final currentUser = userInfoService.getUserInfo();
-        final String authorization = currentUser["token"];
+        final String authorization = currentUser.data!.token!;
         final int membershipId = event.membershipId;
         final MembershipPaymentModel membershipPayment =
             await membershipService.membershipRegister(
@@ -36,7 +36,7 @@ class MembershipPaymentBloc
       emit(PaymentLoading());
       try {
         final currentUser = userInfoService.getUserInfo();
-        final String authorization = currentUser["token"];
+        final String authorization = currentUser.data!.token!;
         final MembershipPaymentModel membershipPayment =
             await membershipService.membershipPaymentInfo(authorization);
         emit(PaymentRequestSuccess(membershipPayment));

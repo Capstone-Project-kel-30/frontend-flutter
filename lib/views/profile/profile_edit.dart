@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_zone/bloc/user/user_bloc.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
-import 'package:workout_zone/views/authentication/widgets/button_txt.dart';
-import 'package:workout_zone/views/authentication/widgets/form_password.dart';
-import 'package:workout_zone/views/authentication/widgets/form_username.dart';
-import 'package:workout_zone/views/profile/widget/image_profile.dart';
-import 'package:workout_zone/views/widgets/cutom_elevated_button.dart';
-import 'package:workout_zone/views/widgets/shimmer_placeholder.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
+
+import '../../bloc/user/user_bloc.dart';
+import '../../utils/routes/routes.gr.dart';
+import '../../utils/themes/app_theme.dart';
+import '../authentication/widgets/button_txt.dart';
+import '../authentication/widgets/form_password.dart';
+import '../authentication/widgets/form_username.dart';
+import '../widgets/cutom_elevated_button.dart';
+import '../widgets/vertical_space.dart';
+import 'widget/image_profile.dart';
 
 class ProfileEdit extends StatefulWidget {
   const ProfileEdit({Key? key}) : super(key: key);

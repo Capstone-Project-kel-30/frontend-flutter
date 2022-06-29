@@ -19,7 +19,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserLoading());
       try {
         final currentUser = userInfoService.getUserInfo();
-        final String token = currentUser["token"];
+        final String token = currentUser.data!.token!;
         final UserModel user = await userService.updateUserProfile(
           authorization: token,
           name: event.name,
@@ -42,7 +42,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserLoading());
       try {
         final currentUser = userInfoService.getUserInfo();
-        final String authorization = currentUser["token"];
+        final String authorization = currentUser.data!.token!;
         final UserModel user = await userService.getUserProfile(authorization);
         emit(UserSuccess(user));
       } catch (e) {
