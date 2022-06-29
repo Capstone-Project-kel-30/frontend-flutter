@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_zone/models/user_model.dart';
 import 'package:workout_zone/views/schedule/widget/card_jadwal.dart';
 import 'package:workout_zone/views/schedule/widget/select_picker.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
@@ -15,6 +16,7 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   int ind = 0;
+  UserModel user = UserModel();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class _SchedulePageState extends State<SchedulePage> {
               const VerticalSpace(height: 20),
               JadwalCard(
                 index: ind,
+                user: user,
               )
             ],
           ),

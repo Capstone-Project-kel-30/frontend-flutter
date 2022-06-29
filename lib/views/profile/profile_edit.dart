@@ -105,14 +105,34 @@ class _ProfileEditState extends State<ProfileEdit> {
                           padding: const EdgeInsets.only(top: 63),
                           child: CustomElevatedButton(
                             text: "Save",
-                            onPressed:
-                                _usernameEmpy && _phoneEmpy ? () {} : null,
+                            onPressed: _usernameEmpy && _phoneEmpy
+                                ? () {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    final String user = _userController.text;
+                                    final String phone = _nomorControllers.text;
+                                    final String password =
+                                        _passwordController.text;
+                                    final String email = _emailController.text;
+                                    context.read<UserBloc>().add(
+                                          UpdateUser(
+                                            email: email,
+                                            name: user,
+                                            password: password,
+                                            phone: phone,
+                                          ),
+                                        );
+                                  }
+                                : null,
                           ),
                         ),
                       ],
                     );
                   }
-                  return const ShimmerPlaceholder(height: 100, width: 100);
+                  return const Center(
+                    heightFactor: 18,
+                    child: CircularProgressIndicator(),
+                  );
                 },
               ),
             ),

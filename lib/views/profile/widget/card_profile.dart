@@ -38,12 +38,16 @@ class CardProfile extends StatelessWidget {
                     style:
                         AppTheme.theme(context).textTheme.titleSmall!.copyWith(
                               fontWeight: kSemiBoldWeight,
+                              fontSize: 14,
                             ),
                   ),
                   TextSpan(
                     text: email,
                     style: const TextStyle(
-                        fontSize: 10, fontWeight: kRegularWeight, height: 2),
+                      fontSize: 10,
+                      fontWeight: kRegularWeight,
+                      height: 1.5,
+                    ),
                   )
                 ],
               ),

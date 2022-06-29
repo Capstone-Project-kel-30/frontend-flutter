@@ -19,7 +19,7 @@ class BannerProfile extends StatelessWidget {
             color: kSecondaryColor,
           ),
           height: 50,
-          width: 199,
+          width: 200,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -31,7 +31,7 @@ class BannerProfile extends StatelessWidget {
                   type: member,
                 ),
                 Text(
-                  "$member Membership",
+                  " $member Membership",
                   style: AppTheme.theme(context).textTheme.bodyMedium!.copyWith(
                         color: kPrimaryColor,
                         fontWeight: kSemiBoldWeight,

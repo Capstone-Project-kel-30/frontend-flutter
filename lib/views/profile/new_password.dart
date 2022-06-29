@@ -13,7 +13,7 @@ class _NewPasswordState extends State<NewPassword> {
   final TextEditingController _oldPasswordCntrl = TextEditingController();
   final TextEditingController _newPasswordCntrl = TextEditingController();
   final TextEditingController _comNewPassCtrl = TextEditingController();
-
+  final GlobalKey<FormState> _formkey = GlobalKey();
   @override
   void dispose() {
     _oldPasswordCntrl.dispose();
@@ -32,32 +32,43 @@ class _NewPasswordState extends State<NewPassword> {
       ),
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+        padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                FormPassword(
-                  title: "Old Password",
-                  hint: "Enter Password",
-                  controller: _oldPasswordCntrl,
-                ),
-                FormPassword(
-                  title: "New Password",
-                  hint: "Enter New Password",
-                  controller: _newPasswordCntrl,
-                ),
-                FormPassword(
-                  title: "Confirm New Password",
-                  hint: "Enter Password",
-                  controller: _comNewPassCtrl,
-                )
-              ],
+            Form(
+              key: _formkey,
+              child: Column(
+                children: [
+                  FormPassword(
+                    title: "Old Password",
+                    hint: "Enter Password",
+                    controller: _oldPasswordCntrl,
+                  ),
+                  FormPassword(
+                    title: "New Password",
+                    hint: "Enter New Password",
+                    controller: _newPasswordCntrl,
+                  ),
+                  FormPassword(
+                    validator: (value) {
+                      if (value == null || value != _newPasswordCntrl.text) {
+                        return 'Password Does Not Match ';
+                      }
+                      return null;
+                    },
+                    title: "Confirm New Password",
+                    hint: "Enter Password",
+                    controller: _comNewPassCtrl,
+                  )
+                ],
+              ),
             ),
             CustomElevatedButton(
               text: "Save",
-              onPressed: () {},
+              onPressed: () {
+                if (_formkey.currentState!.validate()) {}
+              },
             )
           ],
         ),

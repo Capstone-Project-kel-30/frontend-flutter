@@ -45,10 +45,16 @@ class ProfilePage extends StatelessWidget {
                     title: state.user.data!.name!,
                   );
                 }
-                return const CircleAvatar(
-                  child: ShimmerPlaceholder(
-                    height: 100,
-                    width: 100,
+                return const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Center(
+                    child: CircleAvatar(
+                      radius: 50,
+                      child: ShimmerPlaceholder(
+                        height: 100,
+                        width: 100,
+                      ),
+                    ),
                   ),
                 );
               },
@@ -62,7 +68,7 @@ class ProfilePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MembershipPage(),
+                            builder: (context) => const MembershipPage(),
                           ),
                         );
                       },

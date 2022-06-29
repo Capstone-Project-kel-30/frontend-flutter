@@ -52,6 +52,7 @@ class ProfileSeting extends StatelessWidget {
                             .textTheme
                             .bodyMedium!
                             .copyWith(
+                              fontSize: 14,
                               fontWeight: kSemiBoldWeight,
                             ),
                       ),
