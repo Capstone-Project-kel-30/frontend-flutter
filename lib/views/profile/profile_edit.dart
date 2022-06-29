@@ -105,7 +105,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           padding: const EdgeInsets.only(top: 63),
                           child: CustomElevatedButton(
                             text: "Save",
-                            onPressed: _usernameEmpy && _phoneEmpy
+                            onPressed: _usernameEmpy || _phoneEmpy
                                 ? () {
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();
@@ -116,10 +116,12 @@ class _ProfileEditState extends State<ProfileEdit> {
                                     final String email = _emailController.text;
                                     context.read<UserBloc>().add(
                                           UpdateUser(
-                                            email: email,
-                                            name: user,
-                                            password: password,
-                                            phone: phone,
+                                            email: email != "" ? email : null,
+                                            name: user != "" ? user : null,
+                                            password: password != ""
+                                                ? password
+                                                : null,
+                                            phone: phone != "" ? phone : null,
                                           ),
                                         );
                                   }

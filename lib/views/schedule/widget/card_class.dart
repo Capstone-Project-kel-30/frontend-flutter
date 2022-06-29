@@ -40,29 +40,27 @@ class CardClass extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 250,
-                    child: Text(
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
                       classTitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style:
-                          AppTheme.theme(context).textTheme.bodySmall!.copyWith(
+                          AppTheme.theme(context).textTheme.bodyLarge!.copyWith(
                                 fontWeight: kSemiBoldWeight,
-                                fontSize: 16,
                               ),
                     ),
-                  ),
-                  LocationInfo(
-                    classType: classType,
-                    location: location,
-                  ),
-                  TrainerInfo(trainer: trainer),
-                ],
+                    LocationInfo(
+                      classType: classType,
+                      location: location,
+                    ),
+                    TrainerInfo(trainer: trainer),
+                  ],
+                ),
               ),
               DecoratedBox(
                 decoration: BoxDecoration(

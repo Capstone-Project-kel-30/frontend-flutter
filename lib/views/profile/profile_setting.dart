@@ -30,6 +30,7 @@ class ProfileSeting extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BlocBuilder<UserBloc, UserState>(
                     builder: (context, state) {
@@ -44,19 +45,13 @@ class ProfileSeting extends StatelessWidget {
                     },
                   ),
                   const VerticalSpace(height: 10),
-                  Row(
-                    children: [
-                      Text(
-                        "Help",
-                        style: AppTheme.theme(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(
+                  Text(
+                    "Help",
+                    style:
+                        AppTheme.theme(context).textTheme.bodyMedium!.copyWith(
                               fontSize: 14,
                               fontWeight: kSemiBoldWeight,
                             ),
-                      ),
-                    ],
                   ),
                   const VerticalSpace(height: 10),
                   const CardOption(
@@ -81,7 +76,6 @@ class ProfileSeting extends StatelessWidget {
                       );
                   }
                   if (state is UnAuthenticated) {
-                    Restart.restartApp();
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(
@@ -89,6 +83,7 @@ class ProfileSeting extends StatelessWidget {
                           content: Text('Sign Out Success'),
                         ),
                       );
+                    Restart.restartApp();
                   }
                   if (state is AuthenticationError) {
                     ScaffoldMessenger.of(context)
@@ -104,75 +99,77 @@ class ProfileSeting extends StatelessWidget {
                   text: 'Log Out',
                   onPressed: () {
                     showModalBottomSheet(
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10))),
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            height: 240,
-                            decoration: BoxDecoration(
-                              color: kLightColor,
-                              borderRadius: BorderRadius.circular(20),
+                      enableDrag: false,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        ),
+                      ),
+                      context: context,
+                      builder: (BuildContext context) {
+                        return FittedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 56,
+                              vertical: 50,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "Are you sure you want to\nLog Out ?",
-                                        textAlign: TextAlign.center,
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Are you sure you want to\nLog Out ?",
+                                  textAlign: TextAlign.center,
+                                  style: AppTheme.theme(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        fontSize: 20,
+                                        fontWeight: kSemiBoldWeight,
+                                      ),
+                                ),
+                                const VerticalSpace(height: 50),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        context.read<AuthBloc>().add(
+                                              SignOutRequest(),
+                                            );
+                                      },
+                                      child: Text(
+                                        "Yes, Log Out",
                                         style: AppTheme.theme(context)
                                             .textTheme
-                                            .bodyMedium!
+                                            .bodySmall!
                                             .copyWith(
-                                              fontSize: 20,
+                                              fontSize: 16,
                                               fontWeight: kSemiBoldWeight,
+                                              color:
+                                                  HSLColor.fromColor(kRedColor)
+                                                      .withLightness(.5)
+                                                      .withSaturation(1)
+                                                      .toColor(),
                                             ),
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          context.read<AuthBloc>().add(
-                                                SignOutRequest(),
-                                              );
-                                        },
-                                        child: Text(
-                                          "Yes, Log Out",
-                                          style: AppTheme.theme(context)
-                                              .textTheme
-                                              .bodySmall!
-                                              .copyWith(
-                                                fontSize: 16,
-                                                fontWeight: kSemiBoldWeight,
-                                                color: kRedColor,
-                                              ),
-                                        ),
-                                      ),
-                                      const HorizontalSpace(width: 10),
-                                      CustomElevatedButton(
-                                        width: 160,
-                                        text: "No",
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                    ),
+                                    const HorizontalSpace(width: 10),
+                                    CustomElevatedButton(
+                                      width: 160,
+                                      text: "No",
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
-                          );
-                        });
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
               ),
