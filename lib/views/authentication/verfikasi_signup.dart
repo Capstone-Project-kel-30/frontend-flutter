@@ -171,7 +171,7 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                               if (currentOTP != "") {
                                 if (userOtp == currentOTP) {
                                   context.router.replaceAll(
-                                    [CreateNewPass(email: widget.email)],
+                                    [const SignInRoute()],
                                   );
                                 } else {
                                   ScaffoldMessenger.of(context)
@@ -185,7 +185,7 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                               } else {
                                 if (userOtp == widget.otp) {
                                   context.router.replaceAll(
-                                    [CreateNewPass(email: widget.email)],
+                                    [const SignInRoute()],
                                   );
                                 } else {
                                   ScaffoldMessenger.of(context)

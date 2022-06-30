@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../bloc/bloc.dart';
+import '../../models/user_model.dart';
 import '../../utils/common/constant.dart';
 import '../widgets/shimmer_placeholder.dart';
 import '../widgets/vertical_space.dart';
@@ -115,6 +118,19 @@ class _SchedulePageState extends State<SchedulePage> {
                 child: BlocBuilder<UserBloc, UserState>(
                   builder: (context, state) {
                     if (state is UserSuccess) {
+                      final UserModel user = state.user;
+                      if (user.data!.memberType! == "") {
+                        return FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              context.router.push(const MembershipRoute());
+                            },
+                            icon: const Icon(Icons.add),
+                            label: const Text("Add Membership"),
+                          ),
+                        );
+                      }
                       return JadwalCard(
                         classList: getList(ind),
                         user: state.user,
