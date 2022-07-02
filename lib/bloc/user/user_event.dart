@@ -8,12 +8,8 @@ abstract class UserEvent extends Equatable {
 }
 
 class UpdateUser extends UserEvent {
-  final String email, phone, name, password;
-  const UpdateUser(
-      {required this.email,
-      required this.phone,
-      required this.name,
-      required this.password});
+  final String? email, phone, name, password;
+  const UpdateUser({this.email, this.phone, this.name, this.password});
 }
 
 class GetUserProfile extends UserEvent {}

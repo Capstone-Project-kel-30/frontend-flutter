@@ -92,6 +92,8 @@ class _HomePageState extends State<HomePage> {
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UserGetFailed) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.msg),),);
           context.router.replaceAll([
             const ErrorRoute(),
           ]);

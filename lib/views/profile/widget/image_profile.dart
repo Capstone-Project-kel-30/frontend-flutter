@@ -20,7 +20,6 @@ class ProfileImage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const VerticalSpace(height: 20),
         Align(
           alignment: Alignment.center,
           child: CircleAvatar(
@@ -36,6 +35,7 @@ class ProfileImage extends StatelessWidget {
             title,
             style: TextStyle(
               fontWeight: kSemiBoldWeight,
+              fontSize: 16,
               color: color!,
             ),
           ),

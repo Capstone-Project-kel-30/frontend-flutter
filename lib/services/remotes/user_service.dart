@@ -32,19 +32,19 @@ class UserService {
 
   Future<UserModel> updateUserProfile({
     required String authorization,
-    required String name,
-    required String email,
-    required String password,
-    required String phone,
+    String? name,
+    String? email,
+    String? password,
+    String? phone,
   }) async {
     final Map<String, String> header = {
       'Authorization': authorization,
     };
     final Map<String, dynamic> data = {
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'password': password,
+      if (name != null) 'name': name,
+      if (email != null) 'email': email,
+      if (phone != null) 'phone': phone,
+      if (password != null) 'password': password,
     };
     try {
       final Response response = await dio.put(

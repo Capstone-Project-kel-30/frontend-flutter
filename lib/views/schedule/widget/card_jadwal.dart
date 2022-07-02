@@ -1,46 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:workout_zone/models/user_model.dart';
+import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/schedule/widget/card_class.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class JadwalCard extends StatelessWidget {
   const JadwalCard({
     Key? key,
-    required this.index,
     required this.user,
+    required this.classList,
   }) : super(key: key);
-  final int index;
   final UserModel user;
+  final List<Map<String, dynamic>> classList;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        width: double.infinity,
-        height: 545,
-        child: ListView.builder(
-          itemCount: index == 2 ? 2 : 5,
-          itemBuilder: (BuildContext context, int idx) {
-            if (index == 0) {
+    return classList.isEmpty
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/Calendar.png'),
+              const VerticalSpace(height: 20),
+              Text(
+                "No Booking Schedule Yet",
+                style: AppTheme.theme(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: kSemiBoldWeight,
+                      color: kPrimaryColor,
+                    ),
+              )
+            ],
+          )
+        : ListView.builder(
+            itemCount: classList.length,
+            itemBuilder: (BuildContext context, int idx) {
               return CardClass(
-                classType: 'Offline',
+                classTitle: classList[idx]["classTitle"],
+                classType: classList[idx]["classType"],
                 user: user,
+                location: classList[idx]["location"],
+                trainer: classList[idx]["trainer"],
+                startTime: classList[idx]["startTime"],
               );
-            } else if (index == 1) {
-              return CardClass(
-                classType: 'Offline',
-                user: user,
-              );
-            } else if (index == 2) {
-              return CardClass(
-                classType: 'Online',
-                user: user,
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-      ),
-    );
+            },
+          );
   }
 }
