@@ -8,7 +8,7 @@ class FormPassword extends StatefulWidget {
     required this.title,
     required this.hint,
     required this.controller,
-    required this.validator,
+    this.validator,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;

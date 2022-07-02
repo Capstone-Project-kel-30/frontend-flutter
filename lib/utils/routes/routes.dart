@@ -16,7 +16,10 @@ import 'package:workout_zone/views/membership/membership_page.dart';
 import 'package:workout_zone/views/newsletter/newsletter_page.dart';
 import 'package:workout_zone/views/on_boarding/landing_page.dart';
 import 'package:workout_zone/views/on_boarding/on_boarding_page.dart';
+import 'package:workout_zone/views/profile/new_password.dart';
+import 'package:workout_zone/views/profile/profile_edit.dart';
 import 'package:workout_zone/views/profile/profile_page.dart';
+import 'package:workout_zone/views/profile/profile_setting.dart';
 import 'package:workout_zone/views/schedule/schedule_page.dart';
 import 'package:workout_zone/views/video_content/video_content_page.dart';
 import 'package:workout_zone/views/wrapper/home_inner.dart';
@@ -103,7 +106,7 @@ import '../../views/wrapper/home_wrapper.dart';
           ],
         ),
         AutoRoute(
-          path: 'schedule',
+          path: 'schedulePage',
           page: SchedulePage,
         ),
         AutoRoute(
@@ -111,6 +114,22 @@ import '../../views/wrapper/home_wrapper.dart';
           page: ProfilePage,
         ),
       ],
+    ),
+    AutoRoute(
+      path: 'profileSeting',
+      page: ProfileSeting,
+    ),
+    AutoRoute(
+      path: 'profileEdit',
+      page: ProfileEdit,
+    ),
+    AutoRoute(
+      path: 'editProfilePassword',
+      page: NewPassword,
+    ),
+    AutoRoute(
+      path: 'class',
+      page: ClassPage,
     ),
     AutoRoute(
       path: 'newsletter',

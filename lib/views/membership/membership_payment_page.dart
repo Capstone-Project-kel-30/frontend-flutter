@@ -92,7 +92,6 @@ class MembershipPaymentPage extends StatelessWidget {
                 }
                 if (state is PaymentRequestSuccess) {
                   launchURL(state.membershipPayment.data!.snapUrl!);
-                  // TODO: Notifications
                 }
                 if (state is PaymentRequestError) {
                   ScaffoldMessenger.of(context)

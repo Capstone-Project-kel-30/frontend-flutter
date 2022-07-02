@@ -9,14 +9,14 @@ class FormUsername extends StatelessWidget {
     required this.title,
     required this.hint,
     required this.controller,
-    required this.validator,
-    required this.keyboard,
+    this.validator,
+    this.keyboard,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
 
   final String? Function(String?)? validator;
-  final TextInputType keyboard;
+  final TextInputType? keyboard;
 
   @override
   Widget build(BuildContext context) {
