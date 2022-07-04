@@ -77,6 +77,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthenticationError(e.toString()));
       }
     });
+    on<NewOTPRequest>((event, emit) async {
+      emit(Authenticating());
+      try {
+        final email = event.email;
+        final UserModel user = await authService.verifyEmail(email: email);
+        emit(NewOTPSended(user.data!.totp!));
+      } catch (e) {
+        emit(AuthenticationError(e.toString()));
+      }
+    });
     on<ResetPasswordRequest>((event, emit) async {
       emit(Authenticating());
       try {

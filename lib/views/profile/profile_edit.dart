@@ -63,7 +63,33 @@ class _ProfileEditState extends State<ProfileEdit> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: BlocBuilder<UserBloc, UserState>(
+              child: BlocConsumer<UserBloc, UserState>(
+                listener: (context, state) {
+                  if (state is UserSuccess) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text("Update success"),
+                        ),
+                      );
+                  }
+                  if (state is UserUpdateFailed) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        SnackBar(
+                          content: Text(state.msg),
+                        ),
+                      );
+                    context.router.replaceAll([
+                      ErrorRoute(
+                        isHome: false,
+                        message: 'Unable to Update Profile',
+                      ),
+                    ]);
+                  }
+                },
                 builder: (context, state) {
                   if (state is UserSuccess) {
                     return Column(
@@ -124,6 +150,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                                             phone: phone != "" ? phone : null,
                                           ),
                                         );
+                                    _userController.clear();
+                                    _nomorControllers.clear();
+                                    _passwordController.clear();
+                                    _emailController.clear();
                                   }
                                 : null,
                           ),

@@ -15,11 +15,9 @@ class ClassCard extends StatelessWidget {
     required this.location,
     required this.type,
     required this.onTap,
-    required this.isLoading,
   }) : super(key: key);
 
   final String img, title, startTime, location, type;
-  final bool isLoading;
   final Function() onTap;
 
   @override
@@ -106,7 +104,7 @@ class ClassCard extends StatelessWidget {
                       ],
                     ),
                     const VerticalSpace(height: 5),
-                    LocationInfo(classType: type, location: location),
+                    LocationInfo(classType: type),
                   ],
                 ),
               ),

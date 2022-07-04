@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
+import '../../models/class_model.dart';
 import '../../models/user_model.dart';
-import '../../utils/common/constant.dart';
 import '../../utils/common/helper.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/class_list.dart';
@@ -13,9 +14,11 @@ class ClassPage extends StatefulWidget {
     Key? key,
     required this.classType,
     required this.user,
+    required this.classes,
   }) : super(key: key);
 
   final String classType;
+  final ClassModel classes;
   final UserModel user;
 
   @override
@@ -23,69 +26,18 @@ class ClassPage extends StatefulWidget {
 }
 
 class _ClassPageState extends State<ClassPage> {
-  int index = 0;
+  List<Class> classList = [];
 
-  List<Map<String, dynamic>> ganjil = [
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": false,
-      "title": "Lorem Ipsum",
-      "trainer": "trainer",
-      "startTime": "16:00",
-    },
-    {
-      "classType": onlineClass,
-      "location": "Streaming - Zoom",
-      "isFull": true,
-      "title": "Lorem Dorem",
-      "trainer": "trainer",
-      "startTime": "07:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": true,
-      "title": "Lorem Ipsum Dorem",
-      "trainer": "trainer",
-      "startTime": "20:00",
-    },
-  ];
-
-  List<Map<String, dynamic>> genap = [
-    {
-      "classType": onlineClass,
-      "location": "Streaming - GMeet",
-      "isFull": false,
-      "title": "Do esse esse ad eiusmod ad nostrud id",
-      "trainer": "trainer",
-      "startTime": "05:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": false,
-      "title": "Amet mollit sint sint aute eiusmod proident esse duis et.",
-      "trainer": "trainer",
-      "startTime": "08:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": true,
-      "title": "Lorem Ipsum Dorem",
-      "trainer": "trainer",
-      "startTime": "20:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": false,
-      "title": "Lorem Sint Sint",
-      "trainer": "trainer",
-      "startTime": "23:00",
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    final currentDate = DateTime.now();
+    final dateFormatter = DateFormat('d-M-y');
+    final current = dateFormatter.format(currentDate);
+    classList = widget.classes.data!
+        .where((element) => element.date == current)
+        .toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,24 +50,13 @@ class _ClassPageState extends State<ClassPage> {
             const SearchBar(),
             const VerticalSpace(height: 10),
             DatePicker(
-              onPressed: (int idx) {
-                index = idx;
-                setState(() {});
-              },
+              onPressed: (String datePicked) {},
             ),
             const VerticalSpace(height: 10),
             Expanded(
               child: ClassList(
                 user: widget.user,
-                classList: index % 2 == 0
-                    ? genap
-                        .where((element) =>
-                            element["classType"] == widget.classType)
-                        .toList()
-                    : ganjil
-                        .where((element) =>
-                            element["classType"] == widget.classType)
-                        .toList(),
+                classList: classList,
               ),
             ),
           ],

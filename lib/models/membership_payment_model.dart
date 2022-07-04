@@ -2,7 +2,7 @@ class MembershipPaymentModel {
   bool? status;
   String? message;
   List<String>? errors;
-  Data? data;
+  MembershipPayment? data;
 
   MembershipPaymentModel({this.status, this.message, this.errors, this.data});
 
@@ -10,7 +10,8 @@ class MembershipPaymentModel {
     status = json['status'];
     message = json['message'];
     errors = json['errors'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? MembershipPayment.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -25,16 +26,17 @@ class MembershipPaymentModel {
   }
 }
 
-class Data {
+class MembershipPayment {
   int? id;
   User? user;
   Membership? membership;
   int? amount;
   String? snapUrl;
 
-  Data({this.id, this.user, this.membership, this.amount, this.snapUrl});
+  MembershipPayment(
+      {this.id, this.user, this.membership, this.amount, this.snapUrl});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  MembershipPayment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     membership = json['membership'] != null

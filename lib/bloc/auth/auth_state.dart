@@ -52,3 +52,11 @@ class AuthenticationError extends AuthState {
   @override
   List<Object> get props => [msg];
 }
+
+class NewOTPSended extends AuthState {
+  final String otp;
+  const NewOTPSended(this.otp);
+
+  @override
+  List<Object> get props => [otp];
+}

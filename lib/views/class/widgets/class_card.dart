@@ -11,7 +11,6 @@ class CardClass extends StatelessWidget {
     Key? key,
     required this.onTap,
     required this.classType,
-    required this.location,
     required this.title,
     required this.trainer,
     required this.isFull,
@@ -19,7 +18,7 @@ class CardClass extends StatelessWidget {
   }) : super(key: key);
 
   final Function() onTap;
-  final String classType, location, title, trainer, startTime;
+  final String classType, title, trainer, startTime;
   final bool isFull;
 
   @override
@@ -54,7 +53,7 @@ class CardClass extends StatelessWidget {
                             fontWeight: kSemiBoldWeight,
                           ),
                     ),
-                    LocationInfo(classType: classType, location: location),
+                    LocationInfo(classType: classType),
                     TrainerInfo(trainer: trainer),
                   ],
                 ),

@@ -41,4 +41,12 @@ class OTPRequest extends AuthEvent {
   List<Object> get props => [email];
 }
 
+class NewOTPRequest extends AuthEvent {
+  final String email;
+  const NewOTPRequest(this.email);
+
+  @override
+  List<Object> get props => [email];
+}
+
 class CheckUser extends AuthEvent {}

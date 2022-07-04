@@ -9,11 +9,9 @@ class LocationInfo extends StatelessWidget {
   const LocationInfo({
     Key? key,
     required this.classType,
-    required this.location,
   }) : super(key: key);
 
   final String classType;
-  final String location;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,9 @@ class LocationInfo extends StatelessWidget {
             : SvgPicture.asset('assets/icons/Stream.svg'),
         const HorizontalSpace(width: 3),
         Text(
-          location,
+          classType == offlineClass
+              ? "Gym Studio - Bandung"
+              : "Streaming - Zoom",
           style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(
                 fontSize: 10,
                 color: kGreyColor,

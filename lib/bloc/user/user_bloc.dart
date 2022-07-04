@@ -20,12 +20,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         final currentUser = userInfoService.getUserInfo();
         final String token = currentUser.data!.token!;
+        final String currentEmail = currentUser.data!.email!;
+        final String currentName = currentUser.data!.name!;
+        final String currentPhone = currentUser.data!.phone!;
+        final String currentPassword = currentUser.data!.password!;
         final UserModel user = await userService.updateUserProfile(
           authorization: token,
-          name: event.name,
-          email: event.email,
-          password: event.password,
-          phone: event.phone,
+          name: event.name ?? currentName,
+          email: event.email ?? currentEmail,
+          password: event.password ?? currentPassword,
+          phone: event.phone ?? currentPhone,
         );
         await userInfoService.updateUserInfo(
           name: event.name,

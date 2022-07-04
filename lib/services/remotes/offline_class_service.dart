@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../models/class_model.dart';
 import '../../utils/urls/url.dart';
 import 'dio.dart';
 
@@ -7,15 +8,13 @@ class OfflineClassService {
   OfflineClassService() {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
-  getAllOfflineClass(String authorization) async {
-    final Map<String, String> header = {
-      'Authorization': authorization,
-    };
+  Future<ClassModel> getAllOfflineClass() async {
     try {
-      final Response response = await dio.post(
+      final Response response = await dio.get(
         urls.getAllOfflineClass(),
-        options: Options(headers: header),
       );
+      final ClassModel offlineClass = ClassModel.fromJson(response.data);
+      return offlineClass;
     } on DioError catch (e) {
       if (e.response != null) {
         throw (e.response!.data['errors'][0]);
@@ -27,9 +26,11 @@ class OfflineClassService {
     }
   }
 
-  getOfflineClassById(String id) async {
+  Future<ClassModel> getOfflineClassById(String id) async {
     try {
       final Response response = await dio.get(urls.getOfflineClassById(id));
+      final ClassModel offlineClass = ClassModel.fromJson(response.data);
+      return offlineClass;
     } on DioError catch (e) {
       if (e.response != null) {
         throw (e.response!.data['errors'][0]);
