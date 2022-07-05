@@ -2,10 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:workout_zone/models/user_model.dart';
+import 'package:workout_zone/views/widgets/shimmer_placeholder.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../bloc/offline_class/offline_class_bloc.dart';
+import '../../bloc/online_class/online_class_bloc.dart';
 import '../../bloc/user/user_bloc.dart';
+import '../../models/user_model.dart';
 import '../../utils/common/constant.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
@@ -13,9 +16,9 @@ import '../widgets/vertical_space.dart';
 import 'widgets/class_card.dart';
 import 'widgets/home_image_carousel.dart';
 import 'widgets/image_card.dart';
+import 'widgets/join_membership_info.dart';
 import 'widgets/section_container.dart';
 import 'widgets/section_container_title.dart';
-import 'widgets/join_membership_info.dart';
 import 'widgets/video_image_card.dart';
 import 'widgets/welcome_bar.dart';
 
@@ -78,6 +81,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     context.read<UserBloc>().add(GetUserProfile());
+    context.read<OnlineClassBloc>().add(GetAllOnlineClass());
+    context.read<OfflineClassBloc>().add(GetAllOfflineClass());
   }
 
   @override
@@ -92,10 +97,13 @@ class _HomePageState extends State<HomePage> {
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UserGetFailed) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.msg),),);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.msg),
+            ),
+          );
           context.router.replaceAll([
-            const ErrorRoute(),
+            ErrorRoute(isHome: true),
           ]);
         }
         if (state is UserSuccess) {
@@ -126,9 +134,19 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const VerticalSpace(height: 15),
-              HomeImageCarousel(
-                imgList: bannerImgList,
-                textList: textList,
+              BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  if (state is UserSuccess) {
+                    return HomeImageCarousel(
+                      imgList: bannerImgList,
+                      textList: textList,
+                    );
+                  }
+                  return const ShimmerPlaceholder(
+                    height: 166,
+                    width: double.infinity,
+                  );
+                },
               ),
               const VerticalSpace(height: 20),
               BlocBuilder<UserBloc, UserState>(
@@ -152,98 +170,190 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SectionContainerTitle(
-                    moreThan5: true,
-                    title: 'Offline Class',
-                    onTap: () {
-                      context.router.push(
-                        ClassRoute(
-                          classType: offlineClass,
-                          user: user,
+              BlocBuilder<OfflineClassBloc, OfflineClassState>(
+                builder: (context, state) {
+                  if (state is OfflineClassLoaded) {
+                    final offlineClasses = state.offlineClass;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SectionContainerTitle(
+                          moreThan5: offlineClasses.data == null
+                              ? false
+                              : offlineClasses.data!.length > 5,
+                          title: 'Offline Class',
+                          onTap: () {
+                            context.router.push(
+                              ClassRoute(
+                                classType: offlineClass,
+                                classes: offlineClasses,
+                                user: user,
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                  const VerticalSpace(height: 10),
-                  SectionContainer(
-                    height: 130,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: imgList.length > 5 ? 5 : imgList.length,
-                      itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: ClassCard(
-                            isLoading: false,
-                            onTap: () {
-                              context.router.push(
-                                ClassDetailRoute(
-                                  classType: offlineClass,
-                                  user: user,
+                        const VerticalSpace(height: 10),
+                        SectionContainer(
+                          height: 130,
+                          child: offlineClasses.data != null
+                              ? ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: offlineClasses.data!.length > 5
+                                      ? 5
+                                      : offlineClasses.data!.length,
+                                  itemBuilder: ((context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: ClassCard(
+                                        onTap: () {
+                                          context.router.push(
+                                            ClassDetailRoute(
+                                                user: user,
+                                                classes: offlineClasses
+                                                    .data![index]),
+                                          );
+                                        },
+                                        startTime:
+                                            offlineClasses.data![index].clock!,
+                                        img: imgList[0],
+                                        location: 'Gym Studio - Bandung',
+                                        type: offlineClass,
+                                        title: offlineClasses
+                                            .data![index].classname!,
+                                      ),
+                                    );
+                                  }),
+                                )
+                              : const Center(
+                                  child: Text("No Class Available Right Now"),
                                 ),
-                              );
-                            },
-                            startTime: '16:00',
-                            img: imgList[0],
-                            location: 'Gym Studio - Bandung',
-                            type: offlineClass,
-                            title: 'aaaaaaaaaaaaaa',
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                ],
+                        ),
+                      ],
+                    );
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          ShimmerPlaceholder(height: 14, width: 100),
+                          ShimmerPlaceholder(height: 14, width: 50),
+                        ],
+                      ),
+                      const VerticalSpace(height: 10),
+                      SectionContainer(
+                        height: 130,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return const Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: ShimmerPlaceholder(
+                                height: 125,
+                                width: 150,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const VerticalSpace(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SectionContainerTitle(
-                    moreThan5: true,
-                    title: 'Online Class',
-                    onTap: () {
-                      context.router.push(
-                        ClassRoute(
-                          classType: onlineClass,
-                          user: user,
+              BlocBuilder<OnlineClassBloc, OnlineClassState>(
+                builder: (context, state) {
+                  if (state is OnlineClassLoaded) {
+                    final onlineClasses = state.onlineClass;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SectionContainerTitle(
+                          moreThan5: onlineClasses.data == null
+                              ? false
+                              : onlineClasses.data!.length > 5,
+                          title: 'Online Class',
+                          onTap: () {
+                            context.router.push(
+                              ClassRoute(
+                                classType: onlineClass,
+                                classes: onlineClasses,
+                                user: user,
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                  const VerticalSpace(height: 10),
-                  SectionContainer(
-                    height: 130,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: imgList.length > 5 ? 5 : imgList.length,
-                      itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: ClassCard(
-                            isLoading: isLoading,
-                            onTap: () {
-                              context.router.push(
-                                ClassDetailRoute(
-                                  classType: onlineClass,
-                                  user: user,
+                        const VerticalSpace(height: 10),
+                        SectionContainer(
+                          height: 130,
+                          child: onlineClasses.data != null
+                              ? ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: onlineClasses.data!.length > 5
+                                      ? 5
+                                      : onlineClasses.data!.length,
+                                  itemBuilder: ((context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: ClassCard(
+                                        onTap: () {
+                                          context.router.push(
+                                            ClassDetailRoute(
+                                                user: user,
+                                                classes:
+                                                    onlineClasses.data![index]),
+                                          );
+                                        },
+                                        startTime:
+                                            onlineClasses.data![index].clock!,
+                                        img: imgList[0],
+                                        location: 'Streaming - Zoom',
+                                        type: onlineClass,
+                                        title: onlineClasses
+                                            .data![index].classname!,
+                                      ),
+                                    );
+                                  }),
+                                )
+                              : const Center(
+                                  child: Text("No Class Available Right Now"),
                                 ),
-                              );
-                            },
-                            startTime: '16:00',
-                            img: imgList[0],
-                            location: 'Streaming - Zoom',
-                            type: onlineClass,
-                            title: 'aaaa',
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                ],
+                        ),
+                      ],
+                    );
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          ShimmerPlaceholder(height: 14, width: 100),
+                          ShimmerPlaceholder(height: 14, width: 50),
+                        ],
+                      ),
+                      const VerticalSpace(height: 10),
+                      SectionContainer(
+                        height: 130,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return const Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: ShimmerPlaceholder(
+                                height: 125,
+                                width: 150,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const VerticalSpace(height: 20),
               Column(

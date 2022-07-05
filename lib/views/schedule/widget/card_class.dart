@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_zone/models/class_model.dart';
 
 import '../../../models/user_model.dart';
 import '../../../utils/routes/routes.gr.dart';
@@ -26,7 +27,20 @@ class CardClass extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.router.push(
-          ClassDetailRoute(classType: classType, user: user),
+          ClassDetailRoute(
+            classes: Class(
+              classname: classTitle,
+              clastype: classType,
+              trainer: trainer,
+              clock: startTime,
+              description:
+                  'Qui labore labore sunt reprehenderit velit. Pariatur culpa quis ea proident ut nulla ipsum. Laborum aliquip laborum excepteur cupidatat fugiat fugiat sint consectetur deserunt.',
+              date: '22-20-2022',
+              status: 'Available',
+              duration: 60,
+            ),
+            user: user,
+          ),
         );
       },
       child: Card(
@@ -54,10 +68,7 @@ class CardClass extends StatelessWidget {
                                 fontWeight: kSemiBoldWeight,
                               ),
                     ),
-                    LocationInfo(
-                      classType: classType,
-                      location: location,
-                    ),
+                    LocationInfo(classType: classType),
                     TrainerInfo(trainer: trainer),
                   ],
                 ),

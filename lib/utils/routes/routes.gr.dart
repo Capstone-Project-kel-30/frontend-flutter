@@ -13,6 +13,8 @@
 import 'package:auto_route/auto_route.dart' as _i27;
 import 'package:flutter/material.dart' as _i28;
 
+import '../../models/class_model.dart' as _i30;
+import '../../models/membership_payment_model.dart' as _i31;
 import '../../models/user_model.dart' as _i29;
 import '../../views/authentication/create_new_pass.dart' as _i9;
 import '../../views/authentication/forget_password_page.dart' as _i6;
@@ -112,7 +114,10 @@ class AppRouter extends _i27.RootStackRouter {
       return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i14.ClassPage(
-              key: args.key, classType: args.classType, user: args.user));
+              key: args.key,
+              classType: args.classType,
+              user: args.user,
+              classes: args.classes));
     },
     NewsletterRoute.name: (routeData) {
       return _i27.MaterialPageX<dynamic>(
@@ -123,29 +128,35 @@ class AppRouter extends _i27.RootStackRouter {
       return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i16.ClassDetailPage(
-              key: args.key, classType: args.classType, user: args.user));
+              key: args.key, user: args.user, classes: args.classes));
     },
     MembershipDetailRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipDetailRouteArgs>();
       return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i17.MembershipDetailPage(
-              key: args.key, type: args.type, price: args.price));
+              key: args.key,
+              type: args.type,
+              price: args.price,
+              description: args.description));
     },
     MembershipPaymentRoute.name: (routeData) {
       final args = routeData.argsAs<MembershipPaymentRouteArgs>();
       return _i27.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i18.MembershipPaymentPage(
-              key: args.key, type: args.type, price: args.price));
+              key: args.key, membershipPayment: args.membershipPayment));
     },
     BookingDetailRoute.name: (routeData) {
       return _i27.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i19.BookingDetailPage());
     },
     ErrorRoute.name: (routeData) {
+      final args = routeData.argsAs<ErrorRouteArgs>();
       return _i27.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i20.ErrorPage());
+          routeData: routeData,
+          child: _i20.ErrorPage(
+              key: args.key, isHome: args.isHome, message: args.message));
     },
     MembershipRoute.name: (routeData) {
       return _i27.MaterialPageX<dynamic>(
@@ -392,16 +403,24 @@ class NewPassword extends _i27.PageRouteInfo<void> {
 /// [_i14.ClassPage]
 class ClassRoute extends _i27.PageRouteInfo<ClassRouteArgs> {
   ClassRoute(
-      {_i28.Key? key, required String classType, required _i29.UserModel user})
+      {_i28.Key? key,
+      required String classType,
+      required _i29.UserModel user,
+      required _i30.ClassModel classes})
       : super(ClassRoute.name,
             path: 'class',
-            args: ClassRouteArgs(key: key, classType: classType, user: user));
+            args: ClassRouteArgs(
+                key: key, classType: classType, user: user, classes: classes));
 
   static const String name = 'ClassRoute';
 }
 
 class ClassRouteArgs {
-  const ClassRouteArgs({this.key, required this.classType, required this.user});
+  const ClassRouteArgs(
+      {this.key,
+      required this.classType,
+      required this.user,
+      required this.classes});
 
   final _i28.Key? key;
 
@@ -409,9 +428,11 @@ class ClassRouteArgs {
 
   final _i29.UserModel user;
 
+  final _i30.ClassModel classes;
+
   @override
   String toString() {
-    return 'ClassRouteArgs{key: $key, classType: $classType, user: $user}';
+    return 'ClassRouteArgs{key: $key, classType: $classType, user: $user, classes: $classes}';
   }
 }
 
@@ -427,28 +448,29 @@ class NewsletterRoute extends _i27.PageRouteInfo<void> {
 /// [_i16.ClassDetailPage]
 class ClassDetailRoute extends _i27.PageRouteInfo<ClassDetailRouteArgs> {
   ClassDetailRoute(
-      {_i28.Key? key, required String classType, required _i29.UserModel user})
+      {_i28.Key? key,
+      required _i29.UserModel user,
+      required _i30.Class classes})
       : super(ClassDetailRoute.name,
             path: 'classDetail',
-            args: ClassDetailRouteArgs(
-                key: key, classType: classType, user: user));
+            args: ClassDetailRouteArgs(key: key, user: user, classes: classes));
 
   static const String name = 'ClassDetailRoute';
 }
 
 class ClassDetailRouteArgs {
   const ClassDetailRouteArgs(
-      {this.key, required this.classType, required this.user});
+      {this.key, required this.user, required this.classes});
 
   final _i28.Key? key;
 
-  final String classType;
-
   final _i29.UserModel user;
+
+  final _i30.Class classes;
 
   @override
   String toString() {
-    return 'ClassDetailRouteArgs{key: $key, classType: $classType, user: $user}';
+    return 'ClassDetailRouteArgs{key: $key, user: $user, classes: $classes}';
   }
 }
 
@@ -457,18 +479,24 @@ class ClassDetailRouteArgs {
 class MembershipDetailRoute
     extends _i27.PageRouteInfo<MembershipDetailRouteArgs> {
   MembershipDetailRoute(
-      {_i28.Key? key, required String type, required String price})
+      {_i28.Key? key,
+      required String type,
+      required String price,
+      required String description})
       : super(MembershipDetailRoute.name,
             path: 'membershipDetail',
-            args:
-                MembershipDetailRouteArgs(key: key, type: type, price: price));
+            args: MembershipDetailRouteArgs(
+                key: key, type: type, price: price, description: description));
 
   static const String name = 'MembershipDetailRoute';
 }
 
 class MembershipDetailRouteArgs {
   const MembershipDetailRouteArgs(
-      {this.key, required this.type, required this.price});
+      {this.key,
+      required this.type,
+      required this.price,
+      required this.description});
 
   final _i28.Key? key;
 
@@ -476,9 +504,11 @@ class MembershipDetailRouteArgs {
 
   final String price;
 
+  final String description;
+
   @override
   String toString() {
-    return 'MembershipDetailRouteArgs{key: $key, type: $type, price: $price}';
+    return 'MembershipDetailRouteArgs{key: $key, type: $type, price: $price, description: $description}';
   }
 }
 
@@ -487,28 +517,25 @@ class MembershipDetailRouteArgs {
 class MembershipPaymentRoute
     extends _i27.PageRouteInfo<MembershipPaymentRouteArgs> {
   MembershipPaymentRoute(
-      {_i28.Key? key, required String type, required String price})
+      {_i28.Key? key, required _i31.MembershipPaymentModel membershipPayment})
       : super(MembershipPaymentRoute.name,
             path: 'membershipPayment',
-            args:
-                MembershipPaymentRouteArgs(key: key, type: type, price: price));
+            args: MembershipPaymentRouteArgs(
+                key: key, membershipPayment: membershipPayment));
 
   static const String name = 'MembershipPaymentRoute';
 }
 
 class MembershipPaymentRouteArgs {
-  const MembershipPaymentRouteArgs(
-      {this.key, required this.type, required this.price});
+  const MembershipPaymentRouteArgs({this.key, required this.membershipPayment});
 
   final _i28.Key? key;
 
-  final String type;
-
-  final String price;
+  final _i31.MembershipPaymentModel membershipPayment;
 
   @override
   String toString() {
-    return 'MembershipPaymentRouteArgs{key: $key, type: $type, price: $price}';
+    return 'MembershipPaymentRouteArgs{key: $key, membershipPayment: $membershipPayment}';
   }
 }
 
@@ -523,10 +550,32 @@ class BookingDetailRoute extends _i27.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.ErrorPage]
-class ErrorRoute extends _i27.PageRouteInfo<void> {
-  const ErrorRoute() : super(ErrorRoute.name, path: 'error');
+class ErrorRoute extends _i27.PageRouteInfo<ErrorRouteArgs> {
+  ErrorRoute(
+      {_i28.Key? key,
+      required bool isHome,
+      String message = "Unable to Fetch Data"})
+      : super(ErrorRoute.name,
+            path: 'error',
+            args: ErrorRouteArgs(key: key, isHome: isHome, message: message));
 
   static const String name = 'ErrorRoute';
+}
+
+class ErrorRouteArgs {
+  const ErrorRouteArgs(
+      {this.key, required this.isHome, this.message = "Unable to Fetch Data"});
+
+  final _i28.Key? key;
+
+  final bool isHome;
+
+  final String message;
+
+  @override
+  String toString() {
+    return 'ErrorRouteArgs{key: $key, isHome: $isHome, message: $message}';
+  }
 }
 
 /// generated route for

@@ -2,7 +2,7 @@ class UserModel {
   bool? status;
   String? message;
   List<String>? errors;
-  Data? data;
+  User? data;
 
   UserModel({this.status, this.message, this.errors, this.data});
 
@@ -10,7 +10,7 @@ class UserModel {
     status = json['status'];
     message = json['message'];
     errors = json['errors'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? User.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -25,7 +25,7 @@ class UserModel {
   }
 }
 
-class Data {
+class User {
   int? id;
   String? name;
   String? email;
@@ -34,8 +34,9 @@ class Data {
   String? memberType;
   String? token;
   String? totp;
+  String? password;
 
-  Data({
+  User({
     this.id,
     this.name,
     this.email,
@@ -44,9 +45,10 @@ class Data {
     this.memberType,
     this.token,
     this.totp,
+    this.password,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -55,6 +57,7 @@ class Data {
     memberType = json['member_type'];
     token = json['token'];
     totp = json['totp'];
+    password = json['password'];
   }
 
   Map<String, dynamic> toJson() {
@@ -67,6 +70,7 @@ class Data {
     data['member_type'] = memberType;
     data['token'] = token;
     data['totp'] = totp;
+    data['password'] = password;
     return data;
   }
 }

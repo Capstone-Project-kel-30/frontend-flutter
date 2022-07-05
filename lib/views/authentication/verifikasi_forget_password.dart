@@ -147,17 +147,25 @@ class _VerfikasiForgetPasswordState extends State<VerfikasiForgetPassword> {
                 const VerticalSpace(height: 20),
                 BlocListener<AuthBloc, AuthState>(
                   listener: (context, state) {
-                    if (state is AuthSuccess) {
+                    if (state is NewOTPSended) {
                       setState(() {
                         currentOTP = state.otp;
                       });
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('New OTP has been sent to your email'),
+                          ),
+                        );
                     }
                   },
                   child: Bottomtxt(
                     txt1: 'I don’t receive a code!',
                     txt2: 'Please resend',
                     tekan: () {
-                      context.read<AuthBloc>().add(OTPRequest(widget.email));
+                      context.read<AuthBloc>().add(NewOTPRequest(widget.email));
                     },
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../models/class_model.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/common/constant.dart';
@@ -18,11 +19,11 @@ import 'widgets/facilities_info.dart';
 class ClassDetailPage extends StatelessWidget {
   ClassDetailPage({
     Key? key,
-    required this.classType,
     required this.user,
+    required this.classes,
   }) : super(key: key);
 
-  final String classType;
+  final Class classes;
   final UserModel user;
 
   final List<String> imgList = [
@@ -63,39 +64,40 @@ class ClassDetailPage extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const VerticalSpace(height: 10),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: HSLColor.fromColor(kGreyColor)
-                              .withLightness(0.8)
-                              .toColor(),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const SizedBox(
-                          height: 5,
-                          width: 50,
+                      Center(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: HSLColor.fromColor(kGreyColor)
+                                .withLightness(0.8)
+                                .toColor(),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const SizedBox(
+                            height: 5,
+                            width: 50,
+                          ),
                         ),
                       ),
                       const VerticalSpace(height: 25),
                       ClassTitle(
-                        classType: classType,
-                        classTitle: 'Boxing',
-                        location: classType == offlineClass
-                            ? 'Gym Studio - Bandung'
-                            : 'Streaming - Zoom',
+                        classType: classes.clastype!.toUpperCase(),
+                        classTitle: classes.classname!,
+                        location:
+                            classes.clastype!.toUpperCase() == offlineClass
+                                ? 'Gym Studio - Bandung'
+                                : 'Streaming - Zoom',
                       ),
                       const VerticalSpace(height: 20),
-                      const ClassInfo(
-                        date: '03 June 2022',
-                        startTime: '16:00',
-                        trainer: 'trainer',
+                      ClassInfo(
+                        date: classes.date!,
+                        startTime: classes.clock!,
+                        trainer: classes.trainer!,
                       ),
                       const VerticalSpace(height: 20),
-                      const ClassDescription(
-                        description:
-                            'Laboris qui laborum laboris voluptate est occaecat ad duis cillum deserunt consequat dolor. Dolor irure excepteur amet adipisicing in culpa magna sunt est aliquip aliqua. Quis esse id veniam non irure. Reprehenderit cupidatat eiusmod sit deserunt anim.',
-                      ),
+                      ClassDescription(description: classes.description!),
                       const VerticalSpace(height: 20),
                       const FacilitiesInfo(
                         facilities: [

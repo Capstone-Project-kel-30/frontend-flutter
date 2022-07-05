@@ -6,7 +6,14 @@ import '../../utils/themes/app_theme.dart';
 import '../widgets/vertical_space.dart';
 
 class ErrorPage extends StatelessWidget {
-  const ErrorPage({Key? key}) : super(key: key);
+  const ErrorPage({
+    Key? key,
+    required this.isHome,
+    this.message = "Unable to Fetch Data",
+  }) : super(key: key);
+
+  final bool isHome;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,8 @@ class ErrorPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Unable to Fetch Data",
+                message,
+                textAlign: TextAlign.center,
                 style: AppTheme.theme(context).textTheme.titleLarge?.copyWith(
                       fontWeight: kBoldWeight,
                     ),
@@ -25,7 +33,7 @@ class ErrorPage extends StatelessWidget {
               const VerticalSpace(height: 20),
               TextButton(
                 child: Text(
-                  "Go Home",
+                  isHome ? "Restart" : "Go Home",
                   style: AppTheme.theme(context).textTheme.bodyLarge?.copyWith(
                         decoration: TextDecoration.underline,
                         color: kPrimaryColor,

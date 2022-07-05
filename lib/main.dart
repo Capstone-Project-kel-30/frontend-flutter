@@ -6,6 +6,8 @@ import 'bloc/bloc.dart';
 import 'services/locals/user_info_service.dart';
 import 'services/remotes/auth_service.dart';
 import 'services/remotes/membership_service.dart';
+import 'services/remotes/offline_class_service.dart';
+import 'services/remotes/online_class_service.dart';
 import 'services/remotes/user_service.dart';
 import 'utils/routes/routes.gr.dart';
 import 'utils/themes/app_theme.dart';
@@ -28,6 +30,8 @@ class _MyAppState extends State<MyApp> {
   final AuthService _authService = AuthService();
   final UserService _userService = UserService();
   final MembershipService _membershipService = MembershipService();
+  final OnlineClassService _onlineClassService = OnlineClassService();
+  final OfflineClassService _offlineClassService = OfflineClassService();
 
   @override
   void initState() {
@@ -64,6 +68,12 @@ class _MyAppState extends State<MyApp> {
             _membershipService,
             _userInfoService,
           ),
+        ),
+        BlocProvider(
+          create: (_) => OnlineClassBloc(_onlineClassService),
+        ),
+        BlocProvider(
+          create: (_) => OfflineClassBloc(_offlineClassService),
         ),
       ],
       child: MaterialApp.router(

@@ -22,19 +22,26 @@ class ClassTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              classTitle,
-              style: AppTheme.theme(context).textTheme.titleLarge?.copyWith(
-                    fontSize: 20,
-                    fontWeight: kSemiBoldWeight,
-                  ),
-            ),
-            const VerticalSpace(height: 5),
-            LocationInfo(classType: classType, location: location),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Text(
+                  classTitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTheme.theme(context).textTheme.titleLarge?.copyWith(
+                        fontSize: 20,
+                        fontWeight: kSemiBoldWeight,
+                      ),
+                ),
+              ),
+              const VerticalSpace(height: 5),
+              LocationInfo(classType: classType),
+            ],
+          ),
         ),
         Badge(
             child: Text(

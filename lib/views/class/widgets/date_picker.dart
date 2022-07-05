@@ -7,7 +7,7 @@ import 'date_button.dart';
 class DatePicker extends StatefulWidget {
   const DatePicker({Key? key, required this.onPressed}) : super(key: key);
 
-  final Function(int idx) onPressed;
+  final Function(String datePicked) onPressed;
 
   @override
   State<DatePicker> createState() => _DatePickerState();
@@ -17,7 +17,7 @@ class _DatePickerState extends State<DatePicker> {
   final DateTime current = DateTime.now();
   final DateFormat dayFormatter = DateFormat('E');
   final DateFormat dateFormatter = DateFormat('d');
-  final DateFormat fullDataFormatter = DateFormat('d-M');
+  final DateFormat fullDataFormatter = DateFormat('d-M-y');
 
   List<String> fullData = [];
   List<String> days = [];
@@ -61,7 +61,7 @@ class _DatePickerState extends State<DatePicker> {
                     setState(() {
                       dateActived = idx;
                     });
-                    widget.onPressed(idx);
+                    widget.onPressed(fullData[idx]);
                   },
                 ),
               );

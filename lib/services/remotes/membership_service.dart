@@ -82,6 +82,25 @@ class MembershipService {
     }
   }
 
+  Future<MembershipModel> getMembershipById(String id) async {
+    try {
+      final Response response = await dio.get(
+        urls.membershipDetailById(id),
+      );
+      final MembershipModel membership =
+          MembershipModel.fromJson(response.data);
+      return membership;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        throw (e.response!.data['errors'][0]);
+      } else if (e.type == DioErrorType.connectTimeout) {
+        throw ('request timeout, please check your connection');
+      } else {
+        throw ('server error');
+      }
+    }
+  }
+
   bookingClass({required String userId, required String classId}) async {
     final Map<String, String> data = {
       'user_id': userId,
