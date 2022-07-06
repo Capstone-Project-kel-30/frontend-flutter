@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_zone/bloc/bloc.dart';
 import 'package:workout_zone/views/authentication/widgets/form_password.dart';
 import 'package:workout_zone/views/widgets/cutom_elevated_button.dart';
 
@@ -68,6 +70,14 @@ class _NewPasswordState extends State<NewPassword> {
               text: "Save",
               onPressed: () {
                 if (_formkey.currentState!.validate()) {}
+                context.read<UserBloc>().add(
+                      UpdateUser(
+                        email: "",
+                        name: "",
+                        password: _newPasswordCntrl.text,
+                        phone: "",
+                      ),
+                    );
               },
             )
           ],
