@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_zone/views/widgets/payment_button.dart';
-import 'package:workout_zone/views/widgets/user_info.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-import '../../bloc/user/user_bloc.dart';
-import '../../utils/common/constant.dart';
+import '../../models/book_info_model.dart';
+import '../../models/user_model.dart';
+import '../widgets/payment_button.dart';
+import '../widgets/user_info.dart';
+import '../widgets/vertical_space.dart';
 import 'widgets/booking_id.dart';
 import 'widgets/booking_type.dart';
 import 'widgets/membership_type.dart';
 
-class BookingDetailPage extends StatelessWidget {
-  const BookingDetailPage({Key? key}) : super(key: key);
+class BookingDetailPage extends StatefulWidget {
+  const BookingDetailPage({
+    Key? key,
+    required this.bookInfo,
+    required this.user,
+  }) : super(key: key);
 
+  final BookInfoModel bookInfo;
+  final User user;
+
+  @override
+  State<BookingDetailPage> createState() => _BookingDetailPageState();
+}
+
+class _BookingDetailPageState extends State<BookingDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,35 +40,26 @@ class BookingDetailPage extends StatelessWidget {
           children: [
             Column(
               children: [
-                const BookingId(bookingId: '12345'),
-                const VerticalSpace(height: 20),
-                const BookingType(
-                  classTitle: 'Boxing',
-                  classType: offlineClass,
-                  classDate: '22 Juni 2022',
+                BookingId(
+                  bookingId:
+                      'GYM30-${widget.user.memberType!.toUpperCase()}-${widget.bookInfo.data!.id.toString()}',
                 ),
                 const VerticalSpace(height: 20),
-                BlocBuilder<UserBloc, UserState>(
-                  builder: (context, state) {
-                    if (state is UserSuccess) {
-                      return UserInfo(
-                        isLoading: false,
-                        name: state.user.data!.name!,
-                        phone: state.user.data!.phone!,
-                        email: state.user.data!.email!,
-                      );
-                    }
-                    return const UserInfo(
-                      isLoading: true,
-                      name: '',
-                      phone: '',
-                      email: '',
-                    );
-                  },
+                BookingType(
+                  classTitle: widget.bookInfo.data!.classes!.classname!,
+                  classType: widget.bookInfo.data!.classes!.clastype!,
+                  classDate: widget.bookInfo.data!.classes!.date!,
                 ),
                 const VerticalSpace(height: 20),
-                const MembershipType(
-                  memberType: goldMember,
+                UserInfo(
+                  isLoading: false,
+                  name: widget.user.name!,
+                  phone: widget.user.phone!,
+                  email: widget.user.email!,
+                ),
+                const VerticalSpace(height: 20),
+                MembershipType(
+                  memberType: widget.user.memberType!,
                 ),
               ],
             ),

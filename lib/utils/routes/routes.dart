@@ -1,42 +1,31 @@
 import 'package:auto_route/annotations.dart';
-import 'package:workout_zone/views/authentication/create_new_pass.dart';
-import 'package:workout_zone/views/authentication/forget_password_page.dart';
-import 'package:workout_zone/views/authentication/sign_in_page.dart';
-import 'package:workout_zone/views/authentication/sign_up_page.dart';
-import 'package:workout_zone/views/authentication/verfikasi_signup.dart';
-import 'package:workout_zone/views/authentication/verifikasi_forget_password.dart';
-import 'package:workout_zone/views/class/booking_detail_page.dart';
-import 'package:workout_zone/views/class/class_detail_page.dart';
-
-import 'package:workout_zone/views/class/class_page.dart';
-import 'package:workout_zone/views/error/error_page.dart';
-import 'package:workout_zone/views/home/home_page.dart';
-import 'package:workout_zone/views/initial/initial_page.dart';
-import 'package:workout_zone/views/membership/membership_page.dart';
-import 'package:workout_zone/views/newsletter/newsletter_page.dart';
-import 'package:workout_zone/views/on_boarding/landing_page.dart';
-import 'package:workout_zone/views/on_boarding/on_boarding_page.dart';
-import 'package:workout_zone/views/profile/new_password.dart';
-import 'package:workout_zone/views/profile/profile_edit.dart';
-import 'package:workout_zone/views/profile/profile_page.dart';
-import 'package:workout_zone/views/profile/profile_setting.dart';
-import 'package:workout_zone/views/schedule/schedule_page.dart';
-import 'package:workout_zone/views/video_content/video_content_page.dart';
-import 'package:workout_zone/views/wrapper/home_inner.dart';
-import 'package:workout_zone/views/wrapper/home_wrapper.dart';
+import '../../views/authentication/create_new_pass.dart';
+import '../../views/authentication/forget_password_page.dart';
 import '../../views/authentication/sign_in_page.dart';
 import '../../views/authentication/sign_up_page.dart';
+import '../../views/authentication/verfikasi_signup.dart';
+import '../../views/authentication/verifikasi_forget_password.dart';
+import '../../views/class/booking_detail_page.dart';
+import '../../views/class/class_detail_page.dart';
 import '../../views/class/class_page.dart';
+import '../../views/error/error_page.dart';
 import '../../views/home/home_page.dart';
-import '../../views/membership/membership_detail_page.dart';
+import '../../views/initial/initial_page.dart';
 import '../../views/membership/membership_page.dart';
-import '../../views/membership/membership_payment_page.dart';
+import '../../views/newsletter/newsletter_detail_page.dart';
 import '../../views/newsletter/newsletter_page.dart';
+import '../../views/on_boarding/landing_page.dart';
 import '../../views/on_boarding/on_boarding_page.dart';
+import '../../views/profile/new_password.dart';
+import '../../views/profile/profile_edit.dart';
 import '../../views/profile/profile_page.dart';
+import '../../views/profile/profile_setting.dart';
 import '../../views/schedule/schedule_page.dart';
 import '../../views/video_content/video_content_page.dart';
+import '../../views/wrapper/home_inner.dart';
 import '../../views/wrapper/home_wrapper.dart';
+import '../../views/membership/membership_detail_page.dart';
+import '../../views/membership/membership_payment_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -134,6 +123,10 @@ import '../../views/wrapper/home_wrapper.dart';
     AutoRoute(
       path: 'newsletter',
       page: NewsletterPage,
+    ),
+    AutoRoute(
+      path: 'newsletterDetail',
+      page: NewsletterDetailPage,
     ),
     AutoRoute(
       path: 'classDetail',

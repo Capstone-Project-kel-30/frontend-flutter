@@ -26,11 +26,6 @@ class CardClass extends StatelessWidget {
     return SizedBox(
       height: 80,
       child: Card(
-        elevation: 3,
-        shadowColor: kLightColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(

@@ -19,10 +19,6 @@ class CardProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      elevation: 1.1,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -44,10 +44,6 @@ class CardClass extends StatelessWidget {
         );
       },
       child: Card(
-        elevation: 1,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(

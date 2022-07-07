@@ -45,6 +45,14 @@ class AppTheme {
         error: kRedColor,
         background: kBackgroundColor,
       ),
+      cardTheme: CardTheme(
+        color: kLightColor,
+        elevation: 3,
+        shadowColor: kLightColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: kBackgroundColor,
         elevation: 5,

@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:workout_zone/services/remotes/dio_error_handler.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/urls/url.dart';
@@ -26,13 +28,10 @@ class AuthService {
       final UserModel user = UserModel.fromJson(response.data);
       return user;
     } on DioError catch (e) {
-      if (e.response!.data['errors'] != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
@@ -49,13 +48,10 @@ class AuthService {
       final UserModel user = UserModel.fromJson(response.data);
       return user;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
@@ -71,13 +67,10 @@ class AuthService {
       final UserModel user = UserModel.fromJson(response.data);
       return user;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
@@ -97,14 +90,9 @@ class AuthService {
       final UserModel user = UserModel.fromJson(response.data);
       return user;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
-    } catch (e) {
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
       throw ('server error');
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_zone/views/home/widgets/custom_search_delegate.dart';
 
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/horizontal_space.dart';
@@ -76,7 +77,12 @@ class WelcomeBar extends StatelessWidget {
                     icon: SvgPicture.asset('assets/icons/Search-Outline.svg'),
                     padding: EdgeInsets.zero,
                     splashRadius: 20,
-                    onPressed: () {},
+                    onPressed: () async {
+                      await showSearch(
+                        context: context,
+                        delegate: CustomSearchDelegate(),
+                      );
+                    },
                   ),
             isLoading
                 ? Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_zone/utils/common/helper.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/widgets/horizontal_space.dart';
 
@@ -42,7 +43,7 @@ class SelectButton extends StatelessWidget {
                 ),
               const HorizontalSpace(width: 5),
               Text(
-                title!,
+                capitalize(title!),
                 style: AppTheme.theme(context).textTheme.titleSmall!.copyWith(
                       fontSize: 12,
                       fontWeight: kSemiBoldWeight,

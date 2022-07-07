@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/views/schedule/widget/select_button.dart';
+import 'package:workout_zone/views/widgets/select_button.dart';
 
 class SelectPicker extends StatefulWidget {
   const SelectPicker({

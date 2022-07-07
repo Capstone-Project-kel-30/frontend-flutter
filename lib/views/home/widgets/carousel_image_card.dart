@@ -1,7 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/cutom_elevated_button.dart';
 import '../../widgets/vertical_space.dart';
@@ -11,10 +9,12 @@ class CarouselImageCard extends StatelessWidget {
     Key? key,
     required this.img,
     required this.textList,
+    required this.onPressed,
   }) : super(key: key);
 
   final String img;
   final List<String> textList;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +98,7 @@ class CarouselImageCard extends StatelessWidget {
                     width: null,
                     height: 22,
                     fontWeight: kBoldWeight,
-                    onPressed: () {
-                      context.router.push(const MembershipRoute());
-                    },
+                    onPressed: onPressed,
                   )
                 ],
               ),
