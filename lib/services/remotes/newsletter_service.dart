@@ -1,43 +1,42 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:workout_zone/models/newsletter__model.dart';
 
 import '../../utils/urls/url.dart';
 import 'dio.dart';
+import 'dio_error_handler.dart';
 
 class NewsletterService {
   NewsletterService() {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
-  getAllNewsletter(String authorization) async {
-    final Map<String, String> header = {
-      'Authorization': authorization,
-    };
+  Future<NewsletterModel> getAllNewsletter() async {
     try {
-      final Response response = await dio.post(
+      final Response response = await dio.get(
         urls.getAllNewsletter(),
-        options: Options(headers: header),
       );
+      final NewsletterModel newsletters =
+          NewsletterModel.fromJson(response.data);
+      return newsletters;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
-  getNewsletterById(String id) async {
+  Future<NewsletterModel> getNewsletterById(String id) async {
     try {
       final Response response = await dio.get(urls.getNewsletterById(id));
+      final NewsletterModel newsletter =
+          NewsletterModel.fromJson(response.data);
+      return newsletter;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_zone/models/class_model.dart';
+import 'package:workout_zone/views/widgets/custom_network_image.dart';
 import 'package:workout_zone/views/widgets/location_info.dart';
 
 import '../../../utils/themes/app_theme.dart';
@@ -9,15 +11,11 @@ import '../../widgets/vertical_space.dart';
 class ClassCard extends StatelessWidget {
   const ClassCard({
     Key? key,
-    required this.img,
-    required this.title,
-    required this.startTime,
-    required this.location,
-    required this.type,
     required this.onTap,
+    required this.selectedClass,
   }) : super(key: key);
 
-  final String img, title, startTime, location, type;
+  final Class selectedClass;
   final Function() onTap;
 
   @override
@@ -30,26 +28,18 @@ class ClassCard extends StatelessWidget {
         width: 150,
         child: Card(
           margin: EdgeInsets.zero,
-          color: kBackgroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          elevation: 3,
-          shadowColor: kLightColor,
           child: Column(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                child: Image.asset(
-                  img,
-                  fit: BoxFit.cover,
-                  height: 70,
-                  width: 150,
-                ),
-              ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  child: CustomNetworkImage(
+                    link: selectedClass.image!,
+                    height: 70,
+                    width: 100,
+                  )),
               Padding(
                 padding: const EdgeInsets.all(9),
                 child: Column(
@@ -59,7 +49,7 @@ class ClassCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            title,
+                            selectedClass.classname!,
                             style: AppTheme.theme(context)
                                 .textTheme
                                 .bodyMedium
@@ -87,7 +77,7 @@ class ClassCard extends StatelessWidget {
                                 SvgPicture.asset('assets/icons/Clock.svg'),
                                 const HorizontalSpace(width: 3),
                                 Text(
-                                  startTime,
+                                  selectedClass.clock!,
                                   style: AppTheme.theme(context)
                                       .textTheme
                                       .bodySmall
@@ -104,7 +94,8 @@ class ClassCard extends StatelessWidget {
                       ],
                     ),
                     const VerticalSpace(height: 5),
-                    LocationInfo(classType: type),
+                    LocationInfo(
+                        classType: selectedClass.clastype!.toUpperCase()),
                   ],
                 ),
               ),

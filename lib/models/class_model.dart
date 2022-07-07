@@ -46,6 +46,7 @@ class Class {
   int? duration;
   int? userBooked;
   String? description;
+  String? image;
 
   Class(
       {this.id,
@@ -58,20 +59,22 @@ class Class {
       this.clastype,
       this.duration,
       this.userBooked,
-      this.description});
+      this.description,
+      this.image});
 
   Class.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     classname = json['classname'];
     status = json['status'];
     capacity = json['capacity'];
-    trainer = json['trainer'];
-    date = json['date'];
-    clock = json['clock'];
-    clastype = json['clastype'];
+    trainer = json['trainer'] ?? json['Trainer'];
+    date = json['date'] ?? json['Date'];
+    clock = json['clock'] ?? json['Clock'];
+    clastype = json['clastype'] ?? json['ClassType'];
     duration = json['duration'];
     userBooked = json['user_booked'];
-    description = json['description'];
+    description = json['description'] ?? json['Description'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -87,6 +90,7 @@ class Class {
     data['duration'] = duration;
     data['user_booked'] = userBooked;
     data['description'] = description;
+    data['image'] = image;
     return data;
   }
 }

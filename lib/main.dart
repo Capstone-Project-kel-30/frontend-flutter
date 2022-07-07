@@ -5,9 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/bloc.dart';
 import 'services/locals/user_info_service.dart';
 import 'services/remotes/auth_service.dart';
+import 'services/remotes/class_service.dart';
 import 'services/remotes/membership_service.dart';
-import 'services/remotes/offline_class_service.dart';
-import 'services/remotes/online_class_service.dart';
+import 'services/remotes/newsletter_service.dart';
 import 'services/remotes/user_service.dart';
 import 'utils/routes/routes.gr.dart';
 import 'utils/themes/app_theme.dart';
@@ -30,8 +30,8 @@ class _MyAppState extends State<MyApp> {
   final AuthService _authService = AuthService();
   final UserService _userService = UserService();
   final MembershipService _membershipService = MembershipService();
-  final OnlineClassService _onlineClassService = OnlineClassService();
-  final OfflineClassService _offlineClassService = OfflineClassService();
+  final ClassService _classService = ClassService();
+  final NewsletterService _newsletterService = NewsletterService();
 
   @override
   void initState() {
@@ -60,6 +60,9 @@ class _MyAppState extends State<MyApp> {
             userService: _userService,
           ),
         ),
+        BlocProvider(create: (_) => AllClassBloc(_classService)),
+        BlocProvider(create: (_) => OfflineClassBloc(_classService)),
+        BlocProvider(create: (_) => OnlineClassBloc(_classService)),
         BlocProvider(
           create: (_) => MembershipBloc(_membershipService),
         ),
@@ -69,11 +72,12 @@ class _MyAppState extends State<MyApp> {
             _userInfoService,
           ),
         ),
+        BlocProvider(create: (_) => NewsletterBloc(_newsletterService)),
         BlocProvider(
-          create: (_) => OnlineClassBloc(_onlineClassService),
-        ),
-        BlocProvider(
-          create: (_) => OfflineClassBloc(_offlineClassService),
+          create: (_) => BookingBloc(
+            _membershipService,
+            _userInfoService,
+          ),
         ),
       ],
       child: MaterialApp.router(

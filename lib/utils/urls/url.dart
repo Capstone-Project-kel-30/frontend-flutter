@@ -4,7 +4,7 @@ class URLS {
   final String _auth = 'auth';
   final String _user = 'user';
   final String _member = 'member';
-  final String _newsletter = 'newslatter';
+  final String _newsletter = 'newsletter';
   final String _class = 'class';
   final String _online = 'online';
   final String _offline = 'offline';
@@ -57,6 +57,10 @@ class URLS {
     return '$_baseUrl/$_version/$_member/schedule';
   }
 
+  String getAllClass() {
+    return '$_baseUrl/$_version/$_class/list';
+  }
+
   String getAllOnlineClass() {
     return '$_baseUrl/$_version/$_class/$_online/list';
   }
@@ -82,7 +86,7 @@ class URLS {
   }
 
   String getAllNewsletter() {
-    return '$_baseUrl/$_version/$_newsletter/all';
+    return '$_baseUrl/$_version/$_newsletter/list';
   }
 
   String getNewsletterById(String id) {
