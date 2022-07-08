@@ -22,7 +22,6 @@ class ClassDescription extends StatelessWidget {
         const VerticalSpace(height: 10),
         Text(
           description,
-          textAlign: TextAlign.justify,
           style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(
                 color: kDarkColor,
               ),

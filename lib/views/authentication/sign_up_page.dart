@@ -249,7 +249,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           }
                         },
                         child: CustomElevatedButton(
-                          text: 'Sign Up',
+                          text: 'Register',
                           onPressed: _isUserEpty &&
                                   _isEmailEtpy &&
                                   _isPhoneEmpty &&

@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:workout_zone/models/book_info_model.dart';
 import 'package:workout_zone/models/membership_payment_model.dart';
 
 import '../../models/membership_model.dart';
 import '../../utils/urls/url.dart';
 import 'dio.dart';
+import 'dio_error_handler.dart';
 
 class MembershipService {
   MembershipService() {
@@ -29,13 +32,10 @@ class MembershipService {
           MembershipPaymentModel.fromJson(response.data);
       return membershipPayment;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
@@ -53,13 +53,10 @@ class MembershipService {
           MembershipPaymentModel.fromJson(response.data);
       return membershipPayment;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
@@ -72,18 +69,38 @@ class MembershipService {
           MembershipModel.fromJson(response.data);
       return membership;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
-  bookingClass({required String userId, required String classId}) async {
-    final Map<String, String> data = {
+  Future<MembershipModel> getMembershipById(String id) async {
+    try {
+      final Response response = await dio.get(
+        urls.membershipDetailById(id),
+      );
+      final MembershipModel membership =
+          MembershipModel.fromJson(response.data);
+      return membership;
+    } on DioError catch (e) {
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
+    }
+  }
+
+  Future<BookInfoModel> bookingClass({
+    required int userId,
+    required int classId,
+    required String authorization,
+  }) async {
+    final Map<String, dynamic> header = {
+      'Authorization': authorization,
+    };
+    final Map<String, dynamic> data = {
       'user_id': userId,
       'class_id': classId,
     };
@@ -91,15 +108,15 @@ class MembershipService {
       final Response response = await dio.post(
         urls.userBookingClass(),
         data: data,
+        options: Options(headers: header),
       );
+      final BookInfoModel bookInfo = BookInfoModel.fromJson(response.data);
+      return bookInfo;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
@@ -113,13 +130,10 @@ class MembershipService {
         options: Options(headers: header),
       );
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 }

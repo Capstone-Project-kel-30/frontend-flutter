@@ -117,7 +117,7 @@ class _SignInPageState extends State<SignInPage> {
                             ..showSnackBar(
                               const SnackBar(
                                 duration: Duration(seconds: 5),
-                                content: Text('Signing In ...'),
+                                content: Text('Logging In ...'),
                               ),
                             );
                         }
@@ -126,7 +126,7 @@ class _SignInPageState extends State<SignInPage> {
                             ..hideCurrentSnackBar()
                             ..showSnackBar(
                               const SnackBar(
-                                content: Text('Sign In Success'),
+                                content: Text('Login Success'),
                               ),
                             );
                           context.router.replaceAll([const HomeWrapper()]);
@@ -142,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
                         }
                       },
                       child: CustomElevatedButton(
-                        text: "Sign In",
+                        text: "Login",
                         onPressed: _isEmailEpty && _isPassEmpty
                             ? () {
                                 if (_formKey.currentState!.validate()) {
@@ -167,7 +167,7 @@ class _SignInPageState extends State<SignInPage> {
 
                     ///forget button
                     ForgetPassBttn(
-                      titile: 'Forget Password ?',
+                      titile: 'Forget Password?',
                       press: () {
                         context.router.push(
                           const ForgetPasswordRoute(),

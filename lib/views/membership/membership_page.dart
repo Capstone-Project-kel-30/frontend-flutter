@@ -35,17 +35,18 @@ class _MembershipPageState extends State<MembershipPage> {
           builder: (context, state) {
             if (state is MembershipError) {
               context.router.replaceAll([
-                const ErrorRoute(),
+                ErrorRoute(isHome: false),
               ]);
             }
             if (state is MembershipDetailLoaded) {
               return ListView.builder(
                 itemCount: state.membership.data!.length,
                 itemBuilder: (context, index) {
-                  final List<Data> data = state.membership.data!;
+                  final List<Member> data = state.membership.data!;
                   data.sort((a, b) => a.id!.compareTo(b.id!));
                   final String type = data[index].type!;
                   final String price = data[index].price!.toString();
+                  final String description = data[index].description!;
                   return Column(
                     children: [
                       CardInfo(
@@ -53,7 +54,11 @@ class _MembershipPageState extends State<MembershipPage> {
                         price: price,
                         onTap: () {
                           context.router.push(
-                            MembershipDetailRoute(type: type, price: price),
+                            MembershipDetailRoute(
+                              type: type,
+                              price: price,
+                              description: description,
+                            ),
                           );
                         },
                       ),

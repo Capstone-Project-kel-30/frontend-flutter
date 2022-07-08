@@ -143,10 +143,18 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                 const VerticalSpace(height: 20),
                 BlocListener<AuthBloc, AuthState>(
                   listener: (context, state) {
-                    if (state is AuthSuccess) {
+                    if (state is NewOTPSended) {
                       setState(() {
                         currentOTP = state.otp;
                       });
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text("New OTP has been sent to your email"),
+                          ),
+                        );
                     }
                   },
                   child: Bottomtxt(
@@ -154,7 +162,7 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                     txt2: 'Please resend',
                     tekan: () {
                       context.read<AuthBloc>().add(
-                            OTPRequest(widget.email),
+                            NewOTPRequest(widget.email),
                           );
                     },
                   ),
@@ -170,6 +178,13 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                                   '${_kotak1.text}${_kotak2.text}${_kotak3.text}${_kotak4.text}${_kotak5.text}${_kotak6.text}';
                               if (currentOTP != "") {
                                 if (userOtp == currentOTP) {
+                                  ScaffoldMessenger.of(context)
+                                    ..hideCurrentSnackBar()
+                                    ..showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Sign up success'),
+                                      ),
+                                    );
                                   context.router.replaceAll(
                                     [const SignInRoute()],
                                   );
@@ -184,6 +199,13 @@ class _VerfikasiSignUpState extends State<VerfikasiSignUp> {
                                 }
                               } else {
                                 if (userOtp == widget.otp) {
+                                  ScaffoldMessenger.of(context)
+                                    ..hideCurrentSnackBar()
+                                    ..showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Sign up success'),
+                                      ),
+                                    );
                                   context.router.replaceAll(
                                     [const SignInRoute()],
                                   );

@@ -1,8 +1,11 @@
+import 'membership_model.dart';
+import 'user_model.dart';
+
 class MembershipPaymentModel {
   bool? status;
   String? message;
   List<String>? errors;
-  Data? data;
+  MembershipPayment? data;
 
   MembershipPaymentModel({this.status, this.message, this.errors, this.data});
 
@@ -10,7 +13,8 @@ class MembershipPaymentModel {
     status = json['status'];
     message = json['message'];
     errors = json['errors'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? MembershipPayment.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -25,21 +29,21 @@ class MembershipPaymentModel {
   }
 }
 
-class Data {
+class MembershipPayment {
   int? id;
   User? user;
-  Membership? membership;
+  Member? membership;
   int? amount;
   String? snapUrl;
 
-  Data({this.id, this.user, this.membership, this.amount, this.snapUrl});
+  MembershipPayment(
+      {this.id, this.user, this.membership, this.amount, this.snapUrl});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  MembershipPayment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
-    membership = json['membership'] != null
-        ? Membership.fromJson(json['membership'])
-        : null;
+    membership =
+        json['membership'] != null ? Member.fromJson(json['membership']) : null;
     amount = json['amount'];
     snapUrl = json['snap_url'];
   }
@@ -55,68 +59,6 @@ class Data {
     }
     data['amount'] = amount;
     data['snap_url'] = snapUrl;
-    return data;
-  }
-}
-
-class User {
-  int? id;
-  String? name;
-  String? email;
-  String? phone;
-  String? memberExpired;
-  String? memberType;
-
-  User(
-      {this.id,
-      this.name,
-      this.email,
-      this.phone,
-      this.memberExpired,
-      this.memberType});
-
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    phone = json['phone'];
-    memberExpired = json['member_expired'];
-    memberType = json['member_type'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['email'] = email;
-    data['phone'] = phone;
-    data['member_expired'] = memberExpired;
-    data['member_type'] = memberType;
-    return data;
-  }
-}
-
-class Membership {
-  int? id;
-  String? type;
-  int? price;
-  int? duration;
-
-  Membership({this.id, this.type, this.price, this.duration});
-
-  Membership.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    type = json['type'];
-    price = json['price'];
-    duration = json['duration'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['type'] = type;
-    data['price'] = price;
-    data['duration'] = duration;
     return data;
   }
 }

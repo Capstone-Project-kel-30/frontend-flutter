@@ -10,14 +10,16 @@ class UserInfoService {
     final name = sharedPreferences.getString("name");
     final email = sharedPreferences.getString("email");
     final phone = sharedPreferences.getString("phone");
+    final password = sharedPreferences.getString("password");
     final memberType = sharedPreferences.getString("member_type");
     final UserModel user = UserModel(
-      data: Data(
+      data: User(
         token: token,
         name: name,
         email: email,
         phone: phone,
         memberType: memberType,
+        password: password,
       ),
     );
     return user;

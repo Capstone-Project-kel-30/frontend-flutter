@@ -2,7 +2,7 @@ class MembershipModel {
   bool? status;
   String? message;
   List<String>? errors;
-  List<Data>? data;
+  List<Member>? data;
 
   MembershipModel({this.status, this.message, this.errors, this.data});
 
@@ -11,9 +11,9 @@ class MembershipModel {
     message = json['message'];
     errors = json['errors'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Member>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(Member.fromJson(v));
       });
     }
   }
@@ -30,19 +30,21 @@ class MembershipModel {
   }
 }
 
-class Data {
+class Member {
   int? id;
   String? type;
   int? price;
   int? duration;
+  String? description;
 
-  Data({this.id, this.type, this.price, this.duration});
+  Member({this.id, this.type, this.price, this.duration, this.description});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Member.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
     price = json['price'];
     duration = json['duration'];
+    description = json['description'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +53,7 @@ class Data {
     data['type'] = type;
     data['price'] = price;
     data['duration'] = duration;
+    data['description'] = description;
     return data;
   }
 }

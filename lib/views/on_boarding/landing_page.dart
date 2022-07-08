@@ -38,7 +38,7 @@ class Landingpage extends StatelessWidget {
                 Column(
                   children: [
                     CustomOutlinedButton(
-                      text: 'Sign In',
+                      text: 'Login',
                       onPressed: () {
                         context.router.push(
                           const SignInRoute(),
@@ -52,7 +52,7 @@ class Landingpage extends StatelessWidget {
                           const SignUpRoute(),
                         );
                       },
-                      text: 'Sign Up',
+                      text: 'Register',
                     ),
                   ],
                 ),

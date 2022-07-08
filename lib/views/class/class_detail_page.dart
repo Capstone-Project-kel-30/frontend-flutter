@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_zone/bloc/bloc.dart';
+import 'package:workout_zone/views/widgets/custom_sliver_persistent_header_delegate.dart';
+import '../../models/class_model.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/common/constant.dart';
@@ -18,11 +22,11 @@ import 'widgets/facilities_info.dart';
 class ClassDetailPage extends StatelessWidget {
   ClassDetailPage({
     Key? key,
-    required this.classType,
     required this.user,
+    required this.classes,
   }) : super(key: key);
 
-  final String classType;
+  final Class classes;
   final UserModel user;
 
   final List<String> imgList = [
@@ -57,45 +61,34 @@ class ClassDetailPage extends StatelessWidget {
               );
             },
           ),
+          SliverPersistentHeader(
+            delegate: CustomSPHD(),
+            pinned: true,
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const VerticalSpace(height: 10),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: HSLColor.fromColor(kGreyColor)
-                              .withLightness(0.8)
-                              .toColor(),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const SizedBox(
-                          height: 5,
-                          width: 50,
-                        ),
-                      ),
-                      const VerticalSpace(height: 25),
                       ClassTitle(
-                        classType: classType,
-                        classTitle: 'Boxing',
-                        location: classType == offlineClass
-                            ? 'Gym Studio - Bandung'
-                            : 'Streaming - Zoom',
+                        classType: classes.clastype!.toUpperCase(),
+                        classTitle: classes.classname!,
+                        location:
+                            classes.clastype!.toUpperCase() == offlineClass
+                                ? 'Gym Studio - Bandung'
+                                : 'Streaming - Zoom',
                       ),
                       const VerticalSpace(height: 20),
-                      const ClassInfo(
-                        date: '03 June 2022',
-                        startTime: '16:00',
-                        trainer: 'trainer',
+                      ClassInfo(
+                        date: classes.date!,
+                        startTime: classes.clock!,
+                        trainer: classes.trainer!,
                       ),
                       const VerticalSpace(height: 20),
-                      const ClassDescription(
-                        description:
-                            'Laboris qui laborum laboris voluptate est occaecat ad duis cillum deserunt consequat dolor. Dolor irure excepteur amet adipisicing in culpa magna sunt est aliquip aliqua. Quis esse id veniam non irure. Reprehenderit cupidatat eiusmod sit deserunt anim.',
-                      ),
+                      ClassDescription(description: classes.description!),
                       const VerticalSpace(height: 20),
                       const FacilitiesInfo(
                         facilities: [
@@ -108,37 +101,72 @@ class ClassDetailPage extends StatelessWidget {
                         ],
                       ),
                       const VerticalSpace(height: 20),
-                      CustomElevatedButton(
-                        text: 'Booking',
-                        onPressed: () {
-                          if (user.data!.memberType != "") {
+                      BlocListener<BookingBloc, BookingState>(
+                        listener: (context, state) {
+                          if (state is BookingLoading) {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                const SnackBar(
+                                  duration: Duration.zero,
+                                  content: Text('Loading ...'),
+                                ),
+                              );
+                          }
+                          if (state is BookingSuccess) {
                             context.router.replaceAll([
-                              const BookingDetailRoute(),
+                              BookingDetailRoute(
+                                bookInfo: state.bookInfo,
+                                user: state.user,
+                              ),
                             ]);
-                          } else {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const Dialog(
-                                  backgroundColor: Colors.transparent,
-                                  insetPadding: EdgeInsets.zero,
-                                  child: SizedBox(
-                                    height: 180,
-                                    child: PopUpJoinMembership(
-                                      img: 'assets/images/dummy1.png',
-                                      textList: [
-                                        'Save more with our Membership',
-                                        'Enjoy the All-in-One\nHealthy Lifestyle',
-                                        'Start from Rp299.000',
-                                        'GET IT NOW',
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          }
+                          if (state is BookingFailed) {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                SnackBar(
+                                  content: Text(state.msg),
+                                ),
+                              );
                           }
                         },
+                        child: CustomElevatedButton(
+                          text: 'Booking',
+                          onPressed: () {
+                            if (user.data!.memberType != "") {
+                              context.read<BookingBloc>().add(
+                                    BookingRequest(
+                                      classId: classes.id!,
+                                      userId: user.data!.id!,
+                                    ),
+                                  );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    insetPadding: EdgeInsets.zero,
+                                    child: SizedBox(
+                                      height: 180,
+                                      child: PopUpJoinMembership(
+                                        img: 'assets/images/dummy1.png',
+                                        textList: [
+                                          'Save more with our Membership',
+                                          'Enjoy the All-in-One\nHealthy Lifestyle',
+                                          'Start from Rp299.000',
+                                          'GET IT NOW',
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }
+                          },
+                        ),
                       ),
                       const VerticalSpace(height: 20),
                     ],

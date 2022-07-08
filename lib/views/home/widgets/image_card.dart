@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/themes/app_theme.dart';
+import '../../widgets/custom_network_image.dart';
 
 class ImageCard extends StatelessWidget {
   const ImageCard({
     Key? key,
-    required this.asset,
+    required this.link,
     required this.title,
   }) : super(key: key);
 
-  final String asset, title;
+  final String link, title;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +32,12 @@ class ImageCard extends StatelessWidget {
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                asset,
-                fit: BoxFit.cover,
-                width: 150,
+              child: CustomNetworkImage(
+                link: link,
                 height: 100,
+                width: 150,
+                color: kDarkColor,
+                iconErrorColor: kLightColor,
               ),
             ),
           ),

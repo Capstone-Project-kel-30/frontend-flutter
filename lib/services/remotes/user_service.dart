@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/urls/url.dart';
 import 'dio.dart';
+import 'dio_error_handler.dart';
 
 class UserService {
   UserService() {
@@ -20,31 +22,28 @@ class UserService {
       final UserModel user = UserModel.fromJson(response.data);
       return user;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 
   Future<UserModel> updateUserProfile({
     required String authorization,
-    String? name,
-    String? email,
-    String? password,
-    String? phone,
+    required String name,
+    required String email,
+    required String password,
+    required String phone,
   }) async {
     final Map<String, String> header = {
       'Authorization': authorization,
     };
     final Map<String, dynamic> data = {
-      if (name != null) 'name': name,
-      if (email != null) 'email': email,
-      if (phone != null) 'phone': phone,
-      if (password != null) 'password': password,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'password': password,
     };
     try {
       final Response response = await dio.put(
@@ -55,13 +54,10 @@ class UserService {
       final UserModel user = UserModel.fromJson(response.data);
       return user;
     } on DioError catch (e) {
-      if (e.response != null) {
-        throw (e.response!.data['errors'][0]);
-      } else if (e.type == DioErrorType.connectTimeout) {
-        throw ('request timeout, please check your connection');
-      } else {
-        throw ('server error');
-      }
+      throw (dioErrorHandler(e));
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      throw ('server error');
     }
   }
 }

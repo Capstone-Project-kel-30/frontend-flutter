@@ -1,121 +1,127 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
+import '../../bloc/all_class/all_class_bloc.dart';
+import '../../models/class_model.dart';
 import '../../models/user_model.dart';
-import '../../utils/common/constant.dart';
-import '../../utils/common/helper.dart';
+import '../widgets/shimmer_placeholder.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/class_list.dart';
+import 'widgets/class_type_picker.dart';
 import 'widgets/date_picker.dart';
 import 'widgets/search_bar.dart';
 
 class ClassPage extends StatefulWidget {
   const ClassPage({
     Key? key,
-    required this.classType,
     required this.user,
+    required this.classType,
   }) : super(key: key);
 
-  final String classType;
   final UserModel user;
+  final String classType;
 
   @override
   State<ClassPage> createState() => _ClassPageState();
 }
 
 class _ClassPageState extends State<ClassPage> {
-  int index = 0;
+  List<Class> allClass = [];
+  String datePicked = '';
+  String classTypeSelected = '';
 
-  List<Map<String, dynamic>> ganjil = [
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": false,
-      "title": "Lorem Ipsum",
-      "trainer": "trainer",
-      "startTime": "16:00",
-    },
-    {
-      "classType": onlineClass,
-      "location": "Streaming - Zoom",
-      "isFull": true,
-      "title": "Lorem Dorem",
-      "trainer": "trainer",
-      "startTime": "07:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": true,
-      "title": "Lorem Ipsum Dorem",
-      "trainer": "trainer",
-      "startTime": "20:00",
-    },
-  ];
-
-  List<Map<String, dynamic>> genap = [
-    {
-      "classType": onlineClass,
-      "location": "Streaming - GMeet",
-      "isFull": false,
-      "title": "Do esse esse ad eiusmod ad nostrud id",
-      "trainer": "trainer",
-      "startTime": "05:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": false,
-      "title": "Amet mollit sint sint aute eiusmod proident esse duis et.",
-      "trainer": "trainer",
-      "startTime": "08:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": true,
-      "title": "Lorem Ipsum Dorem",
-      "trainer": "trainer",
-      "startTime": "20:00",
-    },
-    {
-      "classType": offlineClass,
-      "location": "Gym Studio - Bandung",
-      "isFull": false,
-      "title": "Lorem Sint Sint",
-      "trainer": "trainer",
-      "startTime": "23:00",
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    context.read<AllClassBloc>().add(GetAllClass());
+    final numberFormatter = NumberFormat('00');
+    final currentDay = numberFormatter.format(DateTime.now().day);
+    final currentMonth = numberFormatter.format(DateTime.now().month);
+    final currentYear = DateTime.now().year.toString();
+    datePicked = '$currentDay-$currentMonth-$currentYear';
+    classTypeSelected = widget.classType;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('${capitalize(widget.classType)} Class')),
+      appBar: AppBar(title: const Text('Classes')),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             const SearchBar(),
             const VerticalSpace(height: 10),
+            ClassTypePicker(
+              classType: widget.classType,
+              onPressed: (String classType) {
+                classTypeSelected = classType;
+                context.read<AllClassBloc>().add(
+                      FilterClass(
+                        allClass,
+                        (e) {
+                          return e.clastype == classType &&
+                              e.date == datePicked;
+                        },
+                      ),
+                    );
+              },
+            ),
+            const VerticalSpace(height: 10),
             DatePicker(
-              onPressed: (int idx) {
-                index = idx;
-                setState(() {});
+              onPressed: (String date) {
+                datePicked = date;
+                context.read<AllClassBloc>().add(
+                      FilterClass(
+                        allClass,
+                        (e) {
+                          return e.clastype == classTypeSelected &&
+                              e.date == date;
+                        },
+                      ),
+                    );
               },
             ),
             const VerticalSpace(height: 10),
             Expanded(
-              child: ClassList(
-                user: widget.user,
-                classList: index % 2 == 0
-                    ? genap
-                        .where((element) =>
-                            element["classType"] == widget.classType)
-                        .toList()
-                    : ganjil
-                        .where((element) =>
-                            element["classType"] == widget.classType)
-                        .toList(),
+              child: BlocBuilder<AllClassBloc, AllClassState>(
+                builder: (context, state) {
+                  if (state is AllClassLoaded) {
+                    List<Class> classList = [];
+                    if (state.allClass.data != null) {
+                      allClass = state.allClass.data!;
+                      classList = state.allClass.data!
+                          .where((element) =>
+                              element.date == datePicked &&
+                              element.clastype!.toUpperCase() ==
+                                  widget.classType)
+                          .toList();
+                    }
+                    return ClassList(
+                      user: widget.user,
+                      classList: classList,
+                    );
+                  }
+                  if (state is FilteredClassLoaded) {
+                    return ClassList(
+                      user: widget.user,
+                      classList: state.filteredClasses,
+                    );
+                  }
+                  return ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return const Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: ShimmerPlaceholder(
+                          height: 80,
+                          width: double.infinity,
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
           ],
