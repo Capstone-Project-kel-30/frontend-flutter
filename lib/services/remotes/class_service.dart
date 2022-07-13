@@ -85,7 +85,7 @@ class ClassService {
     };
     try {
       final Response response = await dio.post(
-        urls.searchOfflineClass(),
+        urls.searchClass(),
         queryParameters: query,
       );
     } on DioError catch (e) {

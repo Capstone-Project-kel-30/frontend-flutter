@@ -61,6 +61,10 @@ class URLS {
     return '$_baseUrl/$_version/$_class/list';
   }
 
+  String searchClass() {
+    return '$_baseUrl/$_version/$_class/search';
+  }
+
   String getAllOnlineClass() {
     return '$_baseUrl/$_version/$_class/$_online/list';
   }
@@ -69,20 +73,12 @@ class URLS {
     return '$_baseUrl/$_version/$_class/$_online/$id';
   }
 
-  String searchOnlineClass() {
-    return '$_baseUrl/$_version/$_class/$_online/search';
-  }
-
   String getAllOfflineClass() {
     return '$_baseUrl/$_version/$_class/$_offline/list';
   }
 
   String getOfflineClassById(String id) {
     return '$_baseUrl/$_version/$_class/$_offline/$id';
-  }
-
-  String searchOfflineClass() {
-    return '$_baseUrl/$_version/$_class/$_offline/search';
   }
 
   String getAllNewsletter() {
