@@ -157,7 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             return 'Password length must be at least 8 characters';
                           }
                           return null;
-                        },
+                        }, read: false,
                       ),
                       FormPassword(
                         title: 'Confirm Password',
@@ -169,7 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             return 'Password Does Not Match ';
                           }
                           return null;
-                        },
+                        }, read: false,
                       ),
 
                       ///check box

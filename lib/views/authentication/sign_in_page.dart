@@ -104,7 +104,7 @@ class _SignInPageState extends State<SignInPage> {
                       validator: null,
                       title: "Password",
                       hint: "Enter your password",
-                      controller: _passwordController,
+                      controller: _passwordController, read: false,
                     ),
                     const VerticalSpace(height: 15),
 

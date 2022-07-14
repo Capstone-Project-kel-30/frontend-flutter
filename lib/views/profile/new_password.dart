@@ -12,10 +12,34 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
+  bool _passEmpty = false;
+  bool _passEmpty1 = false;
+  bool _passEmpty2 = false;
   final TextEditingController _oldPasswordCntrl = TextEditingController();
   final TextEditingController _newPasswordCntrl = TextEditingController();
   final TextEditingController _comNewPassCtrl = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey();
+
+  @override
+  void initState() {
+    _oldPasswordCntrl.addListener(() {
+      setState(() {
+        _passEmpty = _oldPasswordCntrl.text.isNotEmpty;
+      });
+    });
+    _newPasswordCntrl.addListener(() {
+      setState(() {
+        _passEmpty1 = _newPasswordCntrl.text.isNotEmpty;
+      });
+    });
+    _comNewPassCtrl.addListener(() {
+      setState(() {
+        _passEmpty2 = _comNewPassCtrl.text.isNotEmpty;
+      });
+    });
+    super.initState();
+  }
+
   @override
   void dispose() {
     _oldPasswordCntrl.dispose();
@@ -34,53 +58,76 @@ class _NewPasswordState extends State<NewPassword> {
       ),
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Form(
-              key: _formkey,
-              child: Column(
+        padding: const EdgeInsets.fromLTRB(20, 35, 20, 10),
+        child: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if (state is UserSuccess) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  FormPassword(
-                    title: "Old Password",
-                    hint: "Enter Password",
-                    controller: _oldPasswordCntrl,
+                  Form(
+                    key: _formkey,
+                    child: Column(
+                      children: [
+                        FormPassword(
+                          title: "Old Password",
+                          hint: "Enter Password",
+                          controller: _oldPasswordCntrl,
+                          read: false,
+                          validator: (value) {
+                            if (value != state.user.data!.password) {
+                              return "Enter Old Password";
+                            }
+                            return null;
+                          },
+                        ),
+                        FormPassword(
+                          title: "New Password",
+                          hint: "Enter New Password",
+                          controller: _newPasswordCntrl,
+                          read: false,
+                        ),
+                        FormPassword(
+                          validator: (value) {
+                            if (value == null ||
+                                value != _newPasswordCntrl.text) {
+                              return 'Password Does Not Match ';
+                            }
+                            return null;
+                          },
+                          title: "Confirm New Password",
+                          hint: "Enter Password",
+                          controller: _comNewPassCtrl,
+                          read: false,
+                        )
+                      ],
+                    ),
                   ),
-                  FormPassword(
-                    title: "New Password",
-                    hint: "Enter New Password",
-                    controller: _newPasswordCntrl,
-                  ),
-                  FormPassword(
-                    validator: (value) {
-                      if (value == null || value != _newPasswordCntrl.text) {
-                        return 'Password Does Not Match ';
-                      }
-                      return null;
-                    },
-                    title: "Confirm New Password",
-                    hint: "Enter Password",
-                    controller: _comNewPassCtrl,
+                  CustomElevatedButton(
+                    text: "Save",
+                    onPressed: _passEmpty && _passEmpty1 && _passEmpty2
+                        ? () {
+                            if (_formkey.currentState!.validate()) {
+                              context.read<UserBloc>().add(
+                                    UpdateUser(
+                                      password: _newPasswordCntrl.text,
+                                    ),
+                                  );
+                              _oldPasswordCntrl.clear();
+                              _newPasswordCntrl.clear();
+                              _comNewPassCtrl.clear();
+                            }
+                          }
+                        : null,
                   )
                 ],
-              ),
-            ),
-            CustomElevatedButton(
-              text: "Save",
-              onPressed: () {
-                if (_formkey.currentState!.validate()) {}
-                context.read<UserBloc>().add(
-                      UpdateUser(
-                        email: "",
-                        name: "",
-                        password: _newPasswordCntrl.text,
-                        phone: "",
-                      ),
-                    );
-              },
-            )
-          ],
+              );
+            }
+            return const Center(
+              heightFactor: 18,
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
       )),
     );

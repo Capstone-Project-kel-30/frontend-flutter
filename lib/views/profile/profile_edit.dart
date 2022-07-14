@@ -63,33 +63,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: BlocConsumer<UserBloc, UserState>(
-                listener: (context, state) {
-                  if (state is UserSuccess) {
-                    ScaffoldMessenger.of(context)
-                      ..hideCurrentSnackBar()
-                      ..showSnackBar(
-                        const SnackBar(
-                          content: Text("Update success"),
-                        ),
-                      );
-                  }
-                  if (state is UserUpdateFailed) {
-                    ScaffoldMessenger.of(context)
-                      ..hideCurrentSnackBar()
-                      ..showSnackBar(
-                        SnackBar(
-                          content: Text(state.msg),
-                        ),
-                      );
-                    context.router.replaceAll([
-                      ErrorRoute(
-                        isHome: false,
-                        message: 'Unable to Update Profile',
-                      ),
-                    ]);
-                  }
-                },
+              child: BlocBuilder<UserBloc, UserState>(
                 builder: (context, state) {
                   if (state is UserSuccess) {
                     return Column(
@@ -105,9 +79,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                           controller: _emailController,
                         ),
                         FormPassword(
+                          tap: () {
+                            context.router.push(const NewPassword());
+                          },
                           title: "Password",
                           hint: "*************",
                           controller: _passwordController,
+                          read: true,
                         ),
                         const VerticalSpace(height: 10),
                         ForgetPassBttn(
@@ -131,7 +109,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           padding: const EdgeInsets.only(top: 63),
                           child: CustomElevatedButton(
                             text: "Save",
-                            onPressed: _usernameEmpy || _phoneEmpy
+                            onPressed: _usernameEmpy && _phoneEmpy
                                 ? () {
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();

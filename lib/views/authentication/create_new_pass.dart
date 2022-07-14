@@ -77,7 +77,7 @@ class _CreateNewPassState extends State<CreateNewPass> {
                         return 'Password length must be at least 8 characters';
                       }
                       return null;
-                    },
+                    }, read: false,
                   ),
                   FormPassword(
                     title: 'Comfirm New Password',
@@ -90,7 +90,7 @@ class _CreateNewPassState extends State<CreateNewPass> {
                         return 'Password Does Not Match';
                       }
                       return null;
-                    },
+                    }, read: false,
                   )
                 ],
               ),
