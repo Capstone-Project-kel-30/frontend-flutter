@@ -20,27 +20,10 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-  bool _usernameEmpy = false;
-  bool _phoneEmpy = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _nomorControllers = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _userController.addListener(() {
-      setState(() {
-        _usernameEmpy = _userController.text.isNotEmpty;
-      });
-    });
-    _nomorControllers.addListener(() {
-      setState(() {
-        _phoneEmpy = _nomorControllers.text.isNotEmpty;
-      });
-    });
-  }
 
   @override
   void dispose() {
@@ -108,33 +91,28 @@ class _ProfileEditState extends State<ProfileEdit> {
                         Padding(
                           padding: const EdgeInsets.only(top: 63),
                           child: CustomElevatedButton(
-                            text: "Save",
-                            onPressed: _usernameEmpy && _phoneEmpy
-                                ? () {
-                                    FocusManager.instance.primaryFocus
-                                        ?.unfocus();
-                                    final String user = _userController.text;
-                                    final String phone = _nomorControllers.text;
-                                    final String password =
-                                        _passwordController.text;
-                                    final String email = _emailController.text;
-                                    context.read<UserBloc>().add(
-                                          UpdateUser(
-                                            email: email != "" ? email : null,
-                                            name: user != "" ? user : null,
-                                            password: password != ""
-                                                ? password
-                                                : null,
-                                            phone: phone != "" ? phone : null,
-                                          ),
-                                        );
-                                    _userController.clear();
-                                    _nomorControllers.clear();
-                                    _passwordController.clear();
-                                    _emailController.clear();
-                                  }
-                                : null,
-                          ),
+                              text: "Save",
+                              onPressed: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                final String user = _userController.text;
+                                final String phone = _nomorControllers.text;
+                                final String password =
+                                    _passwordController.text;
+                                final String email = _emailController.text;
+                                context.read<UserBloc>().add(
+                                      UpdateUser(
+                                        email: email != "" ? email : null,
+                                        name: user != "" ? user : null,
+                                        password:
+                                            password != "" ? password : null,
+                                        phone: phone != "" ? phone : null,
+                                      ),
+                                    );
+                                _userController.clear();
+                                _nomorControllers.clear();
+                                _passwordController.clear();
+                                _emailController.clear();
+                              }),
                         ),
                       ],
                     );

@@ -40,6 +40,7 @@ class _FormPasswordState extends State<FormPassword> {
           child: TextFormField(
             onTap: widget.tap,
             readOnly: widget.read,
+            obscuringCharacter: '*',
             obscureText: _hidePassword,
             validator: widget.validator,
             controller: widget.controller,

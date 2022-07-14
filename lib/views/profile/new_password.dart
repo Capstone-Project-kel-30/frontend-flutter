@@ -12,33 +12,10 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
-  bool _passEmpty = false;
-  bool _passEmpty1 = false;
-  bool _passEmpty2 = false;
   final TextEditingController _oldPasswordCntrl = TextEditingController();
   final TextEditingController _newPasswordCntrl = TextEditingController();
   final TextEditingController _comNewPassCtrl = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey();
-
-  @override
-  void initState() {
-    _oldPasswordCntrl.addListener(() {
-      setState(() {
-        _passEmpty = _oldPasswordCntrl.text.isNotEmpty;
-      });
-    });
-    _newPasswordCntrl.addListener(() {
-      setState(() {
-        _passEmpty1 = _newPasswordCntrl.text.isNotEmpty;
-      });
-    });
-    _comNewPassCtrl.addListener(() {
-      setState(() {
-        _passEmpty2 = _comNewPassCtrl.text.isNotEmpty;
-      });
-    });
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -104,22 +81,19 @@ class _NewPasswordState extends State<NewPassword> {
                     ),
                   ),
                   CustomElevatedButton(
-                    text: "Save",
-                    onPressed: _passEmpty && _passEmpty1 && _passEmpty2
-                        ? () {
-                            if (_formkey.currentState!.validate()) {
-                              context.read<UserBloc>().add(
-                                    UpdateUser(
-                                      password: _newPasswordCntrl.text,
-                                    ),
-                                  );
-                              _oldPasswordCntrl.clear();
-                              _newPasswordCntrl.clear();
-                              _comNewPassCtrl.clear();
-                            }
-                          }
-                        : null,
-                  )
+                      text: "Save",
+                      onPressed: () {
+                        if (_formkey.currentState!.validate()) {
+                          context.read<UserBloc>().add(
+                                UpdateUser(
+                                  password: _newPasswordCntrl.text,
+                                ),
+                              );
+                          _oldPasswordCntrl.clear();
+                          _newPasswordCntrl.clear();
+                          _comNewPassCtrl.clear();
+                        }
+                      })
                 ],
               );
             }
