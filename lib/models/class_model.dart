@@ -21,17 +21,6 @@ class ClassModel {
       }
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['errors'] = errors;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class Class {
@@ -63,34 +52,17 @@ class Class {
       this.image});
 
   Class.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    classname = json['classname'];
-    status = json['status'];
-    capacity = json['capacity'];
+    id = json['id'] ?? json['ID'];
+    classname = json['classname'] ?? json['Classname'];
+    status = json['status'] ?? json['Status'];
+    capacity = json['capacity'] ?? json['Capacity'];
     trainer = json['trainer'] ?? json['Trainer'];
     date = json['date'] ?? json['Date'];
     clock = json['clock'] ?? json['Clock'];
     clastype = json['clastype'] ?? json['ClassType'];
     duration = json['duration'];
-    userBooked = json['user_booked'];
+    userBooked = json['user_booked'] ?? json['UserBooked'];
     description = json['description'] ?? json['Description'];
     image = json['image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['classname'] = classname;
-    data['status'] = status;
-    data['capacity'] = capacity;
-    data['trainer'] = trainer;
-    data['date'] = date;
-    data['clock'] = clock;
-    data['clastype'] = clastype;
-    data['duration'] = duration;
-    data['user_booked'] = userBooked;
-    data['description'] = description;
-    data['image'] = image;
-    return data;
   }
 }

@@ -16,17 +16,6 @@ class MembershipPaymentModel {
     data =
         json['data'] != null ? MembershipPayment.fromJson(json['data']) : null;
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['errors'] = errors;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
 }
 
 class MembershipPayment {
@@ -46,19 +35,5 @@ class MembershipPayment {
         json['membership'] != null ? Member.fromJson(json['membership']) : null;
     amount = json['amount'];
     snapUrl = json['snap_url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    if (membership != null) {
-      data['membership'] = membership!.toJson();
-    }
-    data['amount'] = amount;
-    data['snap_url'] = snapUrl;
-    return data;
   }
 }

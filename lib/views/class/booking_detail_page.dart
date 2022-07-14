@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../models/book_info_model.dart';
 import '../../models/user_model.dart';
@@ -42,7 +44,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
               children: [
                 BookingId(
                   bookingId:
-                      'GYM30-${widget.user.memberType!.toUpperCase()}-${widget.bookInfo.data!.id.toString()}',
+                      'GYM30-${widget.user.memberType!.toUpperCase()}-${widget.bookInfo.data!.classes!.id!.toString()}',
                 ),
                 const VerticalSpace(height: 20),
                 BookingType(
@@ -64,8 +66,10 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
               ],
             ),
             PaymentButton(
-              elevatedButtonText: 'Continue',
-              onPressed: () {},
+              elevatedButtonText: 'Confirm',
+              onPressed: () {
+                context.router.replaceAll([const HomeWrapper()]);
+              },
             ),
           ],
         ),

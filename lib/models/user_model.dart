@@ -12,17 +12,6 @@ class UserModel {
     errors = json['errors'];
     data = json['data'] != null ? User.fromJson(json['data']) : null;
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['errors'] = errors;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
 }
 
 class User {
@@ -58,19 +47,5 @@ class User {
     token = json['token'];
     totp = json['totp'];
     password = json['password'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['email'] = email;
-    data['phone'] = phone;
-    data['member_expired'] = memberExpired;
-    data['member_type'] = memberType;
-    data['token'] = token;
-    data['totp'] = totp;
-    data['password'] = password;
-    return data;
   }
 }

@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../bloc/bloc.dart';
 import '../../models/membership_payment_model.dart';
@@ -17,7 +19,6 @@ class MembershipPaymentPage extends StatelessWidget {
 
   void launchURL(String url) async {
     var uri = Uri.parse(url);
-    debugPrint(uri.toString());
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
@@ -74,6 +75,7 @@ class MembershipPaymentPage extends StatelessWidget {
               elevatedButtonText: 'Continue to Payment',
               onPressed: () {
                 launchURL(membershipPayment.data!.snapUrl!);
+                context.router.replaceAll([const HomeWrapper()]);
               },
             ),
           ],

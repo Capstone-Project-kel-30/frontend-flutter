@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../bloc/all_class/all_class_bloc.dart';
 import '../../models/class_model.dart';
@@ -30,6 +32,7 @@ class _ClassPageState extends State<ClassPage> {
   List<Class> allClass = [];
   String datePicked = '';
   String classTypeSelected = '';
+  String query = '';
 
   @override
   void initState() {
@@ -51,7 +54,23 @@ class _ClassPageState extends State<ClassPage> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            const SearchBar(),
+            SearchBar(
+              onPressed: (String insideQuery) {
+                query = insideQuery;
+                context.read<AllClassBloc>().add(
+                      FilterClass(
+                        allClass,
+                        (e) {
+                          return e.clastype == classTypeSelected &&
+                              e.date == datePicked &&
+                              e.classname!.toLowerCase().contains(
+                                    query.toLowerCase(),
+                                  );
+                        },
+                      ),
+                    );
+              },
+            ),
             const VerticalSpace(height: 10),
             ClassTypePicker(
               classType: widget.classType,
@@ -62,7 +81,10 @@ class _ClassPageState extends State<ClassPage> {
                         allClass,
                         (e) {
                           return e.clastype == classType &&
-                              e.date == datePicked;
+                              e.date == datePicked &&
+                              e.classname!.toLowerCase().contains(
+                                    query.toLowerCase(),
+                                  );
                         },
                       ),
                     );
@@ -77,7 +99,10 @@ class _ClassPageState extends State<ClassPage> {
                         allClass,
                         (e) {
                           return e.clastype == classTypeSelected &&
-                              e.date == date;
+                              e.date == date &&
+                              e.classname!.toLowerCase().contains(
+                                    query.toLowerCase(),
+                                  );
                         },
                       ),
                     );
@@ -85,7 +110,17 @@ class _ClassPageState extends State<ClassPage> {
             ),
             const VerticalSpace(height: 10),
             Expanded(
-              child: BlocBuilder<AllClassBloc, AllClassState>(
+              child: BlocConsumer<AllClassBloc, AllClassState>(
+                listener: (context, state) {
+                  if (state is AllClassError) {
+                    context.router.replaceAll([ErrorRoute(isHome: false)]);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(state.msg),
+                      ),
+                    );
+                  }
+                },
                 builder: (context, state) {
                   if (state is AllClassLoaded) {
                     List<Class> classList = [];

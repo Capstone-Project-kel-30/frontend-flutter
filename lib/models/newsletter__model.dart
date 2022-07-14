@@ -21,17 +21,6 @@ class NewsletterModel {
       }
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['errors'] = errors;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class Newsletter {
@@ -49,15 +38,5 @@ class Newsletter {
     date = json['date'];
     content = json['content'];
     image = json['image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['date'] = date;
-    data['content'] = content;
-    data['image'] = image;
-    return data;
   }
 }

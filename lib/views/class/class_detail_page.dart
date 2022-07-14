@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_zone/bloc/bloc.dart';
+import 'package:workout_zone/views/widgets/custom_network_image.dart';
 import 'package:workout_zone/views/widgets/custom_sliver_persistent_header_delegate.dart';
 import '../../models/class_model.dart';
 
@@ -12,7 +13,6 @@ import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
 import '../membership/widgets/popup_join_membership.dart';
 import '../widgets/cutom_elevated_button.dart';
-import '../widgets/image_carousel.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/class_description.dart';
 import 'widgets/class_info.dart';
@@ -24,10 +24,12 @@ class ClassDetailPage extends StatelessWidget {
     Key? key,
     required this.user,
     required this.classes,
+    required this.fromSchedule,
   }) : super(key: key);
 
   final Class classes;
   final UserModel user;
+  final bool fromSchedule;
 
   final List<String> imgList = [
     'assets/images/dummy1.png',
@@ -56,7 +58,11 @@ class ClassDetailPage extends StatelessWidget {
                       color: isCollapsed ? kDarkColor : kLightColor,
                     ),
                 flexibleSpace: FlexibleSpaceBar(
-                  background: ImageCarousel(imgList: imgList),
+                  background: CustomNetworkImage(
+                    link: classes.image ?? '',
+                    color: kGreyColor,
+                    iconErrorColor: kLightColor,
+                  ),
                 ),
               );
             },
@@ -132,41 +138,43 @@ class ClassDetailPage extends StatelessWidget {
                               );
                           }
                         },
-                        child: CustomElevatedButton(
-                          text: 'Booking',
-                          onPressed: () {
-                            if (user.data!.memberType != "") {
-                              context.read<BookingBloc>().add(
-                                    BookingRequest(
-                                      classId: classes.id!,
-                                      userId: user.data!.id!,
-                                    ),
-                                  );
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return const Dialog(
-                                    backgroundColor: Colors.transparent,
-                                    insetPadding: EdgeInsets.zero,
-                                    child: SizedBox(
-                                      height: 180,
-                                      child: PopUpJoinMembership(
-                                        img: 'assets/images/dummy1.png',
-                                        textList: [
-                                          'Save more with our Membership',
-                                          'Enjoy the All-in-One\nHealthy Lifestyle',
-                                          'Start from Rp299.000',
-                                          'GET IT NOW',
-                                        ],
-                                      ),
-                                    ),
-                                  );
+                        child: fromSchedule
+                            ? const SizedBox()
+                            : CustomElevatedButton(
+                                text: 'Booking',
+                                onPressed: () {
+                                  if (user.data!.memberType != "") {
+                                    context.read<BookingBloc>().add(
+                                          BookingRequest(
+                                            classId: classes.id!,
+                                            userId: user.data!.id!,
+                                          ),
+                                        );
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return const Dialog(
+                                          backgroundColor: Colors.transparent,
+                                          insetPadding: EdgeInsets.zero,
+                                          child: SizedBox(
+                                            height: 180,
+                                            child: PopUpJoinMembership(
+                                              img: 'assets/images/dummy1.png',
+                                              textList: [
+                                                'Save more with our Membership',
+                                                'Enjoy the All-in-One\nHealthy Lifestyle',
+                                                'Start from Rp299.000',
+                                                'GET IT NOW',
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }
                                 },
-                              );
-                            }
-                          },
-                        ),
+                              ),
                       ),
                       const VerticalSpace(height: 20),
                     ],

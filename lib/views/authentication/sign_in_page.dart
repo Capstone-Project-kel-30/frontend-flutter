@@ -181,7 +181,7 @@ class _SignInPageState extends State<SignInPage> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Bottomtxt(
-                  txt1: "Not Have Account yet ?",
+                  txt1: "Don't have an account yet?",
                   txt2: 'Sign Up',
                   tekan: () {
                     context.router.replaceAll([
