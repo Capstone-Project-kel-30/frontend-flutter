@@ -31,7 +31,11 @@ class ClassList extends StatelessWidget {
                 startTime: classList[idx].clock!,
                 onTap: () {
                   context.router.push(
-                    ClassDetailRoute(user: user, classes: classList[idx]),
+                    ClassDetailRoute(
+                      user: user,
+                      classes: classList[idx],
+                      fromSchedule: false,
+                    ),
                   );
                 },
               );

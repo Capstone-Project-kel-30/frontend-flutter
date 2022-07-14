@@ -36,7 +36,6 @@ class NewsletterDetailPage extends StatelessWidget {
                 title: isCollapsed ? Text(newsletterTitle) : null,
                 expandedHeight: 260,
                 flexibleSpace: FlexibleSpaceBar(
-                  // background: ImageCarousel(imgList: imgList),
                   background: CustomNetworkImage(link: link),
                 ),
                 actions: [

@@ -22,7 +22,7 @@ class LocationInfo extends StatelessWidget {
             : SvgPicture.asset('assets/icons/Stream.svg'),
         const HorizontalSpace(width: 3),
         Text(
-          classType == offlineClass
+          classType.toUpperCase() == offlineClass
               ? "Gym Studio - Bandung"
               : "Streaming - Zoom",
           style: AppTheme.theme(context).textTheme.bodySmall?.copyWith(

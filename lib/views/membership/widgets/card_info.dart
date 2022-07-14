@@ -38,7 +38,7 @@ class CardInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  type,
+                  capitalize(type),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: kSemiBoldWeight,

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:workout_zone/models/book_info_model.dart';
 import 'package:workout_zone/models/membership_payment_model.dart';
+import 'package:workout_zone/models/schedule_info_model.dart';
 
 import '../../models/membership_model.dart';
 import '../../utils/urls/url.dart';
@@ -101,7 +102,6 @@ class MembershipService {
       'Authorization': authorization,
     };
     final Map<String, dynamic> data = {
-      'user_id': userId,
       'class_id': classId,
     };
     try {
@@ -120,7 +120,7 @@ class MembershipService {
     }
   }
 
-  userClassSchedule(String authorization) async {
+  Future<ScheduleInfoModel> userClassSchedule(String authorization) async {
     try {
       final Map<String, String> header = {
         'Authorization': authorization,
@@ -129,6 +129,9 @@ class MembershipService {
         urls.userClassSchedule(),
         options: Options(headers: header),
       );
+      final ScheduleInfoModel scheduleInfo =
+          ScheduleInfoModel.fromJson(response.data);
+      return scheduleInfo;
     } on DioError catch (e) {
       throw (dioErrorHandler(e));
     } on Exception catch (e) {

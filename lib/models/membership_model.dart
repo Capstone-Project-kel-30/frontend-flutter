@@ -17,17 +17,6 @@ class MembershipModel {
       });
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['errors'] = errors;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class Member {
@@ -36,8 +25,16 @@ class Member {
   int? price;
   int? duration;
   String? description;
+  String? img;
 
-  Member({this.id, this.type, this.price, this.duration, this.description});
+  Member({
+    this.id,
+    this.type,
+    this.price,
+    this.duration,
+    this.description,
+    this.img,
+  });
 
   Member.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -45,15 +42,6 @@ class Member {
     price = json['price'];
     duration = json['duration'];
     description = json['description'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['type'] = type;
-    data['price'] = price;
-    data['duration'] = duration;
-    data['description'] = description;
-    return data;
+    img = json['img'];
   }
 }

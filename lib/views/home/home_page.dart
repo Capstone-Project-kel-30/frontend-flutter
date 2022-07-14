@@ -1,23 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:workout_zone/views/home/widgets/class_content.dart';
-import 'package:workout_zone/views/home/widgets/newsletter_content.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../bloc/all_class/all_class_bloc.dart';
 import '../../bloc/newsletter/newsletter_bloc.dart';
 import '../../bloc/offline_class/offline_class_bloc.dart';
 import '../../bloc/online_class/online_class_bloc.dart';
 import '../../bloc/user/user_bloc.dart';
+import '../../models/class_model.dart';
 import '../../models/user_model.dart';
 import '../../utils/common/constant.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
 import '../widgets/shimmer_placeholder.dart';
 import '../widgets/vertical_space.dart';
+import 'widgets/class_content.dart';
 import 'widgets/home_image_carousel.dart';
 import 'widgets/join_membership_info.dart';
+import 'widgets/newsletter_content.dart';
 import 'widgets/section_container.dart';
 import 'widgets/section_container_title.dart';
 import 'widgets/video_image_card.dart';
@@ -32,6 +33,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   UserModel user = UserModel();
+  List<Class> classes = [];
   late YoutubePlayerController _videoController;
   final String url = 'https://www.youtube.com/watch?v=B-_GP-YKk3w';
 
@@ -45,17 +47,6 @@ class _HomePageState extends State<HomePage> {
     'assets/images/banner2.png',
     'assets/images/banner3.png',
   ];
-
-  void launchURL() async {
-    const url = 'https://www.youtube.com/watch?v=B-_GP-YKk3w';
-    var uri = Uri.parse(url);
-    debugPrint(uri.toString());
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      debugPrint('Could not launch $url');
-    }
-  }
 
   @override
   void initState() {
@@ -72,6 +63,9 @@ class _HomePageState extends State<HomePage> {
     Future.delayed(Duration.zero, () {
       context.read<NewsletterBloc>().add(GetAllNewsletter());
     });
+    Future.delayed(Duration.zero, () {
+      context.read<AllClassBloc>().add(GetAllClass());
+    });
   }
 
   @override
@@ -83,19 +77,30 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserBloc, UserState>(
-      listener: (context, state) {
-        if (state is UserGetFailed) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.msg),
-            ),
-          );
-          context.router.replaceAll([
-            ErrorRoute(isHome: true),
-          ]);
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<UserBloc, UserState>(
+          listener: (context, state) {
+            if (state is UserGetFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.msg),
+                ),
+              );
+              context.router.replaceAll([
+                ErrorRoute(isHome: true),
+              ]);
+            }
+          },
+        ),
+        BlocListener<AllClassBloc, AllClassState>(
+          listener: (context, state) {
+            if (state is AllClassLoaded) {
+              classes = state.allClass.data!;
+            }
+          },
+        ),
+      ],
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -108,6 +113,8 @@ class _HomePageState extends State<HomePage> {
                     isLoading: false,
                     username: state.user.data!.name!,
                     member: state.user.data!.memberType!,
+                    classes: classes,
+                    user: user,
                   );
                 }
                 return const WelcomeBar(
@@ -210,6 +217,7 @@ class _HomePageState extends State<HomePage> {
                         height: 130,
                         child: Center(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text("Unable to Fetch Data"),
                               IconButton(
@@ -316,6 +324,7 @@ class _HomePageState extends State<HomePage> {
                         height: 130,
                         child: Center(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text("Unable to Fetch Data"),
                               IconButton(
@@ -430,7 +439,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SectionContainerTitle(
-                  moreThan5: true,
+                  moreThan5: imgList.length > 5,
                   title: 'Workout From Home',
                   onTap: () {
                     context.router.push(const VideoContentRoute());

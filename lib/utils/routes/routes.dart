@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:workout_zone/views/notification/notification_page.dart';
 import '../../views/authentication/create_new_pass.dart';
 import '../../views/authentication/forget_password_page.dart';
 import '../../views/authentication/sign_in_page.dart';
@@ -152,6 +153,10 @@ import '../../views/membership/membership_payment_page.dart';
       path: 'membership',
       page: MembershipPage,
     ),
+    AutoRoute(
+      path: 'notification',
+      page: NotificationPage,
+    )
   ],
 )
 class $AppRouter {}

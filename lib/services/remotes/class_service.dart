@@ -84,8 +84,8 @@ class ClassService {
       'search': keyword,
     };
     try {
-      final Response response = await dio.post(
-        urls.searchOfflineClass(),
+      await dio.get(
+        urls.searchClass(),
         queryParameters: query,
       );
     } on DioError catch (e) {

@@ -1,25 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_zone/models/membership_model.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
+import 'package:workout_zone/views/widgets/custom_network_image.dart';
 
 import '../../bloc/bloc.dart';
 import '../../utils/common/constant.dart';
 import '../../utils/themes/app_theme.dart';
 import '../widgets/cutom_elevated_button.dart';
-import '../widgets/image_carousel.dart';
 import 'widgets/membership_description.dart';
 import 'widgets/membership_info.dart';
 
 class MembershipDetailPage extends StatelessWidget {
   MembershipDetailPage({
     Key? key,
-    required this.type,
-    required this.price,
-    required this.description,
+    required this.member,
   }) : super(key: key);
 
-  final String type, price, description;
+  final Member member;
 
   final List<String> imgList = [
     'assets/images/dummy1.png',
@@ -56,7 +55,12 @@ class MembershipDetailPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          ImageCarousel(imgList: imgList),
+          CustomNetworkImage(
+            link: member.img!,
+            color: kGreyColor,
+            height: 280,
+            width: double.infinity,
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 50),
@@ -69,12 +73,11 @@ class MembershipDetailPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 40, bottom: 20),
                         child: MembershipInfo(
-                          type: type,
-                          price: price,
-                        ),
+                            type: member.type!,
+                            price: member.price!.toString()),
                       ),
                       MembershipDescription(
-                        description: description,
+                        description: member.description!,
                       ),
                     ],
                   ),
@@ -110,7 +113,7 @@ class MembershipDetailPage extends StatelessWidget {
                     child: CustomElevatedButton(
                       text: 'Join Membership',
                       onPressed: () {
-                        final int membershipId = getMembershipId(type);
+                        final int membershipId = member.id!;
                         context
                             .read<MembershipPaymentBloc>()
                             .add(MembershipRegisterRequest(membershipId));
