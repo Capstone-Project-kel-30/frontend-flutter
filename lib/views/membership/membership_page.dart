@@ -46,7 +46,6 @@ class _MembershipPageState extends State<MembershipPage> {
                   data.sort((a, b) => a.id!.compareTo(b.id!));
                   final String type = data[index].type!;
                   final String price = data[index].price!.toString();
-                  final String description = data[index].description!;
                   return Column(
                     children: [
                       CardInfo(
@@ -55,9 +54,7 @@ class _MembershipPageState extends State<MembershipPage> {
                         onTap: () {
                           context.router.push(
                             MembershipDetailRoute(
-                              type: type,
-                              price: price,
-                              description: description,
+                              member: state.membership.data![index],
                             ),
                           );
                         },

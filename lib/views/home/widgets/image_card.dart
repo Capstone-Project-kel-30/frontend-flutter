@@ -36,7 +36,7 @@ class ImageCard extends StatelessWidget {
                 link: link,
                 height: 100,
                 width: 150,
-                color: kDarkColor,
+                color: kGreyColor,
                 iconErrorColor: kLightColor,
               ),
             ),

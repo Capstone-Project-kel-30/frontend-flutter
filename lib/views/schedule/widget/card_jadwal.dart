@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/models/user_model.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
-import 'package:workout_zone/views/schedule/widget/card_class.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
+
+import '../../../models/class_model.dart';
+import '../../../models/user_model.dart';
+import '../../../utils/themes/app_theme.dart';
+import '../../widgets/vertical_space.dart';
+import 'card_class.dart';
 
 class JadwalCard extends StatelessWidget {
   const JadwalCard({
@@ -11,7 +13,7 @@ class JadwalCard extends StatelessWidget {
     required this.classList,
   }) : super(key: key);
   final UserModel user;
-  final List<Map<String, dynamic>> classList;
+  final List<Class> classList;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,8 @@ class JadwalCard extends StatelessWidget {
             itemCount: classList.length,
             itemBuilder: (BuildContext context, int idx) {
               return CardClass(
-                classTitle: classList[idx]["classTitle"],
-                classType: classList[idx]["classType"],
+                classes: classList[idx],
                 user: user,
-                location: classList[idx]["location"],
-                trainer: classList[idx]["trainer"],
-                startTime: classList[idx]["startTime"],
               );
             },
           );

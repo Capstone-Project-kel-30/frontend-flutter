@@ -1,4 +1,5 @@
-import 'class_model.dart';
+import 'package:workout_zone/models/class_model.dart';
+
 import 'user_model.dart';
 
 class BookInfoModel {
@@ -15,17 +16,6 @@ class BookInfoModel {
     errors = json['errors'];
     data = json['data'] != null ? BookData.fromJson(json['data']) : null;
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['errors'] = errors;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
 }
 
 class BookData {
@@ -39,17 +29,5 @@ class BookData {
     id = json['id'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     classes = json['class'] != null ? Class.fromJson(json['class']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    if (classes != null) {
-      data['class'] = classes!.toJson();
-    }
-    return data;
   }
 }

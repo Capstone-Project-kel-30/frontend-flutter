@@ -71,7 +71,7 @@ class ProfileSeting extends StatelessWidget {
                       ..hideCurrentSnackBar()
                       ..showSnackBar(
                         const SnackBar(
-                          content: Text('Signing Out ...'),
+                          content: Text('Logging Out ...'),
                         ),
                       );
                   }
@@ -80,7 +80,7 @@ class ProfileSeting extends StatelessWidget {
                       ..hideCurrentSnackBar()
                       ..showSnackBar(
                         const SnackBar(
-                          content: Text('Sign Out Success'),
+                          content: Text('Logout Success'),
                         ),
                       );
                     Restart.restartApp();
@@ -96,7 +96,8 @@ class ProfileSeting extends StatelessWidget {
                   }
                 },
                 child: CustomOutlinedButton(
-                  text: 'Log Out',
+                  text: 'Logout',
+                  color: kGreyColor,
                   onPressed: () {
                     showModalBottomSheet(
                       enableDrag: false,
