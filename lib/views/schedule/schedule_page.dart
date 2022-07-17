@@ -106,6 +106,24 @@ class _SchedulePageState extends State<SchedulePage> {
                                 user: state.user,
                               );
                             }
+                            if (scheduleState is ScheduleError) {
+                              return Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text('Unable to Fetch Data'),
+                                    IconButton(
+                                      icon: const Icon(Icons.restart_alt),
+                                      onPressed: () {
+                                        context
+                                            .read<ScheduleBloc>()
+                                            .add(GetSchedule());
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
                             return ListView.builder(
                               itemCount: 5,
                               itemBuilder: (context, index) {

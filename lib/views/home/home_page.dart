@@ -55,6 +55,9 @@ class _HomePageState extends State<HomePage> {
       context.read<UserBloc>().add(GetUserProfile());
     });
     Future.delayed(Duration.zero, () {
+      context.read<AllClassBloc>().add(GetAllClass());
+    });
+    Future.delayed(Duration.zero, () {
       context.read<OnlineClassBloc>().add(GetAllOnlineClass());
     });
     Future.delayed(Duration.zero, () {
@@ -62,9 +65,6 @@ class _HomePageState extends State<HomePage> {
     });
     Future.delayed(Duration.zero, () {
       context.read<NewsletterBloc>().add(GetAllNewsletter());
-    });
-    Future.delayed(Duration.zero, () {
-      context.read<AllClassBloc>().add(GetAllClass());
     });
   }
 
@@ -91,12 +91,18 @@ class _HomePageState extends State<HomePage> {
                 ErrorRoute(isHome: true),
               ]);
             }
+            if (state is UserSuccess) {
+              user = state.user;
+            }
           },
         ),
         BlocListener<AllClassBloc, AllClassState>(
           listener: (context, state) {
-            if (state is AllClassLoaded) {
-              classes = state.allClass.data!;
+            if (state is AllClassError) {
+              context.read<AllClassBloc>().add(GetAllClass());
+            }
+            if (state is FilteredClassLoaded) {
+              context.read<AllClassBloc>().add(GetAllClass());
             }
           },
         ),
@@ -105,14 +111,15 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           children: [
-            BlocBuilder<UserBloc, UserState>(
-              builder: (context, state) {
-                if (state is UserSuccess) {
-                  user = state.user;
+            Builder(
+              builder: (context) {
+                final userState = context.watch<UserBloc>().state;
+                final allClassState = context.watch<AllClassBloc>().state;
+                if (userState is UserSuccess &&
+                    allClassState is AllClassLoaded) {
+                  classes = allClassState.allClass.data!;
                   return WelcomeBar(
                     isLoading: false,
-                    username: state.user.data!.name!,
-                    member: state.user.data!.memberType!,
                     classes: classes,
                     user: user,
                   );
@@ -303,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   );
                 }
-                if (state is OfflineClassError) {
+                if (state is OnlineClassError) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -403,6 +410,38 @@ class _HomePageState extends State<HomePage> {
                     ],
                   );
                 }
+                if (state is NewsletterLoadFail) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SectionContainerTitle(
+                        moreThan5: false,
+                        title: 'Health tips for you',
+                        onTap: () {},
+                      ),
+                      const VerticalSpace(height: 10),
+                      SectionContainer(
+                        height: 130,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("Unable to Fetch Data"),
+                              IconButton(
+                                onPressed: () {
+                                  context.read<NewsletterBloc>().add(
+                                        GetAllNewsletter(),
+                                      );
+                                },
+                                icon: const Icon(Icons.restart_alt),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -482,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: VideoImageCard(
                           asset: imgList[index],
-                          title: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                          title: 'Magna et pariatur nostrud id',
                         ),
                       );
                     }),
