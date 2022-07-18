@@ -43,7 +43,27 @@ class _ProfileEditState extends State<ProfileEdit> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: BlocBuilder<UserBloc, UserState>(
+              child: BlocConsumer<UserBloc, UserState>(
+                listener: (context, state) {
+                  if (state is UserSuccess) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text('Update Success'),
+                        ),
+                      );
+                  }
+                  if (state is UserUpdateFailed) {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        SnackBar(
+                          content: Text(state.msg),
+                        ),
+                      );
+                  }
+                },
                 builder: (context, state) {
                   if (state is UserSuccess) {
                     return Column(
@@ -86,15 +106,22 @@ class _ProfileEditState extends State<ProfileEdit> {
                                 final String password =
                                     _passwordController.text;
                                 final String email = _emailController.text;
-                                context.read<UserBloc>().add(
-                                      UpdateUser(
-                                        email: email != "" ? email : null,
-                                        name: user != "" ? user : null,
-                                        password:
-                                            password != "" ? password : null,
-                                        phone: phone != "" ? phone : null,
-                                      ),
-                                    );
+
+                                if (user.isEmpty ||
+                                    phone.isEmpty ||
+                                    password.isEmpty ||
+                                    email.isEmpty) {
+                                  context.read<UserBloc>().add(
+                                        UpdateUser(
+                                          email: email != "" ? email : null,
+                                          name: user != "" ? user : null,
+                                          password:
+                                              password != "" ? password : null,
+                                          phone: phone != "" ? phone : null,
+                                        ),
+                                      );
+                                }
+
                                 _userController.clear();
                                 _nomorControllers.clear();
                                 _passwordController.clear();
