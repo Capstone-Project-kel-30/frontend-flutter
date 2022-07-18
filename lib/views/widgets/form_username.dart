@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:workout_zone/utils/themes/app_theme.dart';
-import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-class FormPassword extends StatefulWidget {
-  const FormPassword({
+import '../../utils/themes/app_theme.dart';
+import 'vertical_space.dart';
+
+class FormUsername extends StatelessWidget {
+  const FormUsername({
     Key? key,
     required this.title,
     required this.hint,
     required this.controller,
     this.validator,
+    this.keyboard,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
+
   final String? Function(String?)? validator;
-
-  @override
-  State<FormPassword> createState() => _FormPasswordState();
-}
-
-class _FormPasswordState extends State<FormPassword> {
-  bool _hidePassword = true;
+  final TextInputType? keyboard;
 
   @override
   Widget build(BuildContext context) {
@@ -28,33 +25,22 @@ class _FormPasswordState extends State<FormPassword> {
       children: [
         const VerticalSpace(height: 10),
         Text(
-          widget.title,
+          title,
           style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 14),
         ),
         const VerticalSpace(height: 8),
         SizedBox(
           child: TextFormField(
-            obscuringCharacter: '*',
-            obscureText: _hidePassword,
-            validator: widget.validator,
-            controller: widget.controller,
+            validator: validator,
+            keyboardType: keyboard,
+            controller: controller,
             decoration: InputDecoration(
               errorStyle: AppTheme.theme(context)
                   .textTheme
                   .labelLarge
                   ?.copyWith(color: Colors.red),
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              suffixIcon: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _hidePassword = !_hidePassword;
-                  });
-                },
-                child: Icon(
-                  _hidePassword ? Icons.visibility_off : Icons.visibility,
-                ),
-              ),
-              hintText: widget.hint,
+              hintText: hint,
               hintStyle: const TextStyle(
                   fontSize: 12, color: kGreyColor, fontWeight: kMediumWeight),
               fillColor: kDarkColor,
@@ -67,7 +53,9 @@ class _FormPasswordState extends State<FormPassword> {
                 borderSide: BorderSide(color: kPrimaryColor),
               ),
               errorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red),
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
               ),
               focusedErrorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red),

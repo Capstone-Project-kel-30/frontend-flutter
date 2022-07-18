@@ -1,13 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/user/user_bloc.dart';
-import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
-import '../authentication/widgets/button_txt.dart';
-import '../authentication/widgets/form_password.dart';
-import '../authentication/widgets/form_username.dart';
+import '../widgets/form_password.dart';
+import '../widgets/form_username.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/vertical_space.dart';
 import 'widget/image_profile.dart';

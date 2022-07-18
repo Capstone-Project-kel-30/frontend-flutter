@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:workout_zone/utils/themes/app_theme.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
-import '../../../utils/themes/app_theme.dart';
-import '../../widgets/vertical_space.dart';
-
-class FormUsername extends StatelessWidget {
-  const FormUsername({
+class FormPassword extends StatefulWidget {
+  const FormPassword({
     Key? key,
     required this.title,
     required this.hint,
     required this.controller,
     this.validator,
-    this.keyboard,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
-
   final String? Function(String?)? validator;
-  final TextInputType? keyboard;
+
+  @override
+  State<FormPassword> createState() => _FormPasswordState();
+}
+
+class _FormPasswordState extends State<FormPassword> {
+  bool _hidePassword = true;
+  bool _isEmpty = true;
+
+  @override
+  void initState() {
+    widget.controller.addListener(() {
+      setState(() {
+        _isEmpty = widget.controller.text.isEmpty;
+        if (_isEmpty) _hidePassword = true;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +40,37 @@ class FormUsername extends StatelessWidget {
       children: [
         const VerticalSpace(height: 10),
         Text(
-          title,
+          widget.title,
           style: const TextStyle(fontWeight: kSemiBoldWeight, fontSize: 14),
         ),
         const VerticalSpace(height: 8),
         SizedBox(
           child: TextFormField(
-            validator: validator,
-            keyboardType: keyboard,
-            controller: controller,
+            obscuringCharacter: '*',
+            obscureText: _hidePassword,
+            validator: widget.validator,
+            controller: widget.controller,
             decoration: InputDecoration(
               errorStyle: AppTheme.theme(context)
                   .textTheme
                   .labelLarge
                   ?.copyWith(color: Colors.red),
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              hintText: hint,
+              suffixIcon: GestureDetector(
+                onTap: !_isEmpty
+                    ? () {
+                        setState(
+                          () {
+                            _hidePassword = !_hidePassword;
+                          },
+                        );
+                      }
+                    : null,
+                child: Icon(
+                  _hidePassword ? Icons.visibility_off : Icons.visibility,
+                ),
+              ),
+              hintText: widget.hint,
               hintStyle: const TextStyle(
                   fontSize: 12, color: kGreyColor, fontWeight: kMediumWeight),
               fillColor: kDarkColor,
@@ -53,9 +83,7 @@ class FormUsername extends StatelessWidget {
                 borderSide: BorderSide(color: kPrimaryColor),
               ),
               errorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.red,
-                ),
+                borderSide: BorderSide(color: Colors.red),
               ),
               focusedErrorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red),
