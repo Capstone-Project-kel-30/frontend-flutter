@@ -62,21 +62,11 @@ class _ProfileEditState extends State<ProfileEdit> {
                           controller: _emailController,
                         ),
                         FormPassword(
-                          tap: () {
-                            context.router.push(const NewPassword());
-                          },
                           title: "Password",
                           hint: "*************",
                           controller: _passwordController,
-                          read: true,
                         ),
                         const VerticalSpace(height: 10),
-                        ForgetPassBttn(
-                          titile: "Change Password",
-                          press: () {
-                            context.router.push(const NewPassword());
-                          },
-                        ),
                         FormUsername(
                           title: "Username",
                           hint: state.user.data!.name!,

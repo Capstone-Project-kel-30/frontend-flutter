@@ -9,14 +9,10 @@ class FormPassword extends StatefulWidget {
     required this.hint,
     required this.controller,
     this.validator,
-    this.tap,
-    required this.read,
   }) : super(key: key);
   final String title, hint;
   final TextEditingController controller;
   final String? Function(String?)? validator;
-  final VoidCallback? tap;
-  final bool read;
 
   @override
   State<FormPassword> createState() => _FormPasswordState();
@@ -38,8 +34,6 @@ class _FormPasswordState extends State<FormPassword> {
         const VerticalSpace(height: 8),
         SizedBox(
           child: TextFormField(
-            onTap: widget.tap,
-            readOnly: widget.read,
             obscuringCharacter: '*',
             obscureText: _hidePassword,
             validator: widget.validator,

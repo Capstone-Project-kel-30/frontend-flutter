@@ -54,13 +54,15 @@ class ProfileSeting extends StatelessWidget {
                             ),
                   ),
                   const VerticalSpace(height: 10),
-                   CardOption(
+                  CardOption(
                     asset: 'assets/icons/bx_help-circle.svg',
-                    title: 'FaQ', ontap: () {  },
+                    title: 'FaQ',
+                    ontap: () {},
                   ),
-                   CardOption(
+                  CardOption(
                     title: 'Contact Us',
-                    asset: 'assets/icons/cell.svg', ontap: () {  },
+                    asset: 'assets/icons/cell.svg',
+                    ontap: () {},
                   )
                 ],
               ),
@@ -130,7 +132,6 @@ class ProfileSeting extends StatelessWidget {
                                 ),
                                 const VerticalSpace(height: 50),
                                 Row(
-                                  
                                   children: [
                                     TextButton(
                                       onPressed: () {
