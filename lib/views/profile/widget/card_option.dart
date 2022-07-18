@@ -6,9 +6,10 @@ class CardOption extends StatelessWidget {
   const CardOption({
     Key? key,
     required this.title,
-    required this.asset,
+    required this.asset, required this.ontap,
   }) : super(key: key);
   final String title, asset;
+  final VoidCallback ontap;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class CardOption extends StatelessWidget {
                   ),
             ),
             trailing: GestureDetector(
-              onTap: () {},
+              onTap: ontap,
               child: const Icon(
                 Icons.arrow_forward_ios,
                 color: kPrimaryColor,

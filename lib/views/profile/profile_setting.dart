@@ -54,13 +54,15 @@ class ProfileSeting extends StatelessWidget {
                             ),
                   ),
                   const VerticalSpace(height: 10),
-                  const CardOption(
+                  CardOption(
                     asset: 'assets/icons/bx_help-circle.svg',
                     title: 'FaQ',
+                    ontap: () {},
                   ),
-                  const CardOption(
+                  CardOption(
                     title: 'Contact Us',
                     asset: 'assets/icons/cell.svg',
+                    ontap: () {},
                   )
                 ],
               ),
@@ -130,8 +132,6 @@ class ProfileSeting extends StatelessWidget {
                                 ),
                                 const VerticalSpace(height: 50),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     TextButton(
                                       onPressed: () {
@@ -155,9 +155,10 @@ class ProfileSeting extends StatelessWidget {
                                             ),
                                       ),
                                     ),
-                                    const HorizontalSpace(width: 10),
+                                    const HorizontalSpace(width: 50),
                                     CustomElevatedButton(
                                       width: 160,
+                                      height: 45,
                                       text: "No",
                                       onPressed: () {
                                         Navigator.pop(context);

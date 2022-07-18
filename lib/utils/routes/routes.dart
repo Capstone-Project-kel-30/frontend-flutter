@@ -18,7 +18,6 @@ import '../../views/newsletter/newsletter_detail_page.dart';
 import '../../views/newsletter/newsletter_page.dart';
 import '../../views/on_boarding/landing_page.dart';
 import '../../views/on_boarding/on_boarding_page.dart';
-import '../../views/profile/new_password.dart';
 import '../../views/profile/profile_edit.dart';
 import '../../views/profile/profile_page.dart';
 import '../../views/profile/profile_setting.dart';
@@ -114,10 +113,7 @@ import '../../views/membership/membership_payment_page.dart';
       path: 'profileEdit',
       page: ProfileEdit,
     ),
-    AutoRoute(
-      path: 'editProfilePassword',
-      page: NewPassword,
-    ),
+    
     AutoRoute(
       path: 'class',
       page: ClassPage,

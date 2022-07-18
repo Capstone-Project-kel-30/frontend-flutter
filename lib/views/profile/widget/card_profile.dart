@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class CardProfile extends StatelessWidget {
   const CardProfile({
@@ -37,6 +38,9 @@ class CardProfile extends StatelessWidget {
                               fontSize: 14,
                             ),
                   ),
+                  const WidgetSpan(
+                    child: VerticalSpace(height: 15),
+                  ),
                   TextSpan(
                     text: email,
                     style: const TextStyle(
@@ -53,6 +57,7 @@ class CardProfile extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 10,
                 fontWeight: kRegularWeight,
+                height: 1.5,
               ),
             ),
             trailing: IconButton(
