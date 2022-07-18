@@ -35,17 +35,31 @@ class _HomePageState extends State<HomePage> {
   UserModel user = UserModel();
   List<Class> classes = [];
   late YoutubePlayerController _videoController;
-  final String url = 'https://www.youtube.com/watch?v=B-_GP-YKk3w';
 
-  List<String> imgList = [
+  final List<String> imgList = [
     'assets/images/dummy1.png',
     'assets/images/dummy2.jpg',
     'assets/images/dummy3.jpg',
   ];
-  List<String> bannerImgList = [
+  final List<String> bannerImgList = [
     'assets/images/banner1.png',
     'assets/images/banner2.png',
     'assets/images/banner3.png',
+  ];
+  final List<String> videoImg = [
+    'assets/images/video_1.png',
+    'assets/images/video_2.png',
+    'assets/images/video_3.png',
+  ];
+  final List<String> videoLink = [
+    'https://www.youtube.com/watch?v=B-_GP-YKk3w',
+    'https://www.youtube.com/watch?v=jSaw1FguwXA',
+    'https://www.youtube.com/watch?v=VlaPUNQ0sA4',
+  ];
+  final List<String> videoTitle = [
+    '7 Latihan Untuk Membentuk Otot Lengan',
+    'Cara Membangun Otot Betis Dengan Cepat',
+    'Cara Belajar Pull Up dari NOL! 4 Latihan Pemula',
   ];
 
   @override
@@ -478,7 +492,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SectionContainerTitle(
-                  moreThan5: imgList.length > 5,
+                  moreThan5: videoImg.length > 5,
                   title: 'Workout From Home',
                   onTap: () {
                     context.router.push(const VideoContentRoute());
@@ -489,12 +503,14 @@ class _HomePageState extends State<HomePage> {
                   height: 100,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: imgList.length > 5 ? 5 : imgList.length,
+                    itemCount: videoImg.length > 5 ? 5 : videoImg.length,
                     itemBuilder: ((context, index) {
                       return GestureDetector(
                         onTap: () {
                           _videoController = YoutubePlayerController(
-                            initialVideoId: YoutubePlayer.convertUrlToId(url)!,
+                            initialVideoId: YoutubePlayer.convertUrlToId(
+                              videoLink[index],
+                            )!,
                           );
                           showDialog(
                             context: context,
@@ -520,8 +536,8 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                         child: VideoImageCard(
-                          asset: imgList[index],
-                          title: 'Magna et pariatur nostrud id',
+                          asset: videoImg[index],
+                          title: videoTitle[index],
                         ),
                       );
                     }),
