@@ -107,10 +107,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                                     _passwordController.text;
                                 final String email = _emailController.text;
 
-                                if (user.isEmpty ||
-                                    phone.isEmpty ||
-                                    password.isEmpty ||
-                                    email.isEmpty) {
+                                if (user.isNotEmpty ||
+                                    phone.isNotEmpty ||
+                                    password.isNotEmpty ||
+                                    email.isNotEmpty) {
                                   context.read<UserBloc>().add(
                                         UpdateUser(
                                           email: email != "" ? email : null,
