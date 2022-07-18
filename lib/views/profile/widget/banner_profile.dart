@@ -33,7 +33,7 @@ class BannerProfile extends StatelessWidget {
               Text(
                 " ${capitalize(member)} Membership",
                 style: AppTheme.theme(context).textTheme.bodyMedium!.copyWith(
-                      color: kPrimaryColor,
+                      color: kLightColor,
                       fontWeight: kSemiBoldWeight,
                     ),
               )

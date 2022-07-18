@@ -7,8 +7,8 @@ import '../../utils/routes/routes.gr.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/button_txt.dart';
-import 'widgets/form_password.dart';
-import 'widgets/form_username.dart';
+import '../widgets/form_password.dart';
+import '../widgets/form_username.dart';
 import 'widgets/txt_sambut.dart';
 
 class SignInPage extends StatefulWidget {
