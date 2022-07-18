@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../bloc/user/user_bloc.dart';
 import '../../utils/themes/app_theme.dart';
@@ -55,6 +57,12 @@ class _ProfileEditState extends State<ProfileEdit> {
                       );
                   }
                   if (state is UserUpdateFailed) {
+                    context.router.replaceAll([
+                      ErrorRoute(
+                        isHome: false,
+                        message: "Unable to Update Profile",
+                      ),
+                    ]);
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(
