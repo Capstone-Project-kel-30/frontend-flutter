@@ -13,8 +13,8 @@ class OnlineClassBloc extends Bloc<OnlineClassEvent, OnlineClassState> {
     on<GetAllOnlineClass>((event, emit) async {
       emit(OnlineClassLoading());
       try {
-        final ClassModel onlineClass = await classService.getAllOnlineClass();
-        emit(OnlineClassLoaded(onlineClass));
+        final ClassModel onlineClasses = await classService.getAllOnlineClass();
+        emit(OnlineClassLoaded(onlineClasses));
       } catch (e) {
         emit(OnlineClassError(e.toString()));
       }

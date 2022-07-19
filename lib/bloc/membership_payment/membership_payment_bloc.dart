@@ -27,6 +27,9 @@ class MembershipPaymentBloc
           membershipId: membershipId,
           authorization: authorization,
         );
+        await userInfoService.updateUserInfo(
+          memberType: membershipPayment.data!.membership!.type!,
+        );
         emit(PaymentRequestSuccess(membershipPayment));
       } catch (e) {
         emit(PaymentRequestError(e.toString()));
