@@ -6,6 +6,7 @@ import 'bloc/bloc.dart';
 import 'services/locals/user_info_service.dart';
 import 'services/remotes/auth_service.dart';
 import 'services/remotes/class_service.dart';
+import 'services/remotes/dio.dart';
 import 'services/remotes/membership_service.dart';
 import 'services/remotes/newsletter_service.dart';
 import 'services/remotes/user_service.dart';
@@ -27,11 +28,11 @@ class _MyAppState extends State<MyApp> {
   late SharedPreferences _sharedPreferences;
   final AppRouter _appRouter = AppRouter();
   late UserInfoService _userInfoService;
-  final AuthService _authService = AuthService();
-  final UserService _userService = UserService();
-  final MembershipService _membershipService = MembershipService();
-  final ClassService _classService = ClassService();
-  final NewsletterService _newsletterService = NewsletterService();
+  final AuthService _authService = AuthService(dio: dio);
+  final UserService _userService = UserService(dio: dio);
+  final MembershipService _membershipService = MembershipService(dio: dio);
+  final ClassService _classService = ClassService(dio: dio);
+  final NewsletterService _newsletterService = NewsletterService(dio: dio);
 
   @override
   void initState() {

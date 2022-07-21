@@ -5,11 +5,11 @@ import 'package:workout_zone/models/membership_payment_model.dart';
 
 import '../../models/membership_model.dart';
 import '../../utils/urls/url.dart';
-import 'dio.dart';
 import 'dio_error_handler.dart';
 
 class MembershipService {
-  MembershipService() {
+  final Dio dio;
+  MembershipService({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
   Future<MembershipPaymentModel> membershipRegister({

@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 
 import '../../models/class_model.dart';
 import '../../utils/urls/url.dart';
-import 'dio.dart';
 import 'dio_error_handler.dart';
 
 class ClassService {
-  ClassService() {
+  final Dio dio;
+  ClassService({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
   Future<ClassModel> getAllOfflineClass() async {

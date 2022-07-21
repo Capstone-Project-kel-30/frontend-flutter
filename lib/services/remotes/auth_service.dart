@@ -4,12 +4,12 @@ import 'package:workout_zone/services/remotes/dio_error_handler.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/urls/url.dart';
-import 'dio.dart';
 
 class AuthService {
-  AuthService() {
+  AuthService({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
+  final Dio dio;
 
   Future<UserModel> register({
     required String name,

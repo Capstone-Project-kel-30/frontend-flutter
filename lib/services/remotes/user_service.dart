@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 
 import '../../models/user_model.dart';
 import '../../utils/urls/url.dart';
-import 'dio.dart';
 import 'dio_error_handler.dart';
 
 class UserService {
-  UserService() {
+  final Dio dio;
+  UserService({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
   Future<UserModel> getUserProfile(String authorization) async {

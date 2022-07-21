@@ -11,10 +11,14 @@ class MembershipModel extends Equatable {
   factory MembershipModel.fromJson(Map<String, dynamic> json) {
     List<Member>? data;
     if (json['data'] != null) {
-      data = <Member>[];
-      json['data'].forEach((v) {
-        data!.add(Member.fromJson(v));
-      });
+      if (json['data'] is Map) {
+        data = [(Member.fromJson(json['data']))];
+      } else {
+        data = <Member>[];
+        json['data'].forEach((v) {
+          data!.add(Member.fromJson(v));
+        });
+      }
     }
     return MembershipModel(
       status: json['status'],

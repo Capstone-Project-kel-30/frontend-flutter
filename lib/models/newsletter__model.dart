@@ -11,13 +11,13 @@ class NewsletterModel extends Equatable {
   factory NewsletterModel.fromJson(Map<String, dynamic> json) {
     List<Newsletter>? data;
     if (json['data'] != null) {
-      if (json['data'].length >= 1) {
+      if (json['data'] is Map) {
+        data?.add(Newsletter.fromJson(json['data']));
+      } else {
         data = <Newsletter>[];
         json['data'].forEach((v) {
           data!.add(Newsletter.fromJson(v));
         });
-      } else {
-        data = [Newsletter.fromJson(json['data'])];
       }
     }
     return NewsletterModel(

@@ -16,11 +16,3 @@ class GetOfflineClassById extends OfflineClassEvent {
   @override
   List<Object> get props => [id];
 }
-
-class ChangeOfflineClassDate extends OfflineClassEvent {
-  final String datePicked;
-  const ChangeOfflineClassDate(this.datePicked);
-
-  @override
-  List<Object> get props => [datePicked];
-}

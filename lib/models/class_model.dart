@@ -11,13 +11,13 @@ class ClassModel extends Equatable {
   factory ClassModel.fromJson(Map<String, dynamic> json) {
     List<Class>? data;
     if (json['data'] != null) {
-      if (json['data'].length >= 1) {
+      if (json['data'] is Map) {
+        data = [Class.fromJson(json['data'])];
+      } else {
         data = <Class>[];
         json['data'].forEach((v) {
           data?.add(Class.fromJson(v));
         });
-      } else {
-        data = [Class.fromJson(json['data'])];
       }
     }
     return ClassModel(
