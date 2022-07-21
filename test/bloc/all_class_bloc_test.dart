@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_zone/bloc/all_class/all_class_bloc.dart';
+import 'package:workout_zone/utils/common/constant.dart';
 import '../dummy/dummy_data.dart';
 import 'all_class_bloc_test.mocks.dart';
 import 'package:workout_zone/services/remotes/class_service.dart';
@@ -63,19 +64,19 @@ void main() {
       },
     );
   });
-  // group('Filtering Class', () {
-  //   blocTest<AllClassBloc, AllClassState>(
-  //     'emits [FilteredClassLoaded] '
-  //     'when FilterClass is added.',
-  //     build: () => allClassBloc,
-  //     act: (bloc) => bloc.add(
-  //       FilterClass(allClass, (e) {
-  //         return e.clastype!.toUpperCase() == offlineClass;
-  //       }),
-  //     ),
-  //     expect: () => <AllClassState>[
-  //       FilteredClassLoaded(offlineClasses),
-  //     ],
-  //   );
-  // });
+  group('Filtering Class', () {
+    blocTest<AllClassBloc, AllClassState>(
+      'emits [FilteredClassLoaded] '
+      'when FilterClass is added.',
+      build: () => allClassBloc,
+      act: (bloc) => bloc.add(
+        FilterClass(allClass, (e) {
+          return e.clastype!.toUpperCase() == offlineClass;
+        }),
+      ),
+      expect: () => <AllClassState>[
+        FilteredClassLoaded(offlineClasses),
+      ],
+    );
+  });
 }

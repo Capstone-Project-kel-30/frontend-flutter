@@ -78,21 +78,4 @@ class ClassService {
       throw ('server error');
     }
   }
-
-  searchClass(String keyword) async {
-    final Map<String, String> query = {
-      'search': keyword,
-    };
-    try {
-      final Response response = await dio.post(
-        urls.searchClass(),
-        queryParameters: query,
-      );
-    } on DioError catch (e) {
-      throw (dioErrorHandler(e));
-    } on Exception catch (e) {
-      debugPrint(e.toString());
-      throw ('server error');
-    }
-  }
 }

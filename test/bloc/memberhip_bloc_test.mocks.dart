@@ -76,7 +76,4 @@ class MockMembershipService extends _i1.Mock implements _i5.MembershipService {
               returnValue:
                   Future<_i4.BookInfoModel>.value(_FakeBookInfoModel_2()))
           as _i6.Future<_i4.BookInfoModel>);
-  @override
-  dynamic userClassSchedule(String? authorization) => super
-      .noSuchMethod(Invocation.method(#userClassSchedule, [authorization]));
 }

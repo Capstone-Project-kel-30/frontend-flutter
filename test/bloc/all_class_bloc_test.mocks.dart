@@ -53,7 +53,4 @@ class MockClassService extends _i1.Mock implements _i3.ClassService {
       (super.noSuchMethod(Invocation.method(#getAllClass, []),
               returnValue: Future<_i2.ClassModel>.value(_FakeClassModel_0()))
           as _i4.Future<_i2.ClassModel>);
-  @override
-  dynamic searchClass(String? keyword) =>
-      super.noSuchMethod(Invocation.method(#searchClass, [keyword]));
 }

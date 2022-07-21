@@ -19,7 +19,7 @@ void main() {
   const String newName = "tested2";
   const String newPassword = "tested1234";
   const String newPhone = "0912991209911";
-  final UserModel newUser = UserModel(
+  const UserModel newUser = UserModel(
     data: User(
       token: authorization,
       email: newEmail,
@@ -72,7 +72,7 @@ void main() {
       ),
       expect: () => <UserState>[
         UserLoading(),
-        UserSuccess(newUser),
+        const UserSuccess(newUser),
       ],
       verify: (_) {
         verify(mockUserInfoService.getUserInfo()).called(1);
@@ -156,7 +156,7 @@ void main() {
       act: (bloc) => bloc.add(GetUserProfile()),
       expect: () => <UserState>[
         UserLoading(),
-        UserSuccess(user),
+        const UserSuccess(user),
       ],
       verify: (_) {
         verify(mockUserInfoService.getUserInfo()).called(1);

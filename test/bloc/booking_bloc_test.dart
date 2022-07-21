@@ -48,7 +48,7 @@ void main() {
       ),
       expect: () => <BookingState>[
         BookingLoading(),
-        BookingSuccess(bookInfo, bookInfo.data!.user!),
+        BookingSuccess(bookInfo, user.data!),
       ],
       verify: (_) {
         verify(mockUserInfoService.getUserInfo()).called(1);

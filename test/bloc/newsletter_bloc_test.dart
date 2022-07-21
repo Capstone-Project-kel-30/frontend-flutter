@@ -38,7 +38,7 @@ void main() {
       act: (bloc) => bloc.add(GetAllNewsletter()),
       expect: () => <NewsletterState>[
         LoadingNewsletter(),
-        NewsletterLoaded(newsletterModel),
+        const NewsletterLoaded(newsletterModel),
       ],
       verify: (_) {
         verify(mockNewsletterService.getAllNewsletter()).called(1);
@@ -75,7 +75,7 @@ void main() {
       act: (bloc) => bloc.add(GetNewsletterById(newsletter.id.toString())),
       expect: () => <NewsletterState>[
         LoadingNewsletter(),
-        NewsletterLoaded(newsletterModel),
+        const NewsletterLoaded(newsletterModel),
       ],
       verify: (_) {
         verify(

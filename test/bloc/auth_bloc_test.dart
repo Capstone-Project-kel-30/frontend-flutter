@@ -3,7 +3,6 @@ import 'package:mockito/annotations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_zone/bloc/auth/auth_bloc.dart';
-import 'package:workout_zone/models/user_model.dart';
 import 'package:workout_zone/services/locals/user_info_service.dart';
 import 'package:workout_zone/services/remotes/auth_service.dart';
 
@@ -46,7 +45,7 @@ void main() {
       act: (bloc) => bloc.add(
         const SignInRequest(email, password),
       ),
-      expect: () => <AuthState>[Authenticating(), Authenticated(user)],
+      expect: () => <AuthState>[Authenticating(), const Authenticated(user)],
       verify: (_) {
         verify(mockUserInfoService.updateUserInfo(
           hasLogin: true,

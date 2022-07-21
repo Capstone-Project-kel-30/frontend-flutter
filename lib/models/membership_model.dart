@@ -1,59 +1,60 @@
-class MembershipModel {
-  bool? status;
-  String? message;
-  List<String>? errors;
-  List<Member>? data;
+import 'package:equatable/equatable.dart';
 
-  MembershipModel({this.status, this.message, this.errors, this.data});
+class MembershipModel extends Equatable {
+  final bool? status;
+  final String? message;
+  final List<String>? errors;
+  final List<Member>? data;
 
-  MembershipModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    errors = json['errors'];
+  const MembershipModel({this.status, this.message, this.errors, this.data});
+
+  factory MembershipModel.fromJson(Map<String, dynamic> json) {
+    List<Member>? data;
     if (json['data'] != null) {
       data = <Member>[];
       json['data'].forEach((v) {
         data!.add(Member.fromJson(v));
       });
     }
+    return MembershipModel(
+      status: json['status'],
+      message: json['message'],
+      errors: json['errors'],
+      data: data,
+    );
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['errors'] = errors;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  @override
+  List<Object?> get props => [status, message, errors, data];
 }
 
-class Member {
-  int? id;
-  String? type;
-  int? price;
-  int? duration;
-  String? description;
+class Member extends Equatable {
+  final int? id;
+  final String? type;
+  final int? price;
+  final int? duration;
+  final String? description;
+  final String? image;
 
-  Member({this.id, this.type, this.price, this.duration, this.description});
+  const Member({
+    this.image,
+    this.id,
+    this.type,
+    this.price,
+    this.duration,
+    this.description,
+  });
 
-  Member.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    type = json['type'];
-    price = json['price'];
-    duration = json['duration'];
-    description = json['description'];
+  factory Member.fromJson(Map<String, dynamic> json) {
+    return Member(
+      id: json['id'],
+      type: json['type'],
+      price: json['price'],
+      duration: json['duration'],
+      description: json['description'],
+      image: json['img'],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['type'] = type;
-    data['price'] = price;
-    data['duration'] = duration;
-    data['description'] = description;
-    return data;
-  }
+  @override
+  List<Object?> get props => [id, type, price, duration, description, image];
 }

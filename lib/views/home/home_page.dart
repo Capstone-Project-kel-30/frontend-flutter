@@ -31,7 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  UserModel user = UserModel();
+  UserModel user = const UserModel();
   late YoutubePlayerController _videoController;
   final String url = 'https://www.youtube.com/watch?v=B-_GP-YKk3w';
 

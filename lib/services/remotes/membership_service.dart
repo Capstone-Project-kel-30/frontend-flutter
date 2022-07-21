@@ -119,21 +119,4 @@ class MembershipService {
       throw ('server error');
     }
   }
-
-  userClassSchedule(String authorization) async {
-    try {
-      final Map<String, String> header = {
-        'Authorization': authorization,
-      };
-      final Response response = await dio.get(
-        urls.userClassSchedule(),
-        options: Options(headers: header),
-      );
-    } on DioError catch (e) {
-      throw (dioErrorHandler(e));
-    } on Exception catch (e) {
-      debugPrint(e.toString());
-      throw ('server error');
-    }
-  }
 }

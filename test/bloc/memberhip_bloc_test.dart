@@ -38,7 +38,7 @@ void main() {
       act: (bloc) => bloc.add(GetMembershipDetail()),
       expect: () => <MembershipState>[
         LoadingMembershipDetail(),
-        MembershipDetailLoaded(membershipModel),
+        const MembershipDetailLoaded(membershipModel),
       ],
       verify: (_) {
         verify(mockMembershipService.getMembershipDetails()).called(1);

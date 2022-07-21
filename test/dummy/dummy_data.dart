@@ -16,7 +16,7 @@ const userId = 1;
 const authorization = 'abcd';
 const memberType = 'GOLD';
 const membershipId = 1;
-final UserModel user = UserModel(
+const UserModel user = UserModel(
   data: User(
     name: name,
     email: email,
@@ -28,14 +28,14 @@ final UserModel user = UserModel(
     totp: otp,
   ),
 );
-final Member member = Member(
+const Member member = Member(
   description: 'description',
   duration: 12,
   id: 1,
   price: 900000,
   type: 'GOLD',
 );
-final MembershipModel membershipModel = MembershipModel(data: [member]);
+const MembershipModel membershipModel = MembershipModel(data: [member]);
 final MembershipPaymentModel membershipPayment = MembershipPaymentModel(
   data: MembershipPayment(
     user: user.data,
@@ -45,18 +45,18 @@ final MembershipPaymentModel membershipPayment = MembershipPaymentModel(
     snapUrl: 'snapUrl',
   ),
 );
-final Newsletter newsletter = Newsletter(
+const Newsletter newsletter = Newsletter(
   content: 'content',
   date: '22-20-2022',
   id: 1,
   image: 'imgUrl',
   title: 'newsletter title',
 );
-final NewsletterModel newsletterModel = NewsletterModel(
+const NewsletterModel newsletterModel = NewsletterModel(
   data: [newsletter],
 );
 List<Class> offlineClasses = [
-  Class(
+  const Class(
     id: 111,
     classname: 'Dummy Offline 2',
     capacity: 20,
@@ -70,7 +70,7 @@ List<Class> offlineClasses = [
     trainer: 'Trainer',
     userBooked: 20,
   ),
-  Class(
+  const Class(
     id: 110,
     classname: 'Dummy Offline 1',
     capacity: 20,
@@ -86,7 +86,7 @@ List<Class> offlineClasses = [
   ),
 ];
 List<Class> onlineClasses = [
-  Class(
+  const Class(
     id: 10,
     classname: 'Dummy Online 2',
     capacity: 20,
@@ -100,7 +100,7 @@ List<Class> onlineClasses = [
     trainer: 'Trainer',
     userBooked: 20,
   ),
-  Class(
+  const Class(
     id: 11,
     classname: 'Dummy Online 1',
     capacity: 20,
@@ -132,7 +132,6 @@ final ClassModel onlineClassModel = ClassModel(
 final BookInfoModel bookInfo = BookInfoModel(
   data: BookData(
     classes: offlineClasses[0],
-    id: 1,
-    user: user.data,
+    userId: userId,
   ),
 );
