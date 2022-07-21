@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/themes/app_theme.dart';
-import '../../widgets/vertical_space.dart';
+import '../../utils/themes/app_theme.dart';
+import 'vertical_space.dart';
 
 class FormUsername extends StatelessWidget {
   const FormUsername({

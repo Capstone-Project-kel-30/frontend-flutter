@@ -2,11 +2,12 @@
 // in workout_zone/test/bloc/newsletter_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
+import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:workout_zone/models/newsletter__model.dart' as _i2;
-import 'package:workout_zone/services/remotes/newsletter_service.dart' as _i3;
+import 'package:workout_zone/models/newsletter__model.dart' as _i3;
+import 'package:workout_zone/services/remotes/newsletter_service.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -18,26 +19,32 @@ import 'package:workout_zone/services/remotes/newsletter_service.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeNewsletterModel_0 extends _i1.Fake implements _i2.NewsletterModel {}
+class _FakeDio_0 extends _i1.Fake implements _i2.Dio {}
+
+class _FakeNewsletterModel_1 extends _i1.Fake implements _i3.NewsletterModel {}
 
 /// A class which mocks [NewsletterService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNewsletterService extends _i1.Mock implements _i3.NewsletterService {
+class MockNewsletterService extends _i1.Mock implements _i4.NewsletterService {
   MockNewsletterService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.NewsletterModel> getAllNewsletter() =>
+  _i2.Dio get dio =>
+      (super.noSuchMethod(Invocation.getter(#dio), returnValue: _FakeDio_0())
+          as _i2.Dio);
+  @override
+  _i5.Future<_i3.NewsletterModel> getAllNewsletter() =>
       (super.noSuchMethod(Invocation.method(#getAllNewsletter, []),
               returnValue:
-                  Future<_i2.NewsletterModel>.value(_FakeNewsletterModel_0()))
-          as _i4.Future<_i2.NewsletterModel>);
+                  Future<_i3.NewsletterModel>.value(_FakeNewsletterModel_1()))
+          as _i5.Future<_i3.NewsletterModel>);
   @override
-  _i4.Future<_i2.NewsletterModel> getNewsletterById(String? id) =>
+  _i5.Future<_i3.NewsletterModel> getNewsletterById(String? id) =>
       (super.noSuchMethod(Invocation.method(#getNewsletterById, [id]),
               returnValue:
-                  Future<_i2.NewsletterModel>.value(_FakeNewsletterModel_0()))
-          as _i4.Future<_i2.NewsletterModel>);
+                  Future<_i3.NewsletterModel>.value(_FakeNewsletterModel_1()))
+          as _i5.Future<_i3.NewsletterModel>);
 }

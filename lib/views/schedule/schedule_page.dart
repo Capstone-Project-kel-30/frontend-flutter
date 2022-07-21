@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../bloc/bloc.dart';
+import '../../models/class_model.dart';
 import '../../models/user_model.dart';
-import '../../utils/common/constant.dart';
+import '../../utils/routes/routes.gr.dart';
 import '../widgets/shimmer_placeholder.dart';
 import '../widgets/vertical_space.dart';
 import 'widget/card_jadwal.dart';
@@ -22,78 +22,12 @@ class SchedulePage extends StatefulWidget {
 
 class _SchedulePageState extends State<SchedulePage> {
   int ind = 0;
-  List<Map<String, dynamic>> onlineClassList = [
-    {
-      "classTitle":
-          "Anim occaecat nisi dolore sit minim sint nisi pariatur sint culpa dolor veniam.",
-      "classType": onlineClass,
-      "trainer": "trainer",
-      "location": "Streaming - Zoom",
-      "startTime": "17:00",
-    },
-    {
-      "classTitle": "Silat",
-      "classType": onlineClass,
-      "trainer": "trainer",
-      "location": "Streaming - GMeet",
-      "startTime": "23:00",
-    },
-    {
-      "classTitle": "Zumba",
-      "classType": onlineClass,
-      "trainer": "trainer",
-      "location": "Streaming - Youtube",
-      "startTime": "05:00",
-    },
-    {
-      "classTitle": "Yoga",
-      "classType": onlineClass,
-      "trainer": "trainer",
-      "location": "Streaming - Zoom",
-      "startTime": "21:00",
-    },
-  ];
+  List<Class> allClass = [];
 
-  List<Map<String, dynamic>> offlineClassList = [
-    // {
-    //   "classTitle": "Boxing",
-    //   "classType": offlineClass,
-    //   "trainer": "trainer",
-    //   "location": "Gym Studio - Bandung",
-    //   "startTime": "17:00",
-    // },
-    // {
-    //   "classTitle": "Silat",
-    //   "classType": offlineClass,
-    //   "trainer": "trainer",
-    //   "location": "Gym Studio - Bandung",
-    //   "startTime": "23:00",
-    // },
-    // {
-    //   "classTitle":
-    //       "Quis occaecat id commodo id et quis tempor amet irure consectetur fugiat consequat velit et.",
-    //   "classType": offlineClass,
-    //   "trainer": "trainer",
-    //   "location": "Gym Studio - Bandung",
-    //   "startTime": "05:00",
-    // },
-    // {
-    //   "classTitle": "Yoga",
-    //   "classType": offlineClass,
-    //   "trainer": "trainer",
-    //   "location": "Gym Studio - Bandung",
-    //   "startTime": "21:00",
-    // },
-  ];
-
-  List<Map<String, dynamic>> getList(int index) {
-    if (index == 0) {
-      return [...offlineClassList, ...onlineClassList];
-    } else if (index == 1) {
-      return offlineClassList;
-    } else {
-      return onlineClassList;
-    }
+  @override
+  void initState() {
+    super.initState();
+    context.read<ScheduleBloc>().add(GetSchedule());
   }
 
   @override
@@ -107,54 +41,111 @@ class _SchedulePageState extends State<SchedulePage> {
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Column(
             children: [
-              SelectPicker(
-                onprees: (int index) {
-                  ind = index;
-                  setState(() {});
+              BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  if (state is UserSuccess) {
+                    final user = state.user.data;
+                    return Visibility(
+                      visible: user!.memberType! != "",
+                      child: SelectPicker(
+                        onprees: (String selectedType) {
+                          context.read<ScheduleBloc>().add(
+                                FilterSchedule(
+                                  (e) {
+                                    if (selectedType == 'All') {
+                                      return true;
+                                    }
+                                    return e.clastype!.toUpperCase() ==
+                                        selectedType.toUpperCase();
+                                  },
+                                  allClass,
+                                ),
+                              );
+                        },
+                      ),
+                    );
+                  }
+                  return const SizedBox();
                 },
               ),
               const VerticalSpace(height: 20),
               Expanded(
-                child: BlocBuilder<UserBloc, UserState>(
-                  builder: (context, state) {
-                    if (state is UserSuccess) {
-                      final UserModel user = state.user;
-                      if (user.data!.memberType! == "") {
-                        return FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              context.router.push(const MembershipRoute());
-                            },
-                            icon: const Icon(Icons.add),
-                            label: const Text("Add Membership"),
-                          ),
-                        );
-                      }
-                      return JadwalCard(
-                        classList: getList(ind),
-                        user: state.user,
-                      );
-                    }
-                    return Center(
-                      child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Center(
-                            child: Column(
-                              children: const [
-                                ShimmerPlaceholder(
-                                  height: 71,
-                                  width: double.infinity,
-                                ),
-                                VerticalSpace(height: 10),
-                              ],
+                child: Center(
+                  child: BlocBuilder<UserBloc, UserState>(
+                    builder: (context, state) {
+                      if (state is UserSuccess) {
+                        final UserModel user = state.user;
+                        if (user.data!.memberType! == "") {
+                          return FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                context.router.push(const MembershipRoute());
+                              },
+                              icon: const Icon(Icons.add),
+                              label: const Text("Add Membership"),
                             ),
                           );
-                        },
-                      ),
-                    );
-                  },
+                        }
+                        return BlocBuilder<ScheduleBloc, ScheduleState>(
+                          builder: (context, scheduleState) {
+                            if (scheduleState is ScheduleLoaded) {
+                              final List<Class> classes =
+                                  scheduleState.scheduleInfo.data!.classes!;
+                              allClass = classes;
+                              return JadwalCard(
+                                classList: classes,
+                                user: state.user,
+                              );
+                            }
+                            if (scheduleState is FilteredSchedule) {
+                              final List<Class> filteredClass =
+                                  scheduleState.filteredClass;
+                              return JadwalCard(
+                                classList: filteredClass,
+                                user: state.user,
+                              );
+                            }
+                            if (scheduleState is ScheduleError) {
+                              return Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text('Unable to Fetch Data'),
+                                    IconButton(
+                                      icon: const Icon(Icons.restart_alt),
+                                      onPressed: () {
+                                        context
+                                            .read<ScheduleBloc>()
+                                            .add(GetSchedule());
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            return ListView.builder(
+                              itemCount: 5,
+                              itemBuilder: (context, index) {
+                                return Center(
+                                  child: Column(
+                                    children: const [
+                                      ShimmerPlaceholder(
+                                        height: 71,
+                                        width: double.infinity,
+                                      ),
+                                      VerticalSpace(height: 10),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      }
+                      return const SizedBox();
+                    },
+                  ),
                 ),
               )
             ],

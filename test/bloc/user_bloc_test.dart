@@ -5,6 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:workout_zone/bloc/bloc.dart';
 import 'package:workout_zone/models/user_model.dart';
 import 'package:workout_zone/services/remotes/user_service.dart';
+import 'package:workout_zone/utils/common/constant.dart';
 
 import '../dummy/dummy_data.dart';
 import 'auth_bloc_test.mocks.dart';
@@ -161,6 +162,8 @@ void main() {
       verify: (_) {
         verify(mockUserInfoService.getUserInfo()).called(1);
         verify(mockUserService.getUserProfile(authorization)).called(1);
+        verify(mockUserInfoService.updateUserInfo(memberType: goldMember))
+            .called(1);
         verifyNoMoreInteractions(mockUserInfoService);
         verifyNoMoreInteractions(mockUserService);
       },

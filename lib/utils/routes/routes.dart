@@ -1,4 +1,6 @@
 import 'package:auto_route/annotations.dart';
+import 'package:workout_zone/views/home/search_bar_page.dart';
+import 'package:workout_zone/views/notification/notification_page.dart';
 import '../../views/authentication/create_new_pass.dart';
 import '../../views/authentication/forget_password_page.dart';
 import '../../views/authentication/sign_in_page.dart';
@@ -16,7 +18,6 @@ import '../../views/newsletter/newsletter_detail_page.dart';
 import '../../views/newsletter/newsletter_page.dart';
 import '../../views/on_boarding/landing_page.dart';
 import '../../views/on_boarding/on_boarding_page.dart';
-import '../../views/profile/new_password.dart';
 import '../../views/profile/profile_edit.dart';
 import '../../views/profile/profile_page.dart';
 import '../../views/profile/profile_setting.dart';
@@ -112,10 +113,7 @@ import '../../views/membership/membership_payment_page.dart';
       path: 'profileEdit',
       page: ProfileEdit,
     ),
-    AutoRoute(
-      path: 'editProfilePassword',
-      page: NewPassword,
-    ),
+    
     AutoRoute(
       path: 'class',
       page: ClassPage,
@@ -151,6 +149,14 @@ import '../../views/membership/membership_payment_page.dart';
     AutoRoute(
       path: 'membership',
       page: MembershipPage,
+    ),
+    AutoRoute(
+      path: 'notification',
+      page: NotificationPage,
+    ),
+    AutoRoute(
+      path: 'search',
+      page: SearchBarPage,
     ),
   ],
 )

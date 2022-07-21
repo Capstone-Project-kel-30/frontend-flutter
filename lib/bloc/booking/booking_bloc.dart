@@ -20,10 +20,8 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
         final UserModel userModel = userInfoService.getUserInfo();
         final User user = userModel.data!;
         final String authorization = user.token!;
-        final int userId = event.userId;
         final int classId = event.classId;
         final BookInfoModel bookInfo = await membershipService.bookingClass(
-          userId: userId,
           classId: classId,
           authorization: authorization,
         );

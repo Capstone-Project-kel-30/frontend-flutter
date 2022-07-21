@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:workout_zone/models/class_model.dart';
+import 'package:workout_zone/views/widgets/vertical_space.dart';
 
+import '../../../models/class_model.dart';
 import '../../../models/user_model.dart';
 import '../../../utils/routes/routes.gr.dart';
 import '../../../utils/themes/app_theme.dart';
@@ -13,33 +14,20 @@ import '../../widgets/location_info.dart';
 class CardClass extends StatelessWidget {
   const CardClass({
     Key? key,
-    required this.classType,
+    required this.classes,
     required this.user,
-    required this.location,
-    required this.trainer,
-    required this.startTime,
-    required this.classTitle,
   }) : super(key: key);
-  final String classType, location, trainer, startTime, classTitle;
   final UserModel user;
+  final Class classes;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         context.router.push(
           ClassDetailRoute(
-            classes: Class(
-              classname: classTitle,
-              clastype: classType,
-              trainer: trainer,
-              clock: startTime,
-              description:
-                  'Qui labore labore sunt reprehenderit velit. Pariatur culpa quis ea proident ut nulla ipsum. Laborum aliquip laborum excepteur cupidatat fugiat fugiat sint consectetur deserunt.',
-              date: '22-20-2022',
-              status: 'Available',
-              duration: 60,
-            ),
+            classes: classes,
             user: user,
+            fromSchedule: true,
           ),
         );
       },
@@ -56,7 +44,7 @@ class CardClass extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      classTitle,
+                      classes.classname!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style:
@@ -64,8 +52,10 @@ class CardClass extends StatelessWidget {
                                 fontWeight: kSemiBoldWeight,
                               ),
                     ),
-                    LocationInfo(classType: classType),
-                    TrainerInfo(trainer: trainer),
+                    const VerticalSpace(height: 5),
+                    LocationInfo(classType: classes.clastype!),
+                    const VerticalSpace(height: 5),
+                    TrainerInfo(trainer: classes.trainer!),
                   ],
                 ),
               ),
@@ -83,7 +73,7 @@ class CardClass extends StatelessWidget {
                       SvgPicture.asset("assets/icons/Clock.svg"),
                       const HorizontalSpace(width: 2.5),
                       Text(
-                        startTime,
+                        classes.clock!,
                         style: AppTheme.theme(context)
                             .textTheme
                             .bodySmall!

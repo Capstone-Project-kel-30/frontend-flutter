@@ -35,16 +35,12 @@ void main() {
       setUp: () {
         when(mockUserInfoService.getUserInfo()).thenReturn(user);
         when(mockMembershipService.bookingClass(
-          userId: user.data!.id!,
           classId: offlineClasses[0].id!,
           authorization: authorization,
         )).thenAnswer((_) => Future.value(bookInfo));
       },
       act: (bloc) => bloc.add(
-        BookingRequest(
-          classId: offlineClasses[0].id!,
-          userId: user.data!.id!,
-        ),
+        BookingRequest(classId: offlineClasses[0].id!),
       ),
       expect: () => <BookingState>[
         BookingLoading(),
@@ -53,7 +49,6 @@ void main() {
       verify: (_) {
         verify(mockUserInfoService.getUserInfo()).called(1);
         verify(mockMembershipService.bookingClass(
-          userId: user.data!.id!,
           classId: offlineClasses[0].id!,
           authorization: authorization,
         )).called(1);
@@ -68,15 +63,15 @@ void main() {
       setUp: () {
         when(mockUserInfoService.getUserInfo()).thenReturn(user);
         when(mockMembershipService.bookingClass(
-          userId: user.data!.id!,
           classId: offlineClasses[0].id!,
           authorization: authorization,
         )).thenThrow(errorMsg);
       },
-      act: (bloc) => bloc.add(BookingRequest(
-        classId: offlineClasses[0].id!,
-        userId: user.data!.id!,
-      )),
+      act: (bloc) => bloc.add(
+        BookingRequest(
+          classId: offlineClasses[0].id!,
+        ),
+      ),
       expect: () => <BookingState>[
         BookingLoading(),
         const BookingFailed(errorMsg),
@@ -84,7 +79,6 @@ void main() {
       verify: (_) {
         verify(mockUserInfoService.getUserInfo()).called(1);
         verify(mockMembershipService.bookingClass(
-          userId: user.data!.id!,
           classId: offlineClasses[0].id!,
           authorization: authorization,
         )).called(1);

@@ -7,8 +7,8 @@ import '../../utils/routes/routes.gr.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/vertical_space.dart';
 import 'widgets/button_txt.dart';
-import 'widgets/form_password.dart';
-import 'widgets/form_username.dart';
+import '../widgets/form_password.dart';
+import '../widgets/form_username.dart';
 import 'widgets/txt_sambut.dart';
 
 class SignInPage extends StatefulWidget {
@@ -181,7 +181,7 @@ class _SignInPageState extends State<SignInPage> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Bottomtxt(
-                  txt1: "Not Have Account yet ?",
+                  txt1: "Don't have an account yet?",
                   txt2: 'Sign Up',
                   tekan: () {
                     context.router.replaceAll([

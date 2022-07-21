@@ -20,6 +20,18 @@ class FormPassword extends StatefulWidget {
 
 class _FormPasswordState extends State<FormPassword> {
   bool _hidePassword = true;
+  bool _isEmpty = true;
+
+  @override
+  void initState() {
+    widget.controller.addListener(() {
+      setState(() {
+        _isEmpty = widget.controller.text.isEmpty;
+        if (_isEmpty) _hidePassword = true;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +46,7 @@ class _FormPasswordState extends State<FormPassword> {
         const VerticalSpace(height: 8),
         SizedBox(
           child: TextFormField(
+            obscuringCharacter: '*',
             obscureText: _hidePassword,
             validator: widget.validator,
             controller: widget.controller,
@@ -44,11 +57,15 @@ class _FormPasswordState extends State<FormPassword> {
                   ?.copyWith(color: Colors.red),
               contentPadding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               suffixIcon: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _hidePassword = !_hidePassword;
-                  });
-                },
+                onTap: !_isEmpty
+                    ? () {
+                        setState(
+                          () {
+                            _hidePassword = !_hidePassword;
+                          },
+                        );
+                      }
+                    : null,
                 child: Icon(
                   _hidePassword ? Icons.visibility_off : Icons.visibility,
                 ),

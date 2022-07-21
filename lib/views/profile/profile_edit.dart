@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../bloc/user/user_bloc.dart';
-import '../../utils/routes/routes.gr.dart';
 import '../../utils/themes/app_theme.dart';
-import '../authentication/widgets/button_txt.dart';
-import '../authentication/widgets/form_password.dart';
-import '../authentication/widgets/form_username.dart';
+import '../widgets/form_password.dart';
+import '../widgets/form_username.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/vertical_space.dart';
 import 'widget/image_profile.dart';
@@ -20,27 +19,10 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-  bool _usernameEmpy = false;
-  bool _phoneEmpy = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _nomorControllers = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _userController.addListener(() {
-      setState(() {
-        _usernameEmpy = _userController.text.isNotEmpty;
-      });
-    });
-    _nomorControllers.addListener(() {
-      setState(() {
-        _phoneEmpy = _nomorControllers.text.isNotEmpty;
-      });
-    });
-  }
 
   @override
   void dispose() {
@@ -70,11 +52,17 @@ class _ProfileEditState extends State<ProfileEdit> {
                       ..hideCurrentSnackBar()
                       ..showSnackBar(
                         const SnackBar(
-                          content: Text("Update success"),
+                          content: Text('Update Success'),
                         ),
                       );
                   }
                   if (state is UserUpdateFailed) {
+                    context.router.replaceAll([
+                      ErrorRoute(
+                        isHome: false,
+                        message: "Unable to Update Profile",
+                      ),
+                    ]);
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(
@@ -82,12 +70,6 @@ class _ProfileEditState extends State<ProfileEdit> {
                           content: Text(state.msg),
                         ),
                       );
-                    context.router.replaceAll([
-                      ErrorRoute(
-                        isHome: false,
-                        message: 'Unable to Update Profile',
-                      ),
-                    ]);
                   }
                 },
                 builder: (context, state) {
@@ -110,12 +92,6 @@ class _ProfileEditState extends State<ProfileEdit> {
                           controller: _passwordController,
                         ),
                         const VerticalSpace(height: 10),
-                        ForgetPassBttn(
-                          titile: "Change Password",
-                          press: () {
-                            context.router.push(const NewPassword());
-                          },
-                        ),
                         FormUsername(
                           title: "Username",
                           hint: state.user.data!.name!,
@@ -130,33 +106,35 @@ class _ProfileEditState extends State<ProfileEdit> {
                         Padding(
                           padding: const EdgeInsets.only(top: 63),
                           child: CustomElevatedButton(
-                            text: "Save",
-                            onPressed: _usernameEmpy || _phoneEmpy
-                                ? () {
-                                    FocusManager.instance.primaryFocus
-                                        ?.unfocus();
-                                    final String user = _userController.text;
-                                    final String phone = _nomorControllers.text;
-                                    final String password =
-                                        _passwordController.text;
-                                    final String email = _emailController.text;
-                                    context.read<UserBloc>().add(
-                                          UpdateUser(
-                                            email: email != "" ? email : null,
-                                            name: user != "" ? user : null,
-                                            password: password != ""
-                                                ? password
-                                                : null,
-                                            phone: phone != "" ? phone : null,
-                                          ),
-                                        );
-                                    _userController.clear();
-                                    _nomorControllers.clear();
-                                    _passwordController.clear();
-                                    _emailController.clear();
-                                  }
-                                : null,
-                          ),
+                              text: "Save",
+                              onPressed: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                final String user = _userController.text;
+                                final String phone = _nomorControllers.text;
+                                final String password =
+                                    _passwordController.text;
+                                final String email = _emailController.text;
+
+                                if (user.isNotEmpty ||
+                                    phone.isNotEmpty ||
+                                    password.isNotEmpty ||
+                                    email.isNotEmpty) {
+                                  context.read<UserBloc>().add(
+                                        UpdateUser(
+                                          email: email != "" ? email : null,
+                                          name: user != "" ? user : null,
+                                          password:
+                                              password != "" ? password : null,
+                                          phone: phone != "" ? phone : null,
+                                        ),
+                                      );
+                                }
+
+                                _userController.clear();
+                                _nomorControllers.clear();
+                                _passwordController.clear();
+                                _emailController.clear();
+                              }),
                         ),
                       ],
                     );

@@ -2,11 +2,12 @@
 // in workout_zone/test/bloc/user_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
+import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:workout_zone/models/user_model.dart' as _i2;
-import 'package:workout_zone/services/remotes/user_service.dart' as _i3;
+import 'package:workout_zone/models/user_model.dart' as _i3;
+import 'package:workout_zone/services/remotes/user_service.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -18,23 +19,29 @@ import 'package:workout_zone/services/remotes/user_service.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeUserModel_0 extends _i1.Fake implements _i2.UserModel {}
+class _FakeDio_0 extends _i1.Fake implements _i2.Dio {}
+
+class _FakeUserModel_1 extends _i1.Fake implements _i3.UserModel {}
 
 /// A class which mocks [UserService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserService extends _i1.Mock implements _i3.UserService {
+class MockUserService extends _i1.Mock implements _i4.UserService {
   MockUserService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.UserModel> getUserProfile(String? authorization) =>
-      (super.noSuchMethod(Invocation.method(#getUserProfile, [authorization]),
-              returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
+  _i2.Dio get dio =>
+      (super.noSuchMethod(Invocation.getter(#dio), returnValue: _FakeDio_0())
+          as _i2.Dio);
   @override
-  _i4.Future<_i2.UserModel> updateUserProfile(
+  _i5.Future<_i3.UserModel> getUserProfile(String? authorization) =>
+      (super.noSuchMethod(Invocation.method(#getUserProfile, [authorization]),
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i5.Future<_i3.UserModel>);
+  @override
+  _i5.Future<_i3.UserModel> updateUserProfile(
           {String? authorization,
           String? name,
           String? email,
@@ -48,6 +55,6 @@ class MockUserService extends _i1.Mock implements _i3.UserService {
                 #password: password,
                 #phone: phone
               }),
-              returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i4.Future<_i2.UserModel>);
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i5.Future<_i3.UserModel>);
 }

@@ -80,6 +80,12 @@ class _MyAppState extends State<MyApp> {
             _userInfoService,
           ),
         ),
+        BlocProvider(
+          create: (_) => ScheduleBloc(
+            _membershipService,
+            _userInfoService,
+          ),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

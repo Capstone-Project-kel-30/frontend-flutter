@@ -16,8 +16,6 @@ class _InitialPageState extends State<InitialPage> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool hasGetStarted = sharedPreferences.getBool("hasGetStarted") ?? false;
     bool hasLogin = sharedPreferences.getBool("hasLogin") ?? false;
-    debugPrint('GET STARTED ::: ${hasGetStarted.toString()}');
-    debugPrint('LOGIN ::: ${hasLogin.toString()}');
     if (hasLogin) {
       Future.delayed(Duration.zero, () {
         context.router.replaceAll([const HomeWrapper()]);

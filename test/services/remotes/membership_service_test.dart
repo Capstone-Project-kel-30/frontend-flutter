@@ -4,6 +4,7 @@ import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:workout_zone/models/book_info_model.dart';
 import 'package:workout_zone/models/membership_model.dart';
 import 'package:workout_zone/models/membership_payment_model.dart';
+import 'package:workout_zone/models/schedule_info_model.dart';
 import 'package:workout_zone/services/remotes/membership_service.dart';
 import 'package:workout_zone/utils/urls/url.dart';
 
@@ -218,7 +219,7 @@ void main() {
           "message": "User Booke Succsessfully",
           "errors": null,
           "data": {
-            "user_id": 2,
+            "user_id": 1,
             "class": {
               "ID": 2,
               "Classname": "Zumba online Tes 233",
@@ -234,7 +235,6 @@ void main() {
           }
         };
         final Map<String, dynamic> data = {
-          'user_id': userId,
           'class_id': 2,
         };
         dioAdapter.onPost(
@@ -248,7 +248,6 @@ void main() {
 
         // act
         final actual = await membershipService.bookingClass(
-          userId: userId,
           classId: 2,
           authorization: authorization,
         );
@@ -258,4 +257,63 @@ void main() {
       },
     );
   });
+  group(
+    'schedule',
+    () {
+      test(
+        'should return correct schedule info model',
+        () async {
+          // arrange
+          const response = {
+            "status": true,
+            "message": "User Booke Succsessfully",
+            "errors": null,
+            "data": {
+              "user_id": 2,
+              "class": [
+                {
+                  "ID": 2,
+                  "Classname": "test 1",
+                  "Trainer": "koko",
+                  "Date": "09-09-3900",
+                  "Clock": "19:11",
+                  "Description": "test",
+                  "ClassType": "offline",
+                  "Capacity": 0,
+                  "UserBooked": 0,
+                  "Status": ""
+                },
+                {
+                  "ID": 1,
+                  "Classname": "test 2",
+                  "Trainer": "koko",
+                  "Date": "09-09-3900",
+                  "Clock": "19:11",
+                  "Description": "test",
+                  "ClassType": "online",
+                  "Capacity": 0,
+                  "UserBooked": 0,
+                  "Status": ""
+                },
+              ]
+            }
+          };
+          dioAdapter.onGet(
+            urls.userClassSchedule(),
+            (server) {
+              server.reply(200, response);
+            },
+            headers: header,
+          );
+
+          // act
+          final actual =
+              await membershipService.userClassSchedule(authorization);
+
+          // assert
+          expect(actual, ScheduleInfoModel.fromJson(response));
+        },
+      );
+    },
+  );
 }

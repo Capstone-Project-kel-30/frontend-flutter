@@ -48,6 +48,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final currentUser = userInfoService.getUserInfo();
         final String authorization = currentUser.data!.token!;
         final UserModel user = await userService.getUserProfile(authorization);
+        await userInfoService.updateUserInfo(
+          memberType: user.data!.memberType!,
+        );
         emit(UserSuccess(user));
       } catch (e) {
         emit(UserGetFailed(e.toString()));

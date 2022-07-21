@@ -31,6 +31,7 @@ class ClassContent extends StatelessWidget {
                 ClassDetailRoute(
                   user: user,
                   classes: classes[index],
+                  fromSchedule: false,
                 ),
               );
             },

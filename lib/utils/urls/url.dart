@@ -38,7 +38,7 @@ class URLS {
   }
 
   String userMembershipPaymentInfo() {
-    return '$_baseUrl/$_version/$_member/payment';
+    return '$_baseUrl/$_version/$_member/details';
   }
 
   String membershipDetails() {

@@ -6,7 +6,7 @@ import '../../bloc/auth/auth_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../widgets/cutom_elevated_button.dart';
 import '../widgets/vertical_space.dart';
-import 'widgets/form_username.dart';
+import '../widgets/form_username.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({Key? key}) : super(key: key);

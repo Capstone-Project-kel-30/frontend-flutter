@@ -7,7 +7,7 @@ class SelectPicker extends StatefulWidget {
     required this.onprees,
   }) : super(key: key);
 
-  final Function(int index) onprees;
+  final Function(String selectedType) onprees;
 
   @override
   State<SelectPicker> createState() => _SelectPickerState();
@@ -48,7 +48,7 @@ class _SelectPickerState extends State<SelectPicker> {
                         selectActive = index;
                       },
                     );
-                    widget.onprees(index);
+                    widget.onprees(select[index]);
                   },
                   isActive: selectActive == index,
                   logo: logoSelect[index],

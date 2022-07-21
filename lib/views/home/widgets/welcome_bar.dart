@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:workout_zone/views/home/widgets/custom_search_delegate.dart';
+import 'package:workout_zone/utils/routes/routes.gr.dart';
 
+import '../../../models/class_model.dart';
+import '../../../models/user_model.dart';
 import '../../../utils/themes/app_theme.dart';
 import '../../widgets/horizontal_space.dart';
 import '../../widgets/member_card.dart';
@@ -11,14 +14,14 @@ import '../../widgets/shimmer_placeholder.dart';
 class WelcomeBar extends StatelessWidget {
   const WelcomeBar({
     Key? key,
-    this.username = "",
-    this.member = "",
     required this.isLoading,
+    this.classes = const [],
+    this.user,
   }) : super(key: key);
 
-  final String username;
-  final String member;
   final bool isLoading;
+  final List<Class> classes;
+  final UserModel? user;
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +31,13 @@ class WelcomeBar extends StatelessWidget {
         Row(
           children: [
             Visibility(
-              visible: isLoading ? true : member != '',
+              visible: isLoading ? true : user!.data!.memberType! != '',
               child: isLoading
                   ? const ShimmerPlaceholder(height: 30, width: 50)
                   : MemberCard(
                       height: 30,
                       width: 50,
-                      type: member,
+                      type: user!.data!.memberType!.toUpperCase(),
                       radius: 5,
                     ),
             ),
@@ -57,7 +60,7 @@ class WelcomeBar extends StatelessWidget {
                 isLoading
                     ? const ShimmerPlaceholder(height: 16, width: 100)
                     : Text(
-                        username,
+                        user!.data!.name!,
                         style: AppTheme.theme(context)
                             .textTheme
                             .titleMedium
@@ -77,10 +80,12 @@ class WelcomeBar extends StatelessWidget {
                     icon: SvgPicture.asset('assets/icons/Search-Outline.svg'),
                     padding: EdgeInsets.zero,
                     splashRadius: 20,
-                    onPressed: () async {
-                      await showSearch(
-                        context: context,
-                        delegate: CustomSearchDelegate(),
+                    onPressed: () {
+                      context.router.push(
+                        SearchBarRoute(
+                          classes: classes,
+                          user: user!,
+                        ),
                       );
                     },
                   ),
@@ -95,7 +100,9 @@ class WelcomeBar extends StatelessWidget {
                     icon: SvgPicture.asset('assets/icons/Bell-Outline.svg'),
                     padding: EdgeInsets.zero,
                     splashRadius: 20,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.router.push(const NotificationRoute());
+                    },
                   ),
           ],
         ),

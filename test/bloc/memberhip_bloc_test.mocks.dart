@@ -2,13 +2,15 @@
 // in workout_zone/test/bloc/memberhip_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i6;
+import 'dart:async' as _i8;
 
+import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:workout_zone/models/book_info_model.dart' as _i4;
-import 'package:workout_zone/models/membership_model.dart' as _i3;
-import 'package:workout_zone/models/membership_payment_model.dart' as _i2;
-import 'package:workout_zone/services/remotes/membership_service.dart' as _i5;
+import 'package:workout_zone/models/book_info_model.dart' as _i5;
+import 'package:workout_zone/models/membership_model.dart' as _i4;
+import 'package:workout_zone/models/membership_payment_model.dart' as _i3;
+import 'package:workout_zone/models/schedule_info_model.dart' as _i6;
+import 'package:workout_zone/services/remotes/membership_service.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,60 +22,73 @@ import 'package:workout_zone/services/remotes/membership_service.dart' as _i5;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeMembershipPaymentModel_0 extends _i1.Fake
-    implements _i2.MembershipPaymentModel {}
+class _FakeDio_0 extends _i1.Fake implements _i2.Dio {}
 
-class _FakeMembershipModel_1 extends _i1.Fake implements _i3.MembershipModel {}
+class _FakeMembershipPaymentModel_1 extends _i1.Fake
+    implements _i3.MembershipPaymentModel {}
 
-class _FakeBookInfoModel_2 extends _i1.Fake implements _i4.BookInfoModel {}
+class _FakeMembershipModel_2 extends _i1.Fake implements _i4.MembershipModel {}
+
+class _FakeBookInfoModel_3 extends _i1.Fake implements _i5.BookInfoModel {}
+
+class _FakeScheduleInfoModel_4 extends _i1.Fake
+    implements _i6.ScheduleInfoModel {}
 
 /// A class which mocks [MembershipService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMembershipService extends _i1.Mock implements _i5.MembershipService {
+class MockMembershipService extends _i1.Mock implements _i7.MembershipService {
   MockMembershipService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i2.MembershipPaymentModel> membershipRegister(
+  _i2.Dio get dio =>
+      (super.noSuchMethod(Invocation.getter(#dio), returnValue: _FakeDio_0())
+          as _i2.Dio);
+  @override
+  _i8.Future<_i3.MembershipPaymentModel> membershipRegister(
           {int? membershipId, String? authorization}) =>
       (super.noSuchMethod(
               Invocation.method(#membershipRegister, [],
                   {#membershipId: membershipId, #authorization: authorization}),
-              returnValue: Future<_i2.MembershipPaymentModel>.value(
-                  _FakeMembershipPaymentModel_0()))
-          as _i6.Future<_i2.MembershipPaymentModel>);
+              returnValue: Future<_i3.MembershipPaymentModel>.value(
+                  _FakeMembershipPaymentModel_1()))
+          as _i8.Future<_i3.MembershipPaymentModel>);
   @override
-  _i6.Future<_i2.MembershipPaymentModel> membershipPaymentInfo(
+  _i8.Future<_i3.MembershipPaymentModel> membershipPaymentInfo(
           String? authorization) =>
       (super.noSuchMethod(
               Invocation.method(#membershipPaymentInfo, [authorization]),
-              returnValue: Future<_i2.MembershipPaymentModel>.value(
-                  _FakeMembershipPaymentModel_0()))
-          as _i6.Future<_i2.MembershipPaymentModel>);
+              returnValue: Future<_i3.MembershipPaymentModel>.value(
+                  _FakeMembershipPaymentModel_1()))
+          as _i8.Future<_i3.MembershipPaymentModel>);
   @override
-  _i6.Future<_i3.MembershipModel> getMembershipDetails() =>
+  _i8.Future<_i4.MembershipModel> getMembershipDetails() =>
       (super.noSuchMethod(Invocation.method(#getMembershipDetails, []),
               returnValue:
-                  Future<_i3.MembershipModel>.value(_FakeMembershipModel_1()))
-          as _i6.Future<_i3.MembershipModel>);
+                  Future<_i4.MembershipModel>.value(_FakeMembershipModel_2()))
+          as _i8.Future<_i4.MembershipModel>);
   @override
-  _i6.Future<_i3.MembershipModel> getMembershipById(String? id) =>
+  _i8.Future<_i4.MembershipModel> getMembershipById(String? id) =>
       (super.noSuchMethod(Invocation.method(#getMembershipById, [id]),
               returnValue:
-                  Future<_i3.MembershipModel>.value(_FakeMembershipModel_1()))
-          as _i6.Future<_i3.MembershipModel>);
+                  Future<_i4.MembershipModel>.value(_FakeMembershipModel_2()))
+          as _i8.Future<_i4.MembershipModel>);
   @override
-  _i6.Future<_i4.BookInfoModel> bookingClass(
-          {int? userId, int? classId, String? authorization}) =>
+  _i8.Future<_i5.BookInfoModel> bookingClass(
+          {int? classId, String? authorization}) =>
       (super.noSuchMethod(
-              Invocation.method(#bookingClass, [], {
-                #userId: userId,
-                #classId: classId,
-                #authorization: authorization
-              }),
+              Invocation.method(#bookingClass, [],
+                  {#classId: classId, #authorization: authorization}),
               returnValue:
-                  Future<_i4.BookInfoModel>.value(_FakeBookInfoModel_2()))
-          as _i6.Future<_i4.BookInfoModel>);
+                  Future<_i5.BookInfoModel>.value(_FakeBookInfoModel_3()))
+          as _i8.Future<_i5.BookInfoModel>);
+  @override
+  _i8.Future<_i6.ScheduleInfoModel> userClassSchedule(String? authorization) =>
+      (super.noSuchMethod(
+              Invocation.method(#userClassSchedule, [authorization]),
+              returnValue: Future<_i6.ScheduleInfoModel>.value(
+                  _FakeScheduleInfoModel_4()))
+          as _i8.Future<_i6.ScheduleInfoModel>);
 }

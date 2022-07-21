@@ -2,13 +2,14 @@
 // in workout_zone/test/bloc/auth_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:shared_preferences/shared_preferences.dart' as _i3;
-import 'package:workout_zone/models/user_model.dart' as _i2;
-import 'package:workout_zone/services/locals/user_info_service.dart' as _i6;
-import 'package:workout_zone/services/remotes/auth_service.dart' as _i4;
+import 'package:shared_preferences/shared_preferences.dart' as _i4;
+import 'package:workout_zone/models/user_model.dart' as _i3;
+import 'package:workout_zone/services/locals/user_info_service.dart' as _i7;
+import 'package:workout_zone/services/remotes/auth_service.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -20,21 +21,27 @@ import 'package:workout_zone/services/remotes/auth_service.dart' as _i4;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeUserModel_0 extends _i1.Fake implements _i2.UserModel {}
+class _FakeDio_0 extends _i1.Fake implements _i2.Dio {}
 
-class _FakeSharedPreferences_1 extends _i1.Fake
-    implements _i3.SharedPreferences {}
+class _FakeUserModel_1 extends _i1.Fake implements _i3.UserModel {}
+
+class _FakeSharedPreferences_2 extends _i1.Fake
+    implements _i4.SharedPreferences {}
 
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i4.AuthService {
+class MockAuthService extends _i1.Mock implements _i5.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.UserModel> register(
+  _i2.Dio get dio =>
+      (super.noSuchMethod(Invocation.getter(#dio), returnValue: _FakeDio_0())
+          as _i2.Dio);
+  @override
+  _i6.Future<_i3.UserModel> register(
           {String? name, String? email, String? phone, String? password}) =>
       (super.noSuchMethod(
               Invocation.method(#register, [], {
@@ -43,46 +50,46 @@ class MockAuthService extends _i1.Mock implements _i4.AuthService {
                 #phone: phone,
                 #password: password
               }),
-              returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i5.Future<_i2.UserModel>);
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i6.Future<_i3.UserModel>);
   @override
-  _i5.Future<_i2.UserModel> login({String? email, String? password}) => (super
+  _i6.Future<_i3.UserModel> login({String? email, String? password}) => (super
       .noSuchMethod(
           Invocation.method(#login, [], {#email: email, #password: password}),
-          returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0())) as _i5
-      .Future<_i2.UserModel>);
+          returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1())) as _i6
+      .Future<_i3.UserModel>);
   @override
-  _i5.Future<_i2.UserModel> verifyEmail({String? email}) =>
+  _i6.Future<_i3.UserModel> verifyEmail({String? email}) =>
       (super.noSuchMethod(Invocation.method(#verifyEmail, [], {#email: email}),
-              returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i5.Future<_i2.UserModel>);
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i6.Future<_i3.UserModel>);
   @override
-  _i5.Future<_i2.UserModel> resetPassword({String? email, String? password}) =>
+  _i6.Future<_i3.UserModel> resetPassword({String? email, String? password}) =>
       (super.noSuchMethod(
               Invocation.method(
                   #resetPassword, [], {#email: email, #password: password}),
-              returnValue: Future<_i2.UserModel>.value(_FakeUserModel_0()))
-          as _i5.Future<_i2.UserModel>);
+              returnValue: Future<_i3.UserModel>.value(_FakeUserModel_1()))
+          as _i6.Future<_i3.UserModel>);
 }
 
 /// A class which mocks [UserInfoService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserInfoService extends _i1.Mock implements _i6.UserInfoService {
+class MockUserInfoService extends _i1.Mock implements _i7.UserInfoService {
   MockUserInfoService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.SharedPreferences get sharedPreferences =>
+  _i4.SharedPreferences get sharedPreferences =>
       (super.noSuchMethod(Invocation.getter(#sharedPreferences),
-          returnValue: _FakeSharedPreferences_1()) as _i3.SharedPreferences);
+          returnValue: _FakeSharedPreferences_2()) as _i4.SharedPreferences);
   @override
-  _i2.UserModel getUserInfo() =>
+  _i3.UserModel getUserInfo() =>
       (super.noSuchMethod(Invocation.method(#getUserInfo, []),
-          returnValue: _FakeUserModel_0()) as _i2.UserModel);
+          returnValue: _FakeUserModel_1()) as _i3.UserModel);
   @override
-  _i5.Future<void> updateUserInfo(
+  _i6.Future<void> updateUserInfo(
           {String? token,
           bool? hasLogin,
           int? id,
@@ -103,10 +110,10 @@ class MockUserInfoService extends _i1.Mock implements _i6.UserInfoService {
             #memberType: memberType
           }),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> resetUserInfo() =>
+  _i6.Future<void> resetUserInfo() =>
       (super.noSuchMethod(Invocation.method(#resetUserInfo, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }

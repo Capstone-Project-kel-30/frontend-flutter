@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/auth/auth_bloc.dart';
 import '../../utils/routes/routes.gr.dart';
 import '../widgets/cutom_elevated_button.dart';
-import 'widgets/form_password.dart';
+import '../widgets/form_password.dart';
 
 class CreateNewPass extends StatefulWidget {
   const CreateNewPass({Key? key, required this.email}) : super(key: key);
@@ -77,7 +77,7 @@ class _CreateNewPassState extends State<CreateNewPass> {
                         return 'Password length must be at least 8 characters';
                       }
                       return null;
-                    },
+                    }, 
                   ),
                   FormPassword(
                     title: 'Comfirm New Password',

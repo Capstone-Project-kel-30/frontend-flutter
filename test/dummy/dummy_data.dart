@@ -3,6 +3,7 @@ import 'package:workout_zone/models/class_model.dart';
 import 'package:workout_zone/models/membership_model.dart';
 import 'package:workout_zone/models/membership_payment_model.dart';
 import 'package:workout_zone/models/newsletter__model.dart';
+import 'package:workout_zone/models/schedule_info_model.dart';
 import 'package:workout_zone/models/user_model.dart';
 import 'package:workout_zone/utils/common/constant.dart';
 
@@ -135,3 +136,4 @@ final BookInfoModel bookInfo = BookInfoModel(
     userId: userId,
   ),
 );
+const ScheduleInfoModel scheduleInfoModel = ScheduleInfoModel();

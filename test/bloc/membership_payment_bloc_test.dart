@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_zone/bloc/bloc.dart';
+import 'package:workout_zone/utils/common/constant.dart';
 import '../dummy/dummy_data.dart';
 import 'auth_bloc_test.mocks.dart';
 import 'memberhip_bloc_test.mocks.dart';
@@ -52,6 +53,7 @@ void main() {
           membershipId: membershipId,
           authorization: authorization,
         )).called(1);
+        verify(mockUserInfoService.updateUserInfo(memberType: goldMember));
         verifyNoMoreInteractions(mockUserInfoService);
         verifyNoMoreInteractions(mockMembershipService);
       },

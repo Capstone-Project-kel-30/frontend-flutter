@@ -47,7 +47,7 @@ void main() {
       expect(actual, matcher);
     });
     test('membership payment info', () {
-      const matcher = '$baseMembership/payment';
+      const matcher = '$baseMembership/details';
       final actual = urls.userMembershipPaymentInfo();
       expect(actual, matcher);
     });
