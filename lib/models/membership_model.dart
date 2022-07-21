@@ -1,47 +1,64 @@
-class MembershipModel {
-  bool? status;
-  String? message;
-  List<String>? errors;
-  List<Member>? data;
+import 'package:equatable/equatable.dart';
 
-  MembershipModel({this.status, this.message, this.errors, this.data});
+class MembershipModel extends Equatable {
+  final bool? status;
+  final String? message;
+  final List<String>? errors;
+  final List<Member>? data;
 
-  MembershipModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    errors = json['errors'];
+  const MembershipModel({this.status, this.message, this.errors, this.data});
+
+  factory MembershipModel.fromJson(Map<String, dynamic> json) {
+    List<Member>? data;
     if (json['data'] != null) {
-      data = <Member>[];
-      json['data'].forEach((v) {
-        data!.add(Member.fromJson(v));
-      });
+      if (json['data'] is Map) {
+        data = [(Member.fromJson(json['data']))];
+      } else {
+        data = <Member>[];
+        json['data'].forEach((v) {
+          data!.add(Member.fromJson(v));
+        });
+      }
     }
+    return MembershipModel(
+      status: json['status'],
+      message: json['message'],
+      errors: json['errors'],
+      data: data,
+    );
   }
+  @override
+  List<Object?> get props => [status, message, errors, data];
 }
 
-class Member {
-  int? id;
-  String? type;
-  int? price;
-  int? duration;
-  String? description;
-  String? img;
+class Member extends Equatable {
+  final int? id;
+  final String? type;
+  final int? price;
+  final int? duration;
+  final String? description;
+  final String? image;
 
-  Member({
+  const Member({
+    this.image,
     this.id,
     this.type,
     this.price,
     this.duration,
     this.description,
-    this.img,
   });
 
-  Member.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    type = json['type'];
-    price = json['price'];
-    duration = json['duration'];
-    description = json['description'];
-    img = json['img'];
+  factory Member.fromJson(Map<String, dynamic> json) {
+    return Member(
+      id: json['id'],
+      type: json['type'],
+      price: json['price'],
+      duration: json['duration'],
+      description: json['description'],
+      image: json['img'],
+    );
   }
+
+  @override
+  List<Object?> get props => [id, type, price, duration, description, image];
 }

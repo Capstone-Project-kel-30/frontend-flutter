@@ -6,11 +6,11 @@ import 'package:workout_zone/models/schedule_info_model.dart';
 
 import '../../models/membership_model.dart';
 import '../../utils/urls/url.dart';
-import 'dio.dart';
 import 'dio_error_handler.dart';
 
 class MembershipService {
-  MembershipService() {
+  final Dio dio;
+  MembershipService({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
   Future<MembershipPaymentModel> membershipRegister({
@@ -94,7 +94,6 @@ class MembershipService {
   }
 
   Future<BookInfoModel> bookingClass({
-    required int userId,
     required int classId,
     required String authorization,
   }) async {

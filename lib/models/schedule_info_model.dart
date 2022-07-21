@@ -1,34 +1,48 @@
+import 'package:equatable/equatable.dart';
+
 import 'class_model.dart';
 
-class ScheduleInfoModel {
-  bool? status;
-  String? message;
-  List<String>? errors;
-  ScheduleData? data;
+class ScheduleInfoModel extends Equatable {
+  final bool? status;
+  final String? message;
+  final List<String>? errors;
+  final ScheduleData? data;
 
-  ScheduleInfoModel({this.status, this.message, this.errors, this.data});
+  const ScheduleInfoModel({this.status, this.message, this.errors, this.data});
 
-  ScheduleInfoModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    errors = json['errors'];
-    data = json['data'] != null ? ScheduleData.fromJson(json['data']) : null;
+  factory ScheduleInfoModel.fromJson(Map<String, dynamic> json) {
+    return ScheduleInfoModel(
+      status: json['status'],
+      message: json['message'],
+      errors: json['errors'],
+      data: json['data'] != null ? ScheduleData.fromJson(json['data']) : null,
+    );
   }
+
+  @override
+  List<Object?> get props => [status, message, errors, data];
 }
 
-class ScheduleData {
-  int? userId;
-  List<Class>? classes;
+class ScheduleData extends Equatable {
+  final int? userId;
+  final List<Class>? classes;
 
-  ScheduleData({this.userId, this.classes});
+  const ScheduleData({this.userId, this.classes});
 
-  ScheduleData.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
+  factory ScheduleData.fromJson(Map<String, dynamic> json) {
+    List<Class>? classes;
     if (json['class'] != null) {
       classes = <Class>[];
       json['class'].forEach((v) {
         classes!.add(Class.fromJson(v));
       });
     }
+    return ScheduleData(
+      userId: json['user_id'],
+      classes: classes,
+    );
   }
+
+  @override
+  List<Object?> get props => [userId, classes];
 }

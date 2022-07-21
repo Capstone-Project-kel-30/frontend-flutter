@@ -44,7 +44,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
               children: [
                 BookingId(
                   bookingId:
-                      'GYM30-${widget.user.memberType!.toUpperCase()}-${widget.bookInfo.data!.classes!.id!.toString()}',
+                      'GYM30-${widget.user.memberType!.toUpperCase()}-${widget.bookInfo.data!.userId.toString()}',
                 ),
                 const VerticalSpace(height: 20),
                 BookingType(

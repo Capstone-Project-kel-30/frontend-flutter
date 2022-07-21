@@ -47,5 +47,5 @@ app.*.map.json
 /android/app/release
 
 # test
-/coverage/
-/genhtml.perl
+/coverage
+genhtml.perl

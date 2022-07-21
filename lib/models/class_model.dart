@@ -1,43 +1,52 @@
-class ClassModel {
-  bool? status;
-  String? message;
-  List<String>? errors;
-  List<Class>? data;
+import 'package:equatable/equatable.dart';
 
-  ClassModel({this.status, this.message, this.errors, this.data});
+class ClassModel extends Equatable {
+  final bool? status;
+  final String? message;
+  final List<String>? errors;
+  final List<Class>? data;
 
-  ClassModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    errors = json['errors'];
+  const ClassModel({this.status, this.message, this.errors, this.data});
+
+  factory ClassModel.fromJson(Map<String, dynamic> json) {
+    List<Class>? data;
     if (json['data'] != null) {
-      if (json['data'].length >= 1) {
+      if (json['data'] is Map) {
+        data = [Class.fromJson(json['data'])];
+      } else {
         data = <Class>[];
         json['data'].forEach((v) {
-          data!.add(Class.fromJson(v));
+          data?.add(Class.fromJson(v));
         });
-      } else {
-        data = [Class.fromJson(json['data'])];
       }
     }
+    return ClassModel(
+      status: json['status'],
+      message: json['message'],
+      errors: json['errors'],
+      data: data,
+    );
   }
+
+  @override
+  List<Object?> get props => [status, message, errors, data];
 }
 
-class Class {
-  int? id;
-  String? classname;
-  String? status;
-  int? capacity;
-  String? trainer;
-  String? date;
-  String? clock;
-  String? clastype;
-  int? duration;
-  int? userBooked;
-  String? description;
-  String? image;
+class Class extends Equatable {
+  final int? id;
+  final String? classname;
+  final String? status;
+  final int? capacity;
+  final String? trainer;
+  final String? date;
+  final String? clock;
+  final String? clastype;
+  final int? duration;
+  final int? userBooked;
+  final String? description;
+  final String? image;
 
-  Class(
+  const Class(
       {this.id,
       this.classname,
       this.status,
@@ -51,18 +60,36 @@ class Class {
       this.description,
       this.image});
 
-  Class.fromJson(Map<String, dynamic> json) {
-    id = json['id'] ?? json['ID'];
-    classname = json['classname'] ?? json['Classname'];
-    status = json['status'] ?? json['Status'];
-    capacity = json['capacity'] ?? json['Capacity'];
-    trainer = json['trainer'] ?? json['Trainer'];
-    date = json['date'] ?? json['Date'];
-    clock = json['clock'] ?? json['Clock'];
-    clastype = json['clastype'] ?? json['ClassType'];
-    duration = json['duration'];
-    userBooked = json['user_booked'] ?? json['UserBooked'];
-    description = json['description'] ?? json['Description'];
-    image = json['image'];
+  factory Class.fromJson(Map<String, dynamic> json) {
+    return Class(
+      id: json['id'] ?? json['ID'],
+      classname: json['classname'] ?? json['Classname'],
+      status: json['status'] ?? json['Status'],
+      capacity: json['capacity'] ?? json['Capacity'],
+      trainer: json['trainer'] ?? json['Trainer'],
+      date: json['date'] ?? json['Date'],
+      clock: json['clock'] ?? json['Clock'],
+      clastype: json['clastype'] ?? json['ClassType'],
+      duration: json['duration'] ?? json['Duration'],
+      userBooked: json['user_booked'] ?? json['UserBooked'],
+      description: json['description'] ?? json['Description'],
+      image: json['image'] ?? json['Image'],
+    );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        classname,
+        status,
+        capacity,
+        trainer,
+        date,
+        clock,
+        clastype,
+        duration,
+        userBooked,
+        description,
+        image,
+      ];
 }

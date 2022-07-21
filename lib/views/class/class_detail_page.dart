@@ -147,7 +147,6 @@ class ClassDetailPage extends StatelessWidget {
                                     context.read<BookingBloc>().add(
                                           BookingRequest(
                                             classId: classes.id!,
-                                            userId: user.data!.id!,
                                           ),
                                         );
                                   } else {

@@ -8,9 +8,9 @@ abstract class BookingEvent extends Equatable {
 }
 
 class BookingRequest extends BookingEvent {
-  final int classId, userId;
-  const BookingRequest({required this.classId, required this.userId});
+  final int classId;
+  const BookingRequest({required this.classId});
 
   @override
-  List<Object> get props => [classId, userId];
+  List<Object> get props => [classId];
 }

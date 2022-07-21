@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 
 import '../../models/class_model.dart';
 import '../../utils/urls/url.dart';
-import 'dio.dart';
 import 'dio_error_handler.dart';
 
 class ClassService {
-  ClassService() {
+  final Dio dio;
+  ClassService({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
   Future<ClassModel> getAllOfflineClass() async {
@@ -71,23 +71,6 @@ class ClassService {
       final Response response = await dio.get(urls.getAllClass());
       final ClassModel classes = ClassModel.fromJson(response.data);
       return classes;
-    } on DioError catch (e) {
-      throw (dioErrorHandler(e));
-    } on Exception catch (e) {
-      debugPrint(e.toString());
-      throw ('server error');
-    }
-  }
-
-  searchClass(String keyword) async {
-    final Map<String, String> query = {
-      'search': keyword,
-    };
-    try {
-      await dio.get(
-        urls.searchClass(),
-        queryParameters: query,
-      );
     } on DioError catch (e) {
       throw (dioErrorHandler(e));
     } on Exception catch (e) {

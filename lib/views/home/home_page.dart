@@ -32,7 +32,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  UserModel user = UserModel();
+  UserModel user = const UserModel();
   List<Class> classes = [];
   late YoutubePlayerController _videoController;
 

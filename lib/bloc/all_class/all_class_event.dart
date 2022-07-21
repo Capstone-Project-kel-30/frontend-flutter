@@ -9,14 +9,6 @@ abstract class AllClassEvent extends Equatable {
 
 class GetAllClass extends AllClassEvent {}
 
-class SearchResult extends AllClassEvent {
-  final String query;
-  const SearchResult(this.query);
-
-  @override
-  List<Object> get props => [query];
-}
-
 class FilterClass extends AllClassEvent {
   final List<Class> allClass;
   final bool Function(Class) filter;

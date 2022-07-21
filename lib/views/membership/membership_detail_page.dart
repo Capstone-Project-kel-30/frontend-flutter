@@ -56,7 +56,7 @@ class MembershipDetailPage extends StatelessWidget {
       body: Column(
         children: [
           CustomNetworkImage(
-            link: member.img!,
+            link: member.image!,
             color: kGreyColor,
             height: 280,
             width: double.infinity,

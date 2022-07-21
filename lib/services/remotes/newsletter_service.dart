@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:workout_zone/models/newsletter__model.dart';
 
 import '../../utils/urls/url.dart';
-import 'dio.dart';
 import 'dio_error_handler.dart';
 
 class NewsletterService {
-  NewsletterService() {
+  final Dio dio;
+  NewsletterService({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
   Future<NewsletterModel> getAllNewsletter() async {
