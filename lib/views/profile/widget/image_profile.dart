@@ -6,14 +6,10 @@ class ProfileImage extends StatelessWidget {
   const ProfileImage({
     Key? key,
     this.img = "assets/images/Profile.png",
-    required this.title,
-    this.color = kDarkColor,
-    this.press,
+    this.title,
   }) : super(key: key);
   final String img;
-  final String title;
-  final Color? color;
-  final VoidCallback? press;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +25,16 @@ class ProfileImage extends StatelessWidget {
           ),
         ),
         const VerticalSpace(height: 10),
-        GestureDetector(
-          onTap: press,
-          child: Text(
-            title,
-            style: TextStyle(
-              fontWeight: kSemiBoldWeight,
-              fontSize: 16,
-              color: color!,
-            ),
-          ),
-        ),
+        title != null
+            ? Text(
+                title!,
+                style: const TextStyle(
+                  fontWeight: kSemiBoldWeight,
+                  fontSize: 16,
+                  color: kDarkColor,
+                ),
+              )
+            : const SizedBox(),
       ],
     );
   }

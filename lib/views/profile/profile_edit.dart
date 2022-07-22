@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_zone/utils/routes/routes.gr.dart';
 
 import '../../bloc/user/user_bloc.dart';
-import '../../utils/themes/app_theme.dart';
 import '../widgets/form_password.dart';
 import '../widgets/form_username.dart';
 import '../widgets/cutom_elevated_button.dart';
@@ -76,11 +75,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   if (state is UserSuccess) {
                     return Column(
                       children: [
-                        ProfileImage(
-                          press: () {},
-                          title: "Change",
-                          color: kPrimaryColor,
-                        ),
+                        const ProfileImage(),
                         FormUsername(
                           title: "Email",
                           hint: state.user.data!.email!,

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_zone/bloc/bloc.dart';
 import 'package:workout_zone/utils/themes/app_theme.dart';
 import 'package:workout_zone/views/notification/widgets/membership_approved_card.dart';
+import 'package:workout_zone/views/notification/widgets/transaction_success_card.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -61,7 +62,14 @@ class _NotificationPageState extends State<NotificationPage> {
                 ),
               );
             }
-            return MembershipApprovedCard(membershipPayment: data);
+            return Column(
+              children: [
+                const VerticalSpace(height: 20),
+                const TransactionSuccessCard(),
+                const VerticalSpace(height: 10),
+                MembershipApprovedCard(membershipPayment: data),
+              ],
+            );
           }
           if (state is PaymentRequestError) {
             return Column(
