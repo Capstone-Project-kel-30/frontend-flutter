@@ -6,8 +6,12 @@ import 'package:workout_zone/views/notification/widgets/membership_approved_card
 import 'package:workout_zone/views/notification/widgets/transaction_success_card.dart';
 import 'package:workout_zone/views/widgets/vertical_space.dart';
 
+import '../../models/user_model.dart';
+
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+  const NotificationPage({Key? key, required this.user}) : super(key: key);
+
+  final User user;
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();
@@ -65,7 +69,9 @@ class _NotificationPageState extends State<NotificationPage> {
             return Column(
               children: [
                 const VerticalSpace(height: 20),
-                const TransactionSuccessCard(),
+                TransactionSuccessCard(
+                  user: widget.user,
+                ),
                 const VerticalSpace(height: 10),
                 MembershipApprovedCard(membershipPayment: data),
               ],

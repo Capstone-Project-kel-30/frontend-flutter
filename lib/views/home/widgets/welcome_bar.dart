@@ -101,7 +101,11 @@ class WelcomeBar extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     splashRadius: 20,
                     onPressed: () {
-                      context.router.push(const NotificationRoute());
+                      context.router.push(
+                        NotificationRoute(
+                          user: user!.data!,
+                        ),
+                      );
                     },
                   ),
           ],
