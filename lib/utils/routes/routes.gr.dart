@@ -173,8 +173,10 @@ class AppRouter extends _i29.RootStackRouter {
           routeData: routeData, child: const _i21.MembershipPage());
     },
     NotificationRoute.name: (routeData) {
+      final args = routeData.argsAs<NotificationRouteArgs>();
       return _i29.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i22.NotificationPage());
+          routeData: routeData,
+          child: _i22.NotificationPage(key: args.key, user: args.user));
     },
     SearchBarRoute.name: (routeData) {
       final args = routeData.argsAs<SearchBarRouteArgs>();
@@ -658,11 +660,26 @@ class MembershipRoute extends _i29.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i22.NotificationPage]
-class NotificationRoute extends _i29.PageRouteInfo<void> {
-  const NotificationRoute()
-      : super(NotificationRoute.name, path: 'notification');
+class NotificationRoute extends _i29.PageRouteInfo<NotificationRouteArgs> {
+  NotificationRoute({_i30.Key? key, required _i31.User user})
+      : super(NotificationRoute.name,
+            path: 'notification',
+            args: NotificationRouteArgs(key: key, user: user));
 
   static const String name = 'NotificationRoute';
+}
+
+class NotificationRouteArgs {
+  const NotificationRouteArgs({this.key, required this.user});
+
+  final _i30.Key? key;
+
+  final _i31.User user;
+
+  @override
+  String toString() {
+    return 'NotificationRouteArgs{key: $key, user: $user}';
+  }
 }
 
 /// generated route for
