@@ -78,26 +78,61 @@ class _NotificationPageState extends State<NotificationPage> {
             );
           }
           if (state is PaymentRequestError) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Unable to Fetch Data',
-                  textAlign: TextAlign.center,
-                  style: AppTheme.theme(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: kBoldWeight,
-                      ),
+            if (state.msg == "record not found") {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/empty-notification.png'),
+                    const VerticalSpace(height: 20),
+                    Text(
+                      'It\'s Empty...for now',
+                      style:
+                          AppTheme.theme(context).textTheme.bodyLarge?.copyWith(
+                                fontSize: 16,
+                                color: HSLColor.fromColor(kGreyColor)
+                                    .withLightness(0.4)
+                                    .toColor(),
+                                fontWeight: kSemiBoldWeight,
+                              ),
+                    ),
+                    const VerticalSpace(height: 5),
+                    Text(
+                      'Anything important we will notify here.',
+                      style:
+                          AppTheme.theme(context).textTheme.bodySmall?.copyWith(
+                                color: HSLColor.fromColor(kGreyColor)
+                                    .withLightness(0.4)
+                                    .toColor(),
+                              ),
+                    )
+                  ],
                 ),
-                const VerticalSpace(height: 20),
-                IconButton(
-                  icon: const Icon(Icons.restart_alt),
-                  onPressed: () {
-                    context
-                        .read<MembershipPaymentBloc>()
-                        .add(GetMembershipPaymentInfo());
-                  },
-                ),
-              ],
+              );
+            }
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Unable to Fetch Data',
+                    textAlign: TextAlign.center,
+                    style:
+                        AppTheme.theme(context).textTheme.titleLarge?.copyWith(
+                              fontWeight: kBoldWeight,
+                            ),
+                  ),
+                  const VerticalSpace(height: 20),
+                  IconButton(
+                    icon: const Icon(Icons.restart_alt),
+                    onPressed: () {
+                      context
+                          .read<MembershipPaymentBloc>()
+                          .add(GetMembershipPaymentInfo());
+                    },
+                  ),
+                ],
+              ),
             );
           }
           return const Center(
