@@ -63,6 +63,29 @@ class _NotificationPageState extends State<NotificationPage> {
             }
             return MembershipApprovedCard(membershipPayment: data);
           }
+          if (state is PaymentRequestError) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Unable to Fetch Data',
+                  textAlign: TextAlign.center,
+                  style: AppTheme.theme(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: kBoldWeight,
+                      ),
+                ),
+                const VerticalSpace(height: 20),
+                IconButton(
+                  icon: const Icon(Icons.restart_alt),
+                  onPressed: () {
+                    context
+                        .read<MembershipPaymentBloc>()
+                        .add(GetMembershipPaymentInfo());
+                  },
+                ),
+              ],
+            );
+          }
           return const Center(
             child: CircularProgressIndicator(),
           );
